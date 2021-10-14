@@ -1,0 +1,15 @@
+{
+	"title": "Nombres de las tablas de BancAndes para la aplicación B",
+	"unidadPersistencia": "BancAndes",
+	"tablas":
+	[
+		"Parranderos_sequence",
+		"B_TIPOBEBIDA",
+		"B_BEBIDA",
+		"B_BAR",
+		"B_BEBEDOR",
+		"B_GUSTAN",
+		"B_SIRVEN",
+		"B_VISITAN"
+	]
+}

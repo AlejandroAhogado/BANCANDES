@@ -1,0 +1,176 @@
+{
+	"title": "Demostración de Parranderos Uniandes",
+	"frameH": 600,
+	"frameW": 800,
+	"bannerPath": "./src/main/resources/config/logo.png",
+	"menuBar":
+	[
+		{ "menuTitle": "TipoBebida",
+		  "options":
+			[
+				{
+					"label": "CRD de TipoBebida",
+					"event": "demoTipoBebida"
+				}
+			]
+		},		
+		{ "menuTitle": "Bebida",
+		  "options":
+			[
+				{
+					"label": "CRD Bebida",
+					"event": "demoBebida"
+				},
+				{
+					"label": "Eliminar Bebidas no servidas 1",
+					"event": "demoElimNoServidas1"
+				},
+				{
+					"label": "Eliminar Bebidas no servidas 2",
+					"event": "demoElimNoServidas2"
+				}
+			]
+		},
+		{ "menuTitle": "Bar",
+		  "options":
+			[
+				{
+					"label": "CRD Bar",
+					"event": "demoBar"
+				},
+				{
+					"label": "Bares y Bebidas",
+					"event": "demoBaresBebidas"
+				},
+				{
+					"label": "Aumentar sedes en una ciudad",
+					"event": "demoAumentarSedesBaresEnCiudad"
+				}
+			]
+		},
+		{ "menuTitle": "Bebedor",
+		  "options":
+			[
+				{
+					"label": "CRD Bebedor",
+					"event": "demoBebedor"
+				},
+				{
+					"label": "Cambiar ciudad",
+					"event": "demoCambiarCiudadBebedor"
+				},
+				{
+					"label": "Bebedor y cuántas visita realiza",
+					"event": "demoBebedoresYNumVisitasRealizadas"
+				},
+				{
+					"label": "Bebedores de una ciudad",
+					"event": "demoBebedoresDeCiudad"
+				},
+				{
+					"label": "Dar Bebedor Completo",
+					"event": "demoDarBebedorCompleto"
+				},
+				{
+					"label": "* Eliminar Bebedor y sus visitas 1",
+					"event": "demoEliminarBebedorYVisitas_v1"
+				},
+				{
+					"label": "* Eliminar Bebedor y sus visitas 2",
+					"event": "demoEliminarBebedorYVisitas_v2"
+				}
+			]
+		},
+		{ "menuTitle": "Gustan",
+		  "options":
+			[
+				{
+					"label": "CRD Gustan",
+					"event": "demoGustan"
+				}
+			]
+		},
+		{ "menuTitle": "Sirven",
+		  "options":
+			[
+				{
+					"label": "CRD Sirven",
+					"event": "demoSirven"
+				}
+			]
+		},
+		{ "menuTitle": "Visitan",
+		  "options":
+			[
+				{
+					"label": "CRD Visitan",
+					"event": "demoVisitan"
+				}			
+			]
+		},
+		{ "menuTitle": "Mantenimiento",
+		  "options":
+			[
+				{
+					"label": "Mostrar log Parranderos",
+					"event": "mostrarLogParranderos"
+				},
+				{
+					"label": "Mostrar log datanucleus",
+					"event": "mostrarLogDatanuecleus"
+				},
+				{
+					"label": "Limpiar log de parranderos",
+					"event": "limpiarLogParranderos"
+				},
+				{
+					"label": "Limpiar log de datanucleus",
+					"event": "limpiarLogDatanucleus"
+				},
+				{
+					"label": "Limpiar Base de Datos",
+					"event": "limpiarBD"
+				}
+			]
+		},		
+		{ "menuTitle": "Documentación",
+		  "options":
+			[
+				{
+					"label": "Presentación general",
+					"event": "mostrarPresentacionGeneral"
+				},
+				{
+					"label": "Modelo conceptual",
+					"event": "mostrarModeloConceptual"
+				},
+				{
+					"label": "Esquema de la BD",
+					"event": "mostrarEsquemaBD"
+				},
+				{
+					"label": "Script creación de la BD",
+					"event": "mostrarScriptBD"
+				},
+				{
+					"label": "Arquitectura de referencia",
+					"event": "mostrarArqRef"
+				},
+				{
+					"label": "Javadoc Parranderos",
+					"event": "mostrarJavadoc"
+				}
+			]
+		},		
+		{ "menuTitle": "Acerca de ...",
+		  "options":
+			[
+				{
+					"label": "Acerca de ...",
+					"event": "acercaDe"
+				}
+			]
+		}		
+	]
+}
+	

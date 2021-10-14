@@ -1,0 +1,15 @@
+{
+	"title": "Nombres de las tablas de BancAndes para pruebas de la aplicación cuando la base de datos no existe o está caida",
+	"unidadPersistencia": "BancAndesErrorUser",
+	"tablas":
+	[
+		"Parranderos_sequence",
+		"X_TIPOBEBIDA",
+		"X_BEBIDA",
+		"X_BAR",
+		"X_BEBEDOR",
+		"X_GUSTAN",
+		"X_SIRVEN",
+		"X_VISITAN"
+	]
+}

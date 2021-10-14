@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" version="1.0">
+
+    <!-- BancAndes "unit" -->
+    <persistence-unit name="BancAndes">
+        <exclude-unlisted-classes/>
+        <properties>
+            <!-- ENABLE THESE FOR Oracle -->
+            <property name="javax.jdo.option.ConnectionURL" value="jdbc:oracle:thin:@fn4.oracle.virtual.uniandes.edu.co:1521/prod"/>
+            <property name="javax.jdo.option.ConnectionDriverName" value="oracle.jdbc.driver.OracleDriver"/>
+            <property name="javax.jdo.option.ConnectionUserName" value="ISIS2304A03202120"/>
+            <property name="javax.jdo.option.ConnectionPassword" value="VbcNqjqxUKzH"/>
+            <property name="javax.jdo.option.Mapping" value="oracle"/>
+
+            <property name="datanucleus.schema.autoCreateAll" value="false"/>
+            <property name="datanucleus.query.sql.allowAll" value="true"/>
+        </properties>
+    </persistence-unit>
+
+    <!-- ParranderosError "unit" Definición de una base de datos que no existe, para verificar el comportamiento en caso de error o caida de la BD-->
+    <persistence-unit name="BancAndesErrorDS">
+        <exclude-unlisted-classes/>
+        <properties>
+            <!-- ENABLE THESE FOR Oracle -->
+            <property name="javax.jdo.option.ConnectionURL" value="jdbc:oracle:thin:@fn3.oracle.virtual.uniandes.edu.co:1521:NN"/>
+            <property name="javax.jdo.option.ConnectionDriverName" value="oracle.jdbc.driver.OracleDriver"/>
+            <property name="javax.jdo.option.ConnectionUserName" value="Unknown"/>
+            <property name="javax.jdo.option.ConnectionPassword" value="NN"/>
+            <property name="javax.jdo.option.Mapping" value="oracle"/>
+
+            <property name="datanucleus.schema.autoCreateAll" value="false"/>
+            <property name="datanucleus.query.sql.allowAll" value="true"/>
+        </properties>
+    </persistence-unit>
+
+    <!-- ParranderosErrorUser "unit" Definición de una base de datos que no existe, para verificar el comportamiento en caso de error en las credenciales del usuario -->
+    <persistence-unit name="BancAndesErrorUser">
+        <exclude-unlisted-classes/>
+        <properties>
+            <!-- ENABLE THESE FOR Oracle -->
+            <property name="javax.jdo.option.ConnectionURL" value="jdbc:oracle:thin:@fn3.oracle.virtual.uniandes.edu.co:1521:prod"/>
+            <property name="javax.jdo.option.ConnectionDriverName" value="oracle.jdbc.driver.OracleDriver"/>
+            <property name="javax.jdo.option.ConnectionUserName" value="NN"/>
+            <property name="javax.jdo.option.ConnectionPassword" value="NN"/>
+            <property name="javax.jdo.option.Mapping" value="oracle"/>
+
+            <property name="datanucleus.schema.autoCreateAll" value="false"/>
+            <property name="datanucleus.query.sql.allowAll" value="true"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>
