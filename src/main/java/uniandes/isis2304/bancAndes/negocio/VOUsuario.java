@@ -1,11 +1,12 @@
 package uniandes.isis2304.bancAndes.negocio;
 
-public interface VOPuestoDeAtencion {
+public interface VOUsuario {
 
 
-	public long getId();
-
+	public String getLogin();
+	
 	@Override
 	public String toString(); 
+	
 	
 }
