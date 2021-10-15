@@ -226,6 +226,25 @@ public class BancAndes {
         return gerenteGeneral;
 	}
 	
+
+	/* ****************************************************************
+	 * 			Métodos para manejar al CAJERO
+	 *****************************************************************/
+	public Cajero adicionarCajero (String tipoDocumento, int numeroDocumento, String departamento, int codigopostal, String nacionalidad,
+			String nombre, String direccion, String login, String contrasena, String correo, int telefono, String ciudad,
+			String administrador, long puestoAtencionoficina, long oficina)
+	{
+        log.info ("Adicionando Cajero: " + login);
+        Cajero cajero = pba.adicionarCajero(tipoDocumento, numeroDocumento, departamento, codigopostal,
+    			nacionalidad, nombre, direccion, login, contrasena, correo,
+    			telefono, ciudad, administrador, puestoAtencionoficina, oficina);		
+        log.info ("Adicionando Cajero: " + cajero);
+        return cajero;
+	}
+	
+	
+	
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar al GERENTEDEOFICINA
 	 *****************************************************************/

@@ -16,6 +16,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import uniandes.isis2304.bancAndes.negocio.Cajero;
 import uniandes.isis2304.bancAndes.negocio.CajeroAutomatico;
 import uniandes.isis2304.bancAndes.negocio.Cliente;
 import uniandes.isis2304.bancAndes.negocio.Cuenta;
@@ -1113,6 +1114,44 @@ public class PersistenciaBancAndes {
             }
             pm.close();
         }
+	}
+
+
+	public Cajero adicionarCajero(String tipoDocumento, int numeroDocumento, String departamento, int codigopostal,
+			String nacionalidad, String nombre, String direccion, String login, String contrasena, String correo,
+			int telefono, String ciudad, String administrador, long puestoAtencionoficina, long oficina) {
+		
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+	            tx.begin();
+	            long tuplasInsertadas = sqlCajero.adicionarCajero(pm, tipoDocumento, numeroDocumento, departamento,
+	        			 codigopostal, nacionalidad, nombre, direccion, login, contrasena,
+	        			 correo, telefono, ciudad, administrador, puestoAtencionoficina,oficina);
+	            tx.commit();
+	            
+	            log.trace ("Inserción de cajero: " + login + ": " + tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new Cajero (tipoDocumento, numeroDocumento, departamento,
+	        			 codigopostal, nacionalidad, nombre, direccion, login, contrasena,
+	        			 correo, telefono, ciudad, administrador,puestoAtencionoficina, oficina);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
+		
 	}
 
 }

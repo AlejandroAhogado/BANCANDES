@@ -1,6 +1,7 @@
 package uniandes.isis2304.bancAndes.persistencia;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 
 public class SQLCajeroAutomatico {
 
@@ -34,9 +35,17 @@ public class SQLCajeroAutomatico {
 		this.pba = pba;
 	}
 
+	/**
+	 * @param pm
+	 * @param id
+	 * @param telefono
+	 * @param localizacion
+	 * @return
+	 */
 	public long adicionarCajeroAutomatico(PersistenceManager pm, long id, int telefono, String localizacion) {
-		// TODO Auto-generated method stub
-		return 0;
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaCajerosAutomaticos () + "( id, telefono, localizacion) values (?, ?, ?)");
+        q.setParameters(id, telefono, localizacion);
+        return (long) q.executeUnique();
 	}
 	
 }

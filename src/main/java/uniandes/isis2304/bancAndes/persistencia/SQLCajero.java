@@ -1,5 +1,8 @@
 package uniandes.isis2304.bancAndes.persistencia;
 
+import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
+
 public class SQLCajero {
 
 	/* ****************************************************************
@@ -30,6 +33,38 @@ public class SQLCajero {
 	public SQLCajero (PersistenciaBancAndes pba)
 	{
 		this.pba = pba;
+	}
+
+	/**
+	 * @param pm
+	 * @param tipoDocumento
+	 * @param numeroDocumento
+	 * @param departamento
+	 * @param codigopostal
+	 * @param nacionalidad
+	 * @param nombre
+	 * @param direccion
+	 * @param login
+	 * @param contrasena
+	 * @param correo
+	 * @param telefono
+	 * @param ciudad
+	 * @param administrador
+	 * @param puestoAtencionoficina
+	 * @param oficina
+	 * @return
+	 */
+	public long adicionarCajero(PersistenceManager pm, String tipoDocumento, int numeroDocumento, String departamento,
+			int codigopostal, String nacionalidad, String nombre, String direccion, String login, String contrasena,
+			String correo, int telefono, String ciudad, String administrador, long puestoAtencionoficina,
+			long oficina) {
+		
+		 Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaCajeros() + "(tipoDocumento, numeroDocumento, departamento, codigopostal, nacionalidad, nombre, direccion, login, contrasena, correo, telefono, ciudad, administrador, puestoAtencionoficina,oficina) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+	        q.setParameters(tipoDocumento, numeroDocumento, departamento,
+       			 codigopostal, nacionalidad, nombre, direccion, login, contrasena,
+       			 correo, telefono, ciudad, administrador, puestoAtencionoficina,oficina);
+	        return (long) q.executeUnique();
+		
 	}
 	
 }
