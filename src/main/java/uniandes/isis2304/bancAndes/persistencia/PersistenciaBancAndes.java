@@ -265,28 +265,28 @@ public class PersistenciaBancAndes {
 	 * Crea los atributos de clases de apoyo SQL
 	 */
 	private void crearClasesSQL() {
-		sqlUtil = new sqlUtil(this);
-		sqlAccion = new sqlAccion(this);
-		sqlCajero = new sqlCajero(this);
-		sqlCajeroAutomatico = new sqlCajeroAutomatico(this);
-		sqlCliente = new sqlCliente(this);
-		sqlClienteProducto = new sqlClienteProducto(this);
-		sqlCuenta = new sqlCuenta(this);
-		sqlDepositoInversion = new sqlDepositoInversion(this);
-		sqlEmpleado = new sqlEmpleado(this);
-		sqlGerenteDeOficina = new sqlGerenteDeOficina(this);
-		sqlGerenteGeneral = new sqlGerenteGeneral(this);
-		sqlOficina = new sqlOficina(this);
-		sqlOperacionBancaria = new sqlOperacionBancaria(this);
-		sqlPrestamo = new sqlPrestamo(this);
-		sqlProducto = new sqlProducto(this);
-		sqlPuestoAtencionOficina = new sqlPuestoAtencionOficina(this);
-		sqlPuestoAtencionTipoOperacion = new sqlPuestoAtencionTipoOperacion(this);
-		sqlPuestoDeAtencion = new sqlPuestoDeAtencion(this);
-		sqlPuestoDigital = new sqlPuestoDigital(this);
-		sqlTipoOperacion = new sqlTipoOperacion(this);
-		sqlUsuario = new sqlUsuario(this);
-		sqlUsuarioTipoOperacion = new sqlUsuarioTipoOperacion(this);
+		sqlUtil = new SQLUtil(this);
+		sqlAccion = new SQLAccion(this);
+		sqlCajero = new SQLCajero(this);
+		sqlCajeroAutomatico = new SQLCajeroAutomatico(this);
+		sqlCliente = new SQLCliente(this);
+		sqlClienteProducto = new SQLClienteProducto(this);
+		sqlCuenta = new SQLCuenta(this);
+		sqlDepositoInversion = new SQLDepositoInversion(this);
+		sqlEmpleado = new SQLEmpleado(this);
+		sqlGerenteDeOficina = new SQLGerenteDeOficina(this);
+		sqlGerenteGeneral = new SQLGerenteGeneral(this);
+		sqlOficina = new SQLOficina(this);
+		sqlOperacionBancaria = new SQLOperacionBancaria(this);
+		sqlPrestamo = new SQLPrestamo(this);
+		sqlProducto = new SQLProducto(this);
+		sqlPuestoAtencionOficina = new SQLPuestoAtencionOficina(this);
+		sqlPuestoAtencionTipoOperacion = new SQLPuestoAtencionTipoOperacion(this);
+		sqlPuestoDeAtencion = new SQLPuestoDeAtencion(this);
+		sqlPuestoDigital = new SQLPuestoDigital(this);
+		sqlTipoOperacion = new SQLTipoOperacion(this);
+		sqlUsuario = new SQLUsuario(this);
+		sqlUsuarioTipoOperacion = new SQLUsuarioTipoOperacion(this);
 	}
 	
 	
@@ -773,13 +773,58 @@ public class PersistenciaBancAndes {
 	
 	
 	public long cerrarCuenta(long idCuenta) {
-		// TODO Auto-generated method stub
-		return 0;
+	
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlCuenta.cerrarCuenta (pm, idCuenta);
+            tx.commit();
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+		
 	}
 
 	public long actualizarSaldoCuenta(long idCuenta, float cambioSaldo) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlCuenta.actualizarSaldoCuenta (pm, idCuenta, cambioSaldo);
+            tx.commit();
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
 	}
 
 	public List<Cuenta> darCuentas() {
@@ -1016,13 +1061,58 @@ public class PersistenciaBancAndes {
 	}
 
 	public long cerrarPrestamo(long idPrestamo) {
-		// TODO Auto-generated method stub
-		return 0;
+	
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlPrestamo.cerrarPrestamo (pm, idPrestamo);
+            tx.commit();
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+		
 	}
 
 	public long realizarPago(long idPrestamo, float montoPago) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlPrestamo.realizarPago (pm, idPrestamo, montoPago);
+            tx.commit();
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
 	}
 
 }
