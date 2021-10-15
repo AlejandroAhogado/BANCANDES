@@ -190,6 +190,7 @@ public class PersistenciaBancAndes {
 		tablas.add ("CLIENTESPRODUCTOS");
 }
 
+	
 	/**
 	 * Constructor privado, que recibe los nombres de las tablas en un objeto Json - Patrón SINGLETON
 	 * @param tableConfig - Objeto Json que contiene los nombres de las tablas y de la unidad de persistencia a manejar
@@ -285,6 +286,182 @@ public class PersistenciaBancAndes {
 		sqlUsuarioTipoOperacion = new sqlUsuarioTipoOperacion(this);
 	}
 	
+	
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador de BancAndes
+	 */
+	public String darSeqBancAndes()
+	{
+		return tablas.get (0);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla Usuarios de BancAndes
+	 */
+	public String darTablaUsuarios ()
+	{
+		return tablas.get (1);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla Empleados de BancAndes
+	 */
+	public String darTablasEmpleados()
+	{
+		return tablas.get (2);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla TiposOperacion de BancAndes
+	 */
+	public String darTablaTiposOperacion ()
+	{
+		return tablas.get (3);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla Productos de BancAndes
+	 */
+	public String darTablaProductos ()
+	{
+		return tablas.get (4);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla PuestosDeAtencion de BancAndes
+	 */
+	public String darTablaPuestosDeAtencion ()
+	{
+		return tablas.get (5);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla Clientes de BancAndes
+	 */
+	public String darTablaClientes()
+	{
+		return tablas.get (6);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla Cajeros de BancAndes
+	 */
+	public String darTablaCajeros ()
+	{
+		return tablas.get (7);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla GerentesDeOficina de BancAndes
+	 */
+	public String darTablaGerentesDeOficina ()
+	{
+		return tablas.get (8);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla GerenteGeneral de BancAndes
+	 */
+	public String darTablaGerenteGeneral ()
+	{
+		return tablas.get (9);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla Oficinas de BancAndes
+	 */
+	public String darTablaOficinas ()
+	{
+		return tablas.get (10);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla PuestoAtencionOficina de BancAndes
+	 */
+	public String darTablaPuestoAtencionOficina ()
+	{
+		return tablas.get (11);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla PuestosDigitales de BancAndes
+	 */
+	public String darTablaPuestosDigitales ()
+	{
+		return tablas.get (12);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla CajerosAutomaticos de BancAndes
+	 */
+	public String darTablaCajerosAutomaticos()
+	{
+		return tablas.get (13);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla OperacionesBancarias de BancAndes
+	 */
+	public String darTablaOperacionesBancarias ()
+	{
+		return tablas.get (14);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla Prestamos de BancAndes
+	 */
+	public String darTablaPrestamos ()
+	{
+		return tablas.get (15);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla Cuentas de BancAndes
+	 */
+	public String darTablaCuentas ()
+	{
+		return tablas.get (16);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla Acciones de BancAndes
+	 */
+	public String darTablaAcciones ()
+	{
+		return tablas.get (17);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla DepositosInversion de BancAndes
+	 */
+	public String darTablaDepositosInversion ()
+	{
+		return tablas.get (18);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla UsuariosTiposOperacion de BancAndes
+	 */
+	public String darTablaUsuariosTiposOperacion ()
+	{
+		return tablas.get (19);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla PuestosAtencionTiposOperacion de BancAndes
+	 */
+	public String darTablaPuestosAtencionTiposOperacion()
+	{
+		return tablas.get (20);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla ClientesProductos de BancAndes
+	 */
+	public String darTablaClientesProductos ()
+	{
+		return tablas.get (21);
+	}
 
 	public Usuario adicionarUsuario(String login) {
 		// TODO Auto-generated method stub
@@ -405,11 +582,6 @@ public class PersistenciaBancAndes {
 	public long realizarPago(long idPrestamo, float montoPago) {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	public String darSeqBancAndes() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
