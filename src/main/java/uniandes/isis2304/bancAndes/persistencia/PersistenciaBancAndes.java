@@ -5,7 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Transaction;
 
 import org.apache.log4j.Logger;
 
@@ -462,76 +464,282 @@ public class PersistenciaBancAndes {
 	{
 		return tablas.get (21);
 	}
+	
 
+	/* ****************************************************************
+	 * 			Métodos para manejar los USUARIOS
+	 *****************************************************************/
+	
 	public Usuario adicionarUsuario(String login) {
-		// TODO Auto-generated method stub
-		return null;
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+	            tx.begin();
+	            long tuplasInsertadas = sqlUsuario.adicionarUsuario(pm,login);
+	            tx.commit();
+	            
+	            log.trace ("Inserción de usuario: " + login + ": " + tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new Usuario (login);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
 	}
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los CLIENTES
+	 *****************************************************************/
 
 	public Cliente adicionarCliente(String tipoDocumento, int numeroDocumento, String departamento, int codigopostal,
 			String nacionalidad, String nombre, String direccion, String login, String contrasena, String correo,
 			int telefono, String ciudad, String tipo) {
-		// TODO Auto-generated method stub
-		return null;
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+	            tx.begin();
+	            long tuplasInsertadas = sqlCliente.adicionarCliente(pm,tipoDocumento, numeroDocumento, departamento, codigopostal,
+	        			nacionalidad, nombre, direccion, login, contrasena, correo,
+	        			telefono, ciudad, tipo);
+	            tx.commit();
+	            
+	            log.trace ("Inserción de cliente: " + login + ": " + tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new Cliente (tipoDocumento, numeroDocumento, departamento, codigopostal,
+	        			nacionalidad, nombre, direccion, login, contrasena, correo,
+	        			telefono, ciudad, tipo);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
 	}
 
 	public List<Cliente> darClientes() {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlCliente.darClientes (pmf.getPersistenceManager());
 	}
 
+	/* ****************************************************************
+	 * 			Métodos para manejar los EMPLEADOS
+	 *****************************************************************/
+	
 	public Empleado adicionarEmpleado(String login) {
-		// TODO Auto-generated method stub
-		return null;
+	
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+	            tx.begin();
+	            long tuplasInsertadas = sqlEmpleado.adicionarEmpleado(pm,login);
+	            tx.commit();
+	            
+	            log.trace ("Inserción de empleado: " + login + ": " + tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new Empleado (login);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
+		
 	}
 
+	/* ****************************************************************
+	 * 			Métodos para manejar GERENTEGENERAL
+	 *****************************************************************/
+	
 	public GerenteGeneral adicionarGerenteGeneral(String tipoDocumento, int numeroDocumento, String departamento,
 			int codigopostal, String nacionalidad, String nombre, String direccion, String login, String contrasena,
 			String correo, int telefono, String ciudad, String administrador, long oficina) {
-		// TODO Auto-generated method stub
-		return null;
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+	            tx.begin();
+	            long tuplasInsertadas = sqlGerenteGeneral.adicionarGerenteGeneral(pm, tipoDocumento, numeroDocumento, departamento,
+	        			 codigopostal, nacionalidad, nombre, direccion, login, contrasena,
+	        			 correo, telefono, ciudad, administrador, oficina);
+	            tx.commit();
+	            
+	            log.trace ("Inserción de gerente general: " + login + ": " + tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new GerenteGeneral (tipoDocumento, numeroDocumento, departamento,
+	        			 codigopostal, nacionalidad, nombre, direccion, login, contrasena,
+	        			 correo, telefono, ciudad, administrador, oficina);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
 	}
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar GERENTEDEOFICINA
+	 *****************************************************************/
+	
 
 	public GerenteDeOficina adicionarGerenteDeOficina(String tipoDocumento, int numeroDocumento, String departamento,
 			int codigopostal, String nacionalidad, String nombre, String direccion, String login, String contrasena,
 			String correo, int telefono, String ciudad, String administrador) {
-		// TODO Auto-generated method stub
-		return null;
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+	            tx.begin();
+	            long tuplasInsertadas = sqlGerenteDeOficina.adicionarGerenteDeOficina(pm, tipoDocumento, numeroDocumento, departamento,
+	        			 codigopostal, nacionalidad, nombre, direccion, login, contrasena,
+	        			 correo, telefono, ciudad, administrador);
+	            tx.commit();
+	            
+	            log.trace ("Inserción de gerente de oficina: " + login + ": " + tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new GerenteDeOficina (tipoDocumento, numeroDocumento, departamento,
+	        			 codigopostal, nacionalidad, nombre, direccion, login, contrasena,
+	        			 correo, telefono, ciudad, administrador);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
 	}
-
+	
+	
+//pendiente
 	public List<Cliente> darClientePorLogin(String login) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Cliente) sqlCliente.darClientePorLogin (pmf.getPersistenceManager(), login);
 	}
-
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar OPERACIONBANCARIA
+	 *****************************************************************/
+	
 	public OperacionBancaria adicionarOperacionBancaria(long id, float valor, Date fecha, String cliente, long producto,
 			String tipoOperacion, long puestoAtencion, String empleado) {
-		// TODO Auto-generated method stub
-		return null;
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+ //id le entra por parametro?
+	            tx.begin();
+	            long id = nextval ();
+	            long tuplasInsertadas = sqlOperacionBancaria.adicionarOperacionBancaria(pm, id, valor, fecha, cliente, producto,
+	        			 tipoOperacion, puestoAtencion, empleado);
+	            tx.commit();
+	            
+	            log.trace ("Inserción de operacion bancaria: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new OperacionBancaria ( id, valor, fecha, cliente, producto,
+	        			 tipoOperacion, puestoAtencion, empleado);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
 	}
 
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar CUENTA
+	 *****************************************************************/
+	
 	public Cuenta adicionarCuenta(long id, int numeroCuenta, String estado, String tipo, float saldo,
 			Date fechaCreacion, Date dechaVencimiento, float tasaRendimiento, long oficina) {
-		// TODO Auto-generated method stub
-		return null;
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+//id le entra por parametro?
+	            tx.begin();
+	            long id = nextval ();
+	            long tuplasInsertadas = sqlCuenta.adicionarCuenta(pm, id, numeroCuenta, estado, tipo, saldo,
+	        			 fechaCreacion, dechaVencimiento, tasaRendimiento, oficina);
+	            tx.commit();
+	            
+	            log.trace ("Inserción de cuenta: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new Cuenta ( id, numeroCuenta, estado, tipo, saldo,
+	        			 fechaCreacion, dechaVencimiento, tasaRendimiento, oficina);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
 	}
-
-	public Prestamo adicionarPrestamo(long id, float monto, float saldoPendiente, float interes, int numeroCuotas,
-			int diaPago, float valorCuotaMinima, Date fechaPrestamo, String cerrado) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Cuenta> darCuentaPorId(long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<Prestamo> darPrestamoPorId(long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
+	
 	public long cerrarCuenta(long idCuenta) {
 		// TODO Auto-generated method stub
 		return 0;
@@ -543,35 +751,236 @@ public class PersistenciaBancAndes {
 	}
 
 	public List<Cuenta> darCuentas() {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlCuenta.darCuentas (pmf.getPersistenceManager());
 	}
 	
-	public PuestoDeAtencion adicionarPuestoDeAtencion(long id) {
-		// TODO Auto-generated method stub
-		return null;
+	/* ****************************************************************
+	 * 			Métodos para manejar PRESTAMO
+	 *****************************************************************/
+
+	public Prestamo adicionarPrestamo(long id, float monto, float saldoPendiente, float interes, int numeroCuotas,
+			int diaPago, float valorCuotaMinima, Date fechaPrestamo, String cerrado) {
+
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+//id le entra por parametro?
+	            tx.begin();
+	            long id = nextval ();
+	            long tuplasInsertadas = sqlPrestamo.adicionarPrestamo( id, monto, saldoPendiente, interes, numeroCuotas,
+	        			 diaPago, valorCuotaMinima, fechaPrestamo, cerrado);
+	            tx.commit();
+	            
+	            log.trace ("Inserción de prestamo: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new Prestamo ( id, monto, saldoPendiente, interes, numeroCuotas,
+	        			 diaPago, valorCuotaMinima, fechaPrestamo, cerrado);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
+		
 	}
+
+//si es una sola por que una lista?
+	public List<Cuenta> darCuentaPorId(long id) {
+		return (Cuenta) sqlCuenta.darCuentaPorId (pmf.getPersistenceManager(), id);
+	}
+
+	public List<Prestamo> darPrestamoPorId(long id) {
+		return (Prestamo) sqlPrestamo.darPrestamoPorId (pmf.getPersistenceManager(), id);
+	}
+
+
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar PUESTODEATENCION
+	 *****************************************************************/
+
+	
+	public PuestoDeAtencion adicionarPuestoDeAtencion(long id) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+	            tx.begin();
+	            long id = nextval ();
+	            long tuplasInsertadas = sqlPuestoDeAtencion.adicionarPuestoDeAtencion(pm,id);
+	            tx.commit();
+	            
+	            log.trace ("Inserción de puesto de atencion: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new PuestoDeAtencion (id);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
+		
+	}
+
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar PUESTOATENCIONOFICINA
+	 *****************************************************************/
 
 	public PuestoAtencionOficina adicionarPuestoAtencionOficina(long id, int telefono, String localizacion,
 			long oficina) {
-		// TODO Auto-generated method stub
-		return null;
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+	            tx.begin();
+	            long id = nextval ();
+	            long tuplasInsertadas = sqlPuestoAtencionOficina.adicionarPuestoAtencionOficina(pm, id, telefono, localizacion,
+	        			 oficina);
+	            tx.commit();
+	            
+	            log.trace ("Inserción de puesto atencion oficina: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new PuestoAtencionOficina ( id, telefono, localizacion, oficina);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
 	}
 
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar PUESTODIGITAL
+	 *****************************************************************/
 	public PuestoDigital adicionarPuestoDigital(long id, int telefono, String tipo, String url) {
-		// TODO Auto-generated method stub
-		return null;
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+	            tx.begin();
+	            long id = nextval ();
+	            long tuplasInsertadas = sqlPuestoDigital.adicionarPuestoDigital(pm, id, telefono, tipo, url);
+	            tx.commit();
+	            
+	            log.trace ("Inserción de puesto digital: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new PuestoDigital ( id, telefono, tipo, url);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
 	}
 
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar OFICINA
+	 *****************************************************************/
 	public Oficina adicionarOficina(long id, String nombre, String direccion, int puestosPosibles,
 			String gerenteLogin) {
-		// TODO Auto-generated method stub
-		return null;
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+	            tx.begin();
+	            long id = nextval ();
+	            long tuplasInsertadas = sqlOficina.adicionarOficina(pm, id, nombre, direccion, puestosPosibles,
+	        			 gerenteLogin);
+	            tx.commit();
+	            
+	            log.trace ("Inserción de oficina: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new Oficina ( id, nombre, direccion, puestosPosibles,
+	        			 gerenteLogin);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
 	}
 
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar CAJEROAUTOMATICO
+	 *****************************************************************/
 	public CajeroAutomatico adicionarCajeroAutomatico(long id, int telefono, String localizacion) {
-		// TODO Auto-generated method stub
-		return null;
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+	            tx.begin();
+	            long id = nextval ();
+	            long tuplasInsertadas = sqlCajeroAutomatico.adicionarCajeroAutomatico(pm, id, telefono, localizacion);
+	            tx.commit();
+	            
+	            log.trace ("Inserción de Cajero automatico: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new CajeroAutomatico (id, telefono, localizacion);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
 	}
 
 	public long cerrarPrestamo(long idPrestamo) {
