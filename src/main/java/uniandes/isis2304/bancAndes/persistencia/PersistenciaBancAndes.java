@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.jdo.JDODataStoreException;
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
@@ -465,6 +466,37 @@ public class PersistenciaBancAndes {
 		return tablas.get (21);
 	}
 	
+	
+	/**
+	 * Transacción para el generador de secuencia de BancAndes
+	 * Adiciona entradas al log de la aplicación
+	 * @return El siguiente número del secuenciador de BancAndes
+	 */
+	private long nextval ()
+	{
+        long resp = sqlUtil.nextval (pmf.getPersistenceManager());
+        log.trace ("Generando secuencia: " + resp);
+        return resp;
+    }
+	
+	/**
+	 * Extrae el mensaje de la exception JDODataStoreException embebido en la Exception e, que da el detalle específico del problema encontrado
+	 * @param e - La excepción que ocurrio
+	 * @return El mensaje de la excepción JDO
+	 */
+	private String darDetalleException(Exception e) 
+	{
+		String resp = "";
+		if (e.getClass().getName().equals("javax.jdo.JDODataStoreException"))
+		{
+			JDODataStoreException je = (javax.jdo.JDODataStoreException) e;
+			return je.getNestedExceptions() [0].getMessage();
+		}
+		return resp;
+	}
+	
+	
+	
 
 	/* ****************************************************************
 	 * 			Métodos para manejar los USUARIOS
@@ -658,21 +690,21 @@ public class PersistenciaBancAndes {
 	
 	
 //pendiente
-	public List<Cliente> darClientePorLogin(String login) {
-		return (Cliente) sqlCliente.darClientePorLogin (pmf.getPersistenceManager(), login);
+	public Cliente darClientePorLogin(String login) {
+		return  sqlCliente.darClientePorLogin (pmf.getPersistenceManager(), login);
 	}
 	
 	/* ****************************************************************
 	 * 			Métodos para manejar OPERACIONBANCARIA
 	 *****************************************************************/
 	
-	public OperacionBancaria adicionarOperacionBancaria(long id, float valor, Date fecha, String cliente, long producto,
+	public OperacionBancaria adicionarOperacionBancaria( float valor, Date fecha, String cliente, long producto,
 			String tipoOperacion, long puestoAtencion, String empleado) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		 Transaction tx=pm.currentTransaction();
 		   try
 	        {
- //id le entra por parametro?
+
 	            tx.begin();
 	            long id = nextval ();
 	            long tuplasInsertadas = sqlOperacionBancaria.adicionarOperacionBancaria(pm, id, valor, fecha, cliente, producto,
@@ -705,13 +737,13 @@ public class PersistenciaBancAndes {
 	 * 			Métodos para manejar CUENTA
 	 *****************************************************************/
 	
-	public Cuenta adicionarCuenta(long id, int numeroCuenta, String estado, String tipo, float saldo,
+	public Cuenta adicionarCuenta( int numeroCuenta, String estado, String tipo, float saldo,
 			Date fechaCreacion, Date dechaVencimiento, float tasaRendimiento, long oficina) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		 Transaction tx=pm.currentTransaction();
 		   try
 	        {
-//id le entra por parametro?
+
 	            tx.begin();
 	            long id = nextval ();
 	            long tuplasInsertadas = sqlCuenta.adicionarCuenta(pm, id, numeroCuenta, estado, tipo, saldo,
@@ -758,14 +790,14 @@ public class PersistenciaBancAndes {
 	 * 			Métodos para manejar PRESTAMO
 	 *****************************************************************/
 
-	public Prestamo adicionarPrestamo(long id, float monto, float saldoPendiente, float interes, int numeroCuotas,
+	public Prestamo adicionarPrestamo( float monto, float saldoPendiente, float interes, int numeroCuotas,
 			int diaPago, float valorCuotaMinima, Date fechaPrestamo, String cerrado) {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		 Transaction tx=pm.currentTransaction();
 		   try
 	        {
-//id le entra por parametro?
+
 	            tx.begin();
 	            long id = nextval ();
 	            long tuplasInsertadas = sqlPrestamo.adicionarPrestamo( id, monto, saldoPendiente, interes, numeroCuotas,
@@ -794,13 +826,13 @@ public class PersistenciaBancAndes {
 		
 	}
 
-//si es una sola por que una lista?
-	public List<Cuenta> darCuentaPorId(long id) {
-		return (Cuenta) sqlCuenta.darCuentaPorId (pmf.getPersistenceManager(), id);
+
+	public Cuenta darCuentaPorId(long id) {
+		return sqlCuenta.darCuentaPorId (pmf.getPersistenceManager(), id);
 	}
 
-	public List<Prestamo> darPrestamoPorId(long id) {
-		return (Prestamo) sqlPrestamo.darPrestamoPorId (pmf.getPersistenceManager(), id);
+	public Prestamo darPrestamoPorId(long id) {
+		return  sqlPrestamo.darPrestamoPorId (pmf.getPersistenceManager(), id);
 	}
 
 
@@ -810,7 +842,7 @@ public class PersistenciaBancAndes {
 	 *****************************************************************/
 
 	
-	public PuestoDeAtencion adicionarPuestoDeAtencion(long id) {
+	public PuestoDeAtencion adicionarPuestoDeAtencion() {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		 Transaction tx=pm.currentTransaction();
 		   try
@@ -846,7 +878,7 @@ public class PersistenciaBancAndes {
 	 * 			Métodos para manejar PUESTOATENCIONOFICINA
 	 *****************************************************************/
 
-	public PuestoAtencionOficina adicionarPuestoAtencionOficina(long id, int telefono, String localizacion,
+	public PuestoAtencionOficina adicionarPuestoAtencionOficina( int telefono, String localizacion,
 			long oficina) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		 Transaction tx=pm.currentTransaction();
@@ -882,7 +914,7 @@ public class PersistenciaBancAndes {
 	/* ****************************************************************
 	 * 			Métodos para manejar PUESTODIGITAL
 	 *****************************************************************/
-	public PuestoDigital adicionarPuestoDigital(long id, int telefono, String tipo, String url) {
+	public PuestoDigital adicionarPuestoDigital( int telefono, String tipo, String url) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		 Transaction tx=pm.currentTransaction();
 		   try
@@ -916,7 +948,7 @@ public class PersistenciaBancAndes {
 	/* ****************************************************************
 	 * 			Métodos para manejar OFICINA
 	 *****************************************************************/
-	public Oficina adicionarOficina(long id, String nombre, String direccion, int puestosPosibles,
+	public Oficina adicionarOficina( String nombre, String direccion, int puestosPosibles,
 			String gerenteLogin) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		 Transaction tx=pm.currentTransaction();
@@ -953,7 +985,7 @@ public class PersistenciaBancAndes {
 	/* ****************************************************************
 	 * 			Métodos para manejar CAJEROAUTOMATICO
 	 *****************************************************************/
-	public CajeroAutomatico adicionarCajeroAutomatico(long id, int telefono, String localizacion) {
+	public CajeroAutomatico adicionarCajeroAutomatico( int telefono, String localizacion) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		 Transaction tx=pm.currentTransaction();
 		   try

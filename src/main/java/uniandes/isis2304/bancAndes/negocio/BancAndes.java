@@ -169,8 +169,8 @@ public class BancAndes {
 	public Cliente darClientePorLogin (String login)
 	{
 		log.info ("Buscando Cliente por login: " + login);
-		List<Cliente> c = pba.darClientePorLogin (login);
-		return !c.isEmpty () ? c.get (0) : null;
+		Cliente cliente= pba.darClientePorLogin (login);
+		return cliente;
 	}
 	
 	/* ****************************************************************
@@ -276,11 +276,11 @@ public class BancAndes {
 	 * @return
 	 * @return El objeto Operacion adicionado. null si ocurre alguna Excepción
 	 */
-	public OperacionBancaria adicionarOperacionBancaria (long id, float valor, Date fecha, String cliente, long producto, String tipoOperacion,
+	public OperacionBancaria adicionarOperacionBancaria ( float valor, Date fecha, String cliente, long producto, String tipoOperacion,
 			long puestoAtencion, String empleado)
 	{
-        log.info ("Adicionando Operacion Bancaria: " + id);
-        OperacionBancaria operacionBancaria = pba.adicionarOperacionBancaria (id, valor, fecha, cliente, producto, tipoOperacion,
+        log.info ("Adicionando Operacion Bancaria ");
+        OperacionBancaria operacionBancaria = pba.adicionarOperacionBancaria ( valor, fecha, cliente, producto, tipoOperacion,
     			puestoAtencion, empleado);		
         log.info ("Adicionando Operacion Bancaria: " + operacionBancaria);
         return operacionBancaria;
@@ -302,11 +302,11 @@ public class BancAndes {
 	 * @param oficina
 	 * @return El objeto Cuenta adicionado. null si ocurre alguna Excepción
 	 */
-	public Cuenta adicionarCuenta(long id, int numeroCuenta, String estado, String tipo, float saldo, Date fechaCreacion,
+	public Cuenta adicionarCuenta( int numeroCuenta, String estado, String tipo, float saldo, Date fechaCreacion,
 			Date dechaVencimiento, float tasaRendimiento, long oficina)
 	{
-        log.info ("Adicionando Cuenta: " + id);
-        Cuenta cuenta = pba.adicionarCuenta (id, numeroCuenta, estado, tipo, saldo, fechaCreacion,
+        log.info ("Adicionando Cuenta ");
+        Cuenta cuenta = pba.adicionarCuenta (numeroCuenta, estado, tipo, saldo, fechaCreacion,
     			dechaVencimiento, tasaRendimiento, oficina);		
         log.info ("Adicionando Cuenta: " + cuenta);
         return cuenta;
@@ -350,8 +350,8 @@ public class BancAndes {
 	public Cuenta darCuentaPorId (long id)
 	{
 		log.info ("Buscando Cuenta por id: " + id);
-		List<Cuenta> c = pba.darCuentaPorId (id);
-		return !c.isEmpty () ? c.get (0) : null;
+		Cuenta cuenta= pba.darCuentaPorId (id);
+		return cuenta;
 	}
 	
 	/**
@@ -398,11 +398,11 @@ public class BancAndes {
 	 * @param cerrado
 	 * @return El objeto Prestamo adicionado. null si ocurre alguna Excepción
 	 */
-	public Prestamo adicionarPrestamo (long id, float monto, float saldoPendiente, float interes, int numeroCuotas, int diaPago,
+	public Prestamo adicionarPrestamo ( float monto, float saldoPendiente, float interes, int numeroCuotas, int diaPago,
 			float valorCuotaMinima, Date fechaPrestamo, String cerrado)
 	{
-        log.info ("Adicionando Prestamo: " + id);
-        Prestamo prestamo = pba.adicionarPrestamo (id, monto, saldoPendiente, interes, numeroCuotas, diaPago,
+        log.info ("Adicionando Prestamo ");
+        Prestamo prestamo = pba.adicionarPrestamo (monto, saldoPendiente, interes, numeroCuotas, diaPago,
     			valorCuotaMinima, fechaPrestamo, cerrado);		
         log.info ("Adicionando Prestamo: " + prestamo);
         return prestamo;
@@ -417,8 +417,8 @@ public class BancAndes {
 	public Prestamo darPrestamoPorId (long id)
 	{
 		log.info ("Buscando Prestamo por id: " + id);
-		List<Prestamo> c = pba.darPrestamoPorId (id);
-		return !c.isEmpty () ? c.get (0) : null;
+		Prestamo prestamo = pba.darPrestamoPorId (id);
+		return prestamo;
 	}
 	//cerrar prestamo
 	
@@ -459,10 +459,10 @@ public class BancAndes {
 	 * @param id
 	 * @return El objeto PuestoDeAtencion adicionado. null si ocurre alguna Excepción
 	 */
-	public PuestoDeAtencion adicionarPuestoDeAtencion (long id)
+	public PuestoDeAtencion adicionarPuestoDeAtencion ()
 	{
-       log.info ("Adicionando Puesto de atencion: " + id);
-       PuestoDeAtencion puestoDeAtencion = pba.adicionarPuestoDeAtencion (id);		
+       log.info ("Adicionando Puesto de atencion " );
+       PuestoDeAtencion puestoDeAtencion = pba.adicionarPuestoDeAtencion ();		
        log.info ("Adicionando Puesto de atencion: " + puestoDeAtencion);
        return puestoDeAtencion;
 	}
@@ -480,10 +480,10 @@ public class BancAndes {
 	 * @param oficina
 	 * @return El objeto PuestoAtencionOficina adicionado. null si ocurre alguna Excepción
 	 */
-	public PuestoAtencionOficina adicionarPuestoAtencionOficina (long id, int telefono, String localizacion, long oficina)
+	public PuestoAtencionOficina adicionarPuestoAtencionOficina (int telefono, String localizacion, long oficina)
 	{
-       log.info ("Adicionando Puesto de atencion oficina: " + id);
-       PuestoAtencionOficina puestoAtencionOficina = pba.adicionarPuestoAtencionOficina (id, telefono, localizacion, oficina);		
+       log.info ("Adicionando Puesto de atencion oficina " );
+       PuestoAtencionOficina puestoAtencionOficina = pba.adicionarPuestoAtencionOficina ( telefono, localizacion, oficina);		
        log.info ("Adicionando Puesto de atencion oficina: " + puestoAtencionOficina);
        return puestoAtencionOficina;
 	}
@@ -500,10 +500,10 @@ public class BancAndes {
 	 * @param url
 	 * @return El objeto PuestoDigital adicionado. null si ocurre alguna Excepción
 	 */
-	public PuestoDigital adicionarPuestoDigital (long id, int telefono, String tipo, String url)
+	public PuestoDigital adicionarPuestoDigital (int telefono, String tipo, String url)
 	{
-       log.info ("Adicionando Puesto digital: " + id);
-       PuestoDigital puestoDigital = pba.adicionarPuestoDigital (id, telefono, tipo, url);		
+       log.info ("Adicionando Puesto digital ");
+       PuestoDigital puestoDigital = pba.adicionarPuestoDigital ( telefono, tipo, url);		
        log.info ("Adicionando Puesto digital: " + puestoDigital);
        return puestoDigital;
 	}
@@ -521,10 +521,10 @@ public class BancAndes {
 	 * @param gerenteLogin
 	 * @return El objeto Oficina adicionado. null si ocurre alguna Excepción
 	 */
-	public Oficina adicionarOficina (long id, String nombre, String direccion, int puestosPosibles, String gerenteLogin)
+	public Oficina adicionarOficina ( String nombre, String direccion, int puestosPosibles, String gerenteLogin)
 	{
-       log.info ("Adicionando Oficina: " + id);
-       Oficina oficina = pba.adicionarOficina(id, nombre, direccion, puestosPosibles, gerenteLogin);		
+       log.info ("Adicionando Oficina ");
+       Oficina oficina = pba.adicionarOficina( nombre, direccion, puestosPosibles, gerenteLogin);		
        log.info ("Adicionando Oficina: " + oficina);
        return oficina;
 	}
@@ -541,10 +541,10 @@ public class BancAndes {
 	 * @param localizacion
 	 * @return El objeto CajeroAutomatico adicionado. null si ocurre alguna Excepción
 	 */
-	public CajeroAutomatico adicionarCajeroAutomatico (long id, int telefono, String localizacion)
+	public CajeroAutomatico adicionarCajeroAutomatico ( int telefono, String localizacion)
 	{
-       log.info ("Adicionando Cajero Automatico: " + id);
-       CajeroAutomatico cajeroAutomatico = pba.adicionarCajeroAutomatico( id,  telefono, localizacion);		
+       log.info ("Adicionando Cajero Automatico ");
+       CajeroAutomatico cajeroAutomatico = pba.adicionarCajeroAutomatico(telefono, localizacion);		
        log.info ("Adicionando Cajero Automatico: " + cajeroAutomatico);
        return cajeroAutomatico;
 	}
