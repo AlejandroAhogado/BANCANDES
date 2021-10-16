@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 
 import uniandes.isis2304.bancAndes.negocio.Cuenta;
 
@@ -42,30 +43,37 @@ public class SQLCuenta {
 
 	public long adicionarCuenta(PersistenceManager pm, long id, int numeroCuenta, String estado, String tipo,
 			float saldo, Date fechaCreacion, Date dechaVencimiento, float tasaRendimiento, long oficina) {
-		// TODO Auto-generated method stub
-		return 0;
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaCuentas () + "(id, numeroCuenta, estado, tipo, saldo,fechaCreacion, dechaVencimiento, tasaRendimiento, oficina) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		q.setParameters(id, numeroCuenta, estado, tipo, saldo,
+				fechaCreacion, dechaVencimiento, tasaRendimiento, oficina);
+		return (long) q.executeUnique();
 	}
 
-	public List<Cuenta> darCuentas(PersistenceManager persistenceManager) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Cuenta> darCuentas(PersistenceManager pm) {
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pba.darTablaCuentas ());
+		q.setResultClass(Cuenta.class);
+		return (List<Cuenta>) q.executeList();
 	}
 
-	public Cuenta darCuentaPorId(PersistenceManager persistenceManager, long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Cuenta darCuentaPorId(PersistenceManager pm, long id) {
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pba.darTablaCuentas () + " WHERE id = ?");
+		q.setResultClass(Cuenta.class);
+		q.setParameters(id);
+		return (Cuenta) q.executeUnique();
 	}
 
 	public long cerrarCuenta(PersistenceManager pm, long idCuenta) {
-		// TODO Auto-generated method stub
-		return 0;
+		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaCuentas () + " SET estado = CERRADA WHERE id = ?");
+		q.setParameters(idCuenta);
+		return (long) q.executeUnique();
 	}
 
 	public long actualizarSaldoCuenta(PersistenceManager pm, long idCuenta, float cambioSaldo) {
-		// TODO Auto-generated method stub
-		return 0;
+		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaCuentas () + " SET saldo = saldo+cambioSaldo WHERE id = ?");
+		q.setParameters(idCuenta);
+		return (long) q.executeUnique();
 	}
 
 
-	
+
 }

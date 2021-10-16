@@ -1,6 +1,7 @@
 package uniandes.isis2304.bancAndes.persistencia;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 
 public class SQLGerenteDeOficina {
 
@@ -37,9 +38,11 @@ public class SQLGerenteDeOficina {
 	public long adicionarGerenteDeOficina(PersistenceManager pm, String tipoDocumento, int numeroDocumento,
 			String departamento, int codigopostal, String nacionalidad, String nombre, String direccion, String login,
 			String contrasena, String correo, int telefono, String ciudad, String administrador) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaGerentesDeOficina () + "(tipoDocumento, numeroDocumento, departamento, codigopostal, nacionalidad, nombre, direccion, login, contrasena,correo, telefono, ciudad, administrador) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		q.setParameters(tipoDocumento, numeroDocumento, departamento, codigopostal, nacionalidad, nombre, direccion, login, contrasena,correo, telefono, ciudad, administrador);
+		return (long) q.executeUnique();
+}
+
 	
 	
 }

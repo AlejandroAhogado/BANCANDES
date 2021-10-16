@@ -1,6 +1,7 @@
 package uniandes.isis2304.bancAndes.persistencia;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 
 public class SQLEmpleado {
 
@@ -36,9 +37,11 @@ public class SQLEmpleado {
 	}
 
 	public long adicionarEmpleado(PersistenceManager pm, String login) {
-		// TODO Auto-generated method stub
-		return 0;
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaEmpleados () + "(login) values (?)");
+		q.setParameters(login);
+		return (long) q.executeUnique();
 	}
+
 	
 	
 }
