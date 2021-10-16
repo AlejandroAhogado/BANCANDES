@@ -3,6 +3,7 @@ package uniandes.isis2304.bancAndes.persistencia;
 import java.util.Date;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 
 public class SQLOperacionBancaria {
 
@@ -38,8 +39,10 @@ public class SQLOperacionBancaria {
 
 	public long adicionarOperacionBancaria(PersistenceManager pm, long id, float valor, Date fecha, String cliente,
 			long producto, String tipoOperacion, long puestoAtencion, String empleado) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		 Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaOperacionesBancarias () + "( id, valor, fecha, cliente, producto,tipoOperacion, puestoAtencion, empleado) values (?,?,?,?,?,?,?,?)");
+	        q.setParameters(id, valor, fecha, cliente, producto,tipoOperacion, puestoAtencion, empleado);
+	        return (long) q.executeUnique();
 	}
 	
 }

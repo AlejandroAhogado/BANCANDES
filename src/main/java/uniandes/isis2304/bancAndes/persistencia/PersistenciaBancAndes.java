@@ -310,7 +310,7 @@ public class PersistenciaBancAndes {
 	/**
 	 * @return La cadena de caracteres con el nombre de la tabla Empleados de BancAndes
 	 */
-	public String darTablasEmpleados()
+	public String darTablaEmpleados()
 	{
 		return tablas.get (2);
 	}
@@ -382,7 +382,7 @@ public class PersistenciaBancAndes {
 	/**
 	 * @return La cadena de caracteres con el nombre de la tabla PuestoAtencionOficina de BancAndes
 	 */
-	public String darTablaPuestoAtencionOficina ()
+	public String darTablaPuestosAtencionOficina ()
 	{
 		return tablas.get (11);
 	}
@@ -846,7 +846,7 @@ public class PersistenciaBancAndes {
 
 	            tx.begin();
 	            long id = nextval ();
-	            long tuplasInsertadas = sqlPrestamo.adicionarPrestamo( id, monto, saldoPendiente, interes, numeroCuotas,
+	            long tuplasInsertadas = sqlPrestamo.adicionarPrestamo(pm, id, monto, saldoPendiente, interes, numeroCuotas,
 	        			 diaPago, valorCuotaMinima, fechaPrestamo, cerrado);
 	            tx.commit();
 	            

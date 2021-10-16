@@ -1,6 +1,7 @@
 package uniandes.isis2304.bancAndes.persistencia;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 
 public class SQLPuestoDigital {
 
@@ -35,8 +36,9 @@ public class SQLPuestoDigital {
 	}
 
 	public long adicionarPuestoDigital(PersistenceManager pm, long id, int telefono, String tipo, String url) {
-		// TODO Auto-generated method stub
-		return 0;
+		 Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaPuestosDigitales () + "(id, telefono, tipo, url) values (?, ?, ?, ?)");
+	        q.setParameters(id, telefono, tipo, url);
+	        return (long) q.executeUnique();
 	}
 	
 	
