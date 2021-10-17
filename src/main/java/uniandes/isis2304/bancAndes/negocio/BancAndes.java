@@ -363,6 +363,38 @@ public class BancAndes {
         return operacionBancaria;
 	}
 	/* ****************************************************************
+	 * 			Métodos para manejar los PRODUCTOS
+	 *****************************************************************/
+	/**
+	 * Adiciona de manera persistente un producto
+	 * Adiciona entradas al log de la aplicación
+	 * @return El objeto Usuario adicionado. null si ocurre alguna Excepción
+	 */
+	public Producto adicionarProducto ()
+	{
+        log.info ("Adicionando Producto: " + login);
+        Usuario usuario = pba.adicionarUsuario (login);		
+        log.info ("Adicionando Usuario: " + usuario);
+        return usuario;
+	}
+	
+	/**
+	 * Elimina de manera persistente un usuario
+	 * Elimina entradas al log de la aplicación
+	 * @param login - El login del usuario
+	 * @return El objeto Usuario eliminado. null si ocurre alguna Excepción
+	 */
+	public long eliminarProducto (String login)
+	{
+	
+        log.info ("Eliminando Usuario: " + login);
+        long resp= pba.eliminarUsuario (login);		
+        log.info ("Eliminando usuario por login: " + resp + " tuplas eliminadas");
+        
+        return resp;
+	}
+	
+	/* ****************************************************************
 	 * 			Métodos para manejar los CUENTAS
 	 *****************************************************************/
 	/**
@@ -497,9 +529,6 @@ public class BancAndes {
 		Prestamo prestamo = pba.darPrestamoPorId (id);
 		return prestamo;
 	}
-	//cerrar prestamo
-	
-	//registrar pago
 	
 	/**
 	 * Cierra un prestamo (cambia su atributo de cerrado a true) dado su id
