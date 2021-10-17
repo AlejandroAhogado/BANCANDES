@@ -614,6 +614,10 @@ public class PersistenciaBancAndes {
 		return sqlCliente.darClientes (pmf.getPersistenceManager());
 	}
 
+	public Cliente darClientePorLogin(String login) {
+		return  sqlCliente.darClientePorLogin (pmf.getPersistenceManager(), login);
+	}
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar los EMPLEADOS
 	 *****************************************************************/
@@ -688,6 +692,54 @@ public class PersistenciaBancAndes {
 	        }
 	}
 	
+	
+	public GerenteGeneral darGerenteGeneralPorLogin(String login) {
+		return  sqlGerenteGeneral.darGerenteGeneralPorLogin (pmf.getPersistenceManager(), login);
+	}
+
+	/* ****************************************************************
+	 * 			Métodos para manejar CAJERO
+	 *****************************************************************/
+	public Cajero adicionarCajero(String tipoDocumento, int numeroDocumento, String departamento, int codigopostal,
+			String nacionalidad, String nombre, String direccion, String login, String contrasena, String correo,
+			int telefono, String ciudad, String administrador, long puestoAtencionoficina, long oficina) {
+		
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+	            tx.begin();
+	            long tuplasInsertadas = sqlCajero.adicionarCajero(pm, tipoDocumento, numeroDocumento, departamento,
+	        			 codigopostal, nacionalidad, nombre, direccion, login, contrasena,
+	        			 correo, telefono, ciudad, administrador, puestoAtencionoficina,oficina);
+	            tx.commit();
+	            
+	            log.trace ("Inserción de cajero: " + login + ": " + tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new Cajero (tipoDocumento, numeroDocumento, departamento,
+	        			 codigopostal, nacionalidad, nombre, direccion, login, contrasena,
+	        			 correo, telefono, ciudad, administrador,puestoAtencionoficina, oficina);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
+		
+	}
+	
+	public Cajero darCajeroPorLogin(String login) {
+		return  sqlCajero.darCajeroPorLogin (pmf.getPersistenceManager(), login);
+	}
 	/* ****************************************************************
 	 * 			Métodos para manejar GERENTEDEOFICINA
 	 *****************************************************************/
@@ -728,11 +780,10 @@ public class PersistenciaBancAndes {
 	        }
 	}
 	
-	
-//pendiente
-	public Cliente darClientePorLogin(String login) {
-		return  sqlCliente.darClientePorLogin (pmf.getPersistenceManager(), login);
+	public GerenteDeOficina darGerenteDeOficinaPorLogin(String login) {
+		return  sqlGerenteDeOficina.darGerenteDeOficinaPorLogin (pmf.getPersistenceManager(), login);
 	}
+
 	
 	/* ****************************************************************
 	 * 			Métodos para manejar OPERACIONBANCARIA
@@ -1156,41 +1207,7 @@ public class PersistenciaBancAndes {
 	}
 
 
-	public Cajero adicionarCajero(String tipoDocumento, int numeroDocumento, String departamento, int codigopostal,
-			String nacionalidad, String nombre, String direccion, String login, String contrasena, String correo,
-			int telefono, String ciudad, String administrador, long puestoAtencionoficina, long oficina) {
-		
-		PersistenceManager pm = pmf.getPersistenceManager();
-		 Transaction tx=pm.currentTransaction();
-		   try
-	        {
-	            tx.begin();
-	            long tuplasInsertadas = sqlCajero.adicionarCajero(pm, tipoDocumento, numeroDocumento, departamento,
-	        			 codigopostal, nacionalidad, nombre, direccion, login, contrasena,
-	        			 correo, telefono, ciudad, administrador, puestoAtencionoficina,oficina);
-	            tx.commit();
-	            
-	            log.trace ("Inserción de cajero: " + login + ": " + tuplasInsertadas + " tuplas insertadas");
-	            
-	            return new Cajero (tipoDocumento, numeroDocumento, departamento,
-	        			 codigopostal, nacionalidad, nombre, direccion, login, contrasena,
-	        			 correo, telefono, ciudad, administrador,puestoAtencionoficina, oficina);
-	        }
-	        catch (Exception e)
-	        {
-//	        	e.printStackTrace();
-	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-	        	return null;
-	        }
-	        finally
-	        {
-	            if (tx.isActive())
-	            {
-	                tx.rollback();
-	            }
-	            pm.close();
-	        }
-		
-	}
+	
+
 
 }

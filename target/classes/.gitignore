@@ -1,14 +1,1 @@
-/META-INF/
-/config/
-/hbase-site.xml
-/log4j.properties
-/package-cassandra.orm
-/package-excel.orm
-/package-h2.orm
-/package-hbase.orm
-/package-hsql.orm
-/package-mongodb.orm
-/package-mysql.orm
-/package-neo4j.orm
-/package-odf.orm
 /uniandes/

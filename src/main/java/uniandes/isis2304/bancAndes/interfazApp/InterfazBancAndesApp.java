@@ -59,9 +59,22 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 	 */
 	private static final String CONFIG_TABLAS = "./src/main/resources/config/TablasBD_A.json"; 
 	
+	public static final String CLIENTE = "Cliente";
+	public static final String GERENTEGENERAL = "Gerente General";
+	public static final String CAJERO = "Cajero";
+	public static final String GERENTEDEOFICINA = "Gerente de Oficina";
+	
 	/* ****************************************************************
 	 * 			Atributos
 	 *****************************************************************/
+	/**
+	 * El tipo de usuario que ingresó al sistema
+	 */
+	private String tipoUsuario;
+	/**
+	 * Indica si el usuario es administrador
+	 */
+	private boolean esAdmin;
     /**
      * Objeto JSON con los nombres de las tablas de la base de datos que se quieren utilizar
      */
@@ -220,7 +233,20 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
         setJMenuBar ( menuBar );	
     }
 	
-    
+    /**
+     * Define el tipo de usuario que ingresó al sistema
+     * @param tipoUsuario
+     */
+    public void setUsuario(String tipoUsuario) {
+    	this.tipoUsuario=tipoUsuario;
+    }
+    /**
+     * Define si el usuario que ingresa al sistema tiene permisos de administrador
+     * @param esAdmin
+     */
+    public void setEsAdmin (boolean esAdmin) {
+    	this.esAdmin=esAdmin;
+    }
     
 	/* ****************************************************************
 	 * 							REQF1 
@@ -231,339 +257,340 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
      */
     public void adicionarUsuario( )
     {
-    	try 
-    	{
-    		String login = JOptionPane.showInputDialog (this, "Login del usuario a registrar", "Agregar usuario", JOptionPane.QUESTION_MESSAGE);
-    		if (login != null)
+    	if (tipoUsuario==CLIENTE) {
+    		mensajeErrorPermisos();
+    	}
+    	else {
+    		try 
     		{
-        		VOUsuario u = bancAndes.adicionarUsuario (login);
-        		if (u==null)
-        		{
-        			throw new Exception ("No se pudo crear un usuario con login: " + login);
-        		}
-        		String[] opciones = {"Cliente", "Gerente General", "Gerente de oficina", "Cajero"};
-        		int tipoUsuario = JOptionPane.showOptionDialog(this, "Seleccione el tipo de usuario que quiere agregar", "Seleccion tipo usuario", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, null);
-        	    switch(tipoUsuario)
-        	     {		
-        	    	
-		        	     case 0:
-			        	    	 JComboBox<String> cbOpcionesDocumento = new JComboBox<String>();
-			        	    	 cbOpcionesDocumento.addItem("NIT");
-			        	    	 cbOpcionesDocumento.addItem("PEP");
-			        	    	 cbOpcionesDocumento.addItem("CEDULA_CIUDADANIA");
-			        	    	 cbOpcionesDocumento.addItem("CEDULA_EXTRANJERIA");
-			        	    	 cbOpcionesDocumento.addItem("TARJETA_IDENTIDAD");
-		        	    	 	
-			        	    	 
-			        	    	 JComboBox<String> cbOpcionesTipo = new JComboBox<String>();
-			        	    	 cbOpcionesTipo.addItem("PERSONA_NATURAL");
-			        	    	 cbOpcionesTipo.addItem("PERSONA_JURIDICA");
-			        	 			        	    	 
-			        	    	 JTextField numeroDocumento = new JTextField();
-			        	    	 JTextField departamento = new JTextField();
-			        	    	 JTextField codigopostal = new JTextField();
-			        	    	 JTextField nacionalidad = new JTextField();
-			        	    	 JTextField nombre = new JTextField();
-			        	    	 JTextField direccion = new JTextField();
-			        	    	 JTextField contrasena = new JTextField();
-			        	    	 JTextField correo = new JTextField();
-			        	    	 JTextField telefono = new JTextField();
-			        	    	 JTextField ciudad = new JTextField();
-			        	    	 
-			        	    	 Object[] message = {
-			        	    	     "TipoDocumento: ", cbOpcionesDocumento,
-			        	    	     "NumeroDocumento:", numeroDocumento,
-			        	    	     "Departamento:", departamento,
-			        	    	     "Codigopostal:", codigopostal,
-			        	    	     "Nacionalidad:", nacionalidad,
-			        	    	     "Nombre:", nombre,
-			        	    	     "Direccion:", direccion,
-			        	    	     "Contrasena:", contrasena,
-			        	    	     "Correo:", correo,
-			        	    	     "Telefono:", telefono,
-			        	    	     "Ciudad:", ciudad,
-			        	    	     "Tipo:", cbOpcionesTipo
-			        	    	 };
-			
-			        	    	 int option = JOptionPane.showConfirmDialog(null, message, "Datos cliente", JOptionPane.OK_CANCEL_OPTION);
-			        	    	 VOCliente c=null;
-			        	    	 if (option == JOptionPane.OK_OPTION) {
-			        	    		 	
-			        	    		try {
-			        	    		 c =  bancAndes.adicionarCliente(
-			        	    				 (String)cbOpcionesDocumento.getSelectedItem(), 
-			        	    				 Integer.parseInt(numeroDocumento.getText()),
-			        	    				 departamento.getText(),
-			        	    				 Integer.parseInt(codigopostal.getText()), 
-			        	    				 nacionalidad.getText(),
-			        	    				 nombre.getText(), 
-			        	    				 direccion.getText(), 
-			        	    				 login, 
-			        	    				 contrasena.getText(),
-			        	    				 correo.getText(), 
-			        	    				 Integer.parseInt(telefono.getText()), 
-			        	    				 ciudad.getText(), 
-			        	    				 (String)cbOpcionesTipo.getSelectedItem()
-			        	    				 );
-			        	    		} catch (Exception e) {
-										bancAndes.eliminarUsuario(login);
-										throw new Exception ("No se pudo crear un cliente con login: " + login);
-									}
-			        	    	 } 	
-			        	  
-			        	    	if (option == JOptionPane.CANCEL_OPTION)
-			                		{			        	    
-			        	    			bancAndes.eliminarUsuario(login);			        	    			
-			                		}
-			       
-        	     case 1:
-			        	    	 
-			        	    	 JComboBox<String> cbOpcionesDocumentoGG = new JComboBox<String>();
+    			String login = JOptionPane.showInputDialog (this, "Login del usuario a registrar", "Agregar usuario", JOptionPane.QUESTION_MESSAGE);
+    			if (login != null)
+    			{
+    				VOUsuario u = bancAndes.adicionarUsuario (login);
+    				if (u==null)
+    				{
+    					throw new Exception ("No se pudo crear un usuario con login: " + login);
+    				}
+    				String[] opciones = {"Cliente", "Gerente General", "Gerente de oficina", "Cajero"};
+    				int tipoUsuario = JOptionPane.showOptionDialog(this, "Seleccione el tipo de usuario que quiere agregar", "Seleccion tipo usuario", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, null);
+    				switch(tipoUsuario)
+    				{		
 
-			        	    	 cbOpcionesDocumentoGG.addItem("PEP");
-			        	    	 cbOpcionesDocumentoGG.addItem("CEDULA_CIUDADANIA");
-			        	    	 cbOpcionesDocumentoGG.addItem("CEDULA_EXTRANJERIA");
-			    	    	 	
-			        	    	 
-			        	    	 JComboBox<String> cbOpcionesAdminGG = new JComboBox<String>();
-			        	    	 cbOpcionesAdminGG.addItem("TRUE");
-			        	    	 cbOpcionesAdminGG.addItem("FALSE");
-			        	 			        	    	 
-			        	    	 JTextField numeroDocumentoGG = new JTextField();
-			        	    	 JTextField departamentoGG = new JTextField();
-			        	    	 JTextField codigopostalGG = new JTextField();
-			        	    	 JTextField nacionalidadGG = new JTextField();
-			        	    	 JTextField nombreGG = new JTextField();
-			        	    	 JTextField direccionGG = new JTextField();
-			        	    	 JTextField contrasenaGG = new JTextField();
-			        	    	 JTextField correoGG = new JTextField();
-			        	    	 JTextField telefonoGG = new JTextField();
-			        	    	 JTextField ciudadGG = new JTextField();
-			        	    	 JTextField oficinaGG = new JTextField();
-			        	    	 
-			        	    	 Object[] messageGG = {
-			        	    	     "TipoDocumento: ", cbOpcionesDocumentoGG,
-			        	    	     "NumeroDocumento:", numeroDocumentoGG,
-			        	    	     "Departamento:", departamentoGG,
-			        	    	     "Codigopostal:", codigopostalGG,
-			        	    	     "Nacionalidad:", nacionalidadGG,
-			        	    	     "Nombre:", nombreGG,
-			        	    	     "Direccion:", direccionGG,
-			        	    	     "Contrasena:", contrasenaGG,
-			        	    	     "Correo:", correoGG,
-			        	    	     "Telefono:", telefonoGG,
-			        	    	     "Ciudad:", ciudadGG,
-			        	    	     "Administrador:", cbOpcionesAdminGG,
-			        	    	     "Oficina:", oficinaGG
-			        	    	 };
-			
-			        	    	 int optionGG = JOptionPane.showConfirmDialog(null, messageGG, "Datos gerente general", JOptionPane.OK_CANCEL_OPTION);
-			        	    	 VOGerenteGeneral gg=null;
-			        	    	 if (optionGG == JOptionPane.OK_OPTION) {
-			        	    		 	
-			        	    		try {
-			        	    		 gg =  bancAndes.adicionarGerenteGeneral(
-			        	    				 (String)cbOpcionesDocumentoGG.getSelectedItem(), 
-			        	    				 Integer.parseInt(numeroDocumentoGG.getText()),
-			        	    				 departamentoGG.getText(),
-			        	    				 Integer.parseInt(codigopostalGG.getText()), 
-			        	    				 nacionalidadGG.getText(),
-			        	    				 nombreGG.getText(), 
-			        	    				 direccionGG.getText(), 
-			        	    				 login, 
-			        	    				 contrasenaGG.getText(),
-			        	    				 correoGG.getText(), 
-			        	    				 Integer.parseInt(telefonoGG.getText()), 
-			        	    				 ciudadGG.getText(), 
-			        	    				 (String)cbOpcionesAdminGG.getSelectedItem(),
-			        	    				 (long)Integer.parseInt(oficinaGG.getText())
-			        	    				 );
-			        	    		} catch (Exception e) {
-										bancAndes.eliminarUsuario(login);
-										throw new Exception ("No se pudo crear un gerente general con login: " + login);
-									}
-			        	    	 } 	
-			        	  
-			        	    	if (optionGG == JOptionPane.CANCEL_OPTION)
-			        	    	{
-			        	    			bancAndes.eliminarUsuario(login);				                		
-			                		}
-			        	    	
-        	     case 2:
-        	    	 
-			        	    	 JComboBox<String> cbOpcionesDocumentoGO = new JComboBox<String>();
-			
-			        	    	 cbOpcionesDocumentoGO.addItem("PEP");
-			        	    	 cbOpcionesDocumentoGO.addItem("CEDULA_CIUDADANIA");
-			        	    	 cbOpcionesDocumentoGO.addItem("CEDULA_EXTRANJERIA");
-			    	    	 	
-			        	    	 
-			        	    	 JComboBox<String> cbOpcionesAdminGO = new JComboBox<String>();
-			        	    	 cbOpcionesAdminGO.addItem("TRUE");
-			        	    	 cbOpcionesAdminGO.addItem("FALSE");
-			        	 			        	    	 
-			        	    	 JTextField numeroDocumentoGO = new JTextField();
-			        	    	 JTextField departamentoGO = new JTextField();
-			        	    	 JTextField codigopostalGO = new JTextField();
-			        	    	 JTextField nacionalidadGO = new JTextField();
-			        	    	 JTextField nombreGO = new JTextField();
-			        	    	 JTextField direccionGO = new JTextField();
-			        	    	 JTextField contrasenaGO = new JTextField();
-			        	    	 JTextField correoGO = new JTextField();
-			        	    	 JTextField telefonoGO = new JTextField();
-			        	    	 JTextField ciudadGO = new JTextField();
+    				case 0:
+    					JComboBox<String> cbOpcionesDocumento = new JComboBox<String>();
+    					cbOpcionesDocumento.addItem("NIT");
+    					cbOpcionesDocumento.addItem("PEP");
+    					cbOpcionesDocumento.addItem("CEDULA_CIUDADANIA");
+    					cbOpcionesDocumento.addItem("CEDULA_EXTRANJERIA");
+    					cbOpcionesDocumento.addItem("TARJETA_IDENTIDAD");
 
-			        	    	 
-			        	    	 Object[] messageGO = {
-			        	    	     "TipoDocumento: ", cbOpcionesDocumentoGO,
-			        	    	     "NumeroDocumento:", numeroDocumentoGO,
-			        	    	     "Departamento:", departamentoGO,
-			        	    	     "Codigopostal:", codigopostalGO,
-			        	    	     "Nacionalidad:", nacionalidadGO,
-			        	    	     "Nombre:", nombreGO,
-			        	    	     "Direccion:", direccionGO,
-			        	    	     "Contrasena:", contrasenaGO,
-			        	    	     "Correo:", correoGO,
-			        	    	     "Telefono:", telefonoGO,
-			        	    	     "Ciudad:", ciudadGO,
-			        	    	     "Administrador:", cbOpcionesAdminGO
-			        	    	   
-			        	    	 };
-			
-			        	    	 int optionGO = JOptionPane.showConfirmDialog(null, messageGO, "Datos gerente oficina", JOptionPane.OK_CANCEL_OPTION);
-			        	    	 VOGerenteDeOficina go=null;
-			        	    	 if (optionGO == JOptionPane.OK_OPTION) {
-			        	    		 	
-			        	    		 
-			        	    		 try {
-			        	    			  go =  bancAndes.adicionarGerenteDeOficina(
-					        	    				 (String)cbOpcionesDocumentoGO.getSelectedItem(), 
-					        	    				 Integer.parseInt(numeroDocumentoGO.getText()),
-					        	    				 departamentoGO.getText(),
-					        	    				 Integer.parseInt(codigopostalGO.getText()), 
-					        	    				 nacionalidadGO.getText(),
-					        	    				 nombreGO.getText(), 
-					        	    				 direccionGO.getText(), 
-					        	    				 login, 
-					        	    				 contrasenaGO.getText(),
-					        	    				 correoGO.getText(), 
-					        	    				 Integer.parseInt(telefonoGO.getText()), 
-					        	    				 ciudadGO.getText(), 
-					        	    				 (String)cbOpcionesAdminGO.getSelectedItem()			        	    				
-					        	    				 );
-									} catch (Exception e) {
-										bancAndes.eliminarUsuario(login);
-										throw new Exception ("No se pudo crear un gerente de oficina con login: " + login);
-									}        	    	
-			
-			        	    	 } 	
 
-			        	    	if (optionGO == JOptionPane.CANCEL_OPTION)
-			                		{
-			        	    			bancAndes.eliminarUsuario(login);			            
-			                		}
-        	    	 
-        	     case 3:
-        	    	
-			        	    	 JComboBox<String> cbOpcionesDocumentoC = new JComboBox<String>();
-			
-			        	    	 cbOpcionesDocumentoC.addItem("PEP");
-			        	    	 cbOpcionesDocumentoC.addItem("CEDULA_CIUDADANIA");
-			        	    	 cbOpcionesDocumentoC.addItem("CEDULA_EXTRANJERIA");
-			    	    	 	
-			        	    	 
-			        	    	 JComboBox<String> cbOpcionesAdminC = new JComboBox<String>();
-			        	    	 cbOpcionesAdminC.addItem("TRUE");
-			        	    	 cbOpcionesAdminC.addItem("FALSE");
-			        	 			        	    	 
-			        	    	 JTextField numeroDocumentoC = new JTextField();
-			        	    	 JTextField departamentoC = new JTextField();
-			        	    	 JTextField codigopostalC = new JTextField();
-			        	    	 JTextField nacionalidadC = new JTextField();
-			        	    	 JTextField nombreC = new JTextField();
-			        	    	 JTextField direccionC = new JTextField();
-			        	    	 JTextField contrasenaC = new JTextField();
-			        	    	 JTextField correoC = new JTextField();
-			        	    	 JTextField telefonoC = new JTextField();
-			        	    	 JTextField ciudadC = new JTextField();
-			        	    	 JTextField puestoAtencionOficinaC = new JTextField();
-			        	    	 JTextField oficinaC = new JTextField();
-			        	    	 
-			        	    	 Object[] messageC = {
-			        	    	     "TipoDocumento: ", cbOpcionesDocumentoC,
-			        	    	     "NumeroDocumento:", numeroDocumentoC,
-			        	    	     "Departamento:", departamentoC,
-			        	    	     "Codigopostal:", codigopostalC,
-			        	    	     "Nacionalidad:", nacionalidadC,
-			        	    	     "Nombre:", nombreC,
-			        	    	     "Direccion:", direccionC,
-			        	    	     "Contrasena:", contrasenaC,
-			        	    	     "Correo:", correoC,
-			        	    	     "Telefono:", telefonoC,
-			        	    	     "Ciudad:", ciudadC,
-			        	    	     "Administrador:", cbOpcionesAdminC,
-			        	    	     "PuestoAtencionOficina:", puestoAtencionOficinaC,
-			        	    	     "Oficina:", oficinaC
-			        	    	 };
-			
-			        	    	 int optionC = JOptionPane.showConfirmDialog(null, messageC, "Datos cajero", JOptionPane.OK_CANCEL_OPTION);
-			        	    	 VOCajero cc=null;
-			        	    	 if (optionC == JOptionPane.OK_OPTION) {
-			        	    		 	
-			        	    		 try { 
-			        	    		 cc =  bancAndes.adicionarCajero(
-			        	    				 (String)cbOpcionesDocumentoC.getSelectedItem(), 
-			        	    				 Integer.parseInt(numeroDocumentoC.getText()),
-			        	    				 departamentoC.getText(),
-			        	    				 Integer.parseInt(codigopostalC.getText()), 
-			        	    				 nacionalidadC.getText(),
-			        	    				 nombreC.getText(), 
-			        	    				 direccionC.getText(), 
-			        	    				 login, 
-			        	    				 contrasenaC.getText(),
-			        	    				 correoC.getText(), 
-			        	    				 Integer.parseInt(telefonoC.getText()), 
-			        	    				 ciudadC.getText(), 
-			        	    				 (String)cbOpcionesAdminC.getSelectedItem(),
-			        	    				 (long)Integer.parseInt(puestoAtencionOficinaC.getText()),
-			        	    				 (long)Integer.parseInt(oficinaC.getText())
-			        	    				 );
-			        	    			} catch (Exception e) {
-											bancAndes.eliminarUsuario(login);
-											throw new Exception ("No se pudo crear un cajero con login: " + login);
-										}     
-			        	    	 } 	
-			        	  
-			        	    	if (optionC == JOptionPane.CANCEL_OPTION)
-			                		{
-			        	    			bancAndes.eliminarUsuario(login);
-			                		}
-			        	     }
-        	    
-        	    
-        	    
-        		String resultado = "En agregar Usuario\n\n";
-        		resultado += "Usuario agregado exitosamente: " + u;
-    			resultado += "\n Operacion terminada";
+    					JComboBox<String> cbOpcionesTipo = new JComboBox<String>();
+    					cbOpcionesTipo.addItem("PERSONA_NATURAL");
+    					cbOpcionesTipo.addItem("PERSONA_JURIDICA");
+
+    					JTextField numeroDocumento = new JTextField();
+    					JTextField departamento = new JTextField();
+    					JTextField codigopostal = new JTextField();
+    					JTextField nacionalidad = new JTextField();
+    					JTextField nombre = new JTextField();
+    					JTextField direccion = new JTextField();
+    					JTextField contrasena = new JTextField();
+    					JTextField correo = new JTextField();
+    					JTextField telefono = new JTextField();
+    					JTextField ciudad = new JTextField();
+
+    					Object[] message = {
+    							"TipoDocumento: ", cbOpcionesDocumento,
+    							"NumeroDocumento:", numeroDocumento,
+    							"Departamento:", departamento,
+    							"Codigopostal:", codigopostal,
+    							"Nacionalidad:", nacionalidad,
+    							"Nombre:", nombre,
+    							"Direccion:", direccion,
+    							"Contrasena:", contrasena,
+    							"Correo:", correo,
+    							"Telefono:", telefono,
+    							"Ciudad:", ciudad,
+    							"Tipo:", cbOpcionesTipo
+    					};
+
+    					int option = JOptionPane.showConfirmDialog(null, message, "Datos cliente", JOptionPane.OK_CANCEL_OPTION);
+    					VOCliente c=null;
+    					if (option == JOptionPane.OK_OPTION) {
+
+    						try {
+    							c =  bancAndes.adicionarCliente(
+    									(String)cbOpcionesDocumento.getSelectedItem(), 
+    									Integer.parseInt(numeroDocumento.getText()),
+    									departamento.getText(),
+    									Integer.parseInt(codigopostal.getText()), 
+    									nacionalidad.getText(),
+    									nombre.getText(), 
+    									direccion.getText(), 
+    									login, 
+    									contrasena.getText(),
+    									correo.getText(), 
+    									Integer.parseInt(telefono.getText()), 
+    									ciudad.getText(), 
+    									(String)cbOpcionesTipo.getSelectedItem()
+    									);
+    						} catch (Exception e) {
+    							bancAndes.eliminarUsuario(login);
+    							throw new Exception ("No se pudo crear un cliente con login: " + login);
+    						}
+    					} 	
+
+    					if (option == JOptionPane.CANCEL_OPTION)
+    					{			        	    
+    						bancAndes.eliminarUsuario(login);			        	    			
+    					}
+
+    				case 1:
+
+    					JComboBox<String> cbOpcionesDocumentoGG = new JComboBox<String>();
+
+    					cbOpcionesDocumentoGG.addItem("PEP");
+    					cbOpcionesDocumentoGG.addItem("CEDULA_CIUDADANIA");
+    					cbOpcionesDocumentoGG.addItem("CEDULA_EXTRANJERIA");
+
+
+    					JComboBox<String> cbOpcionesAdminGG = new JComboBox<String>();
+    					cbOpcionesAdminGG.addItem("TRUE");
+    					cbOpcionesAdminGG.addItem("FALSE");
+
+    					JTextField numeroDocumentoGG = new JTextField();
+    					JTextField departamentoGG = new JTextField();
+    					JTextField codigopostalGG = new JTextField();
+    					JTextField nacionalidadGG = new JTextField();
+    					JTextField nombreGG = new JTextField();
+    					JTextField direccionGG = new JTextField();
+    					JTextField contrasenaGG = new JTextField();
+    					JTextField correoGG = new JTextField();
+    					JTextField telefonoGG = new JTextField();
+    					JTextField ciudadGG = new JTextField();
+    					JTextField oficinaGG = new JTextField();
+
+    					Object[] messageGG = {
+    							"TipoDocumento: ", cbOpcionesDocumentoGG,
+    							"NumeroDocumento:", numeroDocumentoGG,
+    							"Departamento:", departamentoGG,
+    							"Codigopostal:", codigopostalGG,
+    							"Nacionalidad:", nacionalidadGG,
+    							"Nombre:", nombreGG,
+    							"Direccion:", direccionGG,
+    							"Contrasena:", contrasenaGG,
+    							"Correo:", correoGG,
+    							"Telefono:", telefonoGG,
+    							"Ciudad:", ciudadGG,
+    							"Administrador:", cbOpcionesAdminGG,
+    							"Oficina:", oficinaGG
+    					};
+
+    					int optionGG = JOptionPane.showConfirmDialog(null, messageGG, "Datos gerente general", JOptionPane.OK_CANCEL_OPTION);
+    					VOGerenteGeneral gg=null;
+    					if (optionGG == JOptionPane.OK_OPTION) {
+
+    						try {
+    							gg =  bancAndes.adicionarGerenteGeneral(
+    									(String)cbOpcionesDocumentoGG.getSelectedItem(), 
+    									Integer.parseInt(numeroDocumentoGG.getText()),
+    									departamentoGG.getText(),
+    									Integer.parseInt(codigopostalGG.getText()), 
+    									nacionalidadGG.getText(),
+    									nombreGG.getText(), 
+    									direccionGG.getText(), 
+    									login, 
+    									contrasenaGG.getText(),
+    									correoGG.getText(), 
+    									Integer.parseInt(telefonoGG.getText()), 
+    									ciudadGG.getText(), 
+    									(String)cbOpcionesAdminGG.getSelectedItem(),
+    									(long)Integer.parseInt(oficinaGG.getText())
+    									);
+    						} catch (Exception e) {
+    							bancAndes.eliminarUsuario(login);
+    							throw new Exception ("No se pudo crear un gerente general con login: " + login);
+    						}
+    					} 	
+
+    					if (optionGG == JOptionPane.CANCEL_OPTION)
+    					{
+    						bancAndes.eliminarUsuario(login);				                		
+    					}
+
+    				case 2:
+
+    					JComboBox<String> cbOpcionesDocumentoGO = new JComboBox<String>();
+
+    					cbOpcionesDocumentoGO.addItem("PEP");
+    					cbOpcionesDocumentoGO.addItem("CEDULA_CIUDADANIA");
+    					cbOpcionesDocumentoGO.addItem("CEDULA_EXTRANJERIA");
+
+
+    					JComboBox<String> cbOpcionesAdminGO = new JComboBox<String>();
+    					cbOpcionesAdminGO.addItem("TRUE");
+    					cbOpcionesAdminGO.addItem("FALSE");
+
+    					JTextField numeroDocumentoGO = new JTextField();
+    					JTextField departamentoGO = new JTextField();
+    					JTextField codigopostalGO = new JTextField();
+    					JTextField nacionalidadGO = new JTextField();
+    					JTextField nombreGO = new JTextField();
+    					JTextField direccionGO = new JTextField();
+    					JTextField contrasenaGO = new JTextField();
+    					JTextField correoGO = new JTextField();
+    					JTextField telefonoGO = new JTextField();
+    					JTextField ciudadGO = new JTextField();
+
+
+    					Object[] messageGO = {
+    							"TipoDocumento: ", cbOpcionesDocumentoGO,
+    							"NumeroDocumento:", numeroDocumentoGO,
+    							"Departamento:", departamentoGO,
+    							"Codigopostal:", codigopostalGO,
+    							"Nacionalidad:", nacionalidadGO,
+    							"Nombre:", nombreGO,
+    							"Direccion:", direccionGO,
+    							"Contrasena:", contrasenaGO,
+    							"Correo:", correoGO,
+    							"Telefono:", telefonoGO,
+    							"Ciudad:", ciudadGO,
+    							"Administrador:", cbOpcionesAdminGO
+
+    					};
+
+    					int optionGO = JOptionPane.showConfirmDialog(null, messageGO, "Datos gerente oficina", JOptionPane.OK_CANCEL_OPTION);
+    					VOGerenteDeOficina go=null;
+    					if (optionGO == JOptionPane.OK_OPTION) {
+
+
+    						try {
+    							go =  bancAndes.adicionarGerenteDeOficina(
+    									(String)cbOpcionesDocumentoGO.getSelectedItem(), 
+    									Integer.parseInt(numeroDocumentoGO.getText()),
+    									departamentoGO.getText(),
+    									Integer.parseInt(codigopostalGO.getText()), 
+    									nacionalidadGO.getText(),
+    									nombreGO.getText(), 
+    									direccionGO.getText(), 
+    									login, 
+    									contrasenaGO.getText(),
+    									correoGO.getText(), 
+    									Integer.parseInt(telefonoGO.getText()), 
+    									ciudadGO.getText(), 
+    									(String)cbOpcionesAdminGO.getSelectedItem()			        	    				
+    									);
+    						} catch (Exception e) {
+    							bancAndes.eliminarUsuario(login);
+    							throw new Exception ("No se pudo crear un gerente de oficina con login: " + login);
+    						}        	    	
+
+    					} 	
+
+    					if (optionGO == JOptionPane.CANCEL_OPTION)
+    					{
+    						bancAndes.eliminarUsuario(login);			            
+    					}
+
+    				case 3:
+
+    					JComboBox<String> cbOpcionesDocumentoC = new JComboBox<String>();
+
+    					cbOpcionesDocumentoC.addItem("PEP");
+    					cbOpcionesDocumentoC.addItem("CEDULA_CIUDADANIA");
+    					cbOpcionesDocumentoC.addItem("CEDULA_EXTRANJERIA");
+
+
+    					JComboBox<String> cbOpcionesAdminC = new JComboBox<String>();
+    					cbOpcionesAdminC.addItem("TRUE");
+    					cbOpcionesAdminC.addItem("FALSE");
+
+    					JTextField numeroDocumentoC = new JTextField();
+    					JTextField departamentoC = new JTextField();
+    					JTextField codigopostalC = new JTextField();
+    					JTextField nacionalidadC = new JTextField();
+    					JTextField nombreC = new JTextField();
+    					JTextField direccionC = new JTextField();
+    					JTextField contrasenaC = new JTextField();
+    					JTextField correoC = new JTextField();
+    					JTextField telefonoC = new JTextField();
+    					JTextField ciudadC = new JTextField();
+    					JTextField puestoAtencionOficinaC = new JTextField();
+    					JTextField oficinaC = new JTextField();
+
+    					Object[] messageC = {
+    							"TipoDocumento: ", cbOpcionesDocumentoC,
+    							"NumeroDocumento:", numeroDocumentoC,
+    							"Departamento:", departamentoC,
+    							"Codigopostal:", codigopostalC,
+    							"Nacionalidad:", nacionalidadC,
+    							"Nombre:", nombreC,
+    							"Direccion:", direccionC,
+    							"Contrasena:", contrasenaC,
+    							"Correo:", correoC,
+    							"Telefono:", telefonoC,
+    							"Ciudad:", ciudadC,
+    							"Administrador:", cbOpcionesAdminC,
+    							"PuestoAtencionOficina:", puestoAtencionOficinaC,
+    							"Oficina:", oficinaC
+    					};
+
+    					int optionC = JOptionPane.showConfirmDialog(null, messageC, "Datos cajero", JOptionPane.OK_CANCEL_OPTION);
+    					VOCajero cc=null;
+    					if (optionC == JOptionPane.OK_OPTION) {
+
+    						try { 
+    							cc =  bancAndes.adicionarCajero(
+    									(String)cbOpcionesDocumentoC.getSelectedItem(), 
+    									Integer.parseInt(numeroDocumentoC.getText()),
+    									departamentoC.getText(),
+    									Integer.parseInt(codigopostalC.getText()), 
+    									nacionalidadC.getText(),
+    									nombreC.getText(), 
+    									direccionC.getText(), 
+    									login, 
+    									contrasenaC.getText(),
+    									correoC.getText(), 
+    									Integer.parseInt(telefonoC.getText()), 
+    									ciudadC.getText(), 
+    									(String)cbOpcionesAdminC.getSelectedItem(),
+    									(long)Integer.parseInt(puestoAtencionOficinaC.getText()),
+    									(long)Integer.parseInt(oficinaC.getText())
+    									);
+    						} catch (Exception e) {
+    							bancAndes.eliminarUsuario(login);
+    							throw new Exception ("No se pudo crear un cajero con login: " + login);
+    						}     
+    					} 	
+
+    					if (optionC == JOptionPane.CANCEL_OPTION)
+    					{
+    						bancAndes.eliminarUsuario(login);
+    					}
+    				}
+
+
+
+    				String resultado = "En agregar Usuario\n\n";
+    				resultado += "Usuario agregado exitosamente: " + u;
+    				resultado += "\n Operacion terminada";
+    				panelDatos.actualizarInterfaz(resultado);
+    			}
+    			else
+    			{
+    				panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+    			}
+    		} 
+    		catch (Exception e) 
+    		{
+    			//			e.printStackTrace();
+    			String resultado = generarMensajeError(e);
     			panelDatos.actualizarInterfaz(resultado);
     		}
-    		else
-    		{
-    			panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
-    		}
-		} 
-    	catch (Exception e) 
-    	{
-//			e.printStackTrace();
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
-		}
+    	}
     }
-    
-    
-    
-    
-    
+
     
     /**
      * Genera una cadena de caracteres con la descripciÃ³n de la excepcion e, haciendo Ã©nfasis en las excepcionsde JDO
@@ -592,6 +619,14 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 		resultado += e.getLocalizedMessage() + ", " + darDetalleException(e);
 		resultado += "\n\nRevise datanucleus.log y bancAndes.log para mÃ¡s detalles";
 		return resultado;
+	}
+	
+	/**
+	 * Mensaje de error desplegado cuando el usuario no tiene permisos para hacer la operación
+	 */
+	public void mensajeErrorPermisos() {
+		JOptionPane.showMessageDialog( this , "Esta cuenta no tiene permisos para realizar esta operación",
+				"Error en la operación" , JOptionPane.ERROR_MESSAGE );
 	}
 
 	/**
@@ -675,7 +710,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
             // Unifica la interfaz para Mac y para Windows.
             UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName( ) );
             InterfazBancAndesApp interfaz = new InterfazBancAndesApp( );
-            interfaz.setVisible( true );
+            new VentanaInicio(interfaz.bancAndes, interfaz);
         }
         catch( Exception e )
         {

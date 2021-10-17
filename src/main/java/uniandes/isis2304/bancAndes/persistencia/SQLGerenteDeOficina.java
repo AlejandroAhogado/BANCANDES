@@ -3,6 +3,8 @@ package uniandes.isis2304.bancAndes.persistencia;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.isis2304.bancAndes.negocio.GerenteDeOficina;
+
 public class SQLGerenteDeOficina {
 
 	/* ****************************************************************
@@ -41,7 +43,14 @@ public class SQLGerenteDeOficina {
 		Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaGerentesDeOficina () + "(tipoDocumento, numeroDocumento, departamento, codigopostal, nacionalidad, nombre, direccion, login, contrasena,correo, telefono, ciudad, administrador) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		q.setParameters(tipoDocumento, numeroDocumento, departamento, codigopostal, nacionalidad, nombre, direccion, login, contrasena,correo, telefono, ciudad, administrador);
 		return (long) q.executeUnique();
-}
+	}
+
+	public GerenteDeOficina darGerenteDeOficinaPorLogin(PersistenceManager pm, String login) {
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pba.darTablaGerentesDeOficina() + " WHERE login = ?");
+		q.setResultClass(GerenteDeOficina.class);
+		q.setParameters(login);
+		return (GerenteDeOficina) q.executeUnique();
+	}
 
 	
 	

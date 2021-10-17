@@ -3,6 +3,8 @@ package uniandes.isis2304.bancAndes.persistencia;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.isis2304.bancAndes.negocio.Cajero;
+
 public class SQLCajero {
 
 	/* ****************************************************************
@@ -66,5 +68,13 @@ public class SQLCajero {
 	        return (long) q.executeUnique();
 		
 	}
+	
+	public Cajero darCajeroPorLogin(PersistenceManager pm, String login) {
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pba.darTablaCajeros () + " WHERE login = ?");
+		q.setResultClass(Cajero.class);
+		q.setParameters(login);
+		return (Cajero) q.executeUnique();
+	}
+
 	
 }

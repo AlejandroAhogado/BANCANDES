@@ -3,6 +3,8 @@ package uniandes.isis2304.bancAndes.persistencia;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.isis2304.bancAndes.negocio.GerenteGeneral;
+
 public class SQLGerenteGeneral {
 
 	/* ****************************************************************
@@ -43,6 +45,13 @@ public class SQLGerenteGeneral {
 		return (long) q.executeUnique();
 	}
 
+
+	public GerenteGeneral darGerenteGeneralPorLogin(PersistenceManager pm, String login) {
+        Query q = pm.newQuery(SQL, "SELECT * FROM " + pba.darTablaGerenteGeneral () + " WHERE login = ?");
+       q.setResultClass(GerenteGeneral.class);
+       q.setParameters(login);
+       return (GerenteGeneral) q.executeUnique();
+}
 
 	
 	

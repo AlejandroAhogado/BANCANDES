@@ -243,6 +243,20 @@ public class BancAndes {
 	}
 	
 
+	 /**
+     * Encuentra el gerenteGeneral en BancAndes con el login solicitado
+     * Adiciona entradas al log de la aplicación
+     * @param login - El login del gerenteGeneral
+     * @return Un objeto gerenteGeneral con el login que conoce la aplicación, 
+      * lleno con su información básica
+     */
+     public GerenteGeneral darGerenteGeneralPorLogin (String login)
+     {
+                  log.info ("Buscando Gerente General por login: " + login);
+                  GerenteGeneral gerenteGeneral= pba.darGerenteGeneralPorLogin (login);
+                  return gerenteGeneral;
+     }
+
 	/* ****************************************************************
 	 * 			Métodos para manejar al CAJERO
 	 *****************************************************************/
@@ -259,7 +273,20 @@ public class BancAndes {
 	}
 	
 	
-	
+	/**
+     * Encuentra el cajero en BancAndes con el login solicitado
+     * Adiciona entradas al log de la aplicación
+     * @param login - El login del cajero
+     * @return Un objeto cajero con el login que conoce la aplicación, 
+      * lleno con su información básica
+     */
+     public Cajero darCajeroPorLogin (String login)
+     {
+                  log.info ("Buscando Cajero por login: " + login);
+                   Cajero cajero= pba.darCajeroPorLogin (login);
+                  return cajero;
+     }
+
 	
 	/* ****************************************************************
 	 * 			Métodos para manejar al GERENTEDEOFICINA
@@ -294,6 +321,21 @@ public class BancAndes {
         log.info ("Adicionando Gerente de Oficina: " + gerenteDeOficina);
         return gerenteDeOficina;
 	}
+	
+	/**
+     * Encuentra el gerente de oficina en BancAndes con el login solicitado
+     * Adiciona entradas al log de la aplicación
+     * @param login - El login del gerente de oficina
+     * @return Un objeto gerente de oficina con el login que conoce la aplicación, 
+      * lleno con su información básica
+     */
+     public GerenteDeOficina darGerenteDeOficinaPorLogin (String login)
+     {
+                  log.info ("Buscando Gerente de Oficina por login: " + login);
+                  GerenteDeOficina gerenteDeOficina= pba.darGerenteDeOficinaPorLogin (login);
+                  return gerenteDeOficina;
+     }
+
 	/* ****************************************************************
 	 * 			Métodos para manejar los OPERACIONES
 	 *****************************************************************/
