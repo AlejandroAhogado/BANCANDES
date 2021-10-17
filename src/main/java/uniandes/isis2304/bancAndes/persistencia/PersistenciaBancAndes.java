@@ -518,7 +518,7 @@ public class PersistenciaBancAndes {
 	        }
 	        catch (Exception e)
 	        {
-//	        	e.printStackTrace();
+	//        	e.printStackTrace();
 	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 	        	return null;
 	        }
@@ -531,6 +531,45 @@ public class PersistenciaBancAndes {
 	            pm.close();
 	        }
 	}
+	
+	
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Usuario, dado el identificador del Usuario
+	 * Adiciona entradas al log de la aplicación
+	 * @param login - El login del usuario
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarUsuario (String login) 
+	{
+		
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            
+            //falla
+            long resp = sqlUsuario.eliminarUsuario(pm, login);
+   
+            tx.commit();
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
 	
 	/* ****************************************************************
 	 * 			Métodos para manejar los CLIENTES
@@ -557,7 +596,7 @@ public class PersistenciaBancAndes {
 	        }
 	        catch (Exception e)
 	        {
-//	        	e.printStackTrace();
+	        	e.printStackTrace();
 	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 	        	return null;
 	        }

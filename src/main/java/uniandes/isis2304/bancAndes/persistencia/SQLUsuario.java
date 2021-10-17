@@ -35,10 +35,27 @@ public class SQLUsuario {
 		this.pba = pba;
 	}
 
+	/**
+	 * @param pm
+	 * @param login
+	 * @return
+	 */
 	public long adicionarUsuario(PersistenceManager pm, String login) {
 		 Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaUsuarios () + "(login) values (?)");
 	        q.setParameters(login);
 	        return (long) q.executeUnique();
+	}
+
+	/**
+	 * @param pm
+	 * @param login
+	 * @return
+	 */
+	public long eliminarUsuario(PersistenceManager pm, String login) {
+		
+		Query q = pm.newQuery(SQL, "DELETE FROM " + pba.darTablaUsuarios () + " WHERE login = ?");
+        q.setParameters(login);
+        return (long) q.executeUnique();
 	}
 	
 	

@@ -1,0 +1,269 @@
+11:42:05,711 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Limpiando la BD de Parranderos
+11:42:05,809 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.persistencia.PersistenciaParranderos] - Borrada la base de datos
+11:42:05,810 (AWT-EventQueue-0) INFO  [uniandes.isis2304.parranderos.negocio.Parranderos] - Limpiando la BD de Parranderos: Listo!
+17:49:19,884 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+17:49:19,884 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+17:49:19,896 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+15:09:37,509 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+15:09:37,509 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+15:09:37,525 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+15:11:00,326 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Interfaz
+15:11:00,326 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se aplica configuración indicada en el archivo de configuración
+15:11:00,342 (main) INFO  [uniandes.isis2304.parranderos.interfazApp.InterfazParranderosApp] - Se encontró un archivo de configuración válido: Tablas BD
+20:06:12,887 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+20:06:12,888 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+20:06:12,914 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+20:06:26,819 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+20:06:26,820 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+20:06:26,846 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+20:10:45,843 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+20:10:45,844 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+20:10:45,877 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+20:10:57,815 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: pruebaya123
+20:10:58,074 (AWT-EventQueue-0) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO USUARIOS(login) values (?)".
+ORA-00001: restricci�n �nica (ISIS2304A03202120.SYS_C00246246) violada
+
+20:10:58,092 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: null
+20:12:49,957 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+20:12:49,957 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+20:12:49,985 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+20:13:00,066 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: pruebaya123
+20:13:00,317 (AWT-EventQueue-0) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO USUARIOS(login) values (?)".
+ORA-00001: restricci�n �nica (ISIS2304A03202120.SYS_C00246246) violada
+
+20:13:00,341 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: null
+20:13:31,846 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+20:13:31,847 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+20:13:31,874 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+20:13:51,222 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: prueba2ya
+20:13:51,507 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=prueba2ya]
+20:14:44,258 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cliente: prueba2ya
+20:14:44,299 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cliente: Cliente [tipoDocumento=CEDULA_CIUDADANIA, numeroDocumento=1232123121, departamento=Cundinamarca, codigopostal=123321, nacionalidad=colombiana, nombre=prueba2ya, direccion=cra 12#1232-42, login=prueba2ya, contrasena=rgbgvr3424rfv, correo=prueba2ya@gmail.com, telefono=1234567, ciudad=Bogota, tipo=PERSONA_NATURAL]
+20:19:54,891 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+20:19:54,892 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+20:19:54,926 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+20:20:04,637 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: pruebaya
+20:20:04,956 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=pruebaya]
+20:32:02,705 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+20:32:02,707 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+20:32:02,731 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+20:32:14,302 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: pruebaya123
+20:32:14,578 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=pruebaya123]
+20:36:45,271 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+20:36:45,271 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+20:36:45,294 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+20:36:56,007 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: pruebaya3.0
+20:36:56,282 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=pruebaya3.0]
+20:37:35,471 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cliente: pruebaya3.0
+20:37:35,514 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cliente: Cliente [tipoDocumento=CEDULA_CIUDADANIA, numeroDocumento=11211112, departamento=cundinamarc, codigopostal=122121, nacionalidad=colasdasda, nombre=sadadssdasd, direccion=dasasadsasad, login=pruebaya3.0, contrasena=dasadasdsad, correo=dasda@gmail.com, telefono=12345678, ciudad=asdsadasd, tipo=PERSONA_NATURAL]
+20:37:42,922 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: asdasda
+20:37:42,953 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=asdasda]
+20:38:02,328 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cliente: asdasda
+20:38:02,363 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cliente: Cliente [tipoDocumento=NIT, numeroDocumento=12312312, departamento=ssdfcdsf, codigopostal=13123123, nacionalidad=sdfsadas, nombre=dsdfdsf, direccion=sdfsdfsdf, login=asdasda, contrasena=sdfsdfsdf, correo=sdfsfs@gmail.com, telefono=123456789, ciudad=asdcsadsa, tipo=PERSONA_NATURAL]
+20:38:14,963 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: yhjnhny
+20:38:14,992 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=yhjnhny]
+20:38:56,289 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cliente: yhjnhny
+20:38:56,321 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cliente: Cliente [tipoDocumento=NIT, numeroDocumento=23423424, departamento=efgrfbggb, codigopostal=124342, nacionalidad=fgbfgbgfbfgb, nombre=fgbfgbfgbfgb, direccion=fgbfbfgbfb, login=yhjnhny, contrasena=fbbfgbfgbfgb, correo=fgbfgbfg2@gmail.com, telefono=1234567891, ciudad=ahshsa, tipo=PERSONA_NATURAL]
+20:41:07,633 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+20:41:07,634 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+20:41:07,664 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+20:41:14,246 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: sadad
+20:41:14,628 (AWT-EventQueue-0) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO USUARIOS(login) values (?)".
+ORA-02290: restricci�n de control (ISIS2304A03202120.CHK_LENGTHLOGIN_USUARIOS) violada
+
+20:41:14,655 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: null
+20:41:34,972 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: abcde
+20:41:35,107 (AWT-EventQueue-0) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO USUARIOS(login) values (?)".
+ORA-02290: restricci�n de control (ISIS2304A03202120.CHK_LENGTHLOGIN_USUARIOS) violada
+
+20:41:35,122 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: null
+20:41:39,390 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: asdasdasda
+20:41:39,429 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=asdasdasda]
+20:42:14,766 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cliente: asdasdasda
+20:42:14,791 (AWT-EventQueue-0) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO CLIENTES(tipoDocumento, numeroDocumento, departamento, codigopostal, nacionalidad, nombre, direccion, login, contrasena, correo, telefono, ciudad, tipo) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)".
+ORA-02290: restricci�n de control (ISIS2304A03202120.CHK_CONTRASENA_CLIENTES) violada
+
+20:42:14,810 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cliente: null
+20:42:14,811 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: asdasdasda
+20:53:44,329 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+20:53:44,330 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+20:53:44,357 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+20:54:01,041 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: abcdefghi
+20:54:01,333 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=abcdefghi]
+20:54:04,131 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: abcdefghi
+20:58:47,968 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+20:58:47,968 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+20:58:47,995 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+20:58:57,187 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+20:58:57,188 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+20:58:57,216 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+20:59:13,679 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: qwertyuio
+20:59:13,997 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=qwertyuio]
+20:59:20,399 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: qwertyuio
+21:01:55,334 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+21:01:55,334 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+21:01:55,358 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+21:02:15,414 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: zzzzzzzzzzzzzzzzzzzzzz
+21:02:15,674 (AWT-EventQueue-0) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO USUARIOS(login) values (?)".
+ORA-12899: el valor es demasiado grande para la columna "ISIS2304A03202120"."USUARIOS"."LOGIN" (real: 22, m�ximo: 20)
+
+21:02:15,697 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: null
+21:02:29,154 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: mmmmmmm
+21:02:29,204 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=mmmmmmm]
+21:02:39,334 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: mmmmmmm
+21:04:02,581 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+21:04:02,582 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+21:04:02,611 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+21:04:37,709 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: rrrrrrr
+21:04:37,989 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=rrrrrrr]
+21:04:47,360 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: rrrrrrr
+21:15:08,564 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+21:15:08,565 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+21:15:08,600 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+21:15:17,294 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: ccccccccc
+21:15:17,564 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=ccccccccc]
+21:15:20,898 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: ccccccccc
+21:17:44,916 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+21:17:44,917 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+21:17:44,943 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+21:17:51,655 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: vvvvvvvv
+21:17:52,072 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=vvvvvvvv]
+21:17:54,854 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: vvvvvvvv
+21:18:16,439 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+21:18:16,439 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+21:18:16,466 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+21:18:26,761 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: ttttttttttt
+21:18:27,037 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=ttttttttttt]
+21:18:29,200 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: ttttttttttt
+21:19:01,739 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+21:19:01,740 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+21:19:01,769 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+21:19:17,788 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: fffffffffff
+21:19:18,054 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=fffffffffff]
+21:19:20,113 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: fffffffffff
+21:19:43,657 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+21:19:43,657 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+21:19:43,695 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+21:20:16,915 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+21:20:16,916 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+21:20:16,939 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+21:20:25,211 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: nnnnnnnnnnn
+21:20:25,477 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=nnnnnnnnnnn]
+21:20:28,107 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: nnnnnnnnnnn
+21:21:26,796 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+21:21:26,797 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+21:21:26,827 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+21:21:35,283 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: ggggggg
+21:21:35,563 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=ggggggg]
+21:21:37,935 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: ggggggg
+21:22:06,975 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+21:22:06,976 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+21:22:07,006 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+21:22:13,329 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: aaaaaaaaaaaa
+21:22:13,613 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=aaaaaaaaaaaa]
+21:22:16,085 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: aaaaaaaaaaaa
+21:25:41,533 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+21:25:41,534 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+21:25:41,558 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+21:25:52,098 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: dddddd
+21:25:52,509 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=dddddd]
+21:25:55,244 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: dddddd
+21:25:55,267 (AWT-EventQueue-0) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM USUARIOS WHERE login = '?'".
+�ndice de columna no v�lido
+21:25:55,288 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando usuario por login: -1 tuplas eliminadas
+21:35:55,763 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+21:35:55,764 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+21:35:55,808 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+21:43:07,681 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+21:43:07,682 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+21:43:07,710 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+21:43:17,675 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: 
+21:43:17,947 (AWT-EventQueue-0) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO USUARIOS(login) values (?)".
+ORA-01400: no se puede realizar una inserci�n NULL en ("ISIS2304A03202120"."USUARIOS"."LOGIN")
+
+21:43:17,966 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: null
+21:43:37,463 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: 
+21:43:37,481 (AWT-EventQueue-0) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO USUARIOS(login) values (?)".
+ORA-01400: no se puede realizar una inserci�n NULL en ("ISIS2304A03202120"."USUARIOS"."LOGIN")
+
+21:43:37,499 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: null
+21:45:47,986 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+21:45:47,988 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+21:45:48,011 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+21:45:55,988 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: aaaaaaaa
+21:45:56,411 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=aaaaaaaa]
+21:45:59,011 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: aaaaaaaa
+22:13:55,548 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+22:13:55,549 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+22:13:55,571 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+22:15:48,109 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: hhhhhhhh
+22:15:48,385 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=hhhhhhhh]
+22:15:56,798 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: hhhhhhhh
+22:15:56,833 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando usuario por login: 1 tuplas eliminadas
+22:16:44,714 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+22:16:44,715 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+22:16:44,741 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+22:16:53,049 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: jjjjjjjjjjjjj
+22:16:53,326 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=jjjjjjjjjjjjj]
+22:16:58,213 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: jjjjjjjjjjjjj
+22:16:58,248 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando usuario por login: 1 tuplas eliminadas
+22:17:25,017 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+22:17:25,017 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+22:17:25,052 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+22:17:36,192 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: mlmlmlmlm
+22:17:36,689 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=mlmlmlmlm]
+22:17:43,085 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: mlmlmlmlm
+22:17:43,120 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando usuario por login: 1 tuplas eliminadas
+22:18:04,742 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+22:18:04,742 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+22:18:04,777 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+22:18:15,094 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: jijijijijiji
+22:18:15,560 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=jijijijijiji]
+22:18:21,084 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: jijijijijiji
+22:18:21,118 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando usuario por login: 1 tuplas eliminadas
+22:18:46,664 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+22:18:46,665 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+22:18:46,693 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+22:18:55,009 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: jojojojojoj
+22:18:55,330 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=jojojojojoj]
+22:19:02,822 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: jojojojojoj
+22:19:02,854 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando usuario por login: 1 tuplas eliminadas
+22:19:40,436 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+22:19:40,437 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+22:19:40,472 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+22:19:47,776 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: ajajajaj
+22:19:48,048 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=ajajajaj]
+22:23:30,450 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+22:23:30,451 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+22:23:30,469 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+22:23:37,883 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: tgtgtgtgt
+22:23:38,235 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=tgtgtgtgt]
+22:23:44,557 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: tgtgtgtgt
+22:23:44,586 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando usuario por login: 1 tuplas eliminadas
+22:24:32,250 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+22:24:32,251 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+22:24:32,273 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+22:24:49,187 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: lasagna
+22:24:49,444 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=lasagna]
+22:25:02,908 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: lasagna
+22:25:02,943 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando usuario por login: 1 tuplas eliminadas
+22:26:47,762 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+22:26:47,763 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+22:26:47,786 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+22:26:59,748 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: cocacola
+22:27:00,016 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=cocacola]
+22:29:20,741 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+22:29:20,742 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+22:29:20,765 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+22:29:33,237 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: mandarina
+22:29:33,690 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=mandarina]
+22:31:34,158 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+22:31:34,159 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+22:31:34,180 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+22:31:58,126 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+22:31:58,127 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+22:31:58,153 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+22:32:06,034 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: gegege
+22:32:06,366 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=gegege]
+22:32:14,375 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: gegege
+22:32:14,405 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando usuario por login: 1 tuplas eliminadas

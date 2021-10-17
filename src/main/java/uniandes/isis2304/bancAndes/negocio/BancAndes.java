@@ -95,6 +95,22 @@ public class BancAndes {
         return usuario;
 	}
 	
+	/**
+	 * Elimina de manera persistente un usuario
+	 * Elimina entradas al log de la aplicación
+	 * @param login - El login del usuario
+	 * @return El objeto Usuario eliminado. null si ocurre alguna Excepción
+	 */
+	public long eliminarUsuario (String login)
+	{
+	
+        log.info ("Eliminando Usuario: " + login);
+        long resp= pba.eliminarUsuario (login);		
+        log.info ("Eliminando usuario por login: " + resp + " tuplas eliminadas");
+        
+        return resp;
+	}
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar los CLIENTES
 	 *****************************************************************/
@@ -464,11 +480,15 @@ public class BancAndes {
 	 * @return El número de tuplas modificadas: 1 o 0. 0 significa que no se realiz� el pago
 	 */
 	public long realizarPago (long idPrestamo, float montoPago)
-	{
+	{	
+		float valorCuota = darPrestamoPorId(idPrestamo).getValorCuotaMinima();
         log.info ("Realizando Pago: " + idPrestamo);
+        if(valorCuota>montoPago) {
+        	return 0;}
         long cambios = pba.realizarPago (idPrestamo, montoPago);
         return cambios;
-	}
+     }
+	
 	/* **********************
 	 * 			Metodos para manejar los puestos de atencion
 	 ***********************/

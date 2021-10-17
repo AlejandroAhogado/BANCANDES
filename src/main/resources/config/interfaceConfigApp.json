@@ -1,45 +1,86 @@
 {
-	"title": "Aplicación transaccional de Parranderos Uniandes",
+	"title": "Aplicación transaccional de BancAndes Uniandes",
 	"frameH": 600,
 	"frameW": 800,
 	"bannerPath": "./src/main/resources/config/logo.png",
 	"menuBar":
 	[
-		{ "menuTitle": "TipoBebida",
+		{ "menuTitle": "Requerimientos de Modificacion",
 		  "options":
 			[
 				{
-					"label": "Adicionar",
-					"event": "adicionarTipoBebida"
+					"label": "Registrar usuario",
+					"event": "adicionarUsuario"
 				},
 				{
-					"label": "Listar",
-					"event": "listarTipoBebida"
+					"label": "Registrar oficina",
+					"event": "registrarOficina"
 				},
 				{
-					"label": "Borrar por Id",
-					"event": "eliminarTipoBebidaPorId"
+					"label": "Registrar punto de atencion",
+					"event": "registrarPuntoDeAtencion"
 				},
 				{
-					"label": "Buscar por Nombre",
-					"event": "buscarTipoBebidaPorNombre"
+					"label": "Registrar cuenta",
+					"event": "registrarCuenta"
+				},
+				{
+					"label": "Cerrar cuenta",
+					"event": "cerrarCuenta"
+				},
+				{
+					"label": "Registrar operacion sobre cuenta",
+					"event": "registrarOperacionCuenta"
+				},
+				{
+					"label": "Registrar prestamo",
+					"event": "registrarPrestamo"
+				},
+				{
+					"label": "Cerrar prestamo",
+					"event": "cerrarPrestamo"
+				},
+				{
+					"label": "Registrar operacion prestamo",
+					"event": "registrarOperacionPrestamo"
 				}
 			]
 		},
+		{ "menuTitle": "Requerimientos de Consulta",
+			"options":
+			  [
+				  {
+					  "label": "Consultar las cuentas",
+					  "event": "consultarCuentas"
+				  },
+				  {
+					  "label": "Consultar un cliente",
+					  "event": "consultarCliente"
+				  },
+				  {
+					  "label": "Consultar 10 operaciones de mas movimiento",
+					  "event": "consultar10Operaciones"
+				  },
+				  {
+					  "label": "Obtener datos del usuario mas activo",
+					  "event": "obtenerUsuarioMasActivo"
+				  }
+			  ]
+		  },
 		{ "menuTitle": "Mantenimiento",
 		  "options":
 			[
 				{
-					"label": "Mostrar log Parranderos",
-					"event": "mostrarLogParranderos"
+					"label": "Mostrar log BancAndes",
+					"event": "mostrarLogBancAndes"
 				},
 				{
 					"label": "Mostrar log datanucleus",
 					"event": "mostrarLogDatanuecleus"
 				},
 				{
-					"label": "Limpiar log de parranderos",
-					"event": "limpiarLogParranderos"
+					"label": "Limpiar log de bancAndes",
+					"event": "limpiarLogBancAndes"
 				},
 				{
 					"label": "Limpiar log de datanucleus",
@@ -75,7 +116,7 @@
 					"event": "mostrarArqRef"
 				},
 				{
-					"label": "Javadoc Parranderos",
+					"label": "Javadoc BancAndes",
 					"event": "mostrarJavadoc"
 				}
 			]
