@@ -1245,7 +1245,11 @@ public class PersistenciaBancAndes {
 	        }
 	}
 
-	
+	public Oficina darOficinaPorId(long id) {
+		return sqlOficina.darOficinaPorId (pmf.getPersistenceManager(), id);
+	}
+
+
 	/* ****************************************************************
 	 * 			Métodos para manejar CAJEROAUTOMATICO
 	 *****************************************************************/

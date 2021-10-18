@@ -708,7 +708,19 @@ public class BancAndes {
        return oficina;
 	}
 	
-	
+	/**
+	 * Encuentra la oficina en BancAndes con el id solicitado
+	 * Adiciona entradas al log de la aplicación
+	 * @param id de la cuenta
+	 * @return Un objeto Oficina con el id que conoce la aplicación, 
+	 * lleno con su información básica
+	 */
+	public Oficina darOficinaPorId (long id)
+	{
+		log.info ("Buscando Oficina por id: " + id);
+		Oficina oficina= pba.darOficinaPorId (id);
+		return oficina;
+	}
 	/* **********************
 	 * 			Metodos para cajero automatico
 	 ***********************/

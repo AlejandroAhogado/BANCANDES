@@ -63,7 +63,7 @@ public class SQLCuenta {
 	}
 
 	public long cerrarCuenta(PersistenceManager pm, long idCuenta) {
-		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaCuentas () + " SET estado = CERRADA WHERE id = ?");
+		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaCuentas () + " SET estado = CERRADA AND saldo = 0 WHERE id = ?");
 		q.setParameters(idCuenta);
 		return (long) q.executeUnique();
 	}

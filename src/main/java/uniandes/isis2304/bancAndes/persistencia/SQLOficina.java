@@ -3,6 +3,9 @@ package uniandes.isis2304.bancAndes.persistencia;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.isis2304.bancAndes.negocio.Cuenta;
+import uniandes.isis2304.bancAndes.negocio.Oficina;
+
 public class SQLOficina {
 
 	/* ****************************************************************
@@ -40,6 +43,13 @@ public class SQLOficina {
 		 Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaOficinas () + "(id, nombre, direccion, puestosPosibles, gerenteLogin) values (?,?,?,?,?)");
 	        q.setParameters(id, nombre, direccion, puestosPosibles, gerenteLogin);
 	        return (long) q.executeUnique();
+	}
+	
+	public Oficina darOficinaPorId(PersistenceManager pm, long id) {
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pba.darTablaOficinas () + " WHERE id = ?");
+		q.setResultClass(Oficina.class);
+		q.setParameters(id);
+		return (Oficina) q.executeUnique();
 	}
 	
 }
