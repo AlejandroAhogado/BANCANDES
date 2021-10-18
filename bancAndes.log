@@ -625,3 +625,7 @@ ORA-00942: la tabla o vista no existe
 12:23:47,925 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
 12:23:47,947 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
 12:24:23,029 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+13:45:41,464 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+13:45:41,465 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+13:45:41,487 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:46:14,976 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3

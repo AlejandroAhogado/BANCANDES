@@ -353,6 +353,14 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
     								bancAndes.eliminarUsuario(login);
     								throw new Exception ("No se pudo crear un cliente con login: " + login);
     							}
+    							
+    							bancAndes.adicionarUsuarioTipoOperacion("CONSIGNAR", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("LIQUIDAR_RENDIMIENTOS", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("PAGAR_CUOTA", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("PAGAR_CUOTA_EXTRAORDINARIA", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("RETIRAR", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("SOLICIRTAR", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("TRASFERIR", login);
     						} 	
 
     						if (option == JOptionPane.CANCEL_OPTION)
@@ -429,6 +437,12 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
     								bancAndes.eliminarUsuario(login);
     								throw new Exception ("No se pudo crear un gerente general con login: " + login);
     							}
+    							bancAndes.adicionarUsuarioTipoOperacion("ACTIVAR", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("APROBAR", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("CERRAR", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("DESACTIVAR", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("RECHAZAR", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("RENOVAR", login);
     						} 	
 
     						if (optionGG == JOptionPane.CANCEL_OPTION)
@@ -503,7 +517,14 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
     							} catch (Exception e) {
     								bancAndes.eliminarUsuario(login);
     								throw new Exception ("No se pudo crear un gerente de oficina con login: " + login);
-    							}        	    	
+    							}       
+    							
+    							bancAndes.adicionarUsuarioTipoOperacion("ACTIVAR", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("APROBAR", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("CERRAR", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("DESACTIVAR", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("RECHAZAR", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("RENOVAR", login);
 
     						} 	
 
@@ -582,6 +603,14 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
     								bancAndes.eliminarUsuario(login);
     								throw new Exception ("No se pudo crear un cajero con login: " + login);
     							}     
+    							
+    							bancAndes.adicionarUsuarioTipoOperacion("CONSIGNAR", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("LIQUIDAR_RENDIMIENTOS", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("PAGAR_CUOTA", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("PAGAR_CUOTA_EXTRAORDINARIA", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("RETIRAR", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("SOLICITAR", login);
+    							bancAndes.adicionarUsuarioTipoOperacion("TRANSFERIR", login);
     						} 	
 
     						if (optionC == JOptionPane.CANCEL_OPTION)
