@@ -1,6 +1,6 @@
 package uniandes.isis2304.bancAndes.negocio;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class DepositoInversion implements VODepositoInversion{
 
@@ -16,7 +16,8 @@ public class DepositoInversion implements VODepositoInversion{
 		this.monto = 0;
 		this.tasaRendimiento = 0;
 		this.riesgo = "";
-		this.fechaInversion = new Date();
+		long hoy=System.currentTimeMillis();  
+		this.fechaInversion=new java.sql.Date(hoy); 
 	}
 	
 	

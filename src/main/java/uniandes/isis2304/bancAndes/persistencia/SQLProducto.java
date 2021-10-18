@@ -1,5 +1,8 @@
 package uniandes.isis2304.bancAndes.persistencia;
 
+import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
+
 public class SQLProducto {
 
 	/* ****************************************************************
@@ -30,6 +33,27 @@ public class SQLProducto {
 	public SQLProducto (PersistenciaBancAndes pba)
 	{
 		this.pba = pba;
+	}
+	/**
+	 * @param pm
+	 * @param id
+	 * @return
+	 */
+	public long adicionarProducto(PersistenceManager pm, long id) {
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaProductos () + "(id) values (?)");
+        q.setParameters(id);
+        return (long) q.executeUnique();
+	}
+
+	/**
+	 * @param pm
+	 * @param id
+	 * @return
+	 */
+	public long eliminarProducto(PersistenceManager pm, long id) {
+		Query q = pm.newQuery(SQL, "DELETE FROM " + pba.darTablaProductos () + " WHERE id = ?");
+        q.setParameters(id);
+        return (long) q.executeUnique();
 	}
 	
 	

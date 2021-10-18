@@ -1,6 +1,6 @@
 package uniandes.isis2304.bancAndes.negocio;
 
-import java.util.Date;
+import java.sql.Date;
 
 public interface VOOperacionBancaria {
 

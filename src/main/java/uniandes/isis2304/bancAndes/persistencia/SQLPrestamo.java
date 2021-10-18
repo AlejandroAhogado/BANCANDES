@@ -1,6 +1,8 @@
 package uniandes.isis2304.bancAndes.persistencia;
 
-import java.util.Date;
+
+
+import java.sql.Date;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;

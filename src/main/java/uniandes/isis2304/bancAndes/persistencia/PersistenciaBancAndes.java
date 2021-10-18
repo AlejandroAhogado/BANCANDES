@@ -1,6 +1,7 @@
 package uniandes.isis2304.bancAndes.persistencia;
 
-import java.util.Date;
+
+import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,6 +27,7 @@ import uniandes.isis2304.bancAndes.negocio.GerenteGeneral;
 import uniandes.isis2304.bancAndes.negocio.Oficina;
 import uniandes.isis2304.bancAndes.negocio.OperacionBancaria;
 import uniandes.isis2304.bancAndes.negocio.Prestamo;
+import uniandes.isis2304.bancAndes.negocio.Producto;
 import uniandes.isis2304.bancAndes.negocio.PuestoAtencionOficina;
 import uniandes.isis2304.bancAndes.negocio.PuestoDeAtencion;
 import uniandes.isis2304.bancAndes.negocio.PuestoDigital;
@@ -827,8 +829,11 @@ public class PersistenciaBancAndes {
 	/* ****************************************************************
 	 * 			Métodos para manejar CUENTA
 	 *****************************************************************/
-	
-	public Cuenta adicionarCuenta( int numeroCuenta, String estado, String tipo, float saldo,
+	public Cuenta darCuentaPorId(long id) {
+		return sqlCuenta.darCuentaPorId (pmf.getPersistenceManager(), id);
+	}
+
+	public Cuenta adicionarCuenta( long id, int numeroCuenta, String estado, String tipo, float saldo,
 			Date fechaCreacion, Date dechaVencimiento, float tasaRendimiento, long oficina) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		 Transaction tx=pm.currentTransaction();
@@ -836,7 +841,6 @@ public class PersistenciaBancAndes {
 	        {
 
 	            tx.begin();
-	            long id = nextval ();
 	            long tuplasInsertadas = sqlCuenta.adicionarCuenta(pm, id, numeroCuenta, estado, tipo, saldo,
 	        			 fechaCreacion, dechaVencimiento, tasaRendimiento, oficina);
 	            tx.commit();
@@ -926,7 +930,7 @@ public class PersistenciaBancAndes {
 	 * 			Métodos para manejar PRESTAMO
 	 *****************************************************************/
 
-	public Prestamo adicionarPrestamo( float monto, float saldoPendiente, float interes, int numeroCuotas,
+	public Prestamo adicionarPrestamo(long id, float monto, float saldoPendiente, float interes, int numeroCuotas,
 			int diaPago, float valorCuotaMinima, Date fechaPrestamo, String cerrado) {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -935,7 +939,6 @@ public class PersistenciaBancAndes {
 	        {
 
 	            tx.begin();
-	            long id = nextval ();
 	            long tuplasInsertadas = sqlPrestamo.adicionarPrestamo(pm, id, monto, saldoPendiente, interes, numeroCuotas,
 	        			 diaPago, valorCuotaMinima, fechaPrestamo, cerrado);
 	            tx.commit();
@@ -962,9 +965,59 @@ public class PersistenciaBancAndes {
 		
 	}
 
+	public long cerrarPrestamo(long idPrestamo) {
+		
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlPrestamo.cerrarPrestamo (pm, idPrestamo);
+            tx.commit();
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+		
+	}
 
-	public Cuenta darCuentaPorId(long id) {
-		return sqlCuenta.darCuentaPorId (pmf.getPersistenceManager(), id);
+	public long realizarPago(long idPrestamo, float montoPago) {
+		
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlPrestamo.realizarPago (pm, idPrestamo, montoPago);
+            tx.commit();
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
 	}
 
 	public Prestamo darPrestamoPorId(long id) {
@@ -1151,14 +1204,62 @@ public class PersistenciaBancAndes {
 	        }
 	}
 
-	public long cerrarPrestamo(long idPrestamo) {
+
+
+
+	/* ****************************************************************
+	 * 			Métodos para manejar PRODUCTO
+	 *****************************************************************/
+	public Producto adicionarProducto() {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+	            tx.begin();
+	            long id = nextval ();
+	            long tuplasInsertadas = sqlProducto.adicionarProducto(pm,id);
+	            tx.commit();
+	            
+	            log.trace ("Inserción de producto: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new Producto (id);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
+	}
+
 	
+
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Producto, dado el id del Producto
+	 * Adiciona entradas al log de la aplicación
+	 * @param id - El id del producto
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarProducto(long id) {
+		
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
         try
         {
             tx.begin();
-            long resp = sqlPrestamo.cerrarPrestamo (pm, idPrestamo);
+            
+            //falla
+            long resp = sqlProducto.eliminarProducto(pm, id);
+   
             tx.commit();
             return resp;
         }
@@ -1176,38 +1277,7 @@ public class PersistenciaBancAndes {
             }
             pm.close();
         }
-		
 	}
-
-	public long realizarPago(long idPrestamo, float montoPago) {
-		
-		PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx=pm.currentTransaction();
-        try
-        {
-            tx.begin();
-            long resp = sqlPrestamo.realizarPago (pm, idPrestamo, montoPago);
-            tx.commit();
-            return resp;
-        }
-        catch (Exception e)
-        {
-//        	e.printStackTrace();
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-            return -1;
-        }
-        finally
-        {
-            if (tx.isActive())
-            {
-                tx.rollback();
-            }
-            pm.close();
-        }
-	}
-
-
-	
 
 
 }

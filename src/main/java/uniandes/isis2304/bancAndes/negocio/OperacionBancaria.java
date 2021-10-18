@@ -1,5 +1,6 @@
 package uniandes.isis2304.bancAndes.negocio;
-import java.util.Date;
+
+import java.sql.Date;
 
 public class OperacionBancaria implements VOOperacionBancaria {
 
@@ -37,7 +38,8 @@ public class OperacionBancaria implements VOOperacionBancaria {
 	{
 		this.id = 0;
 		this.valor = 0;
-		this.fecha = new Date();
+		long hoy=System.currentTimeMillis();  
+		this.fecha=new java.sql.Date(hoy); 
 		this.cliente = "";
 		this.producto = 0;
 		this.tipoOperacion = "";

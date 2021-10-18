@@ -1,6 +1,6 @@
 package uniandes.isis2304.bancAndes.negocio;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Cuenta implements VOCuenta{
 
@@ -24,8 +24,9 @@ public class Cuenta implements VOCuenta{
 		this.estado = "";
 		this.tipo = "";
 		this.saldo = 0;
-		this.fechaCreacion = new Date();
-		this.dechaVencimiento = new Date();
+		long hoy=System.currentTimeMillis();  
+		this.fechaCreacion=new java.sql.Date(hoy); 
+		this.dechaVencimiento=new java.sql.Date(hoy); 
 		this.tasaRendimiento = 0;
 		this.oficina = 0;
 	}

@@ -1,6 +1,6 @@
 package uniandes.isis2304.bancAndes.negocio;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Prestamo implements VOPrestamo{
 
@@ -44,7 +44,8 @@ public class Prestamo implements VOPrestamo{
 		this.numeroCuotas = 0;
 		this.diaPago = 1;
 		this.valorCuotaMinima = 0;
-		this.fechaPrestamo = new Date();
+		long hoy=System.currentTimeMillis();  
+		this.fechaPrestamo=new java.sql.Date(hoy); 
 		this.cerrado = "FALSE";
 		
 	}

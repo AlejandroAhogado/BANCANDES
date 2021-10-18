@@ -1,6 +1,7 @@
 package uniandes.isis2304.bancAndes.negocio;
 
-import java.util.Date;
+
+import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -372,24 +373,24 @@ public class BancAndes {
 	 */
 	public Producto adicionarProducto ()
 	{
-        log.info ("Adicionando Producto: " + login);
-        Usuario usuario = pba.adicionarUsuario (login);		
-        log.info ("Adicionando Usuario: " + usuario);
-        return usuario;
+        log.info ("Adicionando Producto");
+        Producto producto = pba.adicionarProducto ();		
+        log.info ("Adicionando Producto: " + producto);
+        return producto;
 	}
 	
 	/**
-	 * Elimina de manera persistente un usuario
+	 * Elimina de manera persistente un producto
 	 * Elimina entradas al log de la aplicación
-	 * @param login - El login del usuario
+	 * @param id - El id del producto
 	 * @return El objeto Usuario eliminado. null si ocurre alguna Excepción
 	 */
-	public long eliminarProducto (String login)
+	public long eliminarProducto (long id)
 	{
 	
-        log.info ("Eliminando Usuario: " + login);
-        long resp= pba.eliminarUsuario (login);		
-        log.info ("Eliminando usuario por login: " + resp + " tuplas eliminadas");
+        log.info ("Eliminando Producto: " + id);
+        long resp= pba.eliminarProducto (id);		
+        log.info ("Eliminando producto por id: " + id + " tuplas eliminadas");
         
         return resp;
 	}
@@ -411,11 +412,11 @@ public class BancAndes {
 	 * @param oficina
 	 * @return El objeto Cuenta adicionado. null si ocurre alguna Excepción
 	 */
-	public Cuenta adicionarCuenta( int numeroCuenta, String estado, String tipo, float saldo, Date fechaCreacion,
+	public Cuenta adicionarCuenta( long id, int numeroCuenta, String estado, String tipo, float saldo, Date fechaCreacion,
 			Date dechaVencimiento, float tasaRendimiento, long oficina)
 	{
-        log.info ("Adicionando Cuenta ");
-        Cuenta cuenta = pba.adicionarCuenta (numeroCuenta, estado, tipo, saldo, fechaCreacion,
+        log.info ("Adicionando Cuenta: " +id);
+        Cuenta cuenta = pba.adicionarCuenta (id, numeroCuenta, estado, tipo, saldo, fechaCreacion,
     			dechaVencimiento, tasaRendimiento, oficina);		
         log.info ("Adicionando Cuenta: " + cuenta);
         return cuenta;
@@ -507,11 +508,11 @@ public class BancAndes {
 	 * @param cerrado
 	 * @return El objeto Prestamo adicionado. null si ocurre alguna Excepción
 	 */
-	public Prestamo adicionarPrestamo ( float monto, float saldoPendiente, float interes, int numeroCuotas, int diaPago,
+	public Prestamo adicionarPrestamo ( long id, float monto, float saldoPendiente, float interes, int numeroCuotas, int diaPago,
 			float valorCuotaMinima, Date fechaPrestamo, String cerrado)
 	{
-        log.info ("Adicionando Prestamo ");
-        Prestamo prestamo = pba.adicionarPrestamo (monto, saldoPendiente, interes, numeroCuotas, diaPago,
+        log.info ("Adicionando Prestamo: " +id);
+        Prestamo prestamo = pba.adicionarPrestamo (id, monto, saldoPendiente, interes, numeroCuotas, diaPago,
     			valorCuotaMinima, fechaPrestamo, cerrado);		
         log.info ("Adicionando Prestamo: " + prestamo);
         return prestamo;

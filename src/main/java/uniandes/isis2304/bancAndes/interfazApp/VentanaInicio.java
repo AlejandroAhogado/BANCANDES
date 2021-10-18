@@ -113,7 +113,7 @@ public class VentanaInicio extends JFrame implements ActionListener{
 		     "Constraseña: ", contrasena
 		 };
 
-		 int option = JOptionPane.showConfirmDialog(null, message, "Datos cliente", JOptionPane.OK_CANCEL_OPTION);
+		 int option = JOptionPane.showConfirmDialog(null, message, "Ingreso de datos", JOptionPane.OK_CANCEL_OPTION);
 		 
 		 if (option==JOptionPane.OK_OPTION) {
 			 info[0] =login.getText();
