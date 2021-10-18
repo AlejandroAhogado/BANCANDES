@@ -577,3 +577,51 @@ ORA-00001: restricci髇 鷑ica (ISIS2304A03202120.SYS_C00261274) violada
 ORA-02291: restricci髇 de integridad (ISIS2304A03202120.FK_CLIENTE_CLIENTESPRODUCTOS) violada - clave principal no encontrada
 
 11:58:31,790 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto: null
+12:08:43,277 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Interfaz
+12:08:43,278 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuraci贸n indicada en el archivo de configuraci贸n
+12:08:43,302 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Tablas BD
+12:09:46,215 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+12:09:51,401 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto
+12:09:51,991 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto: Producto [id=35]
+12:10:14,847 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cuenta: 35
+12:10:15,067 (AWT-EventQueue-0) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO CUENTAS(id, numeroCuenta, estado, tipo, saldo,fechaCreacion, fechaVencimiento, tasaRendimiento, oficina) values (?, ?, ?, ?, ?, ?, ?, ?, ?)".
+ORA-02290: restricci髇 de control (ISIS2304A03202120.CHK_NUMEROCUENTA_CUENTAS) violada
+
+12:10:15,097 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cuenta: null
+12:10:15,097 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Producto: 35
+12:10:15,157 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando producto por id: 35 tuplas eliminadas
+12:12:04,453 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto
+12:12:04,603 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto: Producto [id=36]
+12:12:25,706 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cuenta: 36
+12:12:25,774 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cuenta: Cuenta [id=36, numeroCuenta=1234567777, estado=ACTIVA, tipo=AHORROS, saldo=200.0, fechaCreacion=2021-10-18, fechaVencimiento=2022-01-02, tasaRendimiento=2.0, oficina=19]
+12:12:37,107 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando ClienteProducto
+12:12:37,187 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto: ClienteProducto [producto=36, login=luisp8]
+12:14:29,651 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando ClienteProducto
+12:14:29,701 (AWT-EventQueue-0) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO CLIENTESPRODUCTOS(producto, cliente) values (?, ?)".
+ORA-02291: restricci髇 de integridad (ISIS2304A03202120.FK_CLIENTE_CLIENTESPRODUCTOS) violada - clave principal no encontrada
+
+12:14:29,734 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto: null
+12:17:21,899 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Interfaz
+12:17:21,899 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuraci贸n indicada en el archivo de configuraci贸n
+12:17:21,924 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Tablas BD
+12:17:52,345 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+12:18:00,475 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto
+12:18:00,888 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto: Producto [id=37]
+12:18:18,730 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cuenta: 37
+12:18:18,818 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cuenta: Cuenta [id=37, numeroCuenta=1045678945, estado=ACTIVA, tipo=AHORROS, saldo=3.0, fechaCreacion=2021-10-18, fechaVencimiento=2022-01-02, tasaRendimiento=2.0, oficina=19]
+12:18:27,557 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando ClienteProducto
+12:18:27,794 (AWT-EventQueue-0) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO CLIENTESPRODUCTOS(producto, cliente) values (?, ?)".
+ORA-00942: la tabla o vista no existe
+
+12:18:28,095 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto: null
+12:18:28,097 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Producto: 37
+12:18:28,146 (AWT-EventQueue-0) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "DELETE FROM PRODUCTOS WHERE id = ?".
+ORA-00942: la tabla o vista no existe
+
+12:18:28,190 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando producto por id: 37 tuplas eliminadas
+12:18:28,190 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Producto: 37
+12:18:28,254 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando producto por id: 37 tuplas eliminadas
+12:23:47,924 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Interfaz
+12:23:47,925 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuraci贸n indicada en el archivo de configuraci贸n
+12:23:47,947 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Tablas BD
+12:24:23,029 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3

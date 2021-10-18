@@ -932,7 +932,9 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
         	        			if (login != null) {
         	        				
         	        				VOClienteProducto cp=bancAndes.adicionarClienteProducto(id, login);
-        	        				
+        	        				if (cp==null) {
+        								throw new Exception ("El cliente no se pudo asociar al producto");
+        							}
         	        				String asociacion = "En asociar Cliente a Producto\n\n";
         	    	    			asociacion += "Cliente "+ i+ " asociado exitosamente: " + cp;
         	    	    			asociacion += "\n Operacion terminada";
