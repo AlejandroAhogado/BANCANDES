@@ -33,6 +33,7 @@ import uniandes.isis2304.bancAndes.negocio.PuestoAtencionOficina;
 import uniandes.isis2304.bancAndes.negocio.PuestoDeAtencion;
 import uniandes.isis2304.bancAndes.negocio.PuestoDigital;
 import uniandes.isis2304.bancAndes.negocio.Usuario;
+import uniandes.isis2304.bancAndes.negocio.UsuarioTipoOperacion;
 
 public class PersistenciaBancAndes {
 	
@@ -1394,5 +1395,50 @@ public class PersistenciaBancAndes {
 		return sqlClienteProducto.darClienteProductoPorProducto (pmf.getPersistenceManager(), id);
 	}
 
+	/* ****************************************************************
+	 * 			Métodos para manejar USUARIOTIPOOPERACION
+	 *****************************************************************/
+	public UsuarioTipoOperacion adicionarUsuarioTipoOperacion(String tipoOperacion, String usuario) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+	            tx.begin();
+	            long tuplasInsertadas = sqlUsuarioTipoOperacion.adicionarUsuarioTipoOperacion(pm,tipoOperacion, usuario);
+	            tx.commit();
+	            
+	            log.trace ("Insercion de tipo de operacion:" + tipoOperacion + " usuario : " + usuario + ": "+ tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new UsuarioTipoOperacion (tipoOperacion, usuario);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
+	}
+
+
+	public List<UsuarioTipoOperacion> darUsuarioTipoOperacionPorUsuario(String usuario) {
+		return sqlUsuarioTipoOperacion.darUsuarioTipoOperacionPorUsuario (pmf.getPersistenceManager(), usuario);
+	}
+
+
+	public List<UsuarioTipoOperacion> darUsuarioTipoOperacionPorTipo(String tipoOperacion) {
+		return sqlUsuarioTipoOperacion.darUsuarioTipoOperacionPorTipo (pmf.getPersistenceManager(), tipoOperacion);
+	}
+
+	public UsuarioTipoOperacion darUsuarioTipoOperacion(String usuario, String tipoOperacion) {
+		return sqlUsuarioTipoOperacion.darUsuarioTipoOperacion (pmf.getPersistenceManager(), usuario, tipoOperacion);
+	}
 
 }

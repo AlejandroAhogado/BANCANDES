@@ -684,7 +684,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
     	}
     }
     /* ****************************************************************
-     *         						REQF3
+     *        						REQF3
      *****************************************************************/
     /**
      * Adiciona un puesto de atencion con la información dada por el usuario
@@ -705,128 +705,133 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
     			{
     				String[] opciones = {"Puesto de Atencion Oficina", "Puesto Digital", "Cajero Automatico"};
     				int tipoPuesto = JOptionPane.showOptionDialog(this, "Seleccione el tipo de puesto de atencion que quiere agregar", "Seleccion tipo de puesto de atencion", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, null);
+    				int ya = 0;
     				switch(tipoPuesto)
     				{                          
 
     				case 0:
+    					if(ya==0) {
+    						ya++;
+    						JTextField telefonoPAO = new JTextField();
+    						JTextField localizacionPAO = new JTextField();
+    						JTextField oficinaPAO = new JTextField();
 
-    					JTextField telefonoPAO = new JTextField();
-    					JTextField localizacionPAO = new JTextField();
-    					JTextField oficinaPAO = new JTextField();
+    						Object[] message = {
+    								"Telefono: ", telefonoPAO,
+    								"Localizacion:", localizacionPAO,
+    								"Oficina:", oficinaPAO
+    						};
 
-    					Object[] message = {
-    							"Telefono: ", telefonoPAO,
-    							"Localizacion:", localizacionPAO,
-    							"Oficina:", oficinaPAO
-    					};
+    						int option = JOptionPane.showConfirmDialog(null, message, "Datos puesto de atencion oficina", JOptionPane.OK_CANCEL_OPTION);
+    						VOPuestoAtencionOficina pao=null;
+    						if (option == JOptionPane.OK_OPTION) {
 
-    					int option = JOptionPane.showConfirmDialog(null, message, "Datos puesto de atencion oficina", JOptionPane.OK_CANCEL_OPTION);
-    					VOPuestoAtencionOficina pao=null;
-    					if (option == JOptionPane.OK_OPTION) {
-
-    						try {
-    							pao =  bancAndes.adicionarPuestoAtencionOficina(
-    									id,
-    									Integer.parseInt(telefonoPAO.getText()),
-    									localizacionPAO.getText(),
-    									(long)Integer.parseInt(oficinaPAO.getText())                                                                                                                                        
-    									);
-
-    							String login = JOptionPane.showInputDialog (this, "Login del cajero a asociar", "Asociar  cajero", JOptionPane.QUESTION_MESSAGE);
     							try {
-    								bancAndes.asociarPuestoDeAtencionOficinaCajero(id, login);
-    							} catch (Exception e) {
-    								bancAndes.eliminarPuestoDeAtencion(id);
-    								throw new Exception ("No se pudo asociar el cajero con login "+login+ "con el puesto con id: " + id);
-    							}
-    						} catch (Exception e) {
-    							//falta eliminar el id que se le habia dado
-    							bancAndes.eliminarPuestoDeAtencion(id);
-    							throw new Exception ("No se pudo crear un puesto de atencion con id: " + id);
-    						}
-    					}            
+    								pao =  bancAndes.adicionarPuestoAtencionOficina(
+    										id,
+    										Integer.parseInt(telefonoPAO.getText()),
+    										localizacionPAO.getText(),
+    										(long)Integer.parseInt(oficinaPAO.getText())                                                                                                                                        
+    										);
 
-    					if (option == JOptionPane.CANCEL_OPTION)
-    					{            
-    						//falta eliminar el puesto de atencion
-    						bancAndes.eliminarPuestoDeAtencion(id);                                                                                  
+    								String login = JOptionPane.showInputDialog (this, "Login del cajero a asociar", "Asociar  cajero", JOptionPane.QUESTION_MESSAGE);
+    								try {
+    									bancAndes.asociarPuestoDeAtencionOficinaCajero(id, login);
+    								} catch (Exception e) {
+    									bancAndes.eliminarPuestoDeAtencion(id);
+    									throw new Exception ("No se pudo asociar el cajero con login "+login+ "con el puesto con id: " + id);
+    								}
+    							} catch (Exception e) {
+    								//falta eliminar el id que se le habia dado
+    								bancAndes.eliminarPuestoDeAtencion(id);
+    								throw new Exception ("No se pudo crear un puesto de atencion con id: " + id);
+    							}
+    						}            
+
+    						if (option == JOptionPane.CANCEL_OPTION)
+    						{            
+    							//falta eliminar el puesto de atencion
+    							bancAndes.eliminarPuestoDeAtencion(id);                                                                                  
+    						}
     					}
 
-
     				case 1:
+    					if(ya==0) {
+    						ya++;
+    						JTextField telefonoPD = new JTextField();
+    						JTextField urlPD = new JTextField();
 
-    					JTextField telefonoPD = new JTextField();
-    					JTextField urlPD = new JTextField();
+    						JComboBox<String> cbOpcionesTipoPD = new JComboBox<String>();
+    						cbOpcionesTipoPD.addItem("APP");
+    						cbOpcionesTipoPD.addItem("PAGINA_WEB");
 
-    					JComboBox<String> cbOpcionesTipoPD = new JComboBox<String>();
-    					cbOpcionesTipoPD.addItem("APP");
-    					cbOpcionesTipoPD.addItem("PAGINA_WEB");
+    						Object[] messagePD = {
+    								"Telefono: ", telefonoPD,
+    								"Tipo:", cbOpcionesTipoPD,
+    								"Url: (En caso de ser pagina web)", urlPD
+    						};
 
-    					Object[] messagePD = {
-    							"Telefono: ", telefonoPD,
-    							"Tipo:", cbOpcionesTipoPD,
-    							"Url: (En caso de ser pagina web)", urlPD
-    					};
+    						int optionPD = JOptionPane.showConfirmDialog(null, messagePD, "Datos puesto digital", JOptionPane.OK_CANCEL_OPTION);
+    						VOPuestoDigital pd=null;
+    						if (optionPD == JOptionPane.OK_OPTION) {
 
-    					int optionPD = JOptionPane.showConfirmDialog(null, messagePD, "Datos puesto digital", JOptionPane.OK_CANCEL_OPTION);
-    					VOPuestoDigital pd=null;
-    					if (optionPD == JOptionPane.OK_OPTION) {
+    							try {
+    								pd =  bancAndes.adicionarPuestoDigital(
+    										id,
+    										Integer.parseInt(telefonoPD.getText()),
+    										(String)cbOpcionesTipoPD.getSelectedItem(),
+    										urlPD.getText()                                                                                                                                            
+    										);
+    							} catch (Exception e) {
+    								//falta eliminar el id que se le habia dado
+    								bancAndes.eliminarPuestoDeAtencion(id);
+    								throw new Exception ("No se pudo crear un puesto digital con id: " + id);
+    							}
+    						}            
 
-    						try {
-    							pd =  bancAndes.adicionarPuestoDigital(
-    									id,
-    									Integer.parseInt(telefonoPD.getText()),
-    									(String)cbOpcionesTipoPD.getSelectedItem(),
-    									urlPD.getText()                                                                                                                                            
-    									);
-    						} catch (Exception e) {
-    							//falta eliminar el id que se le habia dado
-    							bancAndes.eliminarPuestoDeAtencion(id);
-    							throw new Exception ("No se pudo crear un puesto digital con id: " + id);
+    						if (optionPD == JOptionPane.CANCEL_OPTION)
+    						{            
+    							//falta eliminar el puesto de atencion
+    							bancAndes.eliminarPuestoDeAtencion(id);                                                                                  
     						}
-    					}            
-
-    					if (optionPD == JOptionPane.CANCEL_OPTION)
-    					{            
-    						//falta eliminar el puesto de atencion
-    						bancAndes.eliminarPuestoDeAtencion(id);                                                                                  
     					}
 
     				case 2:
+    					if(ya==0) {
+    						ya++;
+    						JTextField telefonoCA = new JTextField();
+    						JTextField localizacionCA = new JTextField();
 
-    					JTextField telefonoCA = new JTextField();
-    					JTextField localizacionCA = new JTextField();
+    						Object[] messageCA = {
+    								"Telefono: ", telefonoCA,
+    								"Localizacion:", localizacionCA
+    						};
 
-    					Object[] messageCA = {
-    							"Telefono: ", telefonoCA,
-    							"Localizacion:", localizacionCA
-    					};
+    						int optionCA = JOptionPane.showConfirmDialog(null, messageCA, "Datos cajero automatico", JOptionPane.OK_CANCEL_OPTION);
+    						VOCajeroAutomatico ca=null;
+    						if (optionCA == JOptionPane.OK_OPTION) {
 
-    					int optionCA = JOptionPane.showConfirmDialog(null, messageCA, "Datos cajero automatico", JOptionPane.OK_CANCEL_OPTION);
-    					VOCajeroAutomatico ca=null;
-    					if (optionCA == JOptionPane.OK_OPTION) {
+    							try {
+    								ca =  bancAndes.adicionarCajeroAutomatico(
+    										id,
+    										Integer.parseInt(telefonoCA.getText()),
+    										localizacionCA.getText()                                                                                                                                    
+    										);
+    							} catch (Exception e) {
+    								//falta eliminar el id que se le habia dado
+    								bancAndes.eliminarPuestoDeAtencion(id);
+    								throw new Exception ("No se pudo crear un cajeor automatico con id: " + id);
+    							}
+    						}            
 
-    						try {
-    							ca =  bancAndes.adicionarCajeroAutomatico(
-    									id,
-    									Integer.parseInt(telefonoCA.getText()),
-    									localizacionCA.getText()                                                                                                                                    
-    									);
-    						} catch (Exception e) {
-    							//falta eliminar el id que se le habia dado
-    							bancAndes.eliminarPuestoDeAtencion(id);
-    							throw new Exception ("No se pudo crear un cajeor automatico con id: " + id);
-    						}
-    					}            
+    						if (optionCA == JOptionPane.CANCEL_OPTION)
+    						{            
+    							//falta eliminar el puesto de atencion
+    							bancAndes.eliminarPuestoDeAtencion(id);                                                                                  
+    						}                                                     
 
-    					if (optionCA == JOptionPane.CANCEL_OPTION)
-    					{            
-    						//falta eliminar el puesto de atencion
-    						bancAndes.eliminarPuestoDeAtencion(id);                                                                                  
-    					}                                                     
-
+    					}
     				}
-
     				String resultado = "En agregar Puesto de atencion\n\n";
     				resultado += "Puesto de atencion agregado exitosamente: " + upao;
     				resultado += "\n Operacion terminada";
@@ -847,6 +852,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
     		}
     	}
     }
+
 
     /* ****************************************************************
      * 							REQF4

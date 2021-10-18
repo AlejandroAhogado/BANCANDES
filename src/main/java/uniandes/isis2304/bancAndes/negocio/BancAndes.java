@@ -727,5 +727,64 @@ public class BancAndes {
 		log.info ("Adicionando Cajero Automatico: " + cajeroAutomatico);
 		return cajeroAutomatico;
 	}
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los USUARIOTIPOOPERACION
+	 *****************************************************************/
+	/**
+	 * Adiciona de manera persistente un UsuarioTipoOperacion
+	 * Adiciona entradas al log de la aplicación
+	 * @return El objeto UsuarioTipoOperacion adicionado. null si ocurre alguna Excepción
+	 */
+	public UsuarioTipoOperacion adicionarUsuarioTipoOperacion (String tipoOperacion, String usuario)
+	{
+        log.info ("Adicionando ClienteProducto");
+        UsuarioTipoOperacion usuarioTipoOperacion = pba.adicionarUsuarioTipoOperacion(tipoOperacion, usuario);		
+        log.info ("Adicionando Producto: " + usuarioTipoOperacion);
+        return usuarioTipoOperacion;
+	}
+	
+	/**
+     * Encuentra la lista de UsuarioTipoOperacion en BancAndes con el login del usuario dado
+     * Adiciona entradas al log de la aplicación
+     * @param login - El login del usuario
+     * @return Una lista de UsuarioTipoOperacion con el login que conoce la aplicación, 
+      * lleno con su información básica
+     */
+     public List<UsuarioTipoOperacion> darUsuarioTipoOperacionPorUsuario (String usuario)
+     {
+                  log.info ("Buscando UsuarioTipoOperacion por login del usuario: " + usuario);
+                  List<UsuarioTipoOperacion> uto= pba.darUsuarioTipoOperacionPorUsuario(usuario);
+                  return uto;
+     }
+     
+     /**
+      * Encuentra la lista de UsuarioTipoOperacion en BancAndes con el tipo de operacion dado
+      * Adiciona entradas al log de la aplicación
+      * @param id - El tipo de operacion
+      * @return Una lista de UsuarioTipoOperacion con el tipo que conoce la aplicación, 
+       * lleno con su información básica
+      */
+      public List<UsuarioTipoOperacion> darUsuarioTipoOperacionPorTipo (String tipoOperacion)
+      {
+                   log.info ("Buscando UsuarioTipoOperacion por tipo de operacion: " + tipoOperacion);
+                   List<UsuarioTipoOperacion> uto= pba.darUsuarioTipoOperacionPorTipo (tipoOperacion);
+                   return uto;
+      }
+      
+      /**
+       * Encuentra la lista de UsuarioTipoOperacion en BancAndes con el tipo de operacion y usuario dado
+       * Adiciona entradas al log de la aplicación
+       * @param id - El tipo de operacion
+       * @return Un UsuarioTipoOperacion con el tipo y login que conoce la aplicación, 
+        * lleno con su información básica
+       */
+       public UsuarioTipoOperacion darUsuarioTipoOperacion (String usuario, String tipoOperacion)
+       {
+                    log.info ("Buscando UsuarioTipoOperacion por tipo de operacion: " + tipoOperacion);
+                    UsuarioTipoOperacion uto= pba.darUsuarioTipoOperacion (usuario, tipoOperacion);
+                    return uto;
+       }
+
 
 }
