@@ -394,7 +394,49 @@ public class BancAndes {
         
         return resp;
 	}
+	/* ****************************************************************
+	 * 			Métodos para manejar los CLIENTESPRODUCTOS
+	 *****************************************************************/
+	/**
+	 * Adiciona de manera persistente un ClienteProducto
+	 * Adiciona entradas al log de la aplicación
+	 * @return El objeto ClienteProducto adicionado. null si ocurre alguna Excepción
+	 */
+	public ClienteProducto adicionarClienteProducto (long id, String login)
+	{
+        log.info ("Adicionando ClienteProducto");
+        ClienteProducto clienteProducto = pba.adicionarClienteProducto(id, login);		
+        log.info ("Adicionando Producto: " + clienteProducto);
+        return clienteProducto;
+	}
 	
+	/**
+     * Encuentra la lista de ClienteProducto en BancAndes con el login del cliente dado
+     * Adiciona entradas al log de la aplicación
+     * @param login - El login del cliente
+     * @return Una lista de ClienteProducot con el login que conoce la aplicación, 
+      * lleno con su información básica
+     */
+     public List<ClienteProducto> darClienteProductoPorCliente (String login)
+     {
+                  log.info ("Buscando ClienteProducto por login del cliente: " + login);
+                  List<ClienteProducto> cp= pba.darClienteProductoPorCliente (login);
+                  return cp;
+     }
+     
+     /**
+      * Encuentra la lista de ClienteProducto en BancAndes con el id del producto dado
+      * Adiciona entradas al log de la aplicación
+      * @param id - El id del producto
+      * @return Una lista de ClienteProducto con el login que conoce la aplicación, 
+       * lleno con su información básica
+      */
+      public List<ClienteProducto> darClienteProductoPorProducto (long id)
+      {
+                   log.info ("Buscando ClienteProducto por id del producto: " + id);
+                   List<ClienteProducto> cp= pba.darClienteProductoPorProducto (id);
+                   return cp;
+      }
 	/* ****************************************************************
 	 * 			Métodos para manejar los CUENTAS
 	 *****************************************************************/
@@ -491,6 +533,7 @@ public class BancAndes {
         return cambios;
 	}
 	
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar los PRESTAMOS
 	 *****************************************************************/
@@ -577,6 +620,29 @@ public class BancAndes {
        log.info ("Adicionando Puesto de atencion: " + puestoDeAtencion);
        return puestoDeAtencion;
 	}
+	/**
+	 * Elimina de manera persistente un puesto de atencion
+	 * Elimina entradas al log de la aplicación
+	 * @param id - El id del puesto de atencion
+	 * @return El objeto puesto de atencuon eliminado. null si ocurre alguna Excepción
+	 */
+	public long eliminarPuestoDeAtencion(long id)
+	{
+
+		log.info ("Eliminando Puesto de Atencion: " + id);
+		long resp= pba.eliminarPuestoDeAtencion (id);                            
+		log.info ("Eliminando puesto de atencion con id: " + id + " tuplas eliminadas");
+
+		return resp;
+	}
+
+	public long asociarPuestoDeAtencionOficinaCajero (long idPuesto, String login)
+	{
+		log.info ("Asociando puesto de atencion al cajero: " + login);
+		long cambios = pba.asociarPuestoDeAtencionOficinaCajero(idPuesto, login) ;
+		return cambios;
+	}
+
 	
 
 	/* **********************
@@ -591,13 +657,14 @@ public class BancAndes {
 	 * @param oficina
 	 * @return El objeto PuestoAtencionOficina adicionado. null si ocurre alguna Excepción
 	 */
-	public PuestoAtencionOficina adicionarPuestoAtencionOficina (int telefono, String localizacion, long oficina)
+	public PuestoAtencionOficina adicionarPuestoAtencionOficina (long id, int telefono, String localizacion, long oficina)
 	{
-       log.info ("Adicionando Puesto de atencion oficina " );
-       PuestoAtencionOficina puestoAtencionOficina = pba.adicionarPuestoAtencionOficina ( telefono, localizacion, oficina);		
-       log.info ("Adicionando Puesto de atencion oficina: " + puestoAtencionOficina);
-       return puestoAtencionOficina;
+		log.info ("Adicionando Puesto de atencion oficina " );
+		PuestoAtencionOficina puestoAtencionOficina = pba.adicionarPuestoAtencionOficina ( id, telefono, localizacion, oficina);                         
+		log.info ("Adicionando Puesto de atencion oficina: " + puestoAtencionOficina);
+		return puestoAtencionOficina;
 	}
+
 	
 	/* **********************
 	 * 			Metodos para manejar puesto digital
@@ -611,13 +678,14 @@ public class BancAndes {
 	 * @param url
 	 * @return El objeto PuestoDigital adicionado. null si ocurre alguna Excepción
 	 */
-	public PuestoDigital adicionarPuestoDigital (int telefono, String tipo, String url)
+	public PuestoDigital adicionarPuestoDigital (long id, int telefono, String tipo, String url)
 	{
-       log.info ("Adicionando Puesto digital ");
-       PuestoDigital puestoDigital = pba.adicionarPuestoDigital ( telefono, tipo, url);		
-       log.info ("Adicionando Puesto digital: " + puestoDigital);
-       return puestoDigital;
+		log.info ("Adicionando Puesto digital ");
+		PuestoDigital puestoDigital = pba.adicionarPuestoDigital ( id, telefono, tipo, url);                     
+		log.info ("Adicionando Puesto digital: " + puestoDigital);
+		return puestoDigital;
 	}
+
 	
 	/* **********************
 	 * 			Metodos para oficina
@@ -652,11 +720,12 @@ public class BancAndes {
 	 * @param localizacion
 	 * @return El objeto CajeroAutomatico adicionado. null si ocurre alguna Excepción
 	 */
-	public CajeroAutomatico adicionarCajeroAutomatico ( int telefono, String localizacion)
+	public CajeroAutomatico adicionarCajeroAutomatico (long id, int telefono, String localizacion)
 	{
-       log.info ("Adicionando Cajero Automatico ");
-       CajeroAutomatico cajeroAutomatico = pba.adicionarCajeroAutomatico(telefono, localizacion);		
-       log.info ("Adicionando Cajero Automatico: " + cajeroAutomatico);
-       return cajeroAutomatico;
+		log.info ("Adicionando Cajero Automatico ");
+		CajeroAutomatico cajeroAutomatico = pba.adicionarCajeroAutomatico(id, telefono, localizacion);                 
+		log.info ("Adicionando Cajero Automatico: " + cajeroAutomatico);
+		return cajeroAutomatico;
 	}
+
 }

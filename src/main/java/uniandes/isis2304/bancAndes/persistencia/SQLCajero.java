@@ -1,9 +1,12 @@
 package uniandes.isis2304.bancAndes.persistencia;
 
+import java.util.List;
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import uniandes.isis2304.bancAndes.negocio.Cajero;
+import uniandes.isis2304.bancAndes.negocio.ClienteProducto;
 
 public class SQLCajero {
 
@@ -75,6 +78,14 @@ public class SQLCajero {
 		q.setParameters(login);
 		return (Cajero) q.executeUnique();
 	}
+
+	public long asociarPuestoDeAtencionOficinaCajero (PersistenceManager pm, long id, String login)
+	{
+		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaCajeros () + " SET puestoAtencionOficina = ?  WHERE login = ?");
+		q.setParameters(id,login);
+		return (long) q.executeUnique();
+	}
+
 
 	
 }

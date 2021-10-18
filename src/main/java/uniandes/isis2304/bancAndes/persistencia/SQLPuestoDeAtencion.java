@@ -1,6 +1,7 @@
 package uniandes.isis2304.bancAndes.persistencia;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 
 public class SQLPuestoDeAtencion {
 
@@ -34,9 +35,27 @@ public class SQLPuestoDeAtencion {
 		this.pba = pba;
 	}
 
+    /**
+    * @param pm
+    * @param id
+    * @return
+    */
 	public long adicionarPuestoDeAtencion(PersistenceManager pm, long id) {
-		// TODO Auto-generated method stub
-		return 0;
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaPuestosDeAtencion () + "( id) values (?)");
+		q.setParameters(id);
+		return (long) q.executeUnique();
 	}
+
+	/**
+	 * @param pm
+	 * @param id
+	 * @return
+	 */
+	public long eliminarPuestoDeAtencion(PersistenceManager pm, long id) {
+		Query q = pm.newQuery(SQL, "DELETE FROM " + pba.darTablaPuestosDeAtencion () + " WHERE id = ?");
+		q.setParameters(id);
+		return (long) q.executeUnique();
+	}
+
 	
 }

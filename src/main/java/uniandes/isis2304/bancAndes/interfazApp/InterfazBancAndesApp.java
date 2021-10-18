@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 
 import javax.jdo.JDODataStoreException;
 import javax.swing.ImageIcon;
@@ -34,12 +35,18 @@ import com.google.gson.stream.JsonReader;
 
 import uniandes.isis2304.bancAndes.negocio.BancAndes;
 import uniandes.isis2304.bancAndes.negocio.VOCajero;
+import uniandes.isis2304.bancAndes.negocio.VOCajeroAutomatico;
 import uniandes.isis2304.bancAndes.negocio.VOCliente;
+import uniandes.isis2304.bancAndes.negocio.VOClienteProducto;
+import uniandes.isis2304.bancAndes.negocio.VOCuenta;
 import uniandes.isis2304.bancAndes.negocio.VOGerenteDeOficina;
 import uniandes.isis2304.bancAndes.negocio.VOGerenteGeneral;
 import uniandes.isis2304.bancAndes.negocio.VOOficina;
 import uniandes.isis2304.bancAndes.negocio.VOPrestamo;
 import uniandes.isis2304.bancAndes.negocio.VOProducto;
+import uniandes.isis2304.bancAndes.negocio.VOPuestoAtencionOficina;
+import uniandes.isis2304.bancAndes.negocio.VOPuestoDeAtencion;
+import uniandes.isis2304.bancAndes.negocio.VOPuestoDigital;
 import uniandes.isis2304.bancAndes.negocio.VOUsuario;
 
 import java.util.Date;
@@ -676,14 +683,314 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
     		}
     	}
     }
+    /* ****************************************************************
+     *         						REQF3
+     *****************************************************************/
+    /**
+     * Adiciona un puesto de atencion con la información dada por el usuario
+     * Se crea una nueva tupla de puesto de atencion en la base de datos, si un usuario con ese login no existìa
+     */
+    public void registrarPuntoDeAtencion( )
+    {
+    	if (tipoUsuario==CLIENTE) {
+    		mensajeErrorPermisos();
+    	}
+    	else {
+    		try 
+    		{            
+    			VOPuestoDeAtencion upao = bancAndes.adicionarPuestoDeAtencion();
+    			long id = upao.getId();
 
-    
+    			if (this.esAdmin)
+    			{
+    				String[] opciones = {"Puesto de Atencion Oficina", "Puesto Digital", "Cajero Automatico"};
+    				int tipoPuesto = JOptionPane.showOptionDialog(this, "Seleccione el tipo de puesto de atencion que quiere agregar", "Seleccion tipo de puesto de atencion", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, null);
+    				switch(tipoPuesto)
+    				{                          
+
+    				case 0:
+
+    					JTextField telefonoPAO = new JTextField();
+    					JTextField localizacionPAO = new JTextField();
+    					JTextField oficinaPAO = new JTextField();
+
+    					Object[] message = {
+    							"Telefono: ", telefonoPAO,
+    							"Localizacion:", localizacionPAO,
+    							"Oficina:", oficinaPAO
+    					};
+
+    					int option = JOptionPane.showConfirmDialog(null, message, "Datos puesto de atencion oficina", JOptionPane.OK_CANCEL_OPTION);
+    					VOPuestoAtencionOficina pao=null;
+    					if (option == JOptionPane.OK_OPTION) {
+
+    						try {
+    							pao =  bancAndes.adicionarPuestoAtencionOficina(
+    									id,
+    									Integer.parseInt(telefonoPAO.getText()),
+    									localizacionPAO.getText(),
+    									(long)Integer.parseInt(oficinaPAO.getText())                                                                                                                                        
+    									);
+
+    							String login = JOptionPane.showInputDialog (this, "Login del cajero a asociar", "Asociar  cajero", JOptionPane.QUESTION_MESSAGE);
+    							try {
+    								bancAndes.asociarPuestoDeAtencionOficinaCajero(id, login);
+    							} catch (Exception e) {
+    								bancAndes.eliminarPuestoDeAtencion(id);
+    								throw new Exception ("No se pudo asociar el cajero con login "+login+ "con el puesto con id: " + id);
+    							}
+    						} catch (Exception e) {
+    							//falta eliminar el id que se le habia dado
+    							bancAndes.eliminarPuestoDeAtencion(id);
+    							throw new Exception ("No se pudo crear un puesto de atencion con id: " + id);
+    						}
+    					}            
+
+    					if (option == JOptionPane.CANCEL_OPTION)
+    					{            
+    						//falta eliminar el puesto de atencion
+    						bancAndes.eliminarPuestoDeAtencion(id);                                                                                  
+    					}
+
+
+    				case 1:
+
+    					JTextField telefonoPD = new JTextField();
+    					JTextField urlPD = new JTextField();
+
+    					JComboBox<String> cbOpcionesTipoPD = new JComboBox<String>();
+    					cbOpcionesTipoPD.addItem("APP");
+    					cbOpcionesTipoPD.addItem("PAGINA_WEB");
+
+    					Object[] messagePD = {
+    							"Telefono: ", telefonoPD,
+    							"Tipo:", cbOpcionesTipoPD,
+    							"Url: (En caso de ser pagina web)", urlPD
+    					};
+
+    					int optionPD = JOptionPane.showConfirmDialog(null, messagePD, "Datos puesto digital", JOptionPane.OK_CANCEL_OPTION);
+    					VOPuestoDigital pd=null;
+    					if (optionPD == JOptionPane.OK_OPTION) {
+
+    						try {
+    							pd =  bancAndes.adicionarPuestoDigital(
+    									id,
+    									Integer.parseInt(telefonoPD.getText()),
+    									(String)cbOpcionesTipoPD.getSelectedItem(),
+    									urlPD.getText()                                                                                                                                            
+    									);
+    						} catch (Exception e) {
+    							//falta eliminar el id que se le habia dado
+    							bancAndes.eliminarPuestoDeAtencion(id);
+    							throw new Exception ("No se pudo crear un puesto digital con id: " + id);
+    						}
+    					}            
+
+    					if (optionPD == JOptionPane.CANCEL_OPTION)
+    					{            
+    						//falta eliminar el puesto de atencion
+    						bancAndes.eliminarPuestoDeAtencion(id);                                                                                  
+    					}
+
+    				case 2:
+
+    					JTextField telefonoCA = new JTextField();
+    					JTextField localizacionCA = new JTextField();
+
+    					Object[] messageCA = {
+    							"Telefono: ", telefonoCA,
+    							"Localizacion:", localizacionCA
+    					};
+
+    					int optionCA = JOptionPane.showConfirmDialog(null, messageCA, "Datos cajero automatico", JOptionPane.OK_CANCEL_OPTION);
+    					VOCajeroAutomatico ca=null;
+    					if (optionCA == JOptionPane.OK_OPTION) {
+
+    						try {
+    							ca =  bancAndes.adicionarCajeroAutomatico(
+    									id,
+    									Integer.parseInt(telefonoCA.getText()),
+    									localizacionCA.getText()                                                                                                                                    
+    									);
+    						} catch (Exception e) {
+    							//falta eliminar el id que se le habia dado
+    							bancAndes.eliminarPuestoDeAtencion(id);
+    							throw new Exception ("No se pudo crear un cajeor automatico con id: " + id);
+    						}
+    					}            
+
+    					if (optionCA == JOptionPane.CANCEL_OPTION)
+    					{            
+    						//falta eliminar el puesto de atencion
+    						bancAndes.eliminarPuestoDeAtencion(id);                                                                                  
+    					}                                                     
+
+    				}
+
+    				String resultado = "En agregar Puesto de atencion\n\n";
+    				resultado += "Puesto de atencion agregado exitosamente: " + upao;
+    				resultado += "\n Operacion terminada";
+    				panelDatos.actualizarInterfaz(resultado);
+    			}
+    			else
+    			{
+    				//error permisos por admin
+    				mensajeErrorPermisos();
+    				panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+    			}
+    		} 
+    		catch (Exception e) 
+    		{
+    			//                                      e.printStackTrace();
+    			String resultado = generarMensajeError(e);
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    	}
+    }
+
+    /* ****************************************************************
+     * 							REQF4
+     *****************************************************************/
+    /**
+     * Adiciona una cuenta con la información dada por un gerente de oficina
+     * Se crea una nueva tupla de cuenta en la base de datos, si los datos ingresados son correctos
+     */
+    public void registrarCuenta( )
+    {
+    	if (tipoUsuario!=GERENTEDEOFICINA) {
+    		mensajeErrorPermisos();
+    	}
+    	else {
+    		try 
+    		{
+    			VOProducto p = bancAndes.adicionarProducto();
+    			long id = p.getId();
+    			System.out.println(id);
+
+    			JComboBox<String> cbEstado = new JComboBox<String>();
+    			cbEstado.addItem("ACTIVA");
+    			cbEstado.addItem("DESACTIVADA");
+    			cbEstado.addItem("CERRADA");
+
+
+				JComboBox<String> cbTipo = new JComboBox<String>();
+				cbTipo.addItem("AHORROS");
+				cbTipo.addItem("CORRIENTE");
+				cbTipo.addItem("AFC");
+				cbTipo.addItem("CDT");
+				
+    			JTextField numCuenta = new JTextField();
+    			JTextField saldo = new JTextField();
+    			JTextField fechaVencimiento = new JTextField();
+    			JTextField tasaRendimiento = new JTextField();
+    			JTextField oficina = new JTextField();
+
+    			Object[] message = {
+    					"Numero cuenta: ", numCuenta,
+    					"Estado: ", cbEstado,
+    					"Tipo de cuenta: ", cbTipo,
+    					"Saldo:", saldo,
+    					"Fecha de vencimiento (dd-mm-aaaa):", fechaVencimiento,
+    					"Tasa de rendimiento:", tasaRendimiento,
+    					"Oficina:", oficina
+    			};
+
+    			int option = JOptionPane.showConfirmDialog(null, message, "Informacion cuenta", JOptionPane.OK_CANCEL_OPTION);
+    			VOCuenta ct=null;
+    			if (option == JOptionPane.OK_OPTION) {
+    				try {
+    					long hoy=System.currentTimeMillis();  
+    					SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyyy");
+    					java.util.Date fv = format.parse(fechaVencimiento.getText());
+    					ct =  bancAndes.adicionarCuenta(
+    							id, 
+    							Integer.parseInt(numCuenta.getText()),
+    							(String)cbEstado.getSelectedItem(), 
+    							(String)cbTipo.getSelectedItem(), 
+    							(float)Integer.parseInt(saldo.getText()),
+    							new java.sql.Date(hoy),
+    							new java.sql.Date(fv.getTime()),
+    							Integer.parseInt(tasaRendimiento.getText()),
+    							(long)Integer.parseInt(oficina.getText())
+    							
+    							);
+    					
+    					String resultado = "En agregar Cuenta\n\n";
+    	    			resultado += "Cuenta agregada exitosamente: " + ct;
+    	    			resultado += "\n Operacion terminada";
+    	    			panelDatos.actualizarInterfaz(resultado);
+    	    			int i=1;
+    	    			try {//asociar la cuenta a uno o mas clientes
+    	    				boolean asociando = true;
+    	    				
+    	    				
+    	    				while (asociando) {
+    	    					
+        	    				String login = JOptionPane.showInputDialog (this, "Login del cliente "+i+" a asociar", "Asociar la cuenta a un cliente", JOptionPane.QUESTION_MESSAGE);
+        	        			if (login != null) {
+        	        				
+        	        				VOClienteProducto cp=bancAndes.adicionarClienteProducto(id, login);
+        	        				
+        	        				String asociacion = "En asociar Cliente a Producto\n\n";
+        	    	    			asociacion += "Cliente "+ i+ " asociado exitosamente: " + cp;
+        	    	    			asociacion += "\n Operacion terminada";
+        	    	    			
+        	    	    			panelDatos.actualizarInterfaz(asociacion);
+        	        				i++;
+        	        				
+        	        				String[] ynopt = {"S�", "No"};
+        	        				int x= JOptionPane.showOptionDialog(this, "�Desea asociar otro cliente?", "Nueva asociacion", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, ynopt, null);
+        	        				if (x==1) {
+        	        					asociando=false;
+        	        				}
+        	        			}
+        	        			else if (i>1) {
+        	        				panelDatos.actualizarInterfaz("Se asociaron "+i+" clientes a la cuenta");
+        	        				asociando=false;
+        	        			}
+        	        			else {	
+        	        				bancAndes.eliminarProducto(id);	
+        	        				panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+        	        				asociando=false;
+        	        			}
+    	    				}
+    	    				
+    	    			}catch (Exception e) {
+    	    				if (i==1) {
+    	    					bancAndes.eliminarProducto(id);
+    	    				}
+    	    				throw new Exception ("No se pudo asociar el cliente");
+        					
+    	    			}
+    	    			
+    	    			
+    				} catch (Exception e) {
+    					bancAndes.eliminarProducto(id);
+    					throw new Exception ("No se pudo crear la cuenta con id: " + id);
+    				}
+    			} 	
+
+    			else {			        	    
+    				bancAndes.eliminarProducto(id);		
+    				panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+    			}
+
+
+    		} 
+    		catch (Exception e) 
+    		{
+    			//			e.printStackTrace();
+    			String resultado = generarMensajeError(e);
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    	}
+    }
     /* ****************************************************************
      * 							REQF7
      *****************************************************************/
     /**
-     * Adiciona un usuario con la información dada por el usuario
-     * Se crea una nueva tupla de usuario en la base de datos, si un usuario con ese login no existía
+     * Adiciona un prestamo con la información dada por un gerente de oficina
+     * Se crea una nueva tupla de prestamo en la base de datos, si los datos ingresados son correctos
      */
     public void registrarPrestamo( )
     {
@@ -827,7 +1134,6 @@ private String darDetalleException(Exception e)
 		}
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

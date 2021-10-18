@@ -12,7 +12,7 @@ public class Cuenta implements VOCuenta{
 	private String tipo;
 	private float saldo;
 	private Date fechaCreacion;
-	private Date dechaVencimiento;
+	private Date fechaVencimiento;
 	private float tasaRendimiento;
 	//El id de la oficina donde se crea la cuenta
 	private long oficina;
@@ -26,7 +26,7 @@ public class Cuenta implements VOCuenta{
 		this.saldo = 0;
 		long hoy=System.currentTimeMillis();  
 		this.fechaCreacion=new java.sql.Date(hoy); 
-		this.dechaVencimiento=new java.sql.Date(hoy); 
+		this.fechaVencimiento=new java.sql.Date(hoy); 
 		this.tasaRendimiento = 0;
 		this.oficina = 0;
 	}
@@ -42,7 +42,7 @@ public class Cuenta implements VOCuenta{
 		this.tipo = tipo;
 		this.saldo = saldo;
 		this.fechaCreacion = fechaCreacion;
-		this.dechaVencimiento = dechaVencimiento;
+		this.fechaVencimiento = dechaVencimiento;
 		this.tasaRendimiento = tasaRendimiento;
 		this.oficina = oficina;
 	}
@@ -109,12 +109,12 @@ public class Cuenta implements VOCuenta{
 
 
 	public Date getDechaVencimiento() {
-		return dechaVencimiento;
+		return fechaVencimiento;
 	}
 
 
 	public void setDechaVencimiento(Date dechaVencimiento) {
-		this.dechaVencimiento = dechaVencimiento;
+		this.fechaVencimiento = dechaVencimiento;
 	}
 
 
@@ -141,7 +141,7 @@ public class Cuenta implements VOCuenta{
 	@Override
 	public String toString() {
 		return "Cuenta [id=" + id + ", numeroCuenta=" + numeroCuenta + ", estado=" + estado + ", tipo=" + tipo
-				+ ", saldo=" + saldo + ", fechaCreacion=" + fechaCreacion + ", dechaVencimiento=" + dechaVencimiento
+				+ ", saldo=" + saldo + ", fechaCreacion=" + fechaCreacion + ", fechaVencimiento=" + fechaVencimiento
 				+ ", tasaRendimiento=" + tasaRendimiento + ", oficina=" + oficina + "]";
 	}
 	

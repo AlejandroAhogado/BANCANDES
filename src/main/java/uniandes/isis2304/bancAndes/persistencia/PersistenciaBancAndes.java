@@ -20,6 +20,7 @@ import com.google.gson.JsonObject;
 import uniandes.isis2304.bancAndes.negocio.Cajero;
 import uniandes.isis2304.bancAndes.negocio.CajeroAutomatico;
 import uniandes.isis2304.bancAndes.negocio.Cliente;
+import uniandes.isis2304.bancAndes.negocio.ClienteProducto;
 import uniandes.isis2304.bancAndes.negocio.Cuenta;
 import uniandes.isis2304.bancAndes.negocio.Empleado;
 import uniandes.isis2304.bancAndes.negocio.GerenteDeOficina;
@@ -742,6 +743,40 @@ public class PersistenciaBancAndes {
 	public Cajero darCajeroPorLogin(String login) {
 		return  sqlCajero.darCajeroPorLogin (pmf.getPersistenceManager(), login);
 	}
+	
+	
+	/**
+	 * @param idBebedor
+	 * @param ciudad
+	 * @return
+	 */
+	public long asociarPuestoDeAtencionOficinaCajero (long idPuesto, String login)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlCajero.asociarPuestoDeAtencionOficinaCajero (pm, idPuesto, login);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			// e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
 	/* ****************************************************************
 	 * 			Métodos para manejar GERENTEDEOFICINA
 	 *****************************************************************/
@@ -1062,76 +1097,115 @@ public class PersistenciaBancAndes {
 		
 	}
 
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla puesto de atencion, dado el id del puesto de atencion
+	 * Adiciona entradas al log de la aplicación
+	 * @param id - El id del puesto de atencion
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarPuestoDeAtencion(long id) {
+
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+
+
+			long resp = sqlPuestoDeAtencion.eliminarPuestoDeAtencion(pm, id);
+
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			// e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+
 	
 	/* ****************************************************************
 	 * 			Métodos para manejar PUESTOATENCIONOFICINA
 	 *****************************************************************/
 
-	public PuestoAtencionOficina adicionarPuestoAtencionOficina( int telefono, String localizacion,
+	public PuestoAtencionOficina adicionarPuestoAtencionOficina( long id, int telefono, String localizacion,
 			long oficina) {
 		PersistenceManager pm = pmf.getPersistenceManager();
-		 Transaction tx=pm.currentTransaction();
-		   try
-	        {
-	            tx.begin();
-	            long id = nextval ();
-	            long tuplasInsertadas = sqlPuestoAtencionOficina.adicionarPuestoAtencionOficina(pm, id, telefono, localizacion,
-	        			 oficina);
-	            tx.commit();
-	            
-	            log.trace ("Inserción de puesto atencion oficina: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
-	            
-	            return new PuestoAtencionOficina ( id, telefono, localizacion, oficina);
-	        }
-	        catch (Exception e)
-	        {
-//	        	e.printStackTrace();
-	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-	        	return null;
-	        }
-	        finally
-	        {
-	            if (tx.isActive())
-	            {
-	                tx.rollback();
-	            }
-	            pm.close();
-	        }
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+
+			long tuplasInsertadas = sqlPuestoAtencionOficina.adicionarPuestoAtencionOficina(pm, id, telefono, localizacion,
+					oficina);
+			tx.commit();
+
+			log.trace ("Insercion de puesto atencion oficina: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+
+			return new PuestoAtencionOficina ( id, telefono, localizacion, oficina);
+		}
+		catch (Exception e)
+		{
+			//e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
 	}
+
 
 	
 	/* ****************************************************************
 	 * 			Métodos para manejar PUESTODIGITAL
 	 *****************************************************************/
-	public PuestoDigital adicionarPuestoDigital( int telefono, String tipo, String url) {
+	public PuestoDigital adicionarPuestoDigital( long id,int telefono, String tipo, String url) {
 		PersistenceManager pm = pmf.getPersistenceManager();
-		 Transaction tx=pm.currentTransaction();
-		   try
-	        {
-	            tx.begin();
-	            long id = nextval ();
-	            long tuplasInsertadas = sqlPuestoDigital.adicionarPuestoDigital(pm, id, telefono, tipo, url);
-	            tx.commit();
-	            
-	            log.trace ("Inserción de puesto digital: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
-	            
-	            return new PuestoDigital ( id, telefono, tipo, url);
-	        }
-	        catch (Exception e)
-	        {
-//	        	e.printStackTrace();
-	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-	        	return null;
-	        }
-	        finally
-	        {
-	            if (tx.isActive())
-	            {
-	                tx.rollback();
-	            }
-	            pm.close();
-	        }
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+
+			long tuplasInsertadas = sqlPuestoDigital.adicionarPuestoDigital(pm, id, telefono, tipo, url);
+			tx.commit();
+
+			log.trace ("Insercion de puesto digital: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+
+			return new PuestoDigital ( id, telefono, tipo, url);
+		}
+		catch (Exception e)
+		{
+			//     e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
 	}
+
 
 	
 	/* ****************************************************************
@@ -1174,36 +1248,35 @@ public class PersistenciaBancAndes {
 	/* ****************************************************************
 	 * 			Métodos para manejar CAJEROAUTOMATICO
 	 *****************************************************************/
-	public CajeroAutomatico adicionarCajeroAutomatico( int telefono, String localizacion) {
+	public CajeroAutomatico adicionarCajeroAutomatico( long id, int telefono, String localizacion) {
 		PersistenceManager pm = pmf.getPersistenceManager();
-		 Transaction tx=pm.currentTransaction();
-		   try
-	        {
-	            tx.begin();
-	            long id = nextval ();
-	            long tuplasInsertadas = sqlCajeroAutomatico.adicionarCajeroAutomatico(pm, id, telefono, localizacion);
-	            tx.commit();
-	            
-	            log.trace ("Inserción de Cajero automatico: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
-	            
-	            return new CajeroAutomatico (id, telefono, localizacion);
-	        }
-	        catch (Exception e)
-	        {
-//	        	e.printStackTrace();
-	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-	        	return null;
-	        }
-	        finally
-	        {
-	            if (tx.isActive())
-	            {
-	                tx.rollback();
-	            }
-	            pm.close();
-	        }
-	}
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
 
+			long tuplasInsertadas = sqlCajeroAutomatico.adicionarCajeroAutomatico(pm, id, telefono, localizacion);
+			tx.commit();
+
+			log.trace ("Inserción de Cajero automatico: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+
+			return new CajeroAutomatico (id, telefono, localizacion);
+		}
+		catch (Exception e)
+		{
+			//    e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 
 
 
@@ -1277,6 +1350,48 @@ public class PersistenciaBancAndes {
             }
             pm.close();
         }
+	}
+
+	/* ****************************************************************
+	 * 			Métodos para manejar CLIENTEPRODUCTO
+	 *****************************************************************/
+	public ClienteProducto adicionarClienteProducto(long id, String login) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+	            tx.begin();
+	            long tuplasInsertadas = sqlClienteProducto.adicionarClienteProducto(pm,id, login);
+	            tx.commit();
+	            
+	            log.trace ("Inserción de producto id:" + id + " cliente : " + login + ": "+ tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new ClienteProducto (id, login);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
+	}
+
+
+	public List<ClienteProducto> darClienteProductoPorCliente(String login) {
+		return sqlClienteProducto.darClienteProductoPorCliente (pmf.getPersistenceManager(), login);
+	}
+
+
+	public List<ClienteProducto> darClienteProductoPorProducto(long id) {
+		return sqlClienteProducto.darClienteProductoPorProducto (pmf.getPersistenceManager(), id);
 	}
 
 
