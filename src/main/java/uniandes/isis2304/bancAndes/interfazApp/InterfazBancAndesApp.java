@@ -37,6 +37,7 @@ import uniandes.isis2304.bancAndes.negocio.VOCajero;
 import uniandes.isis2304.bancAndes.negocio.VOCliente;
 import uniandes.isis2304.bancAndes.negocio.VOGerenteDeOficina;
 import uniandes.isis2304.bancAndes.negocio.VOGerenteGeneral;
+import uniandes.isis2304.bancAndes.negocio.VOOficina;
 import uniandes.isis2304.bancAndes.negocio.VOPrestamo;
 import uniandes.isis2304.bancAndes.negocio.VOProducto;
 import uniandes.isis2304.bancAndes.negocio.VOUsuario;
@@ -598,6 +599,78 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
     		catch (Exception e) 
     		{
     			//			e.printStackTrace();
+    			String resultado = generarMensajeError(e);
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    	}
+    }
+
+    /* ****************************************************************
+     *                 REQF2 
+     *****************************************************************/
+    /**
+     * Adiciona una oficina con la informacion dada por el usuario
+     * Se crea una nueva tupla de oficina en la base de datos, si un usuario con ese login no existe
+     */
+    public void registrarOficina()
+    {
+    	if (tipoUsuario==CLIENTE) {
+    		mensajeErrorPermisos();
+    	}
+    	else {
+    		try 
+    		{
+
+    			if(this.esAdmin) {
+
+    				JTextField nombreOF = new JTextField();
+    				JTextField direccionOF = new JTextField();
+    				JTextField puestosPosiblesOF = new JTextField();
+    				JTextField gerenteLoginOF = new JTextField();
+
+    				Object[] message = {
+    						"Nombre de la oficina: ", nombreOF,
+    						"Direccion:", direccionOF,
+    						"Puestos posibles:", puestosPosiblesOF,
+    						"Gerente (login):", gerenteLoginOF
+
+    				};
+
+    				int optionOF = JOptionPane.showConfirmDialog(null, message, "Datos oficina", JOptionPane.OK_CANCEL_OPTION);
+    				VOOficina of=null;
+    				if (optionOF == JOptionPane.OK_OPTION) {
+
+    					try { 
+    						of = bancAndes.adicionarOficina(nombreOF.getText(),
+    								direccionOF.getText(),
+    								Integer.parseInt(puestosPosiblesOF.getText()), 
+    								gerenteLoginOF.getText());
+
+    						String resultado = "En agregar Oficina\n\n";
+    						resultado += "Oficina agregada exitosamente ";
+    						resultado += "\n Operacion terminada";
+    						panelDatos.actualizarInterfaz(resultado);
+
+    					} catch (Exception e) {
+    						throw new Exception ("No se pudo crear una oficina con nombre: " + nombreOF.getText());
+    					}     
+    				}            
+
+    				if (optionOF == JOptionPane.CANCEL_OPTION)
+    				{
+    					JOptionPane.showMessageDialog( this , "Oficina con el nombre: "+nombreOF.getText()+" no fue creada",
+    							"Operacion cancelada" , JOptionPane.ERROR_MESSAGE );          
+    					panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+    				}
+    			}
+    			else {mensajeErrorPermisos();}                                                                  
+
+
+
+    		} 
+    		catch (Exception e) 
+    		{
+    			//                                      e.printStackTrace();
     			String resultado = generarMensajeError(e);
     			panelDatos.actualizarInterfaz(resultado);
     		}

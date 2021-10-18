@@ -394,3 +394,6 @@ Tipo de columna no v醠ido
 19:42:24,690 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto: Producto [id=49]
 19:42:28,791 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Producto: 49
 19:42:28,865 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando producto por id: 49 tuplas eliminadas
+20:00:26,693 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Interfaz
+20:00:26,694 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuraci贸n indicada en el archivo de configuraci贸n
+20:00:26,710 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Tablas BD
