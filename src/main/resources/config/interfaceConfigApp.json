@@ -1,5 +1,5 @@
 {
-	"title": "Aplicación transaccional de BancAndes Uniandes",
+	"title": "Aplicacion transaccional de BancAndes Uniandes",
 	"frameH": 600,
 	"frameW": 800,
 	"bannerPath": "./src/main/resources/config/logo.png",
@@ -92,11 +92,11 @@
 				}
 			]
 		},		
-		{ "menuTitle": "Documentación",
+		{ "menuTitle": "Documentacion",
 		  "options":
 			[
 				{
-					"label": "Presentación general",
+					"label": "Presentacion general",
 					"event": "mostrarPresentacionGeneral"
 				},
 				{
@@ -108,7 +108,7 @@
 					"event": "mostrarEsquemaBD"
 				},
 				{
-					"label": "Script creación de la BD",
+					"label": "Script creacion de la BD",
 					"event": "mostrarScriptBD"
 				},
 				{

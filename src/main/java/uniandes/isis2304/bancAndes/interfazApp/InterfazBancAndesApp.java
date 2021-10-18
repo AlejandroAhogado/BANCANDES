@@ -42,6 +42,7 @@ import uniandes.isis2304.bancAndes.negocio.VOCuenta;
 import uniandes.isis2304.bancAndes.negocio.VOGerenteDeOficina;
 import uniandes.isis2304.bancAndes.negocio.VOGerenteGeneral;
 import uniandes.isis2304.bancAndes.negocio.VOOficina;
+import uniandes.isis2304.bancAndes.negocio.VOOperacionBancaria;
 import uniandes.isis2304.bancAndes.negocio.VOPrestamo;
 import uniandes.isis2304.bancAndes.negocio.VOProducto;
 import uniandes.isis2304.bancAndes.negocio.VOPuestoAtencionOficina;
@@ -938,7 +939,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
     					"Estado: ", ACTIVA,
     					"Tipo de cuenta: ", cbTipo,
     					"Saldo:", saldo,
-    					"Fecha de vencimiento (dd-mm-aaaa):", fechaVencimiento,
+    					"Fecha de vencimiento (dd-mm-aaaa) \n (en caso de ser CDT):", fechaVencimiento,
     					"Tasa de rendimiento:", tasaRendimiento,
     					"Oficina:", oficina
     			};
@@ -1102,8 +1103,250 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
     /* ****************************************************************
 	 * 							REQF6
 	 *****************************************************************/
+    /**
+     * Registra una operacion sobre una cuenta. Las operaciones validas son:
+     */
     public void registrarOperacionCuenta() {
-    	
+    	if (tipoUsuario==GERENTEGENERAL || 	tipoUsuario==GERENTEDEOFICINA) {
+    		mensajeErrorPermisos();
+    	}
+    	else {
+    		try 
+    		{            
+    			String[] opciones = {"Consignar", "Retirar"};
+    			int tipoOperacion = JOptionPane.showOptionDialog(this, "Seleccione el tipo de operacion que desea realizar", "Seleccion tipo de operacion", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, null);
+    			int ya = 0;
+
+    			String idCuenta = JOptionPane.showInputDialog (this, "Id de la cuenta", "Indicar cuenta", JOptionPane.QUESTION_MESSAGE);
+    			VOCuenta cuenta = bancAndes.darCuentaPorId((long) Integer.parseInt(idCuenta));
+    			
+    			if (cuenta!=null && cuenta.getEstado().equals(ACTIVA)) {
+    				if (!cuenta.getTipo().equals("CDT")) {
+    					switch(tipoOperacion)
+    					{                          
+
+    					case 0:
+    						if(ya==0) {
+    							ya++;
+
+    							if(tipoUsuario==CAJERO) {//estamos en puesto atencion oficina
+    								VOCajero cajero = bancAndes.darCajeroPorLogin(loginUsuarioSistema);
+
+    								JTextField valor = new JTextField();
+    								JTextField cliente = new JTextField();
+
+    								Object[] message = {
+    										"Valor: ", valor,
+    										"Login cliente:", cliente
+    								};
+
+    								int option = JOptionPane.showConfirmDialog(null, message, "Registro de la operacion", JOptionPane.OK_CANCEL_OPTION);
+    								VOOperacionBancaria ob=null;
+    								if (option == JOptionPane.OK_OPTION) {
+
+    									try {
+    										long hoy=System.currentTimeMillis();
+    										ob =  bancAndes.adicionarOperacionBancaria(
+    												(float) Integer.parseInt(valor.getText()), 
+    				    							new java.sql.Date(hoy),
+    				    							cliente.getText(), 
+    				    							(long) Integer.parseInt(idCuenta), 
+    												"CONSIGNAR", 
+    												cajero.getPuestoAtencionoficina(), 
+    												loginUsuarioSistema);
+    												
+    										bancAndes.actualizarSaldoCuenta((long) Integer.parseInt(idCuenta), (float) Integer.parseInt(valor.getText()));
+    									} catch (Exception e) {
+    										throw new Exception ("No se pudo registrar la operacion sobre la cuenta: " + idCuenta);
+    									}
+    								}            
+
+    								if (option == JOptionPane.CANCEL_OPTION)
+    								{          
+    									panelDatos.actualizarInterfaz("Operacion cancelada");                                                                                 
+    								}
+
+    							}
+    							else {//es un cliente
+
+    								JComboBox<String> cbPuesto = new JComboBox<String>();
+    								cbPuesto.addItem("DIGITAL");
+    								cbPuesto.addItem("CAJERO AUTOMATICO");
+    								
+    								JTextField valor = new JTextField();
+    								JTextField puestoAtencion = new JTextField();
+
+    								Object[] message = {
+    										"Valor: ", valor,
+    										"Tipo de puesto de atencion: ", cbPuesto,
+    										"Id puesto de atencion:", puestoAtencion
+    								};
+
+    								int option = JOptionPane.showConfirmDialog(null, message, "Registro de la operacion", JOptionPane.OK_CANCEL_OPTION);
+    								VOOperacionBancaria ob=null;
+    								if(cbPuesto.getSelectedItem().equals("DIGITAL")) {
+    									VOPuestoDigital pd = bancAndes.darPuestoDigitalPorId((long) Integer.parseInt(puestoAtencion.getText()));
+    									if (pd==null) {
+    										throw new Exception ("No existe el puesto digital "+puestoAtencion.getText());
+    									}
+    								}
+    								else {
+    									VOCajeroAutomatico ca = bancAndes.darCajeroAutomaticoPorId((long) Integer.parseInt(puestoAtencion.getText()));
+    									if (ca==null) {
+    										throw new Exception ("No existe el cajero automatico "+puestoAtencion.getText());
+    									}
+    								}
+    								if (option == JOptionPane.OK_OPTION) {
+
+    									try {
+    										long hoy=System.currentTimeMillis();
+    										ob =  bancAndes.adicionarOperacionBancaria(
+    												(float) Integer.parseInt(valor.getText()), 
+    				    							new java.sql.Date(hoy),
+    				    							this.loginUsuarioSistema, 
+    				    							(long) Integer.parseInt(idCuenta), 
+    												"CONSIGNAR", 
+    												(long) Integer.parseInt(puestoAtencion.getText()), 
+    												null);
+    												
+    										bancAndes.actualizarSaldoCuenta((long) Integer.parseInt(idCuenta), (float) Integer.parseInt(valor.getText()));
+
+    									} catch (Exception e) {
+    										throw new Exception ("No se pudo registrar la operacion sobre la cuenta: " + idCuenta);
+    									}
+    								}            
+
+    								if (option == JOptionPane.CANCEL_OPTION)
+    								{          
+    									panelDatos.actualizarInterfaz("Operacion cancelada");                                                                                 
+    								}
+    							}
+    						}
+
+    					case 1:
+    						if(ya==0) {
+    							ya++;
+    							
+    							if(tipoUsuario==CAJERO) {//estamos en puesto atencion oficina
+    								VOCajero cajero = bancAndes.darCajeroPorLogin(loginUsuarioSistema);
+
+    								JTextField valor = new JTextField();
+    								JTextField cliente = new JTextField();
+
+    								Object[] message = {
+    										"Valor: ", valor,
+    										"Login cliente:", cliente
+    								};
+
+    								int option = JOptionPane.showConfirmDialog(null, message, "Registro de la operacion", JOptionPane.OK_CANCEL_OPTION);
+    								VOOperacionBancaria ob=null;
+    								if (option == JOptionPane.OK_OPTION) {
+
+    									if ()
+    									try {
+    										long hoy=System.currentTimeMillis();
+    										ob =  bancAndes.adicionarOperacionBancaria(
+    												(float) Integer.parseInt(valor.getText()), 
+    				    							new java.sql.Date(hoy),
+    				    							cliente.getText(), 
+    				    							(long) Integer.parseInt(idCuenta), 
+    												"CONSIGNAR", 
+    												cajero.getPuestoAtencionoficina(), 
+    												loginUsuarioSistema);
+    												
+
+    									} catch (Exception e) {
+    										throw new Exception ("No se pudo registrar la operacion sobre la cuenta: " + idCuenta);
+    									}
+    								}            
+
+    								if (option == JOptionPane.CANCEL_OPTION)
+    								{          
+    									panelDatos.actualizarInterfaz("Operacion cancelada");                                                                                 
+    								}
+
+    							}
+    							else {//es un cliente
+
+    								JComboBox<String> cbPuesto = new JComboBox<String>();
+    								cbPuesto.addItem("DIGITAL");
+    								cbPuesto.addItem("CAJERO AUTOMATICO");
+    								
+    								JTextField valor = new JTextField();
+    								JTextField puestoAtencion = new JTextField();
+
+    								Object[] message = {
+    										"Valor: ", valor,
+    										"Tipo de puesto de atencion: ", cbPuesto,
+    										"Id puesto de atencion:", puestoAtencion
+    								};
+
+    								int option = JOptionPane.showConfirmDialog(null, message, "Registro de la operacion", JOptionPane.OK_CANCEL_OPTION);
+    								VOOperacionBancaria ob=null;
+    								if(cbPuesto.getSelectedItem().equals("DIGITAL")) {
+    									VOPuestoDigital pd = bancAndes.darPuestoDigitalPorId((long) Integer.parseInt(puestoAtencion.getText()));
+    									if (pd==null) {
+    										throw new Exception ("No existe el puesto digital "+puestoAtencion.getText());
+    									}
+    								}
+    								else {
+    									VOCajeroAutomatico ca = bancAndes.darCajeroAutomaticoPorId((long) Integer.parseInt(puestoAtencion.getText()));
+    									if (ca==null) {
+    										throw new Exception ("No existe el cajero automatico "+puestoAtencion.getText());
+    									}
+    								}
+    								if (option == JOptionPane.OK_OPTION) {
+
+    									try {
+    										long hoy=System.currentTimeMillis();
+    										ob =  bancAndes.adicionarOperacionBancaria(
+    												(float) Integer.parseInt(valor.getText()), 
+    				    							new java.sql.Date(hoy),
+    				    							this.loginUsuarioSistema, 
+    				    							(long) Integer.parseInt(idCuenta), 
+    												"CONSIGNAR", 
+    												(long) Integer.parseInt(puestoAtencion.getText()), 
+    												null);
+    												
+
+    									} catch (Exception e) {
+    										throw new Exception ("No se pudo registrar la operacion sobre la cuenta: " + idCuenta);
+    									}
+    								}            
+
+    								if (option == JOptionPane.CANCEL_OPTION)
+    								{          
+    									panelDatos.actualizarInterfaz("Operacion cancelada");                                                                                 
+    								}
+    							}
+    						}
+
+
+    					}
+
+    					String resultado = "En registrar operacion sobre cuenta\n\n";
+    					resultado += "Operacion registrada exitosamente sobre cuenta: " + idCuenta;
+    					resultado += "\n Operacion terminada";
+    					panelDatos.actualizarInterfaz(resultado);
+    				}
+    				else {
+    					panelDatos.actualizarInterfaz("No se puede registrar operación sobre el CDT "+idCuenta);
+    				}
+    			}
+    			else {
+    				panelDatos.actualizarInterfaz("La cuenta "+idCuenta+" no está activa");
+    			}
+
+
+
+    		} 
+    		catch (Exception e) 
+    		{
+    			//                                      e.printStackTrace();
+    			String resultado = generarMensajeError(e);
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    	}
     }
     /* ****************************************************************
      * 							REQF7
