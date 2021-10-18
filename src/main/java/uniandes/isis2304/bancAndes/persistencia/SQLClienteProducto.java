@@ -41,9 +41,9 @@ public class SQLClienteProducto {
 		this.pba = pba;
 	}
 
-	public long adicionarClienteProducto(PersistenceManager pm, long id, String login) {
-		Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaProductos () + "(id, login) values (?, ?)");
-        q.setParameters(id, login);
+	public long adicionarClienteProducto(PersistenceManager pm, long producto, String cliente) {
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaClientesProductos () + "(producto, cliente) values (?, ?)");
+        q.setParameters(producto, cliente);
         return (long) q.executeUnique();
 	}
 

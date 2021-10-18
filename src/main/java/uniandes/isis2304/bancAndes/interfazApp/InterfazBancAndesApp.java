@@ -914,7 +914,9 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
     							(long)Integer.parseInt(oficina.getText())
     							
     							);
-    					
+    					if (ct==null) {
+							throw new Exception ("La cuenta no se pudo agregar");
+						}
     					String resultado = "En agregar Cuenta\n\n";
     	    			resultado += "Cuenta agregada exitosamente: " + ct;
     	    			resultado += "\n Operacion terminada";
