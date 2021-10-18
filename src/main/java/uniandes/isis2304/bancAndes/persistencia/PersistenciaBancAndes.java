@@ -1426,6 +1426,11 @@ public class PersistenciaBancAndes {
 	public List<ClienteProducto> darClienteProductoPorProducto(long id) {
 		return sqlClienteProducto.darClienteProductoPorProducto (pmf.getPersistenceManager(), id);
 	}
+	
+	public ClienteProducto darClienteProducto(float producto, String cliente) {
+		return sqlClienteProducto.darClienteProducto (pmf.getPersistenceManager(), producto, cliente);
+	}
+
 
 	/* ****************************************************************
 	 * 			Métodos para manejar USUARIOTIPOOPERACION
@@ -1529,6 +1534,8 @@ public class PersistenciaBancAndes {
 		return sqlCajeroAutomatico.darCajeroAutomaticoPorId (pmf.getPersistenceManager(), id);
 	}
 
+
+	
 
 	
 }

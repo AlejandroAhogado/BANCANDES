@@ -34,6 +34,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
 import uniandes.isis2304.bancAndes.negocio.BancAndes;
+import uniandes.isis2304.bancAndes.negocio.ClienteProducto;
 import uniandes.isis2304.bancAndes.negocio.VOCajero;
 import uniandes.isis2304.bancAndes.negocio.VOCajeroAutomatico;
 import uniandes.isis2304.bancAndes.negocio.VOCliente;
@@ -1435,6 +1436,90 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 		}
 	}
 
+	/* ****************************************************************
+	 * 							REQF8
+	 *****************************************************************/
+	/**
+	 * Registra una operacion sobre un prestamo. Las operaciones validas son:PAGAR_CUOTA y PAGAR_CUOTA_EXTRAORDINARIA
+	 */
+	public void registrarOperacionPrestamo() {
+		if (tipoUsuario==GERENTEGENERAL || 	tipoUsuario==GERENTEDEOFICINA || tipoUsuario==CLIENTE) {
+			mensajeErrorPermisos();
+		}
+		else {
+			try 
+			{            
+				String idPrestamo = JOptionPane.showInputDialog (this, "Id del prestamo", "Indicar prestamo", JOptionPane.QUESTION_MESSAGE);
+				VOPrestamo prestamo = bancAndes.darPrestamoPorId((long) Integer.parseInt(idPrestamo));
+
+				if (prestamo!=null && prestamo.getCerrado().equals("FALSE")) {
+					//estamos en puesto atencion oficina
+					VOCajero cajero = bancAndes.darCajeroPorLogin(loginUsuarioSistema);
+
+					JTextField valor = new JTextField();
+					JTextField cliente = new JTextField();
+
+					Object[] message = {
+							"Valor: ", valor,
+							"Login cliente: ", cliente
+					};
+
+					int option = JOptionPane.showConfirmDialog(null, message, "Registro de la operacion", JOptionPane.OK_CANCEL_OPTION);
+					VOOperacionBancaria ob=null;
+					if (option == JOptionPane.OK_OPTION) {
+						ClienteProducto cp = bancAndes.darClienteProducto((long) Integer.parseInt(idPrestamo), cliente.getText());
+						if (cp!=null) {
+							if ((float) Integer.parseInt(valor.getText())>=prestamo.getValorCuotaMinima()) {
+								String tipoOperacion = (float) Integer.parseInt(valor.getText())>prestamo.getValorCuotaMinima()? "PAGAR_CUOTA_EXTRAORDINARIA":"PAGAR_CUOTA";
+								try {
+									long hoy=System.currentTimeMillis();
+									ob =  bancAndes.adicionarOperacionBancaria(
+											(float) Integer.parseInt(valor.getText()), 
+											new java.sql.Date(hoy),
+											cliente.getText(), 
+											(long) Integer.parseInt(idPrestamo), 
+											tipoOperacion, 
+											cajero.getPuestoAtencionoficina(), 
+											loginUsuarioSistema);
+
+									bancAndes.realizarPago((long) Integer.parseInt(idPrestamo), (float) Integer.parseInt(valor.getText()));
+								} catch (Exception e) {
+									throw new Exception ("No se pudo registrar la operacion sobre el prestamo: " + idPrestamo);
+								}
+							}
+							else {
+								throw new Exception ("No se pudo registrar el pago sobre el prestamo: " + idPrestamo+" porque no se alcanzo la cuota minima");
+							}
+						}
+						else {
+							throw new Exception ("No se puede realizar el pago porque el cliente "+cliente.getText()+" no esta asociado al prestamo "+idPrestamo);
+						}
+					}            
+
+					if (option == JOptionPane.CANCEL_OPTION)
+					{          
+						panelDatos.actualizarInterfaz("Operacion cancelada");                                                                                 
+					}
+
+
+
+
+				}
+				else {
+					panelDatos.actualizarInterfaz("El prestamo "+idPrestamo+" no esta abierto");
+				}
+
+
+
+			} 
+			catch (Exception e) 
+			{
+				//                                      e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+			}
+		}
+	}
 	/* ****************************************************************
 	 *                             REQF9
 	 *****************************************************************/

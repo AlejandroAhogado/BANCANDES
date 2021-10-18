@@ -7,6 +7,7 @@ import javax.jdo.Query;
 
 import uniandes.isis2304.bancAndes.negocio.ClienteProducto;
 import uniandes.isis2304.bancAndes.negocio.Cuenta;
+import uniandes.isis2304.bancAndes.negocio.UsuarioTipoOperacion;
 
 public class SQLClienteProducto {
 
@@ -59,6 +60,13 @@ public class SQLClienteProducto {
 		q.setParameters(id);
 		q.setResultClass(ClienteProducto.class);
 		return (List<ClienteProducto>) q.executeList();
+	}
+
+	public ClienteProducto darClienteProducto(PersistenceManager pm, float producto, String cliente) {
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pba.darTablaClientesProductos () + " WHERE producto = ? AND cliente = ?");
+		q.setParameters(producto, cliente);
+		q.setResultClass(ClienteProducto.class);
+		return (ClienteProducto) q.executeUnique();
 	}
 	
 }

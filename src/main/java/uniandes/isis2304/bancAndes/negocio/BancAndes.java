@@ -436,6 +436,18 @@ public class BancAndes {
                    List<ClienteProducto> cp= pba.darClienteProductoPorProducto (id);
                    return cp;
       }
+      /**
+       * Encuentra la lista de ClienteProducto en BancAndes con el producto y cliente dado
+       * Adiciona entradas al log de la aplicación
+       * @return Un ClienteProducto con el producto y login que conoce la aplicación, 
+        * lleno con su información básica
+       */
+       public ClienteProducto darClienteProducto (float producto, String cliente)
+       {
+                    log.info ("Buscando ClienteProducto por producto: " + producto+" y cliente: "+cliente);
+                    ClienteProducto cp= pba.darClienteProducto (producto, cliente);
+                    return cp;
+       }
 	/* ****************************************************************
 	 * 			Métodos para manejar los CUENTAS
 	 *****************************************************************/
@@ -806,7 +818,7 @@ public class BancAndes {
        */
        public UsuarioTipoOperacion darUsuarioTipoOperacion (String usuario, String tipoOperacion)
        {
-                    log.info ("Buscando UsuarioTipoOperacion por tipo de operacion: " + tipoOperacion);
+                    log.info ("Buscando UsuarioTipoOperacion por tipo de operacion: " + tipoOperacion + " y usuario: "+ usuario);
                     UsuarioTipoOperacion uto= pba.darUsuarioTipoOperacion (usuario, tipoOperacion);
                     return uto;
        }
