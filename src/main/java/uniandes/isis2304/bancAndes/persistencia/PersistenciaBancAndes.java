@@ -30,6 +30,7 @@ import uniandes.isis2304.bancAndes.negocio.OperacionBancaria;
 import uniandes.isis2304.bancAndes.negocio.Prestamo;
 import uniandes.isis2304.bancAndes.negocio.Producto;
 import uniandes.isis2304.bancAndes.negocio.PuestoAtencionOficina;
+import uniandes.isis2304.bancAndes.negocio.PuestoAtencionTipoOperacion;
 import uniandes.isis2304.bancAndes.negocio.PuestoDeAtencion;
 import uniandes.isis2304.bancAndes.negocio.PuestoDigital;
 import uniandes.isis2304.bancAndes.negocio.Usuario;
@@ -1443,6 +1444,52 @@ public class PersistenciaBancAndes {
 
 	public UsuarioTipoOperacion darUsuarioTipoOperacion(String usuario, String tipoOperacion) {
 		return sqlUsuarioTipoOperacion.darUsuarioTipoOperacion (pmf.getPersistenceManager(), usuario, tipoOperacion);
+	}
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar PUESTOATENCIONTIPOOPERACION
+	 *****************************************************************/
+	public PuestoAtencionTipoOperacion adicionarPuestoAtencionTipoOperacion(String tipoOperacion, long puesto) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+	            tx.begin();
+	            long tuplasInsertadas = sqlPuestoAtencionTipoOperacion.adicionarPuestoAtencionTipoOperacion(pm,tipoOperacion, puesto);
+	            tx.commit();
+	            
+	            log.trace ("Insercion de tipo de operacion:" + tipoOperacion + " puesto : " + puesto + ": "+ tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new PuestoAtencionTipoOperacion (tipoOperacion, puesto);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
+	}
+
+
+	public List<PuestoAtencionTipoOperacion> darPuestoAtencionTipoOperacionPorPuesto(long puesto) {
+		return sqlPuestoAtencionTipoOperacion.darPuestoAtencionTipoOperacionPorPuesto (pmf.getPersistenceManager(), puesto);
+	}
+
+
+	public List<PuestoAtencionTipoOperacion> darPuestoAtencionTipoOperacionPorTipo(String tipoOperacion) {
+		return sqlPuestoAtencionTipoOperacion.darPuestoAtencionTipoOperacionPorTipo (pmf.getPersistenceManager(), tipoOperacion);
+	}
+
+	public PuestoAtencionTipoOperacion darPuestoAtencionTipoOperacion(long puesto, String tipoOperacion) {
+		return sqlPuestoAtencionTipoOperacion.darPuestoAtencionTipoOperacion (pmf.getPersistenceManager(), puesto, tipoOperacion);
 	}
 
 }

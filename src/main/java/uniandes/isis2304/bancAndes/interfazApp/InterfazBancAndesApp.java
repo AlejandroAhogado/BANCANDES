@@ -80,6 +80,11 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 	 * 			Atributos
 	 *****************************************************************/
 	/**
+     * Indica si el login del usuario que ingreso al sistema
+     */
+     private String loginUsuarioSistema;
+
+	/**
 	 * El tipo de usuario que ingresó al sistema
 	 */
 	private String tipoUsuario;
@@ -259,6 +264,14 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
     public void setEsAdmin (boolean esAdmin) {
     	this.esAdmin=esAdmin;
     }
+    /**
+     * Define el login del usuario que ingresó al sistema
+     * @param loginUsuarioSistema
+     */
+     public void setLoginUsuarioSistema(String loginUsuarioSistema) {
+                  this.loginUsuarioSistema=loginUsuarioSistema;
+     }
+
     
 	/* ****************************************************************
 	 * 							REQF1 
@@ -1024,6 +1037,68 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
     		}
     	}
     }
+    
+
+    /* ****************************************************************
+     *                             REQF5
+     *****************************************************************/
+    /**
+     * Cierra la cuenta de un cliente
+     * Se crea una nueva tupla de puesto de atencion en la base de datos, si un usuario con ese login no existÃ¬a
+     */
+    public void cerrarCuenta( )
+    {
+    	if (tipoUsuario==CLIENTE||tipoUsuario==GERENTEGENERAL||tipoUsuario==CAJERO) {
+    		mensajeErrorPermisos();
+    	}
+    	else {
+    		try 
+    		{  
+    			JTextField idCu = new JTextField();
+    			Object[] messageCU = {
+    					"id cuenta: ", idCu
+    			};
+
+    			int optionCU = JOptionPane.showConfirmDialog(null, messageCU, "Datos de la cuenta a cerrar", JOptionPane.OK_CANCEL_OPTION);
+
+    			if (optionCU == JOptionPane.OK_OPTION) {
+
+    				try {
+    					long idCuenta = (long)Integer.parseInt(idCu.getText());
+    					VOCuenta cuenta = bancAndes.darCuentaPorId(idCuenta);
+    					long idOficina =  cuenta.getOficina();
+    					//falta comprara que el gerente que la esta cerrando sea de la misma oficina
+    					if (bancAndes.darOficinaPorId(idOficina).getGerenteLogin().equals(loginUsuarioSistema)) {
+    						bancAndes.cerrarCuenta(idCuenta);
+    					}else {
+    						panelDatos.actualizarInterfaz("La cuenta debe ser cerrada por el gerente de oficina de la oficina donde se abrio");
+    					}
+
+    				} catch (Exception e) {
+    					throw new Exception ("No se pudo cerrar la cuenta con id" );
+    				}
+    			}            
+
+    			if (optionCU == JOptionPane.CANCEL_OPTION)
+    			{            
+    				panelDatos.actualizarInterfaz("No se cerro ninguna cuenta");                                                                                
+    			}
+
+    			String resultado = "En cerrar cuenta\n\n";
+    			resultado += "Cuenta cerrada: ";
+    			resultado += "\n Operacion terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		} 
+    		catch (Exception e) 
+    		{
+    			// e.printStackTrace();
+    			String resultado = generarMensajeError(e);
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    	}
+    }
+
+
     /* ****************************************************************
      * 							REQF7
      *****************************************************************/

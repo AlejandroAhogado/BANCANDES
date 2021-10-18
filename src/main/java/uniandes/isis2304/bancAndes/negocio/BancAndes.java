@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 import com.google.gson.JsonObject;
 
 import uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes;
-import uniandes.isis2304.bancAndes.persistencia.PersistenciaParranderos;
 
 public class BancAndes {
 
@@ -406,7 +405,7 @@ public class BancAndes {
 	{
         log.info ("Adicionando ClienteProducto");
         ClienteProducto clienteProducto = pba.adicionarClienteProducto(id, login);		
-        log.info ("Adicionando Producto: " + clienteProducto);
+        log.info ("Adicionando ClienteProducto: " + clienteProducto);
         return clienteProducto;
 	}
 	
@@ -750,9 +749,9 @@ public class BancAndes {
 	 */
 	public UsuarioTipoOperacion adicionarUsuarioTipoOperacion (String tipoOperacion, String usuario)
 	{
-        log.info ("Adicionando ClienteProducto");
+        log.info ("Adicionando UsuarioTipoOperacion");
         UsuarioTipoOperacion usuarioTipoOperacion = pba.adicionarUsuarioTipoOperacion(tipoOperacion, usuario);		
-        log.info ("Adicionando Producto: " + usuarioTipoOperacion);
+        log.info ("Adicionando UsuarioTipoOperacion: " + usuarioTipoOperacion);
         return usuarioTipoOperacion;
 	}
 	
@@ -798,5 +797,60 @@ public class BancAndes {
                     return uto;
        }
 
+       /* ****************************************************************
+   	 * 			Métodos para manejar los PUESTOATENCIONTIPOOPERACION
+   	 *****************************************************************/
+   	/**
+   	 * Adiciona de manera persistente un PuestoAtencionTipoOperacion
+   	 * Adiciona entradas al log de la aplicación
+   	 * @return El objeto PuestoAtencionTipoOperacion adicionado. null si ocurre alguna Excepción
+   	 */
+   	public PuestoAtencionTipoOperacion adicionarPuestoAtencionTipoOperacion (String tipoOperacion, long puesto)
+   	{
+           log.info ("Adicionando PuestoAtencionTipoOperacion");
+           PuestoAtencionTipoOperacion puestoAtencionTipoOperacion = pba.adicionarPuestoAtencionTipoOperacion(tipoOperacion, puesto);		
+           log.info ("Adicionando PuestoAtencionTipoOperacion: " + puestoAtencionTipoOperacion);
+           return puestoAtencionTipoOperacion;
+   	}
+   	
+   	/**
+        * Encuentra la lista de PuestoAtencionTipoOperacion en BancAndes con el id del puesto dado
+        * Adiciona entradas al log de la aplicación
+        * @return Una lista de PuestoAtencionTipoOperacion con el login que conoce la aplicación, 
+         * lleno con su información básica
+        */
+        public List<PuestoAtencionTipoOperacion> darPuestoAtencionTipoOperacionPorPuesto (long puesto)
+        {
+                     log.info ("Buscando PuestoAtencionTipoOperacion por id del puesto: " + puesto);
+                     List<PuestoAtencionTipoOperacion> puestoAtencionTipoOperacion= pba.darPuestoAtencionTipoOperacionPorPuesto(puesto);
+                     return puestoAtencionTipoOperacion;
+        }
+        
+        /**
+         * Encuentra la lista de PuestoAtencionTipoOperacion en BancAndes con el tipo de operacion dado
+         * Adiciona entradas al log de la aplicación
+         * @param id - El tipo de operacion
+         * @return Una lista de PuestoAtencionTipoOperacion con el tipo que conoce la aplicación, 
+          * lleno con su información básica
+         */
+         public List<PuestoAtencionTipoOperacion> darPuestoAtencionTipoOperacionPorTipo (String tipoOperacion)
+         {
+                      log.info ("Buscando PuestoAtencionTipoOperacion por tipo de operacion: " + tipoOperacion);
+                      List<PuestoAtencionTipoOperacion> puestoAtencionTipoOperacion= pba.darPuestoAtencionTipoOperacionPorTipo (tipoOperacion);
+                      return puestoAtencionTipoOperacion;
+         }
+         
+         /**
+          * Encuentra la lista de PuestoAtencionTipoOperacion en BancAndes con el tipo de operacion y puesto dado
+          * Adiciona entradas al log de la aplicación
+          * @return Un PuestoAtencionTipoOperacion con el tipo y id que conoce la aplicación, 
+           * lleno con su información básica
+          */
+          public PuestoAtencionTipoOperacion darPuestoAtencionTipoOperacion (long puesto, String tipoOperacion)
+          {
+                       log.info ("Buscando PuestoAtencionTipoOperacion por tipo de operacion: " + tipoOperacion);
+                       PuestoAtencionTipoOperacion puestoAtencionTipoOperacion= pba.darPuestoAtencionTipoOperacion (puesto, tipoOperacion);
+                       return puestoAtencionTipoOperacion;
+          }
 
 }
