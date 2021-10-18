@@ -74,6 +74,12 @@ public class SQLCuenta {
 		return (long) q.executeUnique();
 	}
 
+	public long cambiarActividadCuenta(PersistenceManager pm, long idCuenta, String estado) {
+		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaCuentas () + " SET estado = ? WHERE id = ?");
+		q.setParameters(estado, idCuenta);
+		return (long) q.executeUnique();
+	}
+
 
 
 }

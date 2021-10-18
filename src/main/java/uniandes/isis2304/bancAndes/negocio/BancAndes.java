@@ -519,6 +519,20 @@ public class BancAndes {
 	}
 	
 	/**
+	 * Cambia el estado de una cuenta dado su id y el estado al que se quiere actualizar
+	 * Adiciona entradas al log de la aplicación
+	 * @param idCuenta
+	 * @param estado al que se quiere cambiar la cuenta (ACTIVA o DESACTIVADA)
+	 * @return El número de tuplas modificadas: 1 o 0. 0 significa que una cuenta con ese identificador no existe
+	 */
+	public long cambiarActividadCuenta (long idCuenta, String estado)
+	{
+        log.info ("Cambiando estado cuenta: " + idCuenta +" a "+ estado);
+        long cambios = pba.cambiarActividadCuenta (idCuenta, estado);
+        return cambios;
+	}
+	
+	/**
 	 * Actualiza el saldo de una cuenta dado su id
 	 * Adiciona entradas al log de la aplicación
 	 * @param idCuenta
@@ -581,7 +595,7 @@ public class BancAndes {
 	 */
 	public long cerrarPrestamo (long idPrestamo)
 	{
-        log.info ("Prestamo cuenta: " + idPrestamo);
+        log.info ("Cerrando prestamo: " + idPrestamo);
         long cambios = pba.cerrarPrestamo (idPrestamo);
         return cambios;
 	}

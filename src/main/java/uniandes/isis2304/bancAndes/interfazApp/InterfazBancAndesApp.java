@@ -76,6 +76,11 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 	public static final String CAJERO = "Cajero";
 	public static final String GERENTEDEOFICINA = "Gerente de Oficina";
 	
+	public static final String ACTIVA = "ACTIVA";
+    public static final String CERRADA = "CERRADA";
+    public static final String DESACTIVADA = "DESACTIVADA";
+
+	
 	/* ****************************************************************
 	 * 			Atributos
 	 *****************************************************************/
@@ -915,11 +920,6 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
     			long id = p.getId();
     			System.out.println(id);
 
-    			JComboBox<String> cbEstado = new JComboBox<String>();
-    			cbEstado.addItem("ACTIVA");
-    			cbEstado.addItem("DESACTIVADA");
-    			cbEstado.addItem("CERRADA");
-
 
 				JComboBox<String> cbTipo = new JComboBox<String>();
 				cbTipo.addItem("AHORROS");
@@ -935,7 +935,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
     			Object[] message = {
     					"Numero cuenta: ", numCuenta,
-    					"Estado: ", cbEstado,
+    					"Estado: ", ACTIVA,
     					"Tipo de cuenta: ", cbTipo,
     					"Saldo:", saldo,
     					"Fecha de vencimiento (dd-mm-aaaa):", fechaVencimiento,
@@ -953,7 +953,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
     					ct =  bancAndes.adicionarCuenta(
     							id, 
     							Integer.parseInt(numCuenta.getText()),
-    							(String)cbEstado.getSelectedItem(), 
+    							ACTIVA, 
     							(String)cbTipo.getSelectedItem(), 
     							(float)Integer.parseInt(saldo.getText()),
     							new java.sql.Date(hoy),
@@ -1100,6 +1100,12 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 
     /* ****************************************************************
+	 * 							REQF6
+	 *****************************************************************/
+    public void registrarOperacionCuenta() {
+    	
+    }
+    /* ****************************************************************
      * 							REQF7
      *****************************************************************/
     /**
@@ -1176,6 +1182,64 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
     		}
     	}
     }
+    
+    /* ****************************************************************
+     *                             REQF9
+     *****************************************************************/
+    /**
+     * Cierra el prestamo de un cliente
+     */
+    public void cerrarPrestamo( )
+    {
+    	if (tipoUsuario==CLIENTE||tipoUsuario==GERENTEGENERAL||tipoUsuario==CAJERO) {
+    		mensajeErrorPermisos();
+    	}
+    	else {
+    		try 
+    		{  
+    			JTextField idPr= new JTextField();
+    			Object[] messagePR = {
+    					"id prestamo: ", idPr
+    			};
+
+    			int optionPR = JOptionPane.showConfirmDialog(null, messagePR, "Datos del prestamo a cerrar", JOptionPane.OK_CANCEL_OPTION);
+
+    			if (optionPR == JOptionPane.OK_OPTION) {
+
+    				try {
+    					long idPrestamo = (long)Integer.parseInt(idPr.getText());
+    					VOPrestamo prestamo = bancAndes.darPrestamoPorId(idPrestamo);
+
+    					if (prestamo.getSaldoPendiente()==0) {
+    						bancAndes.cerrarPrestamo(idPrestamo);
+    					}else {
+    						panelDatos.actualizarInterfaz("El prestamo debe tener un saldo pendiente de $0");
+    					}
+
+    				} catch (Exception e) {
+    					throw new Exception ("No se pudo cerrar el prestamo con id" );
+    				}
+    			}            
+
+    			if (optionPR == JOptionPane.CANCEL_OPTION)
+    			{            
+    				panelDatos.actualizarInterfaz("No se cerro ningun prestamo");                                                                                
+    			}
+
+    			String resultado = "En cerrar prestamo\n\n";
+    			resultado += "Prestamo cerrada: ";
+    			resultado += "\n Operacion terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		} 
+    		catch (Exception e) 
+    		{
+    			// e.printStackTrace();
+    			String resultado = generarMensajeError(e);
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    	}
+    }
+
 
 /**
  * Genera una cadena de caracteres con la descripción de la excepcion e, haciendo énfasis en las excepcionsde JDO

@@ -931,6 +931,33 @@ public class PersistenciaBancAndes {
         }
 		
 	}
+	
+	public long cambiarActividadCuenta(long idCuenta, String estado) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlCuenta.cambiarActividadCuenta (pm, idCuenta, estado);
+            tx.commit();
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+
 
 	public long actualizarSaldoCuenta(long idCuenta, float cambioSaldo) {
 		
@@ -1492,4 +1519,6 @@ public class PersistenciaBancAndes {
 		return sqlPuestoAtencionTipoOperacion.darPuestoAtencionTipoOperacion (pmf.getPersistenceManager(), puesto, tipoOperacion);
 	}
 
+
+	
 }
