@@ -3,6 +3,9 @@ package uniandes.isis2304.bancAndes.persistencia;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.isis2304.bancAndes.negocio.Oficina;
+import uniandes.isis2304.bancAndes.negocio.PuestoDigital;
+
 public class SQLPuestoDigital {
 
 	/* ****************************************************************
@@ -39,6 +42,13 @@ public class SQLPuestoDigital {
 		 Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaPuestosDigitales () + "(id, telefono, tipo, url) values (?, ?, ?, ?)");
 	        q.setParameters(id, telefono, tipo, url);
 	        return (long) q.executeUnique();
+	}
+
+	public PuestoDigital darPuestoDigitalPorId(PersistenceManager pm, long id) {
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pba.darTablaPuestosDigitales () + " WHERE id = ?");
+		q.setResultClass(PuestoDigital.class);
+		q.setParameters(id);
+		return (PuestoDigital) q.executeUnique();
 	}
 	
 	

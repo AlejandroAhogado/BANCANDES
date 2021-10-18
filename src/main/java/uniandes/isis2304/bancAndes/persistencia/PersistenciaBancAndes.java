@@ -1520,5 +1520,15 @@ public class PersistenciaBancAndes {
 	}
 
 
+	public PuestoDigital darPuestoDigitalPorId(long id) {
+		return sqlPuestoDigital.darPuestoDigitalPorId (pmf.getPersistenceManager(), id);
+	}
+
+
+	public CajeroAutomatico darCajeroAutomaticoPorId(long id) {
+		return sqlCajeroAutomatico.darCajeroAutomaticoPorId (pmf.getPersistenceManager(), id);
+	}
+
+
 	
 }

@@ -3,6 +3,9 @@ package uniandes.isis2304.bancAndes.persistencia;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.isis2304.bancAndes.negocio.CajeroAutomatico;
+import uniandes.isis2304.bancAndes.negocio.PuestoDigital;
+
 public class SQLCajeroAutomatico {
 
 	/* ****************************************************************
@@ -46,6 +49,13 @@ public class SQLCajeroAutomatico {
 		Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaCajerosAutomaticos () + "( id, telefono, localizacion) values (?, ?, ?)");
         q.setParameters(id, telefono, localizacion);
         return (long) q.executeUnique();
+	}
+
+	public CajeroAutomatico darCajeroAutomaticoPorId(PersistenceManager pm, long id) {
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pba.darTablaCajerosAutomaticos () + " WHERE id = ?");
+		q.setResultClass(CajeroAutomatico.class);
+		q.setParameters(id);
+		return (CajeroAutomatico) q.executeUnique();
 	}
 	
 }

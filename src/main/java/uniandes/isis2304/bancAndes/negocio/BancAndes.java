@@ -867,6 +867,26 @@ public class BancAndes {
                        return puestoAtencionTipoOperacion;
           }
 
+		/**
+		 * @param parseInt
+		 * @return
+		 */
+		public PuestoDigital darPuestoDigitalPorId(long id) {
+			log.info ("Buscando Puesto digital por id: " + id);
+			PuestoDigital puestoDigital= pba.darPuestoDigitalPorId (id);
+			return puestoDigital;
+		}
+
+		/**
+		 * @param parseInt
+		 * @return
+		 */
+		public CajeroAutomatico darCajeroAutomaticoPorId(long id) {
+			log.info ("Buscando Cajero automatico por id: " + id);
+			CajeroAutomatico cajeroAutomatico= pba.darCajeroAutomaticoPorId (id);
+			return cajeroAutomatico;
+			}
+
 		
 
 }
