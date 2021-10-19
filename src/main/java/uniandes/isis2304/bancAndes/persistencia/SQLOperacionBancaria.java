@@ -1,6 +1,7 @@
 package uniandes.isis2304.bancAndes.persistencia;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -45,4 +46,46 @@ public class SQLOperacionBancaria {
 	        return (long) q.executeUnique();
 	}
 	
+	//************************************************SENTENCIAS PARA REQUERIMIENTOS DE CONSULTA
+	/**
+	 * Consulta las operaciones más movidas en todas las oficinas
+	 * @param pm
+	 * @param fechaInicio
+	 * @param fechaFin
+	 * @return
+	 */
+	public List<Object[]> consultar10OperacionesGG (PersistenceManager pm, String fechaInicio, String fechaFin){
+		String sql = "SELECT Tipooperacion, puestoAtencion, Avg(Valor) valorPromedio, Count(*) numVeces FROM ";
+		sql+= pba.darTablaOperacionesBancarias () + " ob ";
+		sql+= "WHERE fecha BETWEEN To_Date(?, 'DD/MM/YY') AND To_Date(?, 'DD/MM/YY') ";
+		sql+= "Group By Tipooperacion, puestoAtencion ";
+		sql+= "Order By numVeces ";
+		sql+= "Fetch First 10 Rows Only";
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(fechaInicio, fechaFin);
+		return q.executeList();
+	}
+	
+	/**
+	 * Consulta las operaciones más movidas en la oficina de 
+	 * @param pm
+	 * @param fechaInicio
+	 * @param fechaFin
+	 * @return
+	 */
+	public List<Object[]> consultar10OperacionesGOf (PersistenceManager pm, String fechaInicio, String fechaFin, long idOficina){
+		String sql = "SELECT Tipooperacion, puestoAtencion, Avg(Valor) valorPromedio, Count(*) numVeces FROM ";
+		sql+= pba.darTablaOperacionesBancarias () + " ob ";
+		sql+= "INNER JOIN "+ pba.darTablaPuestosAtencionOficina() +" pao ";
+		sql+= "ON ob.puestoAtencion = pao.id ";
+		sql+= "WHERE fecha BETWEEN To_Date(?, 'DD/MM/YY') AND To_Date(?, 'DD/MM/YY') AND pao.oficina=?";
+		sql+= "Group By Tipooperacion, puestoAtencion ";
+		sql+= "Order By numVeces ";
+		sql+= "Fetch First 10 Rows Only";
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(fechaInicio, fechaFin, idOficina);
+		return q.executeList();
+	}
+
+
 }

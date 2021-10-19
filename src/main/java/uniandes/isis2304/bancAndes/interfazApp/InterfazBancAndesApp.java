@@ -2085,7 +2085,122 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 	}
 
+	/* ****************************************************************
+	 *                             REFC2
+	 *****************************************************************/
+	/**
+	 * Consultar un cliente
+	 */
+	public void consultarCliente() {
+		
+	}
+	
+	/* ****************************************************************
+	 *                             REFC3
+	 *****************************************************************/
+	/**
+	 * Consultar las 10 operaciones de mayor movimiento en el sistema en un rango de fechas
+	 */
+	public void consultar10Operaciones() {
+		if (tipoUsuario==CLIENTE||tipoUsuario==CAJERO) {
+			mensajeErrorPermisos();
+		}
+		else {
+			try 
+			{  
+				if (tipoUsuario==GERENTEGENERAL) {
+					
+					JTextField fechaInicio = new JTextField();
+					JTextField fechaFin = new JTextField();
 
+					Object[] message = {
+							"Fecha de inicio (DD/MM/YY): ", fechaInicio,
+							"Fecha de fin (DD/MM/YY):", fechaFin
+					};
+					int option = JOptionPane.showConfirmDialog(null, message, "Ingreso de rango de fechas", JOptionPane.OK_CANCEL_OPTION);
+
+					List<Object []>top10= null;
+					
+					if (option == JOptionPane.OK_OPTION) {
+						top10= bancAndes.consultar10OperacionesGG(fechaInicio.getText(), fechaFin.getText());
+						
+						String resultado = "Resultado de la consulta: ";
+						int i=0;
+						for (Object [] opb : top10) {
+							i++;
+							resultado += "\n Item "+i+": ";
+							resultado+= "Tipo operacion: "+ opb[0];
+							resultado+= ", Puesto atencion: "+ opb[1];
+							resultado+= ", valor promedio: "+ opb[2];
+							resultado+= ", Cantidad veces realizada: "+ opb[3];
+						}
+
+						resultado += "\n Consulta finalizada";
+						panelDatos.actualizarInterfaz(resultado);
+						
+						
+					}
+					else {
+						panelDatos.actualizarInterfaz("Consulta cancelada");
+					}
+				}
+				else {//caso gerente de oficina
+					JTextField fechaInicio = new JTextField();
+					JTextField fechaFin = new JTextField();
+
+					Object[] message = {
+							"Fecha de inicio (DD/MM/YY): ", fechaInicio,
+							"Fecha de fin (DD/MM/YY):", fechaFin
+					};
+					int option = JOptionPane.showConfirmDialog(null, message, "Ingreso de rango de fechas", JOptionPane.OK_CANCEL_OPTION);
+
+					List<Object []>top10= null;
+					
+					if (option == JOptionPane.OK_OPTION) {
+						VOOficina voof = bancAndes.darOficinaPorGerenteDeOficina(loginUsuarioSistema);
+						
+						top10= bancAndes.consultar10OperacionesGOf(fechaInicio.getText(), fechaFin.getText(), voof.getId());
+						
+						String resultado = "Resultado de la consulta: ";
+						int i=0;
+						for (Object [] opb : top10) {
+							i++;
+							resultado += "\n Item "+i+": ";
+							resultado+= "Tipo operacion: "+ opb[0];
+							resultado+= ", Puesto atencion: "+ opb[1];
+							resultado+= ", valor promedio: "+ opb[2];
+							resultado+= ", Cantidad veces realizada: "+ opb[3];
+						}
+
+						resultado += "\n Consulta finalizada";
+						panelDatos.actualizarInterfaz(resultado);
+						
+						
+					}
+					else {
+						panelDatos.actualizarInterfaz("Consulta cancelada");
+					}
+				}
+				
+				
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+			}
+		}
+	}
+	/* ****************************************************************
+	 *                             REFC4
+	 *****************************************************************/
+	/**
+	 * Obtener los datos del usuario m�s activo
+	 */
+	public void obtenerUsuarioMasActivo() {
+		
+	}
 	/**
 	 * Genera una cadena de caracteres con la descripción de la excepcion e, haciendo énfasis en las excepcionsde JDO
 	 * @param e - La excepción recibida

@@ -1598,13 +1598,20 @@ public class PersistenciaBancAndes {
 		
 	}
 
-
-
-
-
+//***************************************************RFC3************************************************************
 	
 
 
+	public List<Object[]> consultar10OperacionesGG(String fechaInicio, String fechaFin) {
+		return sqlOperacionBancaria.consultar10OperacionesGG(pmf.getPersistenceManager(), fechaInicio, fechaFin);
+		
+	}
+	
+
+	public List<Object[]> consultar10OperacionesGOf(String fechaInicio, String fechaFin, long idOficina) {
+		return sqlOperacionBancaria.consultar10OperacionesGOf(pmf.getPersistenceManager(), fechaInicio, fechaFin, idOficina);
+		
+	}
 	
 
 	

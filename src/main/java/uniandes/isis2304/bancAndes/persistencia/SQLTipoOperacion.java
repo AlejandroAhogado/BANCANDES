@@ -1,5 +1,10 @@
 package uniandes.isis2304.bancAndes.persistencia;
 
+import java.util.List;
+
+import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
+
 public class SQLTipoOperacion {
 
 	/* ****************************************************************
@@ -32,6 +37,6 @@ public class SQLTipoOperacion {
 		this.pba = pba;
 	}
 	
-	
+
 	
 }

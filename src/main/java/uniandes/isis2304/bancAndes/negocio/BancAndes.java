@@ -946,6 +946,7 @@ public class BancAndes {
 		
 		//***************************************METEODOS PARA REQUERIMIENTOS DE CONSULTA
 		
+		//-----------------------------RFC1
 		public List<Object []> consultarCuentasGerenteOficina(String id, String criterio1p, String signo1, String filtro1p,
 				String criterio2p, String signo2, String filtro2p, String selectedItem, String selectedItem2) {
 			log.info ("Consultando cuentas de la oficina : " + id);
@@ -1004,8 +1005,17 @@ public class BancAndes {
 		}
 
 		
-
+		//-----------------------------RFC2
+		public List<Object []> consultar10OperacionesGG(String fechaInicio, String fechaFin) {
+			log.info ("Consultando las 10 operaciones de mas movimiento en todo el sistema");
+			List<Object []> top10= pba.consultar10OperacionesGG(fechaInicio, fechaFin );
+			return top10;
+			}
 		
-		
 
+		public List<Object []> consultar10OperacionesGOf(String fechaInicio, String fechaFin, long idOficina) {
+			log.info ("Consultando las 10 operaciones de mas movimiento en todo el sistema");
+			List<Object []> top10= pba.consultar10OperacionesGOf(fechaInicio, fechaFin, idOficina );
+			return top10;
+			}
 }
