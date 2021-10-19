@@ -866,10 +866,18 @@ public class PersistenciaBancAndes {
 	/* ****************************************************************
 	 * 			Métodos para manejar CUENTA
 	 *****************************************************************/
+	/**
+	 * @param id
+	 * @return
+	 */
 	public Cuenta darCuentaPorId(long id) {
 		return sqlCuenta.darCuentaPorId (pmf.getPersistenceManager(), id);
 	}
 
+	public Cuenta darCuentaPorNumero(int numero) {
+		return sqlCuenta.darCuentaPorNumero (pmf.getPersistenceManager(), numero);
+	}
+	
 	public Cuenta adicionarCuenta( long id, int numeroCuenta, String estado, String tipo, float saldo,
 			Date fechaCreacion, Date dechaVencimiento, float tasaRendimiento, long oficina) {
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1547,18 +1555,54 @@ public class PersistenciaBancAndes {
 		return sqlCajeroAutomatico.darCajeroAutomaticoPorId (pmf.getPersistenceManager(), id);
 	}
 
-
-	public List<Cuenta> consultarCuentasGerenteOficina(String id, String criterio1p, String signo1, String filtro1p,
+//******************************************METODOS DE LOS REQUERIMIENTOS DE CONSULTA*************************************************************************
+	public List<Object[]> consultarCuentasGerenteOficina(String id, String criterio1p, String signo1, String filtro1p,
 			String criterio2p, String signo2, String filtro2p, String ordenamiento, String tipoOrdenamiento) {
 		return sqlCuenta.consultarCuentasGerenteOficina(pmf.getPersistenceManager(), id, criterio1p, signo1, filtro1p, criterio2p, signo2, filtro2p, ordenamiento, tipoOrdenamiento);
 	}
 
 
-	public List<Cuenta> consultarCuentasGerenteOficinaAgrupamiento(String selectedItem, String id, String criterio1p,
-			String signo1, String filtro1p, String criterio2p, String signo2, String filtro2p, String selectedItem2,
-			String selectedItem3) {
-		return sqlCuenta.consultarCuentasGerenteGeneralAgrupamiento(pmf.getPersistenceManager(), signo2, criterio1p, filtro1p, criterio2p, filtro2p, selectedItem2, selectedItem3);
+	public List<Object[]> consultarCuentasGerenteOficinaAgrupamiento(String agrupamiento, String id, String criterio1p,
+			String signo1, String filtro1p, String criterio2p, String signo2, String filtro2p, String ordenamiento,
+			String tipoOrdenamiento) {
+		return sqlCuenta.consultarCuentasGerenteOficinaAgrupamiento(pmf.getPersistenceManager(), agrupamiento, id, criterio1p,signo1, filtro1p, criterio2p, signo2, filtro2p, ordenamiento, tipoOrdenamiento);
 	}
+
+
+	public List<Object[]> consultarCuentasGerenteGeneral(String criterio1p, String signo1, String filtro1p,
+			String criterio2p, String signo2, String filtro2p, String ordenamiento, String tipoOrden) {
+		return sqlCuenta.consultarCuentasGerenteGeneral(pmf.getPersistenceManager(), criterio1p, signo1, filtro1p, criterio2p, signo2, filtro2p, ordenamiento, tipoOrden);
+		
+	}
+
+
+	public List<Object[]> consultarCuentasGerenteGeneralAgrupamiento(String agrupamiento, String criterio1p,
+			String signo1, String filtro1p, String criterio2p, String signo2, String filtro2p, String ordenamiento,
+			String tipoOrden) {
+		return sqlCuenta.consultarCuentasGerenteGeneralAgrupamiento(pmf.getPersistenceManager(), agrupamiento, criterio1p,signo1, filtro1p, criterio2p, signo2, filtro2p, ordenamiento, tipoOrden);
+		
+	}
+
+
+	public List<Object[]> consultarCuentasCliente(String login, String criterio1p, String signo1, String filtro1p,
+			String criterio2p, String signo2, String filtro2p, String ordenamiento, String tipoOrden) {
+		return sqlCuenta.consultarCuentasCliente(pmf.getPersistenceManager(), login, criterio1p, signo1, filtro1p, criterio2p, signo2, filtro2p, ordenamiento, tipoOrden);
+		
+	}
+
+
+	public List<Object[]> consultarCuentasClienteAgrupamiento(String agrupamiento, String login, String criterio1p,
+			String signo1, String filtro1p, String criterio2p, String signo2, String filtro2p, String ordenamiento,
+			String tipoOrden) {
+		return sqlCuenta.consultarCuentasClienteAgrupamiento(pmf.getPersistenceManager(), agrupamiento, login, criterio1p,signo1, filtro1p, criterio2p, signo2, filtro2p, ordenamiento, tipoOrden);
+		
+	}
+
+
+
+
+
+	
 
 
 	

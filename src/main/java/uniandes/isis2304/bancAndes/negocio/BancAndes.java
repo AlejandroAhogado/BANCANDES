@@ -519,6 +519,22 @@ public class BancAndes {
 	}
 	
 	/**
+	 * Encuentra la cuenta en BancAndes con el numero de cuenta solicitado
+	 * Adiciona entradas al log de la aplicación
+	 * @param numero de la cuenta
+	 * @return Un objeto Cuenta con el numero que conoce la aplicación, 
+	 * lleno con su información básica
+	 */
+	public Cuenta darCuentaPorNumero (int numero)
+	{
+		System.out.println("llego a dar x num");
+		log.info ("Buscando Cuenta por numero de cuenta: " + numero);
+		Cuenta cuenta= pba.darCuentaPorNumero (numero);
+		log.info ("Se encontro la cuenta: "+cuenta);
+		return cuenta;
+	}
+	
+	/**
 	 * Cierra una cuenta (deja el saldo en cero y cambia su estado a CERRADA) dado su id
 	 * Adiciona entradas al log de la aplicación
 	 * @param idCuenta
@@ -927,25 +943,67 @@ public class BancAndes {
 			return cajeroAutomatico;
 			}
 
-		public List<Cuenta> consultarCuentasGerenteOficina(String id, String criterio1p, String signo1, String filtro1p,
+		
+		//***************************************METEODOS PARA REQUERIMIENTOS DE CONSULTA
+		
+		public List<Object []> consultarCuentasGerenteOficina(String id, String criterio1p, String signo1, String filtro1p,
 				String criterio2p, String signo2, String filtro2p, String selectedItem, String selectedItem2) {
 			log.info ("Consultando cuentas de la oficina : " + id);
-			List<Cuenta> cuentas= pba.consultarCuentasGerenteOficina( id, criterio1p, signo1,filtro1p,
+			List<Object []> cuentas= pba.consultarCuentasGerenteOficina( id, criterio1p, signo1,filtro1p,
 					 criterio2p, signo2, filtro2p,selectedItem,selectedItem2);
 			return cuentas;
 		}
 
-		public List<Cuenta> consultarCuentasGerenteOficinaAgrupamiento(String agrupamiento, String id,
+		public List<Object []> consultarCuentasGerenteOficinaAgrupamiento(String agrupamiento, String id,
 				String criterio1p, String signo1, String filtro1p, String criterio2p, String signo2, String filtro2p,
 				String ordenamiento, String tipoOrdenamiento) {
-			log.info ("Consultando cuentas de la oficina : " + id);
-			List<Cuenta> cuentas= pba.consultarCuentasGerenteOficinaAgrupamiento( agrupamiento,  id,
+			log.info ("Consultando cuentas de la oficina : " + id +" (agrupamiento)");
+			List<Object []> cuentas= pba.consultarCuentasGerenteOficinaAgrupamiento( agrupamiento,  id,
 					 criterio1p,  signo1,  filtro1p,  criterio2p,  signo2,  filtro2p,
 					 ordenamiento,  tipoOrdenamiento);
 			return cuentas;
 			
 			
 		}
+
+		public List<Object []> consultarCuentasGerenteGeneral(String criterio1p, String signo1, String filtro1p,
+				String criterio2p, String signo2, String filtro2p, String ordenamiento, String tipoOrden) {
+			log.info ("Consultando todas las cuentas");
+			List<Object []> cuentas= pba.consultarCuentasGerenteGeneral( criterio1p, signo1,filtro1p,
+					 criterio2p, signo2, filtro2p,ordenamiento,tipoOrden);
+			return cuentas;
+		}
+
+		public List<Object []> consultarCuentasGerenteGeneralAgrupamiento(String agrupamiento, String criterio1p,
+				String signo1, String filtro1p, String criterio2p, String signo2, String filtro2p, String ordenamiento,
+				String tipoOrden) {
+			log.info ("Consultando todas las cuentas (agrupamiento)");
+			List<Object []> cuentas= pba.consultarCuentasGerenteGeneralAgrupamiento( agrupamiento, 
+					 criterio1p,  signo1,  filtro1p,  criterio2p,  signo2,  filtro2p,
+					 ordenamiento,  tipoOrden);
+			return cuentas;
+		}
+
+		public List<Object []> consultarCuentasCliente(String login, String criterio1p, String signo1,
+				String filtro1p, String criterio2p, String signo2, String filtro2p, String ordenamiento,
+				String tipoOrden) {
+			log.info ("Consultando cuentas del cliente: " + login);
+			List<Object []> cuentas= pba.consultarCuentasCliente( login, criterio1p, signo1,filtro1p,
+					 criterio2p, signo2, filtro2p,ordenamiento,tipoOrden);
+			return cuentas;
+			}
+		
+		public List<Object []> consultarCuentasClienteAgrupamiento(String agrupamiento, String login,
+				String criterio1p, String signo1, String filtro1p, String criterio2p, String signo2, String filtro2p,
+				String ordenamiento, String tipoOrden) {
+			log.info ("Consultando las cuentas del cliente: "+login+" (agrupamiento)");
+			List<Object []> cuentas= pba.consultarCuentasClienteAgrupamiento( agrupamiento,  login,
+					 criterio1p,  signo1,  filtro1p,  criterio2p,  signo2,  filtro2p,
+					 ordenamiento,  tipoOrden);
+			return cuentas;
+		}
+
+		
 
 		
 		
