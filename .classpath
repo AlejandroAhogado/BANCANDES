@@ -3,7 +3,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/main/resources"/>
-	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="lib" path="lib/ojdbc8.jar"/>
 	<classpathentry kind="lib" path="lib/datanucleus-api-jdo-5.1.7.jar"/>
 	<classpathentry kind="lib" path="lib/datanucleus-core-5.1.10.jar"/>
