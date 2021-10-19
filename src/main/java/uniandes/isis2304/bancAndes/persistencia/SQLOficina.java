@@ -52,4 +52,12 @@ public class SQLOficina {
 		return (Oficina) q.executeUnique();
 	}
 	
+	public Oficina darOficinaPorGerenteDeOficina(PersistenceManager pm, String gerenteLogin) {
+        Query q = pm.newQuery(SQL, "SELECT * FROM " + pba.darTablaOficinas () + " WHERE gerenteLogin = ?");
+        q.setResultClass(Oficina.class);
+        q.setParameters(gerenteLogin);
+        return (Oficina) q.executeUnique();
+}
+
+	
 }

@@ -746,6 +746,25 @@ public class BancAndes {
 		Oficina oficina= pba.darOficinaPorId (id);
 		return oficina;
 	}
+	
+	
+	/**
+     * Encuentra la oficina en BancAndes con el login del gerente de oficina solicitado
+     * Adiciona entradas al log de la aplicación
+     * @param login del gerente de oficina
+     * @return Un objeto Oficina con el login del gerente de oficina que conoce la aplicación, 
+      * lleno con su información básica
+     */
+     public Oficina darOficinaPorGerenteDeOficina (String gerenteLogin)
+     {
+                   log.info ("Buscando Oficina por login del gerente de oficina: " + gerenteLogin);
+                   Oficina oficina= pba.darOficinaPorGerenteDeOficina (gerenteLogin);
+                   return oficina;
+     }
+
+	
+	
+	
 	/* **********************
 	 * 			Metodos para cajero automatico
 	 ***********************/
@@ -899,6 +918,27 @@ public class BancAndes {
 			return cajeroAutomatico;
 			}
 
+		public List<Cuenta> consultarCuentasGerenteOficina(String id, String criterio1p, String signo1, String filtro1p,
+				String criterio2p, String signo2, String filtro2p, String selectedItem, String selectedItem2) {
+			log.info ("Consultando cuentas de la oficina : " + id);
+			List<Cuenta> cuentas= pba.consultarCuentasGerenteOficina( id, criterio1p, signo1,filtro1p,
+					 criterio2p, signo2, filtro2p,selectedItem,selectedItem2);
+			return cuentas;
+		}
+
+		public List<Cuenta> consultarCuentasGerenteOficinaAgrupamiento(String agrupamiento, String id,
+				String criterio1p, String signo1, String filtro1p, String criterio2p, String signo2, String filtro2p,
+				String ordenamiento, String tipoOrdenamiento) {
+			log.info ("Consultando cuentas de la oficina : " + id);
+			List<Cuenta> cuentas= pba.consultarCuentasGerenteOficinaAgrupamiento( agrupamiento,  id,
+					 criterio1p,  signo1,  filtro1p,  criterio2p,  signo2,  filtro2p,
+					 ordenamiento,  tipoOrdenamiento);
+			return cuentas;
+			
+			
+		}
+
+		
 		
 
 }

@@ -80,39 +80,39 @@ public class SQLCuenta {
 		return (long) q.executeUnique();
 	}
 
-	public List<Cuenta> consultarCuentasCliente(PersistenceManager pm, String login, String criterio, String filtro, String criterio2, String filtro2, String ordenamiento, String tipoOrdenamiento )
+	public List<Cuenta> consultarCuentasCliente(PersistenceManager pm, String login, String criterio,String signo1 ,String filtro, String criterio2,String signo2 ,String filtro2, String ordenamiento, String tipoOrdenamiento )
 	{
 		Query q = pm.newQuery(SQL, "SELECT cliente," + pba.darTablaCuentas()+".* FROM " + pba.darTablaClientesProductos () +
-				" JOIN "+pba.darTablaCuentas() + "ON producto = id WHERE cliente = ? and ? = ? and ? = ? order by ? ?");
+				" JOIN "+pba.darTablaCuentas() + "ON producto = id WHERE cliente = ? and ? ? ? and ? ? ? order by ? ?");
 		q.setResultClass(Cuenta.class);
-		q.setParameters(login,criterio,filtro,criterio2, filtro2, ordenamiento,tipoOrdenamiento);
+		q.setParameters(login,criterio,signo1 ,filtro,criterio2, signo2,filtro2, ordenamiento,tipoOrdenamiento);
 		return (List<Cuenta>) q.executeList();
 	}
 	
-	public List<Cuenta> consultarCuentasClienteAgrupamiento(PersistenceManager pm, String agrupamiento, String login, String criterio, String filtro, String criterio2, String filtro2, String ordenamiento, String tipoOrdenamiento )
+	public List<Cuenta> consultarCuentasClienteAgrupamiento(PersistenceManager pm, String agrupamiento, String login, String criterio,String signo1 ,String filtro, String criterio2, String signo2,String filtro2, String ordenamiento, String tipoOrdenamiento )
 	{
 		Query q = pm.newQuery(SQL, "SELECT ?, count(*) FROM " + pba.darTablaClientesProductos () +
-				" JOIN "+pba.darTablaCuentas() + "ON producto = id WHERE cliente = ? and ? = ? and ? = ? group by ? order by ? ?");
+				" JOIN "+pba.darTablaCuentas() + "ON producto = id WHERE cliente = ? and ? ? ? and ? ? ? group by ? order by ? ?");
 		q.setResultClass(Cuenta.class);
-		q.setParameters(agrupamiento,login,criterio,filtro,criterio2, filtro2, agrupamiento,ordenamiento,tipoOrdenamiento);
+		q.setParameters(agrupamiento,login,criterio,signo1,filtro,criterio2,signo2 ,filtro2, agrupamiento,ordenamiento,tipoOrdenamiento);
 		return (List<Cuenta>) q.executeList();
 	}
 	
-	public List<Cuenta> consultarCuentasGerenteOficina(PersistenceManager pm, String idOficina, String criterio, String filtro, String criterio2, String filtro2, String ordenamiento, String tipoOrdenamiento )
+	public List<Cuenta> consultarCuentasGerenteOficina(PersistenceManager pm, String idOficina, String criterio,String signo1, String filtro, String criterio2,String signo2, String filtro2, String ordenamiento, String tipoOrdenamiento )
 	{
 		Query q = pm.newQuery(SQL, "SELECT cliente," + pba.darTablaCuentas()+".* FROM " + pba.darTablaClientesProductos () +
-				" JOIN "+pba.darTablaCuentas() + "ON producto = id WHERE oficina = ? and ? = ? and ? = ? order by ? ?");
+				" JOIN "+pba.darTablaCuentas() + "ON producto = id WHERE oficina = ? and ? ? ? and ? ? ? order by ? ?");
 		q.setResultClass(Cuenta.class);
-		q.setParameters(idOficina,criterio,filtro,criterio2, filtro2, ordenamiento,tipoOrdenamiento);
+		q.setParameters(idOficina,criterio,signo1,filtro,criterio2,signo2, filtro2, ordenamiento,tipoOrdenamiento);
 		return (List<Cuenta>) q.executeList();
 	}
 	
-	public List<Cuenta> consultarCuentasGerenteOficinaAgrupamiento(PersistenceManager pm, String agrupamiento, String idOficina, String criterio, String filtro, String criterio2, String filtro2, String ordenamiento, String tipoOrdenamiento )
+	public List<Cuenta> consultarCuentasGerenteOficinaAgrupamiento(PersistenceManager pm, String agrupamiento, String idOficina, String criterio, String signo1, String filtro, String criterio2, String signo2, String filtro2, String ordenamiento, String tipoOrdenamiento )
 	{
 		Query q = pm.newQuery(SQL, "SELECT ?, count(*) FROM " + pba.darTablaClientesProductos () +
-				" JOIN "+pba.darTablaCuentas() + "ON producto = id WHERE oficina = ? and ? = ? and ? = ? group by ? order by ? ?");
+				" JOIN "+pba.darTablaCuentas() + "ON producto = id WHERE oficina = ? and ? ? ? and ? ? ? group by ? order by ? ?");
 		q.setResultClass(Cuenta.class);
-		q.setParameters(agrupamiento,idOficina,criterio,filtro,criterio2, filtro2, agrupamiento,ordenamiento,tipoOrdenamiento);
+		q.setParameters(agrupamiento,idOficina,criterio,signo1,filtro,criterio2, signo2,filtro2, agrupamiento,ordenamiento,tipoOrdenamiento);
 		return (List<Cuenta>) q.executeList();
 	}
 

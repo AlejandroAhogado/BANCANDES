@@ -1273,8 +1273,21 @@ public class PersistenciaBancAndes {
 	        }
 	}
 
+	/**
+	 * @param id
+	 * @return
+	 */
 	public Oficina darOficinaPorId(long id) {
 		return sqlOficina.darOficinaPorId (pmf.getPersistenceManager(), id);
+	}
+
+	
+	/**
+	 * @param gerenteLogin
+	 * @return
+	 */
+	public Oficina darOficinaPorGerenteDeOficina(String gerenteLogin) {
+        return sqlOficina.darOficinaPorGerenteDeOficina (pmf.getPersistenceManager(), gerenteLogin);
 	}
 
 
@@ -1532,6 +1545,19 @@ public class PersistenciaBancAndes {
 
 	public CajeroAutomatico darCajeroAutomaticoPorId(long id) {
 		return sqlCajeroAutomatico.darCajeroAutomaticoPorId (pmf.getPersistenceManager(), id);
+	}
+
+
+	public List<Cuenta> consultarCuentasGerenteOficina(String id, String criterio1p, String signo1, String filtro1p,
+			String criterio2p, String signo2, String filtro2p, String ordenamiento, String tipoOrdenamiento) {
+		return sqlCuenta.consultarCuentasGerenteOficina(pmf.getPersistenceManager(), id, criterio1p, signo1, filtro1p, criterio2p, signo2, filtro2p, ordenamiento, tipoOrdenamiento);
+	}
+
+
+	public List<Cuenta> consultarCuentasGerenteOficinaAgrupamiento(String selectedItem, String id, String criterio1p,
+			String signo1, String filtro1p, String criterio2p, String signo2, String filtro2p, String selectedItem2,
+			String selectedItem3) {
+		return sqlCuenta.consultarCuentasGerenteGeneralAgrupamiento(pmf.getPersistenceManager(), signo2, criterio1p, filtro1p, criterio2p, filtro2p, selectedItem2, selectedItem3);
 	}
 
 

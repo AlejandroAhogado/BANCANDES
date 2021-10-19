@@ -14,6 +14,7 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 
 import javax.jdo.JDODataStoreException;
+import javax.jdo.PersistenceManager;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -35,6 +36,7 @@ import com.google.gson.stream.JsonReader;
 
 import uniandes.isis2304.bancAndes.negocio.BancAndes;
 import uniandes.isis2304.bancAndes.negocio.ClienteProducto;
+import uniandes.isis2304.bancAndes.negocio.Cuenta;
 import uniandes.isis2304.bancAndes.negocio.VOCajero;
 import uniandes.isis2304.bancAndes.negocio.VOCajeroAutomatico;
 import uniandes.isis2304.bancAndes.negocio.VOCliente;
@@ -52,6 +54,7 @@ import uniandes.isis2304.bancAndes.negocio.VOPuestoDigital;
 import uniandes.isis2304.bancAndes.negocio.VOUsuario;
 
 import java.util.Date;
+import java.util.List;
 
 public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
@@ -1576,6 +1579,467 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 			}
 		}
 	}
+
+
+
+
+	/* ****************************************************************
+	 *                             REFC1
+	 *****************************************************************/
+	/**
+	 * Consultar las cuentas en bancAndes
+	 */
+	public void consultarCuentas( )
+	{
+
+		if (tipoUsuario==CAJERO) {
+			mensajeErrorPermisos();
+		}
+		else {
+			try 
+			{
+				if(this.tipoUsuario==GERENTEDEOFICINA) {
+
+					JComboBox<String> cbOpcionesCriterio = new JComboBox<String>();
+					cbOpcionesCriterio.addItem("NINGUNO");
+					cbOpcionesCriterio.addItem("TIPO");
+					cbOpcionesCriterio.addItem("SALDO MAYOR A");
+					cbOpcionesCriterio.addItem("FECHACREACION");
+					cbOpcionesCriterio.addItem("CLIENTE");
+
+					JComboBox<String> cbOpcionesCriterio2 = new JComboBox<String>();
+					cbOpcionesCriterio2.addItem("NINGUNO");
+					cbOpcionesCriterio2.addItem("TIPO");
+					cbOpcionesCriterio2.addItem("SALDO MENOR A");
+					cbOpcionesCriterio2.addItem("FECHACREACION");
+					cbOpcionesCriterio2.addItem("CLIENTE");
+
+					JComboBox<String> cbOpcionesAgrupamiento = new JComboBox<String>();
+					cbOpcionesAgrupamiento.addItem("NINGUNO");
+					cbOpcionesAgrupamiento.addItem("TIPO");
+					cbOpcionesAgrupamiento.addItem("FECHACREACION");
+					cbOpcionesAgrupamiento.addItem("CLIENTE");
+
+					JComboBox<String> cbOpcionesOrdenamiento = new JComboBox<String>();
+					cbOpcionesOrdenamiento.addItem("TIPO");
+					cbOpcionesOrdenamiento.addItem("SALDO");
+					cbOpcionesOrdenamiento.addItem("FECHACREACION");
+					cbOpcionesOrdenamiento.addItem("TASARENDIMIENTO");
+					cbOpcionesOrdenamiento.addItem("ID");
+					cbOpcionesOrdenamiento.addItem("NUMEROCUENTA");
+					cbOpcionesOrdenamiento.addItem("ESTADO");
+					cbOpcionesOrdenamiento.addItem("CLIENTE");
+
+
+					JComboBox<String> cbOpcionesTipoOrdenamiento = new JComboBox<String>();
+					cbOpcionesTipoOrdenamiento.addItem("ASC");
+					cbOpcionesTipoOrdenamiento.addItem("DESC");
+
+					JTextField filtro1 = new JTextField();
+					JTextField filtro2 = new JTextField();
+
+					Object[] message = {
+							"Agrupamiento: ", cbOpcionesAgrupamiento,
+							"Primer Criterio:", cbOpcionesCriterio,
+							"Primer Filtro:", filtro1,
+							"Segundo Criterio:", cbOpcionesCriterio2,
+							"Segundo Filtro:", filtro2,
+							"Ordenamiento:", cbOpcionesOrdenamiento,
+							"Tipo Ordenamiento:", cbOpcionesTipoOrdenamiento
+
+					};
+
+					int option = JOptionPane.showConfirmDialog(null, message, "Consulta de cuentas", JOptionPane.OK_CANCEL_OPTION);
+
+					if (option == JOptionPane.OK_OPTION) {
+						List<Cuenta> lvo = null;
+
+						VOOficina voof = bancAndes.darOficinaPorGerenteDeOficina(loginUsuarioSistema);
+
+						String signo1 = cbOpcionesCriterio.getSelectedItem().equals("SALDO MAYOR A") ? "<" : "=";
+						String signo2 = cbOpcionesCriterio2.getSelectedItem().equals("SALDO MENOR A") ? ">" : "=";
+
+						String criterio1p = cbOpcionesCriterio.getSelectedItem().equals("NINGUNO") ? "oficina" : (String) cbOpcionesCriterio.getSelectedItem();
+						String criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("NINGUNO") ? "oficina" : (String) cbOpcionesCriterio2.getSelectedItem();
+
+						String filtro1p = cbOpcionesCriterio.getSelectedItem().equals("NINGUNO") ?  String.valueOf(voof.getId()) : (String) filtro1.getText();
+						String filtro2p = cbOpcionesCriterio2.getSelectedItem().equals("NINGUNO") ? String.valueOf(voof.getId()) : (String) filtro2.getText();
+
+
+
+						if (cbOpcionesAgrupamiento.getSelectedItem().equals("NINGUNO")) {
+
+							try {
+								lvo = bancAndes.consultarCuentasGerenteOficina(
+										String.valueOf(voof.getId()), 
+										criterio1p,
+										signo1, 
+										filtro1p,
+										criterio2p,
+										signo2,
+										filtro2p,
+										(String) cbOpcionesOrdenamiento.getSelectedItem(),
+										(String) cbOpcionesTipoOrdenamiento.getSelectedItem()
+										);
+							} catch (Exception e) {
+								throw new Exception ("Error en la consulta");
+							}
+						}
+
+						if (!cbOpcionesAgrupamiento.getSelectedItem().equals("NINGUNO")) {
+
+							try {
+								lvo = bancAndes.consultarCuentasGerenteOficinaAgrupamiento(
+										(String)cbOpcionesAgrupamiento.getSelectedItem(),
+										String.valueOf(voof.getId()),
+										criterio1p,
+										signo1, 
+										filtro1p,
+										criterio2p,
+										signo2,
+										filtro2p,
+										(String)cbOpcionesOrdenamiento.getSelectedItem(),
+										(String)cbOpcionesTipoOrdenamiento.getSelectedItem()
+										);
+
+							} catch (Exception e) {
+								throw new Exception ("Error en la consulta");
+							}
+
+
+						}
+
+					} 	
+
+					if (option == JOptionPane.CANCEL_OPTION)
+					{			        	    
+						panelDatos.actualizarInterfaz("Consulta cancelada");			        	    			
+					}
+				}
+
+
+			
+				
+				
+				
+//aqui vamos en cliente				
+				
+				if(this.tipoUsuario==CLIENTE) {
+
+					JComboBox<String> cbOpcionesCriterio = new JComboBox<String>();
+					cbOpcionesCriterio.addItem("NINGUNO");
+					cbOpcionesCriterio.addItem("TIPO");
+					cbOpcionesCriterio.addItem("SALDO MAYOR A");
+					cbOpcionesCriterio.addItem("FECHACREACION");
+					cbOpcionesCriterio.addItem("CLIENTE");
+
+					JComboBox<String> cbOpcionesCriterio2 = new JComboBox<String>();
+					cbOpcionesCriterio2.addItem("NINGUNO");
+					cbOpcionesCriterio2.addItem("TIPO");
+					cbOpcionesCriterio2.addItem("SALDO MENOR A");
+					cbOpcionesCriterio2.addItem("FECHACREACION");
+					cbOpcionesCriterio2.addItem("CLIENTE");
+
+					JComboBox<String> cbOpcionesAgrupamiento = new JComboBox<String>();
+					cbOpcionesAgrupamiento.addItem("NINGUNO");
+					cbOpcionesAgrupamiento.addItem("TIPO");
+					cbOpcionesAgrupamiento.addItem("FECHACREACION");
+					cbOpcionesAgrupamiento.addItem("CLIENTE");
+
+					JComboBox<String> cbOpcionesOrdenamiento = new JComboBox<String>();
+					cbOpcionesOrdenamiento.addItem("TIPO");
+					cbOpcionesOrdenamiento.addItem("SALDO");
+					cbOpcionesOrdenamiento.addItem("FECHACREACION");
+					cbOpcionesOrdenamiento.addItem("TASARENDIMIENTO");
+					cbOpcionesOrdenamiento.addItem("ID");
+					cbOpcionesOrdenamiento.addItem("NUMEROCUENTA");
+					cbOpcionesOrdenamiento.addItem("ESTADO");
+					cbOpcionesOrdenamiento.addItem("CLIENTE");
+
+
+					JComboBox<String> cbOpcionesTipoOrdenamiento = new JComboBox<String>();
+					cbOpcionesTipoOrdenamiento.addItem("ASC");
+					cbOpcionesTipoOrdenamiento.addItem("DESC");
+
+					JTextField filtro1 = new JTextField();
+					JTextField filtro2 = new JTextField();
+
+					Object[] message = {
+							"Agrupamiento: ", cbOpcionesAgrupamiento,
+							"Primer Criterio:", cbOpcionesCriterio,
+							"Primer Filtro:", filtro1,
+							"Segundo Criterio:", cbOpcionesCriterio2,
+							"Segundo Filtro:", filtro2,
+							"Ordenamiento:", cbOpcionesOrdenamiento,
+							"Tipo Ordenamiento:", cbOpcionesTipoOrdenamiento
+
+					};
+
+					int option = JOptionPane.showConfirmDialog(null, message, "Consulta de cuentas", JOptionPane.OK_CANCEL_OPTION);
+
+					if (option == JOptionPane.OK_OPTION) {
+						List<Cuenta> lvo = null;
+
+						VOOficina voof = bancAndes.darOficinaPorGerenteDeOficina(loginUsuarioSistema);
+
+						String signo1 = cbOpcionesCriterio.getSelectedItem().equals("SALDO MAYOR A") ? "<" : "=";
+						String signo2 = cbOpcionesCriterio2.getSelectedItem().equals("SALDO MENOR A") ? ">" : "=";
+
+						String criterio1p = cbOpcionesCriterio.getSelectedItem().equals("NINGUNO") ? "oficina" : (String) cbOpcionesCriterio.getSelectedItem();
+						String criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("NINGUNO") ? "oficina" : (String) cbOpcionesCriterio2.getSelectedItem();
+
+						String filtro1p = cbOpcionesCriterio.getSelectedItem().equals("NINGUNO") ?  String.valueOf(voof.getId()) : (String) filtro1.getText();
+						String filtro2p = cbOpcionesCriterio2.getSelectedItem().equals("NINGUNO") ? String.valueOf(voof.getId()) : (String) filtro2.getText();
+
+
+
+						if (cbOpcionesAgrupamiento.getSelectedItem().equals("NINGUNO")) {
+
+							try {
+								lvo = bancAndes.consultarCuentasGerenteOficina(
+										String.valueOf(voof.getId()), 
+										criterio1p,
+										signo1, 
+										filtro1p,
+										criterio2p,
+										signo2,
+										filtro2p,
+										(String) cbOpcionesOrdenamiento.getSelectedItem(),
+										(String) cbOpcionesTipoOrdenamiento.getSelectedItem()
+										);
+							} catch (Exception e) {
+								throw new Exception ("Error en la consulta");
+							}
+						}
+
+						if (!cbOpcionesAgrupamiento.getSelectedItem().equals("NINGUNO")) {
+
+							try {
+								lvo = bancAndes.consultarCuentasGerenteOficinaAgrupamiento(
+										(String)cbOpcionesAgrupamiento.getSelectedItem(),
+										String.valueOf(voof.getId()),
+										criterio1p,
+										signo1, 
+										filtro1p,
+										criterio2p,
+										signo2,
+										filtro2p,
+										(String)cbOpcionesOrdenamiento.getSelectedItem(),
+										(String)cbOpcionesTipoOrdenamiento.getSelectedItem()
+										);
+
+							} catch (Exception e) {
+								throw new Exception ("Error en la consulta");
+							}
+
+
+						}
+
+					} 	
+
+					if (option == JOptionPane.CANCEL_OPTION)
+					{			        	    
+						panelDatos.actualizarInterfaz("Consulta cancelada");			        	    			
+					}
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+
+			case 2:
+				if(this.esAdmin) {
+					JComboBox<String> cbOpcionesDocumentoGO = new JComboBox<String>();
+
+					cbOpcionesDocumentoGO.addItem("PEP");
+					cbOpcionesDocumentoGO.addItem("CEDULA_CIUDADANIA");
+					cbOpcionesDocumentoGO.addItem("CEDULA_EXTRANJERIA");
+
+
+					JComboBox<String> cbOpcionesAdminGO = new JComboBox<String>();
+					cbOpcionesAdminGO.addItem("TRUE");
+					cbOpcionesAdminGO.addItem("FALSE");
+
+					JTextField numeroDocumentoGO = new JTextField();
+					JTextField departamentoGO = new JTextField();
+					JTextField codigopostalGO = new JTextField();
+					JTextField nacionalidadGO = new JTextField();
+					JTextField nombreGO = new JTextField();
+					JTextField direccionGO = new JTextField();
+					JTextField contrasenaGO = new JTextField();
+					JTextField correoGO = new JTextField();
+					JTextField telefonoGO = new JTextField();
+					JTextField ciudadGO = new JTextField();
+
+
+					Object[] messageGO = {
+							"TipoDocumento: ", cbOpcionesDocumentoGO,
+							"NumeroDocumento:", numeroDocumentoGO,
+							"Departamento:", departamentoGO,
+							"Codigopostal:", codigopostalGO,
+							"Nacionalidad:", nacionalidadGO,
+							"Nombre:", nombreGO,
+							"Direccion:", direccionGO,
+							"Contrasena:", contrasenaGO,
+							"Correo:", correoGO,
+							"Telefono:", telefonoGO,
+							"Ciudad:", ciudadGO,
+							"Administrador:", cbOpcionesAdminGO
+
+					};
+
+					int optionGO = JOptionPane.showConfirmDialog(null, messageGO, "Datos gerente oficina", JOptionPane.OK_CANCEL_OPTION);
+					VOGerenteDeOficina go=null;
+					if (optionGO == JOptionPane.OK_OPTION) {
+
+
+						try {
+							go =  bancAndes.adicionarGerenteDeOficina(
+									(String)cbOpcionesDocumentoGO.getSelectedItem(), 
+									Integer.parseInt(numeroDocumentoGO.getText()),
+									departamentoGO.getText(),
+									Integer.parseInt(codigopostalGO.getText()), 
+									nacionalidadGO.getText(),
+									nombreGO.getText(), 
+									direccionGO.getText(), 
+									login, 
+									contrasenaGO.getText(),
+									correoGO.getText(), 
+									Integer.parseInt(telefonoGO.getText()), 
+									ciudadGO.getText(), 
+									(String)cbOpcionesAdminGO.getSelectedItem()			        	    				
+									);
+						} catch (Exception e) {
+							bancAndes.eliminarUsuario(login);
+							throw new Exception ("No se pudo crear un gerente de oficina con login: " + login);
+						}       
+
+						bancAndes.adicionarUsuarioTipoOperacion("ACTIVAR", login);
+						bancAndes.adicionarUsuarioTipoOperacion("APROBAR", login);
+						bancAndes.adicionarUsuarioTipoOperacion("CERRAR", login);
+						bancAndes.adicionarUsuarioTipoOperacion("DESACTIVAR", login);
+						bancAndes.adicionarUsuarioTipoOperacion("RECHAZAR", login);
+						bancAndes.adicionarUsuarioTipoOperacion("RENOVAR", login);
+
+					} 	
+
+					if (optionGO == JOptionPane.CANCEL_OPTION)
+					{
+						bancAndes.eliminarUsuario(login);			            
+					}
+				}
+				else {mensajeErrorPermisos();}
+			case 3:
+				if(this.esAdmin) {
+					JComboBox<String> cbOpcionesDocumentoC = new JComboBox<String>();
+
+					cbOpcionesDocumentoC.addItem("PEP");
+					cbOpcionesDocumentoC.addItem("CEDULA_CIUDADANIA");
+					cbOpcionesDocumentoC.addItem("CEDULA_EXTRANJERIA");
+
+
+					JComboBox<String> cbOpcionesAdminC = new JComboBox<String>();
+					cbOpcionesAdminC.addItem("TRUE");
+					cbOpcionesAdminC.addItem("FALSE");
+
+					JTextField numeroDocumentoC = new JTextField();
+					JTextField departamentoC = new JTextField();
+					JTextField codigopostalC = new JTextField();
+					JTextField nacionalidadC = new JTextField();
+					JTextField nombreC = new JTextField();
+					JTextField direccionC = new JTextField();
+					JTextField contrasenaC = new JTextField();
+					JTextField correoC = new JTextField();
+					JTextField telefonoC = new JTextField();
+					JTextField ciudadC = new JTextField();
+					JTextField puestoAtencionOficinaC = new JTextField();
+					JTextField oficinaC = new JTextField();
+
+					Object[] messageC = {
+							"TipoDocumento: ", cbOpcionesDocumentoC,
+							"NumeroDocumento:", numeroDocumentoC,
+							"Departamento:", departamentoC,
+							"Codigopostal:", codigopostalC,
+							"Nacionalidad:", nacionalidadC,
+							"Nombre:", nombreC,
+							"Direccion:", direccionC,
+							"Contrasena:", contrasenaC,
+							"Correo:", correoC,
+							"Telefono:", telefonoC,
+							"Ciudad:", ciudadC,
+							"Administrador:", cbOpcionesAdminC,
+							"PuestoAtencionOficina:", puestoAtencionOficinaC,
+							"Oficina:", oficinaC
+					};
+
+					int optionC = JOptionPane.showConfirmDialog(null, messageC, "Datos cajero", JOptionPane.OK_CANCEL_OPTION);
+					VOCajero cc=null;
+					if (optionC == JOptionPane.OK_OPTION) {
+
+						try { 
+							cc =  bancAndes.adicionarCajero(
+									(String)cbOpcionesDocumentoC.getSelectedItem(), 
+									Integer.parseInt(numeroDocumentoC.getText()),
+									departamentoC.getText(),
+									Integer.parseInt(codigopostalC.getText()), 
+									nacionalidadC.getText(),
+									nombreC.getText(), 
+									direccionC.getText(), 
+									login, 
+									contrasenaC.getText(),
+									correoC.getText(), 
+									Integer.parseInt(telefonoC.getText()), 
+									ciudadC.getText(), 
+									(String)cbOpcionesAdminC.getSelectedItem(),
+									(long)Integer.parseInt(puestoAtencionOficinaC.getText()),
+									(long)Integer.parseInt(oficinaC.getText())
+									);
+						} catch (Exception e) {
+							bancAndes.eliminarUsuario(login);
+							throw new Exception ("No se pudo crear un cajero con login: " + login);
+						}     
+
+						bancAndes.adicionarUsuarioTipoOperacion("CONSIGNAR", login);
+						bancAndes.adicionarUsuarioTipoOperacion("LIQUIDAR_RENDIMIENTOS", login);
+						bancAndes.adicionarUsuarioTipoOperacion("PAGAR_CUOTA", login);
+						bancAndes.adicionarUsuarioTipoOperacion("PAGAR_CUOTA_EXTRAORDINARIA", login);
+						bancAndes.adicionarUsuarioTipoOperacion("RETIRAR", login);
+						bancAndes.adicionarUsuarioTipoOperacion("SOLICITAR", login);
+						bancAndes.adicionarUsuarioTipoOperacion("TRANSFERIR", login);
+					} 	
+
+					if (optionC == JOptionPane.CANCEL_OPTION)
+					{
+						bancAndes.eliminarUsuario(login);
+					}
+				}
+				else {mensajeErrorPermisos();}
+
+
+
+				String resultado = "En agregar Usuario\n\n";
+				resultado += "Usuario agregado exitosamente: " + u;
+				resultado += "\n Operacion terminada";
+				panelDatos.actualizarInterfaz(resultado);
+
+			} 
+			catch (Exception e) 
+			{
+				//			e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+			}
+		}
+	}
+
 
 
 	/**
