@@ -78,7 +78,7 @@ public class SQLOperacionBancaria {
 		sql+= pba.darTablaOperacionesBancarias () + " ob ";
 		sql+= "INNER JOIN "+ pba.darTablaPuestosAtencionOficina() +" pao ";
 		sql+= "ON ob.puestoAtencion = pao.id ";
-		sql+= "WHERE fecha BETWEEN To_Date(?, 'DD/MM/YY') AND To_Date(?, 'DD/MM/YY') AND pao.oficina=?";
+		sql+= "WHERE fecha BETWEEN To_Date(?, 'DD/MM/YY') AND To_Date(?, 'DD/MM/YY') AND pao.oficina= ? ";
 		sql+= "Group By Tipooperacion, puestoAtencion ";
 		sql+= "Order By numVeces ";
 		sql+= "Fetch First 10 Rows Only";
