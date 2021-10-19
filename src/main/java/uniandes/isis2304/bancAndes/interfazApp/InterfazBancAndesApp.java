@@ -786,15 +786,53 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 											(long)Integer.parseInt(oficinaPAO.getText())                                                                                                                                        
 											);
 
-									String login = JOptionPane.showInputDialog (this, "Login del cajero a asociar", "Asociar  cajero", JOptionPane.QUESTION_MESSAGE);
-									try {
-										bancAndes.asociarPuestoDeAtencionOficinaCajero(id, login);
-									} catch (Exception e) {
-										bancAndes.eliminarPuestoDeAtencion(id);
-										throw new Exception ("No se pudo asociar el cajero con login "+login+ "con el puesto con id: " + id);
+									int i=1;
+									try {//asociar al puesto a uno o mas cajeros
+										boolean asociando = true;
+
+
+										while (asociando) {
+
+											String login = JOptionPane.showInputDialog (this, "Login del cajero "+i+" a asociar", "Asociar  cajero", JOptionPane.QUESTION_MESSAGE);
+											if (login != null) {
+
+												bancAndes.asociarPuestoDeAtencionOficinaCajero(id, login);
+												
+												String asociacion = "En asociar Cajero al Puesto de atencion\n\n";
+												asociacion += "Cajero "+ i+ " asociado exitosamente: " + login;
+												asociacion += "\n Operacion terminada";
+
+												panelDatos.actualizarInterfaz(asociacion);
+												i++;
+
+												String[] ynopt = {"Sí", "No"};
+												int x= JOptionPane.showOptionDialog(this, "¿Desea asociar otro cajero?", "Nueva asociacion", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, ynopt, null);
+												if (x==1) {
+													asociando=false;
+												}
+											}
+											else if (i>1) {
+												panelDatos.actualizarInterfaz("Se asociaron "+i+" cajeros a la cuenta");
+												asociando=false;
+											}
+											else {	
+												bancAndes.eliminarPuestoDeAtencion(id);
+												panelDatos.actualizarInterfaz("No se pudo asociar el cajero con login "+login+ "con el puesto con id: " + id);
+												asociando=false;
+											}
+										}
+
+									}catch (Exception e) {
+										if (i==1) {
+											bancAndes.eliminarProducto(id);
+										}
+										throw new Exception ("No se pudo asociar el cajero");
+
 									}
+									
+									//hasta aqui va el ciclo de asociacion
+									
 								} catch (Exception e) {
-									//falta eliminar el id que se le habia dado
 									bancAndes.eliminarPuestoDeAtencion(id);
 									throw new Exception ("No se pudo crear un puesto de atencion con id: " + id);
 								}
@@ -955,6 +993,9 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						long hoy=System.currentTimeMillis();  
 						SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyyy");
 						java.util.Date fv = format.parse(fechaVencimiento.getText());
+						
+						//java.sql.Date fvp = fechaVencimiento.getText().isEmpty()? null: new java.sql.Date(fv.getTime());
+						
 						ct =  bancAndes.adicionarCuenta(
 								id, 
 								Integer.parseInt(numCuenta.getText()),
@@ -962,7 +1003,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 								(String)cbTipo.getSelectedItem(), 
 								(float)Integer.parseInt(saldo.getText()),
 								new java.sql.Date(hoy),
-								new java.sql.Date(fv.getTime()),
+								 new java.sql.Date(fv.getTime()),
 								Integer.parseInt(tasaRendimiento.getText()),
 								(long)Integer.parseInt(oficina.getText())
 
@@ -1072,27 +1113,31 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						long idCuenta = (long)Integer.parseInt(idCu.getText());
 						VOCuenta cuenta = bancAndes.darCuentaPorId(idCuenta);
 						long idOficina =  cuenta.getOficina();
-						//falta comprara que el gerente que la esta cerrando sea de la misma oficina
+						
 						if (bancAndes.darOficinaPorId(idOficina).getGerenteLogin().equals(loginUsuarioSistema)) {
 							bancAndes.cerrarCuenta(idCuenta);
+							
+							String resultado = "En cerrar cuenta\n\n";
+							resultado += "Cuenta cerrada: "+ idCuenta;
+							resultado += "\n Operacion terminada";
+							panelDatos.actualizarInterfaz(resultado);
+							
+							
 						}else {
 							panelDatos.actualizarInterfaz("La cuenta debe ser cerrada por el gerente de oficina de la oficina donde se abrio");
 						}
 
 					} catch (Exception e) {
-						throw new Exception ("No se pudo cerrar la cuenta con id" );
+						throw new Exception ("No se pudo cerrar la cuenta con id: " +idCu.getText());
 					}
 				}            
 
-				if (optionCU == JOptionPane.CANCEL_OPTION)
+				else if (optionCU == JOptionPane.CANCEL_OPTION)
 				{            
-					panelDatos.actualizarInterfaz("No se cerro ninguna cuenta");                                                                                
+					panelDatos.actualizarInterfaz("No se cerro ninguna cuenta. Operacion cancelada por el usuario");                                                                                
 				}
 
-				String resultado = "En cerrar cuenta\n\n";
-				resultado += "Cuenta cerrada: ";
-				resultado += "\n Operacion terminada";
-				panelDatos.actualizarInterfaz(resultado);
+				
 			} 
 			catch (Exception e) 
 			{
@@ -1417,6 +1462,54 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						resultado += "\n Operacion terminada";
 						panelDatos.actualizarInterfaz(resultado);
 
+						int i=1;
+						try {//asociar la cuenta a uno o mas clientes
+							boolean asociando = true;
+
+
+							while (asociando) {
+
+								String login = JOptionPane.showInputDialog (this, "Login del cliente "+i+" a asociar", "Asociar el prestamo a un cliente", JOptionPane.QUESTION_MESSAGE);
+								if (login != null) {
+
+									VOClienteProducto cp=bancAndes.adicionarClienteProducto(id, login);
+									if (cp==null) {
+										throw new Exception ("El cliente no se pudo asociar al producto");
+									}
+									String asociacion = "En asociar Cliente a Producto\n\n";
+									asociacion += "Cliente "+ i+ " asociado exitosamente: " + cp;
+									asociacion += "\n Operacion terminada";
+
+									panelDatos.actualizarInterfaz(asociacion);
+									i++;
+
+									String[] ynopt = {"Sí", "No"};
+									int x= JOptionPane.showOptionDialog(this, "¿Desea asociar otro cliente?", "Nueva asociacion", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, ynopt, null);
+									if (x==1) {
+										asociando=false;
+									}
+								}
+								else if (i>1) {
+									panelDatos.actualizarInterfaz("Se asociaron "+i+" clientes al prestamo");
+									asociando=false;
+								}
+								else {	
+									bancAndes.eliminarProducto(id);	
+									panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+									asociando=false;
+								}
+							}
+
+						}catch (Exception e) {
+							if (i==1) {
+								bancAndes.eliminarProducto(id);
+							}
+							throw new Exception ("No se pudo asociar el cliente");
+
+						}
+						
+						//hasta aqui va el ciclo de asociacion de clientes
+						
 					} catch (Exception e) {
 						bancAndes.eliminarProducto(id);
 						throw new Exception ("No se pudo crear el prestamo con id: " + id);
@@ -1552,13 +1645,21 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 						if (prestamo.getSaldoPendiente()==0) {
 							bancAndes.cerrarPrestamo(idPrestamo);
-						}else {
+							
+							String resultado = "En cerrar prestamo\n\n";
+							resultado += "Prestamo cerrado: "+idPrestamo;
+							resultado += "\n Operacion terminada";
+							panelDatos.actualizarInterfaz(resultado);
+							
+						}
+						else {
 							panelDatos.actualizarInterfaz("El prestamo debe tener un saldo pendiente de $0");
 						}
 
 					} catch (Exception e) {
 						throw new Exception ("No se pudo cerrar el prestamo con id" );
 					}
+					
 				}            
 
 				if (optionPR == JOptionPane.CANCEL_OPTION)
@@ -1566,10 +1667,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					panelDatos.actualizarInterfaz("No se cerro ningun prestamo");                                                                                
 				}
 
-				String resultado = "En cerrar prestamo\n\n";
-				resultado += "Prestamo cerrada: ";
-				resultado += "\n Operacion terminada";
-				panelDatos.actualizarInterfaz(resultado);
+				
 			} 
 			catch (Exception e) 
 			{

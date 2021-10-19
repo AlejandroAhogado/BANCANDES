@@ -389,7 +389,7 @@ public class BancAndes {
 	
         log.info ("Eliminando Producto: " + id);
         long resp= pba.eliminarProducto (id);		
-        log.info ("Eliminando producto por id: " + id + " tuplas eliminadas");
+        log.info ("Eliminando producto por id: " + id );
         
         return resp;
 	}
@@ -514,6 +514,7 @@ public class BancAndes {
 	{
 		log.info ("Buscando Cuenta por id: " + id);
 		Cuenta cuenta= pba.darCuentaPorId (id);
+		log.info ("Se encontro la cuenta: "+cuenta);
 		return cuenta;
 	}
 	
@@ -527,6 +528,7 @@ public class BancAndes {
 	{
         log.info ("Cerrando cuenta: " + idCuenta);
         long cambios = pba.cerrarCuenta (idCuenta);
+        log.info ("Se actualizaron "+cambios+" tuplas");
         return cambios;
 	}
 	
@@ -541,6 +543,7 @@ public class BancAndes {
 	{
         log.info ("Cambiando estado cuenta: " + idCuenta +" a "+ estado);
         long cambios = pba.cambiarActividadCuenta (idCuenta, estado);
+        log.info ("Se actualizaron "+cambios+" tuplas");
         return cambios;
 	}
 	
@@ -555,6 +558,7 @@ public class BancAndes {
 	{
         log.info ("Actualizando saldo de cuenta: " + idCuenta);
         long cambios = pba.actualizarSaldoCuenta (idCuenta, cambioSaldo);
+        log.info ("Se actualizaron "+cambios+" tuplas");
         return cambios;
 	}
 	
@@ -596,6 +600,7 @@ public class BancAndes {
 	{
 		log.info ("Buscando Prestamo por id: " + id);
 		Prestamo prestamo = pba.darPrestamoPorId (id);
+		log.info ("Se encontro el prestamo: " + prestamo);
 		return prestamo;
 	}
 	
@@ -609,6 +614,7 @@ public class BancAndes {
 	{
         log.info ("Cerrando prestamo: " + idPrestamo);
         long cambios = pba.cerrarPrestamo (idPrestamo);
+        log.info ("Se actualizaron "+cambios+" tuplas");
         return cambios;
 	}
 	
@@ -626,6 +632,7 @@ public class BancAndes {
         if(valorCuota>montoPago) {
         	return 0;}
         long cambios = pba.realizarPago (idPrestamo, montoPago);
+        log.info ("Se actualizaron "+cambios+" tuplas");
         return cambios;
      }
 	
@@ -663,8 +670,9 @@ public class BancAndes {
 
 	public long asociarPuestoDeAtencionOficinaCajero (long idPuesto, String login)
 	{
-		log.info ("Asociando puesto de atencion al cajero: " + login);
+		log.info ("Asociando puesto de atencion: "+idPuesto+" al cajero: " + login);
 		long cambios = pba.asociarPuestoDeAtencionOficinaCajero(idPuesto, login) ;
+		log.info ("Se actualizaron "+cambios+" tuplas");
 		return cambios;
 	}
 
@@ -744,6 +752,7 @@ public class BancAndes {
 	{
 		log.info ("Buscando Oficina por id: " + id);
 		Oficina oficina= pba.darOficinaPorId (id);
+		log.info ("Se encontro la oficina: "+oficina);
 		return oficina;
 	}
 	
