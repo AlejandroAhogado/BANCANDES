@@ -34,15 +34,18 @@ public class Cuenta implements VOCuenta{
 	
 	//Constructor usando campos
 	public Cuenta(long id, int numeroCuenta, String estado, String tipo, float saldo, Date fechaCreacion,
-			Date dechaVencimiento, float tasaRendimiento, long oficina) {
+			Date fechaVencimiento, float tasaRendimiento, long oficina) {
+		
 		super();
+		System.out.println(id + numeroCuenta + estado + tipo + saldo + fechaCreacion +
+				fechaVencimiento + tasaRendimiento + oficina);
 		this.id = id;
 		this.numeroCuenta = numeroCuenta;
 		this.estado = estado;
 		this.tipo = tipo;
 		this.saldo = saldo;
 		this.fechaCreacion = fechaCreacion;
-		this.fechaVencimiento = dechaVencimiento;
+		this.fechaVencimiento = fechaVencimiento;
 		this.tasaRendimiento = tasaRendimiento;
 		this.oficina = oficina;
 	}

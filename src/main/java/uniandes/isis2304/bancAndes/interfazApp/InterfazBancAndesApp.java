@@ -1128,6 +1128,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						}
 
 					} catch (Exception e) {
+						e.printStackTrace();
 						throw new Exception ("No se pudo cerrar la cuenta con id: " +idCu.getText());
 					}
 				}            
@@ -1141,7 +1142,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 			} 
 			catch (Exception e) 
 			{
-				// e.printStackTrace();
+				e.printStackTrace();
 				String resultado = generarMensajeError(e);
 				panelDatos.actualizarInterfaz(resultado);
 			}
@@ -2199,7 +2200,198 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 	 * Obtener los datos del usuario m�s activo
 	 */
 	public void obtenerUsuarioMasActivo() {
-		
+		if (tipoUsuario==CLIENTE||tipoUsuario==CAJERO) {
+			mensajeErrorPermisos();
+		}
+		else {
+			String[] opciones = {"Tipo de operacion", "Limite inferior del valor de la operacion"};
+			int tipoFiltro = JOptionPane.showOptionDialog(this, "Seleccione el tipo de filtro que desea para buscar el usuario mas activo", "Seleccion Filtro", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, null);
+
+
+			try 
+			{  
+				boolean entra=true;
+
+				switch(tipoFiltro)
+				{                          
+
+
+				case 0://tipoFiltro: por tipo de operacion
+					if(entra) {
+						entra=false;
+						JComboBox<String> cbTipoOperacion = new JComboBox<String>();
+						cbTipoOperacion.addItem("ABRIR");
+						cbTipoOperacion.addItem("CERRAR");
+						cbTipoOperacion.addItem("CONSIGNAR");
+						cbTipoOperacion.addItem("TRANSFERIR");
+						cbTipoOperacion.addItem("RETIRAR");
+						cbTipoOperacion.addItem("SOLICITAR");
+						cbTipoOperacion.addItem("APROBAR");
+						cbTipoOperacion.addItem("RENOVAR");
+						cbTipoOperacion.addItem("RECHAZAR");
+						cbTipoOperacion.addItem("DESACTIVAR");
+						cbTipoOperacion.addItem("PAGAR_CUOTA");
+						cbTipoOperacion.addItem("LIQUIDAR_RENDIMIENTOS");
+						cbTipoOperacion.addItem("PAGAR_CUOTA_EXTRAORDINARIA");
+
+
+						Object[] message = {
+								"Tipo de operacion: ", cbTipoOperacion
+						};
+						int option = JOptionPane.showConfirmDialog(null, message, "Seleccion del tipo de operacion", JOptionPane.OK_CANCEL_OPTION);
+
+						List<Object []>clientes= null;
+						List<Object []>empleados= null;
+
+						if (option == JOptionPane.OK_OPTION) {
+							String resultado = "Resultado de la consulta: ";
+
+							if(tipoUsuario==GERENTEGENERAL) {
+								clientes= bancAndes. obtenerUsuarioMasActivoTipoOpGG("cliente", (String) cbTipoOperacion.getSelectedItem());
+								empleados= bancAndes. obtenerUsuarioMasActivoTipoOpGG("empleado", (String) cbTipoOperacion.getSelectedItem());
+							}
+							else {//caso gerente de oficina
+								VOOficina voof = bancAndes.darOficinaPorGerenteDeOficina(loginUsuarioSistema);
+
+								clientes= bancAndes. obtenerUsuarioMasActivoTipoOpGOf("cliente", (String) cbTipoOperacion.getSelectedItem(), voof.getId());
+								empleados= bancAndes. obtenerUsuarioMasActivoTipoOpGOf("empleado", (String) cbTipoOperacion.getSelectedItem(), voof.getId());
+							}
+
+
+							if(((Number) clientes.get(0)[1]).intValue()>(((Number) empleados.get(0)[1]).intValue())) {
+								//Los clietes son mas activos
+								int i=0;
+								for (Object [] ca : clientes) {
+									i++;
+									resultado += "\n Item "+i+": ";
+									resultado+= "Login usuario: "+ ca[0];
+									resultado+= ", Numero de operaciones: "+ ca[1];
+								}
+							}
+							else if(((Number) clientes.get(0)[1]).intValue()<(((Number) empleados.get(0)[1]).intValue())){
+								//Los elpleados son mas activos
+								int i=0;
+								for (Object [] ea : empleados) {
+									i++;
+									resultado += "\n Item "+i+": ";
+									resultado+= "Login usuario: "+ ea[0];
+									resultado+= ", Numero de operaciones: "+ ea[1];
+								}
+							}
+							else {
+								//ambos son iguales de activos
+								int i=0;
+								for (Object [] ca : clientes) {
+									i++;
+									resultado += "\n Item "+i+": ";
+									resultado+= "Login usuario: "+ ca[0];
+									resultado+= ", Numero de operaciones: "+ ca[1];
+								}
+								for (Object [] ea : empleados) {
+									i++;
+									resultado += "\n Item "+i+": ";
+									resultado+= "Login usuario: "+ ea[0];
+									resultado+= ", Numero de operaciones: "+ ea[1];
+								}
+							}
+
+							resultado += "\n Consulta finalizada";
+							panelDatos.actualizarInterfaz(resultado);
+
+						}
+
+						else { //JOptionPane->cancel option
+							panelDatos.actualizarInterfaz("Consulta cancelada");
+						}
+
+
+					}
+				case 1://filtro por valores
+					if(entra) {
+						entra=false;
+						JTextField valor = new JTextField();
+
+
+						Object[] messageV = {
+								"Operaciones con valores mayores a: ", valor
+						};
+						int optionV = JOptionPane.showConfirmDialog(null, messageV, "Ingresar el valor", JOptionPane.OK_CANCEL_OPTION);
+
+						List<Object []>clientesV= null;
+						List<Object []>empleadosV= null;
+
+						if (optionV == JOptionPane.OK_OPTION) {
+							String resultado = "Resultado de la consulta: ";
+
+							if(tipoUsuario==GERENTEGENERAL) {
+								clientesV= bancAndes. obtenerUsuarioMasActivoValorGG("cliente", (long) Integer.parseInt(valor.getText()));
+								empleadosV= bancAndes. obtenerUsuarioMasActivoValorGG("empleado", (long) Integer.parseInt(valor.getText()));
+							}
+							else {//caso gerente de oficina
+								VOOficina voof = bancAndes.darOficinaPorGerenteDeOficina(loginUsuarioSistema);
+
+								clientesV= bancAndes. obtenerUsuarioMasActivoValorGOf("cliente", (long) Integer.parseInt(valor.getText()), voof.getId());
+								empleadosV= bancAndes. obtenerUsuarioMasActivoValorGOf("empleado", (long) Integer.parseInt(valor.getText()), voof.getId());
+							}
+
+							if(((Number) clientesV.get(0)[1]).intValue()>(((Number) empleadosV.get(0)[1]).intValue())) {
+								//Los clietes son mas activos
+								int i=0;
+								for (Object [] ca : clientesV) {
+									i++;
+									resultado += "\n Item "+i+": ";
+									resultado+= "Login usuario: "+ ca[0];
+									resultado+= ", Numero de operaciones: "+ ca[1];
+								}
+							}
+							else if(((Number) clientesV.get(0)[1]).intValue()<(((Number) empleadosV.get(0)[1]).intValue())) {
+								//Los elpleados son mas activos
+								int i=0;
+								for (Object [] ea : empleadosV) {
+									i++;
+									resultado += "\n Item "+i+": ";
+									resultado+= "Login usuario: "+ ea[0];
+									resultado+= ", Numero de operaciones: "+ ea[1];
+								}
+							}
+							else {
+								//ambos son iguales de activos
+								int i=0;
+								for (Object [] ca : clientesV) {
+									i++;
+									resultado += "\n Item "+i+": ";
+									resultado+= "Login usuario: "+ ca[0];
+									resultado+= ", Numero de operaciones: "+ ca[1];
+								}
+								for (Object [] ea : empleadosV) {
+									i++;
+									resultado += "\n Item "+i+": ";
+									resultado+= "Login usuario: "+ ea[0];
+									resultado+= ", Numero de operaciones: "+ ea[1];
+								}
+							}
+
+							resultado += "\n Consulta finalizada";
+							panelDatos.actualizarInterfaz(resultado);
+
+						}
+
+						else { //JOptionPane->cancel option
+							panelDatos.actualizarInterfaz("Consulta cancelada");
+						}
+
+
+					}
+
+				}
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+			}
+		}
 	}
 	/**
 	 * Genera una cadena de caracteres con la descripción de la excepcion e, haciendo énfasis en las excepcionsde JDO

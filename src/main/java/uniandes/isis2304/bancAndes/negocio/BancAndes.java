@@ -1005,7 +1005,7 @@ public class BancAndes {
 		}
 
 		
-		//-----------------------------RFC2
+		//-----------------------------RFC3
 		public List<Object []> consultar10OperacionesGG(String fechaInicio, String fechaFin) {
 			log.info ("Consultando las 10 operaciones de mas movimiento en todo el sistema");
 			List<Object []> top10= pba.consultar10OperacionesGG(fechaInicio, fechaFin );
@@ -1018,4 +1018,32 @@ public class BancAndes {
 			List<Object []> top10= pba.consultar10OperacionesGOf(fechaInicio, fechaFin, idOficina );
 			return top10;
 			}
+		
+		//-----------------------------RFC4
+		public List<Object []> obtenerUsuarioMasActivoValorGG(String tipoUsuario, float valor){
+			log.info ("Consultando el usuario mas activo en el sistema por filtro segun valor");
+			List<Object []> usuarios= pba.obtenerUsuarioMasActivoValorGG(tipoUsuario, valor );
+			return usuarios;
+			}
+		
+
+		public List<Object []> obtenerUsuarioMasActivoTipoOpGG(String tipoUsuario, String tipoOperacion)  {
+			log.info ("Consultando el usuario mas activo en el sistema por filtro por tipo de operacion");
+			List<Object []> usuarios= pba.obtenerUsuarioMasActivoTipoOpGG(tipoUsuario, tipoOperacion);
+			return usuarios;
+			}
+		
+		public List<Object []> obtenerUsuarioMasActivoValorGOf(String tipoUsuario, float valor, long idOficina){
+			log.info ("Consultando el usuario mas activo en el sistema por filtro segun valor");
+			List<Object []> usuarios= pba.obtenerUsuarioMasActivoValorGOf(tipoUsuario, valor, idOficina );
+			return usuarios;
+			}
+		
+
+		public List<Object []> obtenerUsuarioMasActivoTipoOpGOf(String tipoUsuario, String tipoOperacion, long idOficina)  {
+			log.info ("Consultando el usuario mas activo en el sistema por filtro por tipo de operacion");
+			List<Object []> usuarios= pba.obtenerUsuarioMasActivoTipoOpGOf(tipoUsuario, tipoOperacion, idOficina);
+			return usuarios;
+			}
+		
 }

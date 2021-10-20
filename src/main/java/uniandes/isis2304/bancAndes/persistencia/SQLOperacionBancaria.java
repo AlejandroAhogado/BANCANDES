@@ -47,6 +47,8 @@ public class SQLOperacionBancaria {
 	}
 	
 	//************************************************SENTENCIAS PARA REQUERIMIENTOS DE CONSULTA
+	
+	//----------------------------------RFC3--------------------------------------------------
 	/**
 	 * Consulta las operaciones más movidas en todas las oficinas
 	 * @param pm
@@ -86,6 +88,132 @@ public class SQLOperacionBancaria {
 		q.setParameters(fechaInicio, fechaFin, idOficina);
 		return q.executeList();
 	}
+	
+	//----------------------------------RFC4--------------------------------------------------
+	/**
+	 * Consulta el usuario (o usuarios) mas activos del sistema
+	 *
+	 * @param pm
+	 * @param tipoUsuario
+	 * @param valor
+	 * @param idOficina
+	 * @return
+	 */
+	public List<Object[]> obtenerUsuarioMasActivoValorGOf (PersistenceManager pm, String tipoUsuario, float valor, long idOficina){
+		String sql = "SELECT * FROM ( ";
+		sql+= "SELECT ?, count(*) NUMOPERACIONES ";
+		sql+= "from "+pba.darTablaOperacionesBancarias ()+" ob ";
+		sql+= "INNER JOIN "+ pba.darTablaPuestosAtencionOficina() +" pao ";
+		sql+= "ON ob.puestoAtencion = pao.id ";
+		sql+= "WHERE valor> ? AND pao.oficina= ? ";
+		sql+= "Group By ? ";
+		sql+= ") where NUMOPERACIONES=( ";
+		sql+= "select max(numoperaciones) ";
+		sql+= "from( ";
+		sql+= "Select ?, count(*) NUMOPERACIONES ";
+		sql+= "from "+pba.darTablaOperacionesBancarias ()+" ob ";
+		sql+= "INNER JOIN "+ pba.darTablaPuestosAtencionOficina() +" pao ";
+		sql+= "On ob.puestoAtencion = pao.id ";
+		sql+= "where valor> ? And pao.oficina= ? ";
+		sql+= "Group By ? ";
+		sql+= ") )";
+		
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(tipoUsuario, valor, idOficina, tipoUsuario, tipoUsuario, valor, idOficina, tipoUsuario);
+		return q.executeList();
+	}
+	
 
+	/**
+	 * Consulta el usuario (o usuarios) mas activos del sistema como gerente de oficina usando el filtro de tipo de operacion
+	 *
+	 * @param pm
+	 * @param tipoUsuario
+	 * @param tipoOperacion
+	 * @param idOficina
+	 * @return
+	 */
+	public List<Object[]> obtenerUsuarioMasActivoTipoOpGOf (PersistenceManager pm, String tipoUsuario, String tipoOperacion, long idOficina){
+		String sql = "SELECT * FROM ( ";
+		sql+= "SELECT ?, count(*) NUMOPERACIONES ";
+		sql+= "from "+pba.darTablaOperacionesBancarias ()+" ob ";
+		sql+= "INNER JOIN "+ pba.darTablaPuestosAtencionOficina() +" pao ";
+		sql+= "ON ob.puestoAtencion = pao.id ";
+		sql+= "WHERE tipoOperacion = ? AND pao.oficina= ? ";
+		sql+= "Group By ? ";
+		sql+= ") where NUMOPERACIONES=( ";
+		sql+= "select max(numoperaciones) ";
+		sql+= "from( ";
+		sql+= "Select ?, count(*) NUMOPERACIONES ";
+		sql+= "from "+pba.darTablaOperacionesBancarias ()+" ob ";
+		sql+= "INNER JOIN "+ pba.darTablaPuestosAtencionOficina() +" pao ";
+		sql+= "On ob.puestoAtencion = pao.id ";
+		sql+= "where tipoOperacion = ? And pao.oficina= ? ";
+		sql+= "Group By ? ";
+		sql+= ") )";
+		
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(tipoUsuario, tipoOperacion, idOficina, tipoUsuario, tipoUsuario, tipoOperacion, idOficina, tipoUsuario);
+		return q.executeList();
+	}
+	
+	/**
+	 * Consulta el usuario (o usuarios) mas activos del sistema como un gerente general usando el filtro de valor
+	 *
+	 * @param pm
+	 * @param tipoUsuario
+	 * @param valor
+	 * @param idOficina
+	 * @return
+	 */
+	public List<Object[]> obtenerUsuarioMasActivoValorGG (PersistenceManager pm, String tipoUsuario, float valor){
+		String sql = "SELECT * FROM ( ";
+		sql+= "SELECT ?, count(*) NUMOPERACIONES ";
+		sql+= "from "+pba.darTablaOperacionesBancarias ()+" ob ";
+		sql+= "WHERE valor> ? ";
+		sql+= "Group By ? ";
+		sql+= ") where NUMOPERACIONES=( ";
+		sql+= "select max(numoperaciones) ";
+		sql+= "from( ";
+		sql+= "Select ?, count(*) NUMOPERACIONES ";
+		sql+= "from "+pba.darTablaOperacionesBancarias ()+" ob ";
+		sql+= "where valor> ? ";
+		sql+= "Group By ? ";
+		sql+= ") )";
+		
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(tipoUsuario, valor, tipoUsuario, tipoUsuario, valor, tipoUsuario);
+		return q.executeList();
+	}
+	
+
+	/**
+	 * Consulta el usuario (o usuarios) mas activos del sistema como un gerente general usando el filtro de tipo de operacion
+	 *
+	 * @param pm
+	 * @param tipoUsuario
+	 * @param tipoOperacion
+	 * @param idOficina
+	 * @return
+	 */
+	public List<Object[]> obtenerUsuarioMasActivoTipoOpGG (PersistenceManager pm, String tipoUsuario, String tipoOperacion){
+		String sql = "SELECT * FROM ( ";
+		sql+= "SELECT ?, count(*) NUMOPERACIONES ";
+		sql+= "from "+pba.darTablaOperacionesBancarias ()+" ob ";
+		sql+= "WHERE tipoOperacion = ? ";
+		sql+= "Group By ? ";
+		sql+= ") where NUMOPERACIONES=( ";
+		sql+= "select max(numoperaciones) ";
+		sql+= "from( ";
+		sql+= "Select ?, count(*) NUMOPERACIONES ";
+		sql+= "from "+pba.darTablaOperacionesBancarias ()+" ob ";
+		sql+= "where tipoOperacion = ? ";
+		sql+= "Group By ? ";
+		sql+= ") )";
+		
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(tipoUsuario, tipoOperacion, tipoUsuario, tipoUsuario, tipoOperacion, tipoUsuario);
+		return q.executeList();
+	}
 
 }

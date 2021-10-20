@@ -871,7 +871,14 @@ public class PersistenciaBancAndes {
 	 * @return
 	 */
 	public Cuenta darCuentaPorId(long id) {
-		return sqlCuenta.darCuentaPorId (pmf.getPersistenceManager(), id);
+		Cuenta cuenta=null;
+		try {
+		cuenta = sqlCuenta.darCuentaPorId (pmf.getPersistenceManager(), id);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return cuenta;
 	}
 
 	public Cuenta darCuentaPorNumero(int numero) {
@@ -1614,5 +1621,26 @@ public class PersistenciaBancAndes {
 	}
 	
 
+	//***************************************************RFC4************************************************************
+	public List<Object[]> obtenerUsuarioMasActivoValorGG(String tipoUsuario, float valor) {
+		return sqlOperacionBancaria.obtenerUsuarioMasActivoValorGG(pmf.getPersistenceManager(), tipoUsuario, valor);
+		
+	}
+	
+	public List<Object[]> obtenerUsuarioMasActivoTipoOpGG(String tipoUsuario, String tipoOperacion) {
+		return sqlOperacionBancaria.obtenerUsuarioMasActivoTipoOpGG(pmf.getPersistenceManager(), tipoUsuario, tipoOperacion);
+		
+	}
+	
+	public List<Object[]> obtenerUsuarioMasActivoValorGOf(String tipoUsuario, float valor, long idOficina) {
+		return sqlOperacionBancaria.obtenerUsuarioMasActivoValorGOf(pmf.getPersistenceManager(), tipoUsuario, valor, idOficina);
+		
+	}
+	
+
+	public List<Object[]> obtenerUsuarioMasActivoTipoOpGOf(String tipoUsuario, String tipoOperacion, long idOficina) {
+		return sqlOperacionBancaria.obtenerUsuarioMasActivoTipoOpGOf(pmf.getPersistenceManager(), tipoUsuario, tipoOperacion, idOficina);
+		
+	}
 	
 }

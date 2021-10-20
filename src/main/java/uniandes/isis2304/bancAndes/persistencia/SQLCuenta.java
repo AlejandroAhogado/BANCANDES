@@ -1,6 +1,6 @@
 package uniandes.isis2304.bancAndes.persistencia;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -70,9 +70,10 @@ public class SQLCuenta {
 	}
 
 	public long cerrarCuenta(PersistenceManager pm, long idCuenta) {
-		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaCuentas () + " SET estado = CERRADA AND saldo = 0 WHERE id = ?");
+		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaCuentas () + " SET estado = CERRADA, saldo = 0 WHERE id = ?");
 		q.setParameters(idCuenta);
-		return (long) q.executeUnique();
+		//q.
+		return (long) q.execute();
 	}
 
 	public long actualizarSaldoCuenta(PersistenceManager pm, long idCuenta, float cambioSaldo) {
