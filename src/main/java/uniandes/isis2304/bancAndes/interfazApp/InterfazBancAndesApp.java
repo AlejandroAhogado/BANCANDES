@@ -2468,7 +2468,9 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 		}
 	}
 
-
+	private void acercaDe() {
+		panelDatos.actualizarInterfaz("Trabajo realizado por: /n Laura Quiroga - 201922965 y Alejandro Ahogado Prieto - 201920701");
+	}
 
 
 
@@ -2511,6 +2513,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 			UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName( ) );
 			InterfazBancAndesApp interfaz = new InterfazBancAndesApp( );
 			new VentanaInicio(interfaz.bancAndes, interfaz);
+			
 		}
 		catch( Exception e )
 		{
