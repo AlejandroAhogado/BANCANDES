@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"uniandes.isis2304.bancAndes.persistencia","l":"SQLOperacionBancaria"}]
