@@ -299,6 +299,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 			try 
 			{
 				String login = JOptionPane.showInputDialog (this, "Login del usuario a registrar", "Agregar usuario", JOptionPane.QUESTION_MESSAGE);
+				boolean entro = false;
 				if (login != null)
 				{
 					VOUsuario u = bancAndes.adicionarUsuario (login);
@@ -391,7 +392,10 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 								bancAndes.eliminarUsuario(login);			        	    			
 							}
 						}
-						else {mensajeErrorPermisos();}
+						else {entro = true;
+							mensajeErrorPermisos();
+						bancAndes.eliminarUsuario(login);
+						panelDatos.actualizarInterfaz("Se elimino el usuario " + login);}
 
 					case 1:
 
@@ -473,7 +477,11 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 								bancAndes.eliminarUsuario(login);				                		
 							}
 						}
-						else {mensajeErrorPermisos();}
+						else {
+							entro = true;
+							mensajeErrorPermisos();
+						bancAndes.eliminarUsuario(login);
+						panelDatos.actualizarInterfaz("Se elimino el usuario " + login);}
 
 					case 2:
 						if(this.esAdmin) {
@@ -556,7 +564,11 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 								bancAndes.eliminarUsuario(login);			            
 							}
 						}
-						else {mensajeErrorPermisos();}
+						else {
+							entro = true;
+							mensajeErrorPermisos();
+						bancAndes.eliminarUsuario(login);
+						panelDatos.actualizarInterfaz("Se elimino el usuario " + login);}
 					case 3:
 						if(this.esAdmin) {
 							JComboBox<String> cbOpcionesDocumentoC = new JComboBox<String>();
@@ -641,14 +653,20 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 								bancAndes.eliminarUsuario(login);
 							}
 						}
-						else {mensajeErrorPermisos();}
+						else {
+							entro = true;
+							mensajeErrorPermisos();
+						bancAndes.eliminarUsuario(login);
+						panelDatos.actualizarInterfaz("Se elimino el usuario " + login);}
 
 					}
-
-					String resultado = "En agregar Usuario\n\n";
-					resultado += "Usuario agregado exitosamente: " + u;
-					resultado += "\n Operacion terminada";
-					panelDatos.actualizarInterfaz(resultado);
+					if (entro==false) {
+						String resultado = "En agregar Usuario\n\n";
+						resultado += "Usuario agregado exitosamente: " + u;
+						resultado += "\n Operacion terminada";
+						panelDatos.actualizarInterfaz(resultado);
+					}
+				
 				}
 				else
 				{
@@ -981,7 +999,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						"Estado: ", ACTIVA,
 						"Tipo de cuenta: ", cbTipo,
 						"Saldo:", saldo,
-						"Fecha de vencimiento (dd-mm-aaaa) \n (en caso de ser CDT):", fechaVencimiento,
+						"Fecha de vencimiento (dd-mm-aaaa) :", fechaVencimiento,
 						"Tasa de rendimiento:", tasaRendimiento,
 						"Oficina:", oficina
 				};
@@ -2255,11 +2273,13 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 								clientes= bancAndes. obtenerUsuarioMasActivoTipoOpGOf("cliente", (String) cbTipoOperacion.getSelectedItem(), voof.getId());
 								empleados= bancAndes. obtenerUsuarioMasActivoTipoOpGOf("empleado", (String) cbTipoOperacion.getSelectedItem(), voof.getId());
+								
 							}
 
 
 							if(((Number) clientes.get(0)[1]).intValue()>(((Number) empleados.get(0)[1]).intValue())) {
 								//Los clietes son mas activos
+								
 								int i=0;
 								for (Object [] ca : clientes) {
 									i++;

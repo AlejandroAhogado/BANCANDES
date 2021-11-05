@@ -88,3 +88,262 @@
 21:40:52,470 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
 21:40:52,495 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
 21:41:08,899 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+13:15:27,441 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+13:15:27,442 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+13:15:27,463 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:21:56,012 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+13:21:56,013 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+13:21:56,037 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:23:02,653 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente General por login: null
+13:24:42,058 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: andres43
+13:24:57,188 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: pruebaEmpleadoNo
+13:24:57,483 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=pruebaEmpleadoNo]
+13:25:20,367 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: pruebaclientesi
+13:25:20,404 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=pruebaclientesi]
+13:25:39,941 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: dfsdfsdfs
+13:25:39,989 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=dfsdfsdfs]
+13:25:48,719 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: sdfsdfsdfsdfsdfs
+13:25:48,919 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=sdfsdfsdfsdfsdfs]
+13:29:51,535 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+13:29:51,536 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+13:29:51,567 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:30:28,297 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: andres43	
+13:30:41,061 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: andres43
+13:30:56,407 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: nononoonononono
+13:30:57,012 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=nononoonononono]
+13:31:01,552 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: nononoonononono
+13:31:01,593 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando usuario por login: 1 tuplas eliminadas
+13:31:03,728 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: nononoonononono
+13:31:03,780 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando usuario por login: 0 tuplas eliminadas
+13:31:04,676 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: nononoonononono
+13:31:04,706 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando usuario por login: 0 tuplas eliminadas
+13:31:21,915 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: NOOOOOOOOO
+13:31:21,945 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=NOOOOOOOOO]
+13:31:29,247 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: NOOOOOOOOO
+13:31:29,281 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando usuario por login: 1 tuplas eliminadas
+13:31:33,189 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: NOOOOOOOOO
+13:31:33,217 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando usuario por login: 0 tuplas eliminadas
+13:34:29,152 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+13:34:29,153 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+13:34:29,176 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:34:48,033 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: andres43
+13:34:57,053 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: booooooooooooooooooo
+13:34:57,284 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Usuario: Usuario [login=booooooooooooooooooo]
+13:35:01,214 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: booooooooooooooooooo
+13:35:01,246 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando usuario por login: 1 tuplas eliminadas
+13:35:02,977 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: booooooooooooooooooo
+13:35:03,010 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando usuario por login: 0 tuplas eliminadas
+13:35:03,943 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Usuario: booooooooooooooooooo
+13:35:03,977 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando usuario por login: 0 tuplas eliminadas
+13:40:16,422 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+13:40:16,424 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+13:40:16,455 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:40:40,916 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+13:41:04,838 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Oficina 
+13:41:05,138 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Oficina: Oficina [id=41, nombre=pruebaoficina, direccion=asdasdasdas, puestosPosibles=12, gerenteLogin=camila3]
+13:41:42,299 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+13:41:42,300 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+13:41:42,328 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:41:46,058 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+13:41:46,058 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+13:41:46,091 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:42:35,772 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+13:42:35,774 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+13:42:35,803 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:42:51,123 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+13:42:53,357 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Puesto de atencion 
+13:42:53,603 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Puesto de atencion: PuestoDeAtencion [id=42]
+13:43:31,204 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Puesto de atencion oficina 
+13:43:31,605 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Puesto de atencion oficina: PuestoAtencionOficina [id=42, telefono=6543521, localizacion=bogotaa, oficina=41]
+13:43:54,423 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Asociando puesto de atencion: 42 al cajero: rom2716
+13:43:54,457 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+13:44:37,115 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+13:44:37,116 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+13:44:37,149 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:45:15,488 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+13:45:22,166 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto
+13:45:22,738 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto: Producto [id=43]
+13:46:15,708 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cuenta: 43
+13:46:15,780 (AWT-EventQueue-0) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO CUENTAS(id, numeroCuenta, estado, tipo, saldo,fechaCreacion, fechaVencimiento, tasaRendimiento, oficina) values (?, ?, ?, ?, ?, ?, ?, ?, ?)".
+ORA-02290: restricci�n de control (ISIS2304A03202120.CHK_FECHAVENCIMIENTO_CUENTAS) violada
+
+13:46:15,802 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cuenta: null
+13:46:15,802 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Producto: 43
+13:46:15,845 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando producto por id: 43
+13:46:27,218 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto
+13:46:27,279 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto: Producto [id=44]
+13:46:46,380 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Producto: 44
+13:46:46,410 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando producto por id: 44
+13:46:54,714 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto
+13:46:54,779 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto: Producto [id=45]
+13:47:14,066 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cuenta: 45
+13:47:14,098 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cuenta: Cuenta [id=45, numeroCuenta=1123456788, estado=ACTIVA, tipo=AHORROS, saldo=858585.0, fechaCreacion=2021-10-22, fechaVencimiento=2022-01-10, tasaRendimiento=2.0, oficina=18]
+13:47:22,779 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando ClienteProducto
+13:47:22,811 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando ClienteProducto: ClienteProducto [producto=45, login=luisp8]
+13:48:54,126 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+13:48:54,127 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+13:48:54,162 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:49:07,011 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: null
+13:49:33,422 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+13:49:33,423 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+13:49:33,452 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:50:14,712 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+13:50:20,189 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 45
+13:50:20,270 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: null
+14:03:52,520 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:03:52,521 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:03:52,557 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:08:34,359 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:08:34,359 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:08:34,392 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:08:56,011 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+14:09:00,066 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto
+14:09:00,283 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto: Producto [id=46]
+14:09:16,684 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Prestamo: 46
+14:09:16,736 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Prestamo: Prestamo [id=46, monto=40000.0, saldoPendiente=40000.0, interes=5.0, numeroCuotas=1, diaPago=12, valorCuotaMinima=10000.0, fechaPrestamo=2021-10-22, cerrado=FALSE]
+14:09:41,251 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando ClienteProducto
+14:09:41,288 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando ClienteProducto: ClienteProducto [producto=46, login=luisp8]
+14:11:24,370 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:11:24,371 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:11:24,399 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:11:36,684 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+14:12:12,894 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:12:12,895 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:12:12,921 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:12:22,195 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cajero por login: rom2716
+14:12:31,702 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Prestamo por id: 46
+14:12:31,743 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro el prestamo: Prestamo [id=46, monto=40000.0, saldoPendiente=40000.0, interes=5.0, numeroCuotas=1, diaPago=12, valorCuotaMinima=10000.0, fechaPrestamo=null, cerrado=FALSE]
+14:12:31,744 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cajero por login: rom2716
+14:13:25,094 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando ClienteProducto por producto: 46.0 y cliente: luisp8
+14:15:39,944 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:15:39,944 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:15:39,979 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:15:44,596 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:15:44,597 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:15:44,629 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:15:53,192 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cajero por login: null
+14:16:35,280 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:16:35,282 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:16:35,316 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:16:56,851 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+14:17:14,814 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Prestamo por id: 1
+14:17:14,864 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro el prestamo: Prestamo [id=1, monto=5.0E7, saldoPendiente=2.3E7, interes=3800000.0, numeroCuotas=15, diaPago=20, valorCuotaMinima=1000000.0, fechaPrestamo=null, cerrado=FALSE]
+14:19:04,338 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:19:04,338 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:19:04,379 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:19:21,951 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cliente por login: COMPRATODO321
+14:19:44,943 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Consultando cuentas del cliente: COMPRATODO321
+14:20:35,525 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:20:35,526 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:20:35,553 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:21:27,171 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cliente por login: val763
+14:22:55,569 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Consultando las cuentas del cliente: val763 (agrupamiento)
+14:36:44,684 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:36:44,685 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:36:44,717 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:36:52,766 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+14:37:49,819 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Oficina por login del gerente de oficina: camila3
+14:38:07,276 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:38:07,277 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:38:07,298 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:38:26,553 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente General por login: juanl2
+14:38:40,238 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Consultando las 10 operaciones de mas movimiento en todo el sistema
+14:39:43,863 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:39:43,864 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:39:43,885 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:40:58,717 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:40:58,717 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:40:58,740 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:41:31,089 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente General por login: juanl2
+14:41:45,076 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Consultando las 10 operaciones de mas movimiento en todo el sistema
+14:48:14,602 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:48:14,602 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:48:14,636 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:48:35,618 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:48:35,619 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:48:35,656 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:48:51,847 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente General por login: juanl2
+14:49:04,875 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Consultando el usuario mas activo en el sistema por filtro por tipo de operacion
+14:49:04,917 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Consultando el usuario mas activo en el sistema por filtro por tipo de operacion
+15:40:44,519 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+15:40:44,521 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+15:40:44,547 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+15:41:39,556 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+15:43:47,694 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto
+15:43:48,119 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto: Producto [id=23]
+15:45:32,483 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cuenta: 23
+15:45:32,539 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Cuenta: Cuenta [id=23, numeroCuenta=1234567890, estado=ACTIVA, tipo=AHORROS, saldo=1000.0, fechaCreacion=2021-10-22, fechaVencimiento=2022-01-10, tasaRendimiento=5.0, oficina=18]
+15:46:06,494 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando ClienteProducto
+15:46:06,553 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando ClienteProducto: ClienteProducto [producto=23, login=luisp8]
+15:46:42,640 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 23
+15:46:42,729 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: null
+15:50:16,847 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+15:50:16,848 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+15:50:16,872 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+15:51:00,424 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cliente por login: luisp8
+15:51:49,005 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 4
+15:51:49,068 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: null
+15:52:14,575 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+15:52:14,576 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+15:52:14,602 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+15:52:45,354 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cliente por login: val763
+15:53:07,359 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 3
+15:53:07,435 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: null
+15:54:13,275 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+15:54:13,276 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+15:54:13,310 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+15:54:45,410 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cajero por login: rom2716
+15:55:00,918 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 4
+15:55:00,984 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: null
+15:55:30,890 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+15:55:30,891 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+15:55:30,917 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+15:55:38,956 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+15:55:41,822 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto
+15:55:42,612 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Producto: Producto [id=24]
+15:56:09,029 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Prestamo: 24
+15:56:09,092 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Prestamo: Prestamo [id=24, monto=1000000.0, saldoPendiente=1000000.0, interes=12.0, numeroCuotas=12, diaPago=8, valorCuotaMinima=100000.0, fechaPrestamo=2021-10-22, cerrado=FALSE]
+15:56:28,145 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando ClienteProducto
+15:56:28,184 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando ClienteProducto: ClienteProducto [producto=24, login=luisp8]
+15:57:20,587 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+15:57:20,587 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+15:57:20,613 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+15:57:34,414 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cajero por login: rom2716
+15:58:13,412 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+15:58:13,412 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+15:58:13,439 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+15:58:26,196 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+15:58:32,874 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Prestamo por id: 24
+15:58:32,976 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro el prestamo: Prestamo [id=24, monto=1000000.0, saldoPendiente=1000000.0, interes=12.0, numeroCuotas=12, diaPago=8, valorCuotaMinima=100000.0, fechaPrestamo=null, cerrado=FALSE]
+15:58:58,068 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+15:58:58,069 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+15:58:58,096 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+15:59:09,821 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cajero por login: rom2716
+15:59:15,034 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Prestamo por id: 24
+15:59:15,075 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro el prestamo: Prestamo [id=24, monto=1000000.0, saldoPendiente=1000000.0, interes=12.0, numeroCuotas=12, diaPago=8, valorCuotaMinima=100000.0, fechaPrestamo=null, cerrado=FALSE]
+15:59:15,076 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cajero por login: rom2716
+15:59:46,624 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando ClienteProducto por producto: 24.0 y cliente: luisp8
+16:00:17,529 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+16:00:17,531 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+16:00:17,563 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+16:00:55,123 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cliente por login: luisp8
+16:01:29,588 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Consultando cuentas del cliente: luisp8
+16:03:46,553 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+16:03:46,553 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+16:03:46,580 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+16:05:24,393 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+16:05:24,394 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+16:05:24,422 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+16:05:37,811 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente General por login: null
+16:05:54,521 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+16:05:54,523 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+16:05:54,547 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+16:06:03,066 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+16:06:26,294 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Oficina por login del gerente de oficina: camila3
+16:06:26,348 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Consultando el usuario mas activo en el sistema por filtro por tipo de operacion
+16:06:26,385 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Consultando el usuario mas activo en el sistema por filtro por tipo de operacion
+16:06:44,799 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+16:06:44,801 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+16:06:44,825 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+16:06:51,619 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente General por login: juanl2
+16:07:40,025 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Consultando las 10 operaciones de mas movimiento en todo el sistema

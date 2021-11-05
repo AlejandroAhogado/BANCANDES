@@ -83,7 +83,7 @@ public class SQLClienteProducto {
 		sql+= "SELECT * FROM ( ";
 		sql+= "SELECT cl.login, cl.tipo, cl.nombre, cl.correo, cl.telefono, cl.ciudad, cp.producto ";
 		sql+= "from "+pba.darTablaClientes ()+" cl ";
-		sql+= "INNER JOIN "+pba.darTablaProductos ()+" cp ";
+		sql+= "INNER JOIN "+pba.darTablaClientesProductos ()+" cp ";
 		sql+= "ON cl.login = cp.cliente ) PRIMERA";
 		sql+= "JOIN( ";
 		sql+= "select ob.id,ob.valor,ob.tipooperacion, pao.oficina, ob.cliente ";
@@ -110,7 +110,7 @@ public class SQLClienteProducto {
 		sql+= "SELECT * FROM ( ";
 		sql+= "SELECT cl.login, cl.tipo, cl.nombre, cl.correo, cl.telefono, cl.ciudad, cp.producto ";
 		sql+= "from "+pba.darTablaClientes ()+" cl ";
-		sql+= "INNER JOIN "+pba.darTablaProductos ()+" cp ";
+		sql+= "INNER JOIN "+pba.darTablaClientesProductos ()+" cp ";
 		sql+= "ON cl.login = cp.cliente ) PRIMERA";
 		sql+= "JOIN( ";
 		sql+= "select ob.id,ob.valor,ob.tipooperacion, pao.oficina, ob.cliente ";
