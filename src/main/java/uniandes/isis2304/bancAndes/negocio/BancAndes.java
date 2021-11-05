@@ -353,11 +353,15 @@ public class BancAndes {
 	 * @return
 	 * @return El objeto Operacion adicionado. null si ocurre alguna Excepción
 	 */
-	public OperacionBancaria adicionarOperacionBancaria ( float valor, Date fecha, String cliente, long producto, String tipoOperacion,
+
+// revisar como manejar null al agregar dato en java
+     
+     
+	public OperacionBancaria adicionarOperacionBancaria ( float valor, Date fecha, String cliente, long productoOrigen,long productoDestino, String tipoOperacion,
 			long puestoAtencion, String empleado)
 	{
         log.info ("Adicionando Operacion Bancaria ");
-        OperacionBancaria operacionBancaria = pba.adicionarOperacionBancaria ( valor, fecha, cliente, producto, tipoOperacion,
+        OperacionBancaria operacionBancaria = pba.adicionarOperacionBancaria ( valor, fecha, cliente, productoOrigen,productoDestino, tipoOperacion,
     			puestoAtencion, empleado);		
         log.info ("Adicionando Operacion Bancaria: " + operacionBancaria);
         return operacionBancaria;
@@ -466,11 +470,11 @@ public class BancAndes {
 	 * @return El objeto Cuenta adicionado. null si ocurre alguna Excepción
 	 */
 	public Cuenta adicionarCuenta( long id, int numeroCuenta, String estado, String tipo, float saldo, Date fechaCreacion,
-			Date dechaVencimiento, float tasaRendimiento, long oficina)
+			Date dechaVencimiento, float tasaRendimiento, long oficina, String corporativo)
 	{
         log.info ("Adicionando Cuenta: " +id);
         Cuenta cuenta = pba.adicionarCuenta (id, numeroCuenta, estado, tipo, saldo, fechaCreacion,
-    			dechaVencimiento, tasaRendimiento, oficina);		
+    			dechaVencimiento, tasaRendimiento, oficina, corporativo);		
         log.info ("Adicionando Cuenta: " + cuenta);
         return cuenta;
 	}

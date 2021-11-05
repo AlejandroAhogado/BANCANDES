@@ -42,10 +42,10 @@ public class SQLCuenta {
 	}
 
 	public long adicionarCuenta(PersistenceManager pm, long id, int numeroCuenta, String estado, String tipo,
-			float saldo, Date fechaCreacion, Date fechaVencimiento, float tasaRendimiento, long oficina) {
-		Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaCuentas () + "(id, numeroCuenta, estado, tipo, saldo,fechaCreacion, fechaVencimiento, tasaRendimiento, oficina) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			float saldo, Date fechaCreacion, Date fechaVencimiento, float tasaRendimiento, long oficina, String corporativo) {
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaCuentas () + "(id, numeroCuenta, estado, tipo, saldo,fechaCreacion, fechaVencimiento, tasaRendimiento, oficina, corporativo) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 		q.setParameters(id, numeroCuenta, estado, tipo, saldo,
-				fechaCreacion, fechaVencimiento, tasaRendimiento, oficina);
+				fechaCreacion, fechaVencimiento, tasaRendimiento, oficina, corporativo);
 		return (long) q.executeUnique();
 	}
 

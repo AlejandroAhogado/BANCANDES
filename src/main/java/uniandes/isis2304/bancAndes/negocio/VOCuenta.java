@@ -21,11 +21,13 @@ public interface VOCuenta {
 	public Date getFechaCreacion();
 
 
-	public Date getDechaVencimiento();
+	public Date getFechaVencimiento();
 
 	public float getTasaRendimiento();
 
 
 	public long getOficina();
+	
+	public String getCorporativo();
 
 }

@@ -993,6 +993,10 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 				JTextField fechaVencimiento = new JTextField();
 				JTextField tasaRendimiento = new JTextField();
 				JTextField oficina = new JTextField();
+				
+				JComboBox<String> cbCorporativo= new JComboBox<String>();
+				cbCorporativo.addItem("FALSE");
+				cbCorporativo.addItem("TRUE");
 
 				Object[] message = {
 						"Numero cuenta: ", numCuenta,
@@ -1001,7 +1005,8 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						"Saldo:", saldo,
 						"Fecha de vencimiento (dd-mm-aaaa) :", fechaVencimiento,
 						"Tasa de rendimiento:", tasaRendimiento,
-						"Oficina:", oficina
+						"Oficina:", oficina,
+						"Corporativo: ", cbCorporativo
 				};
 
 				int option = JOptionPane.showConfirmDialog(null, message, "Informacion cuenta", JOptionPane.OK_CANCEL_OPTION);
@@ -1023,7 +1028,8 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 								new java.sql.Date(hoy),
 								 new java.sql.Date(fv.getTime()),
 								Integer.parseInt(tasaRendimiento.getText()),
-								(long)Integer.parseInt(oficina.getText())
+								(long)Integer.parseInt(oficina.getText()),
+								(String)cbCorporativo.getSelectedItem()
 
 								);
 						if (ct==null) {
@@ -1171,6 +1177,12 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 	/* ****************************************************************
 	 * 							REQF6
 	 *****************************************************************/
+	
+	
+// Pendiente arreglar cuenta origen cuenta destino!
+	
+	
+	
 	/**
 	 * Registra una operacion sobre una cuenta. Las operaciones validas son:
 	 */
@@ -1187,6 +1199,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 				String idCuenta = JOptionPane.showInputDialog (this, "Id de la cuenta", "Indicar cuenta", JOptionPane.QUESTION_MESSAGE);
 				VOCuenta cuenta = bancAndes.darCuentaPorId((long) Integer.parseInt(idCuenta));
+					
 
 				if (cuenta!=null && cuenta.getEstado().equals(ACTIVA)) {
 					if (!cuenta.getTipo().equals("CDT")) {

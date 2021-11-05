@@ -12,7 +12,9 @@ public class OperacionBancaria implements VOOperacionBancaria {
 	
 	private String cliente;
 	
-	private long producto;
+	private long productoOrigen;
+	
+	private long productoDestino;
 	
 	private String tipoOperacion;
 	
@@ -21,14 +23,15 @@ public class OperacionBancaria implements VOOperacionBancaria {
 	private String empleado;
 
 	
-	public OperacionBancaria(long id, float valor, Date fecha, String cliente, long producto, String tipoOperacion,
+	public OperacionBancaria(long id, float valor, Date fecha, String cliente, long productoOrigen,long productoDestino, String tipoOperacion,
 			long puestoAtencion, String empleado) {
 		
 		this.id = id;
 		this.valor = valor;
 		this.fecha = fecha;
 		this.cliente = cliente;
-		this.producto = producto;
+		this.productoOrigen = productoOrigen;
+		this.productoDestino = productoDestino;
 		this.tipoOperacion = tipoOperacion;
 		this.puestoAtencion = puestoAtencion;
 		this.empleado = empleado;
@@ -41,12 +44,29 @@ public class OperacionBancaria implements VOOperacionBancaria {
 		long hoy=System.currentTimeMillis();  
 		this.fecha=new java.sql.Date(hoy); 
 		this.cliente = "";
-		this.producto = 0;
+		this.productoOrigen = 0;
+		this.productoDestino = 0;
 		this.tipoOperacion = "";
 		this.puestoAtencion = 0;
 		this.empleado = "";
 	}
 	
+
+	public long getProductoOrigen() {
+		return productoOrigen;
+	}
+
+	public void setProductoOrigen(long productoOrigen) {
+		this.productoOrigen = productoOrigen;
+	}
+
+	public long getProductoDestino() {
+		return productoDestino;
+	}
+
+	public void setProductoDestino(long productoDestino) {
+		this.productoDestino = productoDestino;
+	}
 
 	public long getId() {
 		return id;
@@ -87,17 +107,6 @@ public class OperacionBancaria implements VOOperacionBancaria {
 		this.cliente = cliente;
 	}
 
-
-	public long getProducto() {
-		return producto;
-	}
-
-
-	public void setProducto(long producto) {
-		this.producto = producto;
-	}
-
-
 	public String getTipoOperacion() {
 		return tipoOperacion;
 	}
@@ -127,12 +136,13 @@ public class OperacionBancaria implements VOOperacionBancaria {
 		this.empleado = empleado;
 	}
 
-
 	@Override
 	public String toString() {
 		return "OperacionBancaria [id=" + id + ", valor=" + valor + ", fecha=" + fecha + ", cliente=" + cliente
-				+ ", producto=" + producto + ", tipoOperacion=" + tipoOperacion + ", puestoAtencion=" + puestoAtencion
-				+ ", empleado=" + empleado + "]";
+				+ ", productoOrigen=" + productoOrigen + ", productoDestino=" + productoDestino + ", tipoOperacion="
+				+ tipoOperacion + ", puestoAtencion=" + puestoAtencion + ", empleado=" + empleado + "]";
 	}
+
+
 	
 }

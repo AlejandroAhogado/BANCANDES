@@ -39,10 +39,10 @@ public class SQLOperacionBancaria {
 	}
 
 	public long adicionarOperacionBancaria(PersistenceManager pm, long id, float valor, Date fecha, String cliente,
-			long producto, String tipoOperacion, long puestoAtencion, String empleado) {
+			long productoOrigen, long productoDestino, String tipoOperacion, long puestoAtencion, String empleado) {
 		
-		 Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaOperacionesBancarias () + "( id, valor, fecha, cliente, producto,tipoOperacion, puestoAtencion, empleado) values (?,?,?,?,?,?,?,?)");
-	        q.setParameters(id, valor, fecha, cliente, producto,tipoOperacion, puestoAtencion, empleado);
+		 Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaOperacionesBancarias () + "( id, valor, fecha, cliente, productoOrigen, productoDestino,tipoOperacion, puestoAtencion, empleado) values (?,?,?,?,?,?,?,?,?)");
+	        q.setParameters(id, valor, fecha, cliente, productoOrigen,productoDestino,tipoOperacion, puestoAtencion, empleado);
 	        return (long) q.executeUnique();
 	}
 	

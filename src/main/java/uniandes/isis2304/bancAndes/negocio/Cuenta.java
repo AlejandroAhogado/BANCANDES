@@ -16,6 +16,7 @@ public class Cuenta implements VOCuenta{
 	private float tasaRendimiento;
 	//El id de la oficina donde se crea la cuenta
 	private long oficina;
+	private String corporativo; 
 	
 	//Constructor por defecto
 	public Cuenta() {
@@ -29,12 +30,33 @@ public class Cuenta implements VOCuenta{
 		this.fechaVencimiento=new java.sql.Date(hoy); 
 		this.tasaRendimiento = 0;
 		this.oficina = 0;
+		this.corporativo = "FALSE";
 	}
 	
 	
+	public Date getFechaVencimiento() {
+		return fechaVencimiento;
+	}
+
+
+	public void setFechaVencimiento(Date fechaVencimiento) {
+		this.fechaVencimiento = fechaVencimiento;
+	}
+
+
+	public String getCorporativo() {
+		return corporativo;
+	}
+
+
+	public void setCorporativo(String corporativo) {
+		this.corporativo = corporativo;
+	}
+
+
 	//Constructor usando campos
 	public Cuenta(long id, int numeroCuenta, String estado, String tipo, float saldo, Date fechaCreacion,
-			Date fechaVencimiento, float tasaRendimiento, long oficina) {
+			Date fechaVencimiento, float tasaRendimiento, long oficina, String corporativo) {
 		
 		super();
 		System.out.println(id + numeroCuenta + estado + tipo + saldo + fechaCreacion +
@@ -48,6 +70,7 @@ public class Cuenta implements VOCuenta{
 		this.fechaVencimiento = fechaVencimiento;
 		this.tasaRendimiento = tasaRendimiento;
 		this.oficina = oficina;
+		this.corporativo = corporativo;
 	}
 
 
@@ -110,17 +133,6 @@ public class Cuenta implements VOCuenta{
 		this.fechaCreacion = fechaCreacion;
 	}
 
-
-	public Date getDechaVencimiento() {
-		return fechaVencimiento;
-	}
-
-
-	public void setDechaVencimiento(Date dechaVencimiento) {
-		this.fechaVencimiento = dechaVencimiento;
-	}
-
-
 	public float getTasaRendimiento() {
 		return tasaRendimiento;
 	}
@@ -145,8 +157,8 @@ public class Cuenta implements VOCuenta{
 	public String toString() {
 		return "Cuenta [id=" + id + ", numeroCuenta=" + numeroCuenta + ", estado=" + estado + ", tipo=" + tipo
 				+ ", saldo=" + saldo + ", fechaCreacion=" + fechaCreacion + ", fechaVencimiento=" + fechaVencimiento
-				+ ", tasaRendimiento=" + tasaRendimiento + ", oficina=" + oficina + "]";
+				+ ", tasaRendimiento=" + tasaRendimiento + ", oficina=" + oficina + ", corporativo=" + corporativo
+				+ "]";
 	}
-	
 	
 }

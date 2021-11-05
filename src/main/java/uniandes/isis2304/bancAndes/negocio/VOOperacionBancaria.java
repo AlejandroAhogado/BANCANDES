@@ -12,7 +12,9 @@ public interface VOOperacionBancaria {
 
 	public String getCliente(); 
 	
-	public long getProducto(); 
+	public long getProductoOrigen(); 
+	
+	public long getProductoDestino(); 
 
 	public String getTipoOperacion();
 	

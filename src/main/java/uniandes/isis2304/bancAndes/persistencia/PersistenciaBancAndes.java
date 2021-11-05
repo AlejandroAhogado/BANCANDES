@@ -828,7 +828,7 @@ public class PersistenciaBancAndes {
 	 * 			Métodos para manejar OPERACIONBANCARIA
 	 *****************************************************************/
 	
-	public OperacionBancaria adicionarOperacionBancaria( float valor, Date fecha, String cliente, long producto,
+	public OperacionBancaria adicionarOperacionBancaria( float valor, Date fecha, String cliente, long productoOrigen,long productoDestino,
 			String tipoOperacion, long puestoAtencion, String empleado) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		 Transaction tx=pm.currentTransaction();
@@ -837,13 +837,13 @@ public class PersistenciaBancAndes {
 
 	            tx.begin();
 	            long id = nextval ();
-	            long tuplasInsertadas = sqlOperacionBancaria.adicionarOperacionBancaria(pm, id, valor, fecha, cliente, producto,
+	            long tuplasInsertadas = sqlOperacionBancaria.adicionarOperacionBancaria(pm, id, valor, fecha, cliente, productoOrigen,productoDestino,
 	        			 tipoOperacion, puestoAtencion, empleado);
 	            tx.commit();
 	            
 	            log.trace ("Inserción de operacion bancaria: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
 	            
-	            return new OperacionBancaria ( id, valor, fecha, cliente, producto,
+	            return new OperacionBancaria ( id, valor, fecha, cliente, productoOrigen,productoDestino,
 	        			 tipoOperacion, puestoAtencion, empleado);
 	        }
 	        catch (Exception e)
@@ -886,7 +886,7 @@ public class PersistenciaBancAndes {
 	}
 	
 	public Cuenta adicionarCuenta( long id, int numeroCuenta, String estado, String tipo, float saldo,
-			Date fechaCreacion, Date dechaVencimiento, float tasaRendimiento, long oficina) {
+			Date fechaCreacion, Date dechaVencimiento, float tasaRendimiento, long oficina, String corporativo) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		 Transaction tx=pm.currentTransaction();
 		   try
@@ -894,13 +894,13 @@ public class PersistenciaBancAndes {
 
 	            tx.begin();
 	            long tuplasInsertadas = sqlCuenta.adicionarCuenta(pm, id, numeroCuenta, estado, tipo, saldo,
-	        			 fechaCreacion, dechaVencimiento, tasaRendimiento, oficina);
+	        			 fechaCreacion, dechaVencimiento, tasaRendimiento, oficina, corporativo);
 	            tx.commit();
 	            
 	            log.trace ("Inserción de cuenta: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
 	            
 	            return new Cuenta ( id, numeroCuenta, estado, tipo, saldo,
-	        			 fechaCreacion, dechaVencimiento, tasaRendimiento, oficina);
+	        			 fechaCreacion, dechaVencimiento, tasaRendimiento, oficina, corporativo);
 	        }
 	        catch (Exception e)
 	        {
