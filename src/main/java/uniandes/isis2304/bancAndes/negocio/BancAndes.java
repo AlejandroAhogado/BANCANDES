@@ -948,6 +948,32 @@ public class BancAndes {
 			}
 
 		
+		/* ****************************************************************
+		 * 			Métodos para manejar Asociacion
+		 *****************************************************************/
+	
+		public Asociacion adicionarAsociacion (long id, float valor, String frecuencia,  int cuentaCorporativo)
+		{
+	        log.info ("Adicionando Asociacion: " +id);
+	        Asociacion asociacion = pba.adicionarAsociacion (id, valor, frecuencia, cuentaCorporativo);		
+	        log.info ("Adicionando Asociacion: " + asociacion);
+	        return asociacion;
+		}
+		
+		/* ****************************************************************
+		 * 			Métodos para manejar AsociacionCuentasEmpleados
+		 *****************************************************************/
+	
+		public AsociacionCuentasEmpleados adicionarAsociacionCuentasEmpleados (long asociacion, long cuentaEmpleado)
+		{
+	        log.info ("Adicionando Asociacion Cuenta Empleados:");
+	        AsociacionCuentasEmpleados asociacionCuentaEmpleado = pba.adicionarAsociacionCuentasEmpleados (asociacion, cuentaEmpleado);		
+	        log.info ("Adicionando Asociacion Cuenta Empleados: " + asociacionCuentaEmpleado);
+	        return asociacionCuentaEmpleado;
+		}
+		
+		
+		
 		//***************************************METEODOS PARA REQUERIMIENTOS DE CONSULTA
 		
 		//-----------------------------RFC1

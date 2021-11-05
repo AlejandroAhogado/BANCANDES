@@ -1017,7 +1017,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyyy");
 						java.util.Date fv = format.parse(fechaVencimiento.getText());
 						
-						//java.sql.Date fvp = fechaVencimiento.getText().isEmpty()? null: new java.sql.Date(fv.getTime());
+						java.sql.Date fvp =fechaVencimiento.getText().isEmpty()? null: new java.sql.Date(fv.getTime());
 						
 						ct =  bancAndes.adicionarCuenta(
 								id, 
@@ -1026,7 +1026,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 								(String)cbTipo.getSelectedItem(), 
 								(float)Integer.parseInt(saldo.getText()),
 								new java.sql.Date(hoy),
-								 new java.sql.Date(fv.getTime()),
+								 new java.sql.Date(fvp.getTime()),
 								Integer.parseInt(tasaRendimiento.getText()),
 								(long)Integer.parseInt(oficina.getText()),
 								(String)cbCorporativo.getSelectedItem()

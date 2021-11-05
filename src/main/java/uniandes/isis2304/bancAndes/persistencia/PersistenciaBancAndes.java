@@ -17,6 +17,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import uniandes.isis2304.bancAndes.negocio.Asociacion;
+import uniandes.isis2304.bancAndes.negocio.AsociacionCuentasEmpleados;
 import uniandes.isis2304.bancAndes.negocio.Cajero;
 import uniandes.isis2304.bancAndes.negocio.CajeroAutomatico;
 import uniandes.isis2304.bancAndes.negocio.Cliente;
@@ -160,6 +162,18 @@ public class PersistenciaBancAndes {
 	 */
 	private SQLUsuarioTipoOperacion sqlUsuarioTipoOperacion;
 	
+	/**
+	 * Atributo para el acceso a la tabla ASOCIACIONES de la base de datos
+	 */
+	private SQLAsociacion sqlAsociacion;
+	
+	
+	/**
+	 * Atributo para el acceso a la tabla ASOCIACIONCUENTASEMPLEADOS de la base de datos
+	 */
+	private SQLAsociacionCuentasEmpleados sqlAsociacionCuentasEmpleados;
+	
+	
 	
 	/* ****************************************************************
 	 * 			Métodos del MANEJADOR DE PERSISTENCIA
@@ -197,6 +211,8 @@ public class PersistenciaBancAndes {
 		tablas.add ("USUARIOSTIPOSOPERACION");
 		tablas.add ("PUESTOSATENCIONTIPOSOPERACION");
 		tablas.add ("CLIENTESPRODUCTOS");
+		tablas.add("ASOCIACIONES");
+		tablas.add("ASOCIACIONCUENTASEMPLEADOS");
 }
 
 	
@@ -293,6 +309,9 @@ public class PersistenciaBancAndes {
 		sqlTipoOperacion = new SQLTipoOperacion(this);
 		sqlUsuario = new SQLUsuario(this);
 		sqlUsuarioTipoOperacion = new SQLUsuarioTipoOperacion(this);
+		sqlAsociacion = new SQLAsociacion(this);
+		sqlAsociacionCuentasEmpleados = new SQLAsociacionCuentasEmpleados(this);
+		
 	}
 	
 	
@@ -470,6 +489,22 @@ public class PersistenciaBancAndes {
 	public String darTablaClientesProductos ()
 	{
 		return tablas.get (21);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla Asociaciones de BancAndes
+	 */
+	public String darTablaAsociaciones ()
+	{
+		return tablas.get (22);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla AsociacioCuentasEmpleados de BancAndes
+	 */
+	public String darTablaAsociacionCuentasEmpleados() {
+		return tablas.get(23);
+	
 	}
 	
 	
@@ -1562,6 +1597,99 @@ public class PersistenciaBancAndes {
 		return sqlCajeroAutomatico.darCajeroAutomaticoPorId (pmf.getPersistenceManager(), id);
 	}
 
+	
+	
+	
+	
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar Asociacion
+	 *****************************************************************/
+
+	/**
+	 * @param id
+	 * @param valor
+	 * @param frecuencia
+	 * @param cuentaCorporativo
+	 * @return
+	 */
+	public Asociacion adicionarAsociacion(long id, float valor, String frecuencia,  int cuentaCorporativo) {
+
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+
+	            tx.begin();
+	            long tuplasInsertadas = sqlAsociacion.adicionarAsociacion(pm, id, valor, frecuencia, cuentaCorporativo);
+	            tx.commit();
+	            
+	            log.trace ("Insercion de Asociacion: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new Asociacion ( id, valor, frecuencia, cuentaCorporativo);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
+		
+	}
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar Asociacion cuenta empleados
+	 *****************************************************************/
+	
+
+	/**
+	 * @param asociacion
+	 * @param cuentaEmpleado
+	 * @return
+	 */
+	public AsociacionCuentasEmpleados adicionarAsociacionCuentasEmpleados(long asociacion, long cuentaEmpleado) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		 Transaction tx=pm.currentTransaction();
+		   try
+	        {
+	            tx.begin();
+	            long tuplasInsertadas = sqlAsociacionCuentasEmpleados.adicionarAsociacionCuentasEmpleados(pm,asociacion, cuentaEmpleado);
+	            tx.commit();
+	            
+	            log.trace ("Insercion de la asociacion id:" + asociacion + " cuenta empleado : " + cuentaEmpleado + ": "+ tuplasInsertadas + " tuplas insertadas");
+	            
+	            return new AsociacionCuentasEmpleados (asociacion, cuentaEmpleado);
+	        }
+	        catch (Exception e)
+	        {
+//	        	e.printStackTrace();
+	        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+	        	return null;
+	        }
+	        finally
+	        {
+	            if (tx.isActive())
+	            {
+	                tx.rollback();
+	            }
+	            pm.close();
+	        }
+	}
+	
+	
+
+	
+	
+	
+	
 //******************************************METODOS DE LOS REQUERIMIENTOS DE CONSULTA*************************************************************************
 	public List<Object[]> consultarCuentasGerenteOficina(String id, String criterio1p, String signo1, String filtro1p,
 			String criterio2p, String signo2, String filtro2p, String ordenamiento, String tipoOrdenamiento) {
@@ -1642,5 +1770,8 @@ public class PersistenciaBancAndes {
 		return sqlOperacionBancaria.obtenerUsuarioMasActivoTipoOpGOf(pmf.getPersistenceManager(), tipoUsuario, tipoOperacion, idOficina);
 		
 	}
-	
+
+
+
+
 }
