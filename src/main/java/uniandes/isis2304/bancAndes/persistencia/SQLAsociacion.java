@@ -37,12 +37,43 @@ public class SQLAsociacion {
 		this.pba = pba;
 	}
 
+	/**
+	 * @param pm
+	 * @param id
+	 * @param valor
+	 * @param frecuencia
+	 * @param cuentaCorporativo
+	 * @return
+	 */
 	public long adicionarAsociacion(PersistenceManager pm, long id, float valor, String frecuencia,  int cuentaCorporativo) {
 		
 		   Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaAsociaciones () + "(id, valor, frecuencia, cuentaCorporativo) values (?, ?, ?, ?)");
 	        q.setParameters(id, valor, frecuencia, cuentaCorporativo);
 	        return (long) q.executeUnique();
 		
+	}
+
+	/**
+	 * @param pm
+	 * @param idAsociacion
+	 * @param numeroCuenta
+	 * @return
+	 */
+	public long actualizarCuentaAsociacion(PersistenceManager pm, long idAsociacion, int numeroCuenta) {
+		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaAsociaciones() + " SET cuentaCorporativo = ? WHERE id = ?");
+		q.setParameters( numeroCuenta, idAsociacion);
+		return (long) q.executeUnique();
+	}
+
+	/**
+	 * @param pm
+	 * @param id
+	 * @return
+	 */
+	public long eliminarAsociacion(PersistenceManager pm, long id) {
+		Query q = pm.newQuery(SQL, "DELETE FROM " + pba.darTablaAsociaciones () + " WHERE id = ?");
+        q.setParameters(id);
+        return (long) q.executeUnique();
 	}
 
 }

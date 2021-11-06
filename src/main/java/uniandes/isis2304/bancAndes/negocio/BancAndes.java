@@ -952,13 +952,44 @@ public class BancAndes {
 		 * 			Métodos para manejar Asociacion
 		 *****************************************************************/
 	
-		public Asociacion adicionarAsociacion (long id, float valor, String frecuencia,  int cuentaCorporativo)
+		public Asociacion adicionarAsociacion (float valor, String frecuencia,  int cuentaCorporativo)
 		{
-	        log.info ("Adicionando Asociacion: " +id);
-	        Asociacion asociacion = pba.adicionarAsociacion (id, valor, frecuencia, cuentaCorporativo);		
+	        log.info ("Adicionando Asociacion: ");
+	        Asociacion asociacion = pba.adicionarAsociacion ( valor, frecuencia, cuentaCorporativo);		
 	        log.info ("Adicionando Asociacion: " + asociacion);
 	        return asociacion;
 		}
+		
+		/**
+		 
+		 */
+		/**
+		 * @param idCuenta
+		 * @param cambioSaldo
+		 * @return
+		 *  * @return El numero de tuplas modificadas: 1 o 0. 0 significa que una asociacion con ese identificador no existe
+		 */
+		public long actualizarCuentaAsociacion (long idAsociacion, int numeroCuenta)
+		{
+	        log.info ("Actualizando cuenta de la asociacion: " + idAsociacion);
+	        long cambios = pba.actualizarCuentaAsociacion (idAsociacion, numeroCuenta);
+	        log.info ("Se actualizaron "+cambios+" tuplas");
+	        return cambios;
+		}
+		
+		
+
+		/**
+		 * @param id
+		 */
+		public void eliminarAsociacion(long id) {
+
+	        log.info ("Eliminando Asociacion: " + id);
+	        long resp= pba.eliminarAsociacion (id);		
+	        log.info ("Eliminando asociacion por id: " + resp + " tuplas eliminadas");
+	    
+		}
+		
 		
 		/* ****************************************************************
 		 * 			Métodos para manejar AsociacionCuentasEmpleados
@@ -1075,5 +1106,6 @@ public class BancAndes {
 			List<Object []> usuarios= pba.obtenerUsuarioMasActivoTipoOpGOf(tipoUsuario, tipoOperacion, idOficina);
 			return usuarios;
 			}
+
 		
 }

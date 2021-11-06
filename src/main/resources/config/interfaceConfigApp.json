@@ -1,7 +1,7 @@
 {
 	"title": "Aplicacion transaccional de BancAndes Uniandes",
 	"frameH": 600,
-	"frameW": 800,
+	"frameW": 1200,
 	"bannerPath": "./src/main/resources/config/logo.png",
 	"menuBar":
 	[
@@ -67,6 +67,44 @@
 				  }
 			  ]
 		  },
+		  { "menuTitle": "Requerimientos de Modificacion V.2",
+			"options":
+			  [
+				  {
+					  "label": "Asociar cuenta empleado ",
+					  "event": "asociarCuentaEmpleadoACuentaCorporativa"
+				  },
+				  {
+					  "label": "Registrar operacion sobre cuenta",
+					  "event": "registrarOperacionCuentaV2"
+				  },
+				  {
+					  "label": "Registrar operacion prestamo",
+					  "event": "registrarOperacionPrestamoV2"
+				  },
+				  {
+					  "label": "Pagar Nomina",
+					  "event": "pagarNomina"
+				  },
+				  {
+					  "label": "Cerrar cuenta",
+					  "event": "cerrarCuentaV2"
+				  }
+			  ]
+		  },
+		  { "menuTitle": "Requerimientos de Consulta V.2",
+			  "options":
+				[
+					{
+						"label": "Consultar prestamos",
+						"event": "consultarPrestamos"
+					},
+					{
+						"label": "Consultar operaciones",
+						"event": "consultarOperaciones"
+					}
+				]
+			},
 		{ "menuTitle": "Mantenimiento",
 		  "options":
 			[

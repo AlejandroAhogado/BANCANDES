@@ -37,6 +37,8 @@ import com.google.gson.stream.JsonReader;
 import uniandes.isis2304.bancAndes.negocio.BancAndes;
 import uniandes.isis2304.bancAndes.negocio.ClienteProducto;
 import uniandes.isis2304.bancAndes.negocio.Cuenta;
+import uniandes.isis2304.bancAndes.negocio.VOAsociacion;
+import uniandes.isis2304.bancAndes.negocio.VOAsociacionCuentasEmpleados;
 import uniandes.isis2304.bancAndes.negocio.VOCajero;
 import uniandes.isis2304.bancAndes.negocio.VOCajeroAutomatico;
 import uniandes.isis2304.bancAndes.negocio.VOCliente;
@@ -393,7 +395,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 							}
 						}
 						else {entro = true;
-							mensajeErrorPermisos();
+						mensajeErrorPermisos();
 						bancAndes.eliminarUsuario(login);
 						panelDatos.actualizarInterfaz("Se elimino el usuario " + login);}
 
@@ -480,8 +482,8 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						else {
 							entro = true;
 							mensajeErrorPermisos();
-						bancAndes.eliminarUsuario(login);
-						panelDatos.actualizarInterfaz("Se elimino el usuario " + login);}
+							bancAndes.eliminarUsuario(login);
+							panelDatos.actualizarInterfaz("Se elimino el usuario " + login);}
 
 					case 2:
 						if(this.esAdmin) {
@@ -567,8 +569,8 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						else {
 							entro = true;
 							mensajeErrorPermisos();
-						bancAndes.eliminarUsuario(login);
-						panelDatos.actualizarInterfaz("Se elimino el usuario " + login);}
+							bancAndes.eliminarUsuario(login);
+							panelDatos.actualizarInterfaz("Se elimino el usuario " + login);}
 					case 3:
 						if(this.esAdmin) {
 							JComboBox<String> cbOpcionesDocumentoC = new JComboBox<String>();
@@ -656,8 +658,8 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						else {
 							entro = true;
 							mensajeErrorPermisos();
-						bancAndes.eliminarUsuario(login);
-						panelDatos.actualizarInterfaz("Se elimino el usuario " + login);}
+							bancAndes.eliminarUsuario(login);
+							panelDatos.actualizarInterfaz("Se elimino el usuario " + login);}
 
 					}
 					if (entro==false) {
@@ -666,7 +668,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						resultado += "\n Operacion terminada";
 						panelDatos.actualizarInterfaz(resultado);
 					}
-				
+
 				}
 				else
 				{
@@ -815,7 +817,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 											if (login != null) {
 
 												bancAndes.asociarPuestoDeAtencionOficinaCajero(id, login);
-												
+
 												String asociacion = "En asociar Cajero al Puesto de atencion\n\n";
 												asociacion += "Cajero "+ i+ " asociado exitosamente: " + login;
 												asociacion += "\n Operacion terminada";
@@ -847,9 +849,9 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 										throw new Exception ("No se pudo asociar el cajero");
 
 									}
-									
+
 									//hasta aqui va el ciclo de asociacion
-									
+
 								} catch (Exception e) {
 									bancAndes.eliminarPuestoDeAtencion(id);
 									throw new Exception ("No se pudo crear un puesto de atencion con id: " + id);
@@ -993,7 +995,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 				JTextField fechaVencimiento = new JTextField();
 				JTextField tasaRendimiento = new JTextField();
 				JTextField oficina = new JTextField();
-				
+
 				JComboBox<String> cbCorporativo= new JComboBox<String>();
 				cbCorporativo.addItem("FALSE");
 				cbCorporativo.addItem("TRUE");
@@ -1016,9 +1018,9 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						long hoy=System.currentTimeMillis();  
 						SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyyy");
 						java.util.Date fv = format.parse(fechaVencimiento.getText());
-						
+
 						java.sql.Date fvp =fechaVencimiento.getText().isEmpty()? null: new java.sql.Date(fv.getTime());
-						
+
 						ct =  bancAndes.adicionarCuenta(
 								id, 
 								Integer.parseInt(numCuenta.getText()),
@@ -1026,7 +1028,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 								(String)cbTipo.getSelectedItem(), 
 								(float)Integer.parseInt(saldo.getText()),
 								new java.sql.Date(hoy),
-								 new java.sql.Date(fvp.getTime()),
+								new java.sql.Date(fvp.getTime()),
 								Integer.parseInt(tasaRendimiento.getText()),
 								(long)Integer.parseInt(oficina.getText()),
 								(String)cbCorporativo.getSelectedItem()
@@ -1137,16 +1139,16 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						long idCuenta = (long)Integer.parseInt(idCu.getText());
 						VOCuenta cuenta = bancAndes.darCuentaPorId(idCuenta);
 						long idOficina =  cuenta.getOficina();
-						
+
 						if (bancAndes.darOficinaPorId(idOficina).getGerenteLogin().equals(loginUsuarioSistema)) {
 							bancAndes.cerrarCuenta(idCuenta);
-							
+
 							String resultado = "En cerrar cuenta\n\n";
 							resultado += "Cuenta cerrada: "+ idCuenta;
 							resultado += "\n Operacion terminada";
 							panelDatos.actualizarInterfaz(resultado);
-							
-							
+
+
 						}else {
 							panelDatos.actualizarInterfaz("La cuenta debe ser cerrada por el gerente de oficina de la oficina donde se abrio");
 						}
@@ -1162,7 +1164,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					panelDatos.actualizarInterfaz("No se cerro ninguna cuenta. Operacion cancelada por el usuario");                                                                                
 				}
 
-				
+
 			} 
 			catch (Exception e) 
 			{
@@ -1177,12 +1179,12 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 	/* ****************************************************************
 	 * 							REQF6
 	 *****************************************************************/
-	
-	
-// Pendiente arreglar cuenta origen cuenta destino!
-	
-	
-	
+
+
+	// Pendiente arreglar cuenta origen cuenta destino!
+
+
+
 	/**
 	 * Registra una operacion sobre una cuenta. Las operaciones validas son:
 	 */
@@ -1199,7 +1201,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 				String idCuenta = JOptionPane.showInputDialog (this, "Id de la cuenta", "Indicar cuenta", JOptionPane.QUESTION_MESSAGE);
 				VOCuenta cuenta = bancAndes.darCuentaPorId((long) Integer.parseInt(idCuenta));
-					
+
 
 				if (cuenta!=null && cuenta.getEstado().equals(ACTIVA)) {
 					if (!cuenta.getTipo().equals("CDT")) {
@@ -1539,9 +1541,9 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 							throw new Exception ("No se pudo asociar el cliente");
 
 						}
-						
+
 						//hasta aqui va el ciclo de asociacion de clientes
-						
+
 					} catch (Exception e) {
 						bancAndes.eliminarProducto(id);
 						throw new Exception ("No se pudo crear el prestamo con id: " + id);
@@ -1677,12 +1679,12 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 						if (prestamo.getSaldoPendiente()==0) {
 							bancAndes.cerrarPrestamo(idPrestamo);
-							
+
 							String resultado = "En cerrar prestamo\n\n";
 							resultado += "Prestamo cerrado: "+idPrestamo;
 							resultado += "\n Operacion terminada";
 							panelDatos.actualizarInterfaz(resultado);
-							
+
 						}
 						else {
 							panelDatos.actualizarInterfaz("El prestamo debe tener un saldo pendiente de $0");
@@ -1691,7 +1693,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					} catch (Exception e) {
 						throw new Exception ("No se pudo cerrar el prestamo con id" );
 					}
-					
+
 				}            
 
 				if (optionPR == JOptionPane.CANCEL_OPTION)
@@ -1699,7 +1701,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					panelDatos.actualizarInterfaz("No se cerro ningun prestamo");                                                                                
 				}
 
-				
+
 			} 
 			catch (Exception e) 
 			{
@@ -1709,6 +1711,174 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 			}
 		}
 	}
+
+
+
+
+
+
+
+
+
+
+	/* ****************************************************************
+	 *                             REF10
+	 *****************************************************************/
+	/**
+
+	/**
+	 * Asocia cuenta de persona natural con cuenta de persona juridica
+	 * Se crea una nueva tupla de asociacionCuentaEmpleado en la base de datos, si los datos ingresados son correctos
+	 */
+	public void asociarCuentaEmpleadoACuentaCorporativa( )
+	{
+		if (tipoUsuario!=GERENTEDEOFICINA) {
+			mensajeErrorPermisos();
+		}
+		else {
+			try 
+			{
+				JTextField valor = new JTextField();
+				JTextField cuentaCorporativo = new JTextField();
+				JTextField cuentaEmpleado = new JTextField();
+				JTextField nombreEmpleado = new JTextField();
+				
+
+				JComboBox<String> cbAsociacionCorp= new JComboBox<String>();
+				cbAsociacionCorp.addItem("QUINCENAL");
+				cbAsociacionCorp.addItem("MENSUAL");
+
+
+				Object[] message = {
+						"Valor de la transferencia ", valor,
+						"Cuenta Corporativo:", cuentaCorporativo,
+						"Frecuencia de pago", cbAsociacionCorp
+				};
+
+				int optionACOR = JOptionPane.showConfirmDialog(null, message, "Datos pago empleado", JOptionPane.OK_CANCEL_OPTION);
+				VOAsociacion aso=null;
+				if (optionACOR == JOptionPane.OK_OPTION) {
+
+					try { 
+
+						aso = bancAndes.adicionarAsociacion(
+								Float.parseFloat(valor.getText()),
+								(String) cbAsociacionCorp.getSelectedItem(),
+								Integer.parseInt(cuentaCorporativo.getText()));								
+						
+						int i=1;
+						
+						try {//asociar la cuenta a uno o mas empleados
+							boolean asociando = true;
+
+
+							while (asociando) {
+									nombreEmpleado = new JTextField();
+									cuentaEmpleado = new JTextField();
+								Object[] messageEmpleado = {
+										"Nombre del empleado", nombreEmpleado,
+										"Cuenta Empleado:", cuentaEmpleado
+								};
+								
+								
+								JOptionPane.showConfirmDialog(null, messageEmpleado, "Nombre del empleado "+i+" a asociar", JOptionPane.OK_CANCEL_OPTION);
+							
+								
+								if (!cuentaEmpleado.getText().isEmpty()) {
+									
+									
+									VOCuenta cuenta= bancAndes.darCuentaPorNumero(Integer.parseInt(cuentaEmpleado.getText()));
+								
+									VOAsociacionCuentasEmpleados asoEmp = null;
+
+									if (cuenta!=null) {
+										asoEmp = bancAndes.adicionarAsociacionCuentasEmpleados(aso.getId(), cuenta.getId());
+									}else {
+										throw new Exception ("La cuenta no existe");
+									}										
+
+									if (asoEmp==null) {
+										throw new Exception ("El cliente no se pudo asociar al producto");
+									}
+									String asociacion = "En asociar Cuenta empleado a cuenta corporativa\n\n";
+									asociacion += "Empleado "+ i+ " asociado exitosamente: " + asoEmp;
+									asociacion += "\n Operacion terminada";
+
+									panelDatos.actualizarInterfaz(asociacion);
+									i++;
+
+									String[] ynopt = {"Sí", "No"};
+									int x= JOptionPane.showOptionDialog(this, "¿Desea asociar otro empleado?", "Nueva asociacion", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, ynopt, null);
+									if (x==1) {
+										asociando=false;
+									}
+								}
+								else if (i>1) {
+									panelDatos.actualizarInterfaz("Se asociaron "+i+" clientes a la cuenta");
+									asociando=false;
+								}
+								else {	
+									bancAndes.eliminarAsociacion(aso.getId());	
+									panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+									asociando=false;
+								}
+							}
+
+						}catch (Exception e) {
+							if (i==1) {
+								bancAndes.eliminarAsociacion(aso.getId());
+							}
+							e.printStackTrace();
+							throw new Exception ("No se pudo asociar el empleado");
+
+						}
+
+
+					} catch (Exception e) {
+						//e.printStackTrace();
+						throw new Exception ("No se pudo asociar la cuenta del corporativo : " + cuentaCorporativo.getText() + 
+								" a la cuenta "+ cuentaEmpleado.getText()+"  del empleado.");
+					}     
+				}            
+
+				if (optionACOR == JOptionPane.CANCEL_OPTION)
+				{
+					JOptionPane.showMessageDialog( this , "Asociacion a la cuenta del cliente: " + nombreEmpleado.getText() + "  no fue creada",
+							"Operacion cancelada" , JOptionPane.ERROR_MESSAGE );          
+					panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+				}                                                             
+
+			} 
+			catch (Exception e) 
+			{
+				//                                      e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+			}
+		}
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1847,7 +2017,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 				}
 
-		
+
 
 				else if(this.tipoUsuario==CLIENTE) {
 
@@ -1862,7 +2032,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					cbOpcionesCriterio2.addItem("TIPO");
 					cbOpcionesCriterio2.addItem("SALDO MENOR A");
 					cbOpcionesCriterio2.addItem("FECHACREACION");
-					
+
 					JComboBox<String> cbOpcionesAgrupamiento = new JComboBox<String>();
 					cbOpcionesAgrupamiento.addItem("NINGUNO");
 					cbOpcionesAgrupamiento.addItem("TIPO");
@@ -2036,7 +2206,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						String criterio2p; 
 						String filtro1p;
 						String filtro2p;
-						
+
 						//si no hay primer criterio de filtro
 						if (cbOpcionesCriterio.getSelectedItem().equals("NINGUNO")) {
 							criterio1p = "id";
@@ -2124,9 +2294,9 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 	 * Consultar un cliente
 	 */
 	public void consultarCliente() {
-		
+
 	}
-	
+
 	/* ****************************************************************
 	 *                             REFC3
 	 *****************************************************************/
@@ -2141,7 +2311,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 			try 
 			{  
 				if (tipoUsuario==GERENTEGENERAL) {
-					
+
 					JTextField fechaInicio = new JTextField();
 					JTextField fechaFin = new JTextField();
 
@@ -2152,10 +2322,10 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					int option = JOptionPane.showConfirmDialog(null, message, "Ingreso de rango de fechas", JOptionPane.OK_CANCEL_OPTION);
 
 					List<Object []>top10= null;
-					
+
 					if (option == JOptionPane.OK_OPTION) {
 						top10= bancAndes.consultar10OperacionesGG(fechaInicio.getText(), fechaFin.getText());
-						
+
 						String resultado = "Resultado de la consulta: ";
 						int i=0;
 						for (Object [] opb : top10) {
@@ -2169,8 +2339,8 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 						resultado += "\n Consulta finalizada";
 						panelDatos.actualizarInterfaz(resultado);
-						
-						
+
+
 					}
 					else {
 						panelDatos.actualizarInterfaz("Consulta cancelada");
@@ -2187,12 +2357,12 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					int option = JOptionPane.showConfirmDialog(null, message, "Ingreso de rango de fechas", JOptionPane.OK_CANCEL_OPTION);
 
 					List<Object []>top10= null;
-					
+
 					if (option == JOptionPane.OK_OPTION) {
 						VOOficina voof = bancAndes.darOficinaPorGerenteDeOficina(loginUsuarioSistema);
-						
+
 						top10= bancAndes.consultar10OperacionesGOf(fechaInicio.getText(), fechaFin.getText(), voof.getId());
-						
+
 						String resultado = "Resultado de la consulta: ";
 						int i=0;
 						for (Object [] opb : top10) {
@@ -2206,15 +2376,15 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 						resultado += "\n Consulta finalizada";
 						panelDatos.actualizarInterfaz(resultado);
-						
-						
+
+
 					}
 					else {
 						panelDatos.actualizarInterfaz("Consulta cancelada");
 					}
 				}
-				
-				
+
+
 			} 
 			catch (Exception e) 
 			{
@@ -2286,13 +2456,13 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 								clientes= bancAndes. obtenerUsuarioMasActivoTipoOpGOf("cliente", (String) cbTipoOperacion.getSelectedItem(), voof.getId());
 								empleados= bancAndes. obtenerUsuarioMasActivoTipoOpGOf("empleado", (String) cbTipoOperacion.getSelectedItem(), voof.getId());
-								
+
 							}
 
 
 							if(((Number) clientes.get(0)[1]).intValue()>(((Number) empleados.get(0)[1]).intValue())) {
 								//Los clietes son mas activos
-								
+
 								int i=0;
 								for (Object [] ca : clientes) {
 									i++;
@@ -2546,7 +2716,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 			UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName( ) );
 			InterfazBancAndesApp interfaz = new InterfazBancAndesApp( );
 			new VentanaInicio(interfaz.bancAndes, interfaz);
-			
+
 		}
 		catch( Exception e )
 		{
