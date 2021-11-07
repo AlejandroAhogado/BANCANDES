@@ -1490,7 +1490,7 @@ public class PersistenciaBancAndes {
 		return sqlClienteProducto.darClienteProductoPorProducto (pmf.getPersistenceManager(), id);
 	}
 
-	public ClienteProducto darClienteProducto(float producto, String cliente) {
+	public ClienteProducto darClienteProducto(long producto, String cliente) {
 		return sqlClienteProducto.darClienteProducto (pmf.getPersistenceManager(), producto, cliente);
 	}
 

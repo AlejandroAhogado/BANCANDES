@@ -70,8 +70,8 @@ public class SQLPrestamo {
 
 	public long realizarPago(PersistenceManager pm, long idPrestamo, float montoPago) {
 		
-		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaPrestamos () + " SET saldoPendiente = saldoPendiente - montoPago WHERE id = ?");
-		q.setParameters(idPrestamo);
+		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaPrestamos () + " SET saldoPendiente = saldoPendiente - ? WHERE id = ?");
+		q.setParameters(montoPago, idPrestamo);
 		return  (long) q.executeUnique();
 	}
 	

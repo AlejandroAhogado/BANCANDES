@@ -40,10 +40,16 @@ public class SQLOperacionBancaria {
 
 	public long adicionarOperacionBancaria(PersistenceManager pm, long id, float valor, Date fecha, String cliente,
 			long productoOrigen, long productoDestino, String tipoOperacion, long puestoAtencion, String empleado) {
-		
-		 Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaOperacionesBancarias () + "( id, valor, fecha, cliente, productoOrigen, productoDestino,tipoOperacion, puestoAtencion, empleado) values (?,?,?,?,?,?,?,?,?)");
+		Query q;
+		if(productoDestino!=0) {
+			q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaOperacionesBancarias () + "( id, valor, fecha, cliente, productoOrigen, productoDestino,tipoOperacion, puestoAtencion, empleado) values (?,?,?,?,?,?,?,?,?)");
 	        q.setParameters(id, valor, fecha, cliente, productoOrigen,productoDestino,tipoOperacion, puestoAtencion, empleado);
-	        return (long) q.executeUnique();
+		}
+		else {
+			q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaOperacionesBancarias () + "( id, valor, fecha, cliente, productoOrigen, tipoOperacion, puestoAtencion, empleado) values (?,?,?,?,?,?,?,?)");
+	        q.setParameters(id, valor, fecha, cliente, productoOrigen,tipoOperacion, puestoAtencion, empleado);
+		}
+		return (long) q.executeUnique();
 	}
 	
 	//************************************************SENTENCIAS PARA REQUERIMIENTOS DE CONSULTA

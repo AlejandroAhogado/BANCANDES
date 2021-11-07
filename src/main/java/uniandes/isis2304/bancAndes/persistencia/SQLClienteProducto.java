@@ -62,7 +62,8 @@ public class SQLClienteProducto {
 		return (List<ClienteProducto>) q.executeList();
 	}
 
-	public ClienteProducto darClienteProducto(PersistenceManager pm, float producto, String cliente) {
+	public ClienteProducto darClienteProducto(PersistenceManager pm, long producto, String cliente) {
+		//System.out.println(producto +","+ cliente);
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pba.darTablaClientesProductos () + " WHERE producto = ? AND cliente = ?");
 		q.setParameters(producto, cliente);
 		q.setResultClass(ClienteProducto.class);

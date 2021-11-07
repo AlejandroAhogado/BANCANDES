@@ -1,6 +1,7 @@
 package uniandes.isis2304.bancAndes.persistencia;
 
 import java.sql.Date;
+import java.sql.Types;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -43,9 +44,17 @@ public class SQLCuenta {
 
 	public long adicionarCuenta(PersistenceManager pm, long id, int numeroCuenta, String estado, String tipo,
 			float saldo, Date fechaCreacion, Date fechaVencimiento, float tasaRendimiento, long oficina, String corporativo) {
-		Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaCuentas () + "(id, numeroCuenta, estado, tipo, saldo,fechaCreacion, fechaVencimiento, tasaRendimiento, oficina, corporativo) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-		q.setParameters(id, numeroCuenta, estado, tipo, saldo,
-				fechaCreacion, fechaVencimiento, tasaRendimiento, oficina, corporativo);
+		Query q;
+		if (fechaVencimiento!=null) {
+			q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaCuentas () + "(id, numeroCuenta, estado, tipo, saldo,fechaCreacion, fechaVencimiento, tasaRendimiento, oficina, corporativo) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			q.setParameters(id, numeroCuenta, estado, tipo, saldo,
+					fechaCreacion, fechaVencimiento, tasaRendimiento, oficina, corporativo);
+		}
+		else {
+			q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaCuentas () + "(id, numeroCuenta, estado, tipo, saldo,fechaCreacion, tasaRendimiento, oficina, corporativo) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			q.setParameters(id, numeroCuenta, estado, tipo, saldo,
+					fechaCreacion, tasaRendimiento, oficina, corporativo);
+		}
 		return (long) q.executeUnique();
 	}
 
@@ -77,8 +86,8 @@ public class SQLCuenta {
 	}
 
 	public long actualizarSaldoCuenta(PersistenceManager pm, long idCuenta, float cambioSaldo) {
-		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaCuentas () + " SET saldo = saldo+cambioSaldo WHERE id = ?");
-		q.setParameters(idCuenta);
+		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaCuentas () + " SET saldo = saldo + ? WHERE id = ?");
+		q.setParameters(cambioSaldo, idCuenta);
 		return (long) q.executeUnique();
 	}
 

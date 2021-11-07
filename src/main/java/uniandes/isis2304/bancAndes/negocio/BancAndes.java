@@ -424,6 +424,7 @@ public class BancAndes {
      {
                   log.info ("Buscando ClienteProducto por login del cliente: " + login);
                   List<ClienteProducto> cp= pba.darClienteProductoPorCliente (login);
+                  log.info ("Se encontro el ClienteProducto: " + cp);
                   return cp;
      }
      
@@ -438,6 +439,7 @@ public class BancAndes {
       {
                    log.info ("Buscando ClienteProducto por id del producto: " + id);
                    List<ClienteProducto> cp= pba.darClienteProductoPorProducto (id);
+                   log.info ("Se encontro el ClienteProducto: " + cp);
                    return cp;
       }
       /**
@@ -446,10 +448,11 @@ public class BancAndes {
        * @return Un ClienteProducto con el producto y login que conoce la aplicación, 
         * lleno con su información básica
        */
-       public ClienteProducto darClienteProducto (float producto, String cliente)
+       public ClienteProducto darClienteProducto (long producto, String cliente)
        {
                     log.info ("Buscando ClienteProducto por producto: " + producto+" y cliente: "+cliente);
                     ClienteProducto cp= pba.darClienteProducto (producto, cliente);
+                    log.info ("Se encontro el ClienteProducto : " +cp);
                     return cp;
        }
 	/* ****************************************************************
