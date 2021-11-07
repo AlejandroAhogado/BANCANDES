@@ -62,7 +62,7 @@ public class SQLPrestamo {
 
 	public long cerrarPrestamo(PersistenceManager pm, long idPrestamo) {
 	
-		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaPrestamos () + " SET cerrado = FALSE  WHERE id = ?");
+		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaPrestamos () + " SET cerrado = 'TRUE'  WHERE id = ?");
 		q.setParameters(idPrestamo);
 		return  (long) q.executeUnique();
 		
