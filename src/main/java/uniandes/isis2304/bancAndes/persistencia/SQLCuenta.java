@@ -105,9 +105,10 @@ public class SQLCuenta {
 		String sql = "SELECT cp.cliente, ct.* FROM ";
 		sql+= pba.darTablaClientesProductos () + " cp ";
 		sql+= "JOIN "+pba.darTablaCuentas() +" ct ";
-		sql+= "ON cp.producto = ct.id WHERE cliente = ? and ? ? ? and ? ? ? order by ? ?";
+		sql+= "ON cp.producto = ct.id WHERE cliente = ? and " + criterio + " " + signo1 + " ? ";
+		sql+= "and " + criterio2 + " " + signo2 + " ? order by "+ ordenamiento + "  asc";
 		Query q = pm.newQuery(SQL, sql);
-		q.setParameters(login,criterio,signo1 ,filtro,criterio2, signo2,filtro2, ordenamiento,tipoOrdenamiento);
+		q.setParameters(login, filtro, filtro2);
 		return q.executeList();
 	}
 	
