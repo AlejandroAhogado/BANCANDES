@@ -1175,4 +1175,70 @@ public class BancAndes {
 			return prestamos;
 		}
 		
+		
+		//-----------------------------RFC6
+		
+				/**
+				 * Implementación del rfc6 desde una cuenta de gerente general: consultar todas las operaciones en bancandes
+				 * @param criterio1p
+				 * @param signo1
+				 * @param filtro1p
+				 * @param criterio2p
+				 * @param signo2
+				 * @param filtro2p
+				 * @param ordenamiento
+				 * @param tipoOrden
+				 * @return todas las operaciones en bancandes segun filtros y criterio de ordenamiento
+				 */
+				public List<Object[]> consultarOperacionesGerenteGeneral(String criterio1p, String signo1, String filtro1p,
+						String criterio2p, String signo2, String filtro2p, String ordenamiento, String tipoOrden) {
+					log.info ("Consultando todas las operaciones");
+					List<Object []> prestamos= pba.consultarOperacionesGerenteGeneral( criterio1p, signo1,filtro1p,
+							 criterio2p, signo2, filtro2p,ordenamiento,tipoOrden);
+					log.info ("Se encontraron todas las operaciones");
+					return prestamos;
+				}
+
+				/**
+				 * Implementación del rfc6 desde una cuenta de gerente de oficina: consultar todas las operaciones en la oficina del gerente de oficina
+				 * @param criterio1p
+				 * @param signo1
+				 * @param filtro1p
+				 * @param criterio2p
+				 * @param signo2
+				 * @param filtro2p
+				 * @param ordenamiento
+				 * @param tipoOrden
+				 * @return todas las operaciones en bancandes segun filtros y criterio de ordenamiento
+				 */
+				public List<Object[]> consultarOperacionesGerenteOficina(String idOficina, String criterio1p, String signo1, String filtro1p,
+						String criterio2p, String signo2, String filtro2p, String ordenamiento, String tipoOrden) {
+					log.info ("Consultando todas las operaciones de la oficina: "+idOficina);
+					List<Object []> prestamos= pba.consultarOperacionesGerenteOficina(idOficina, criterio1p, signo1,filtro1p,
+							 criterio2p, signo2, filtro2p,ordenamiento,tipoOrden);
+					log.info ("Se encontraron todas las operaciones");
+					return prestamos;
+				}
+				
+				/**
+				 * Implementación del rfc6 desde una cuenta de un cliente: consultar todas las operaciones en bancandes de ese cliente
+				 * @param criterio1p
+				 * @param signo1
+				 * @param filtro1p
+				 * @param criterio2p
+				 * @param signo2
+				 * @param filtro2p
+				 * @param ordenamiento
+				 * @param tipoOrden
+				 * @return todas las operaciones en bancandes segun filtros y criterio de ordenamiento
+				 */
+				public List<Object[]> consultarOperacionesCliente(String loginCliente, String criterio1p, String signo1, String filtro1p,
+						String criterio2p, String signo2, String filtro2p, String ordenamiento, String tipoOrden) {
+					log.info ("Consultando todas las operaciones del cliente: "+loginCliente);
+					List<Object []> prestamos= pba.consultarOperacionesCliente(loginCliente,criterio1p, signo1,filtro1p,
+							 criterio2p, signo2, filtro2p,ordenamiento,tipoOrden);
+					log.info ("Se encontraron todas las operaciones del cliente");
+					return prestamos;
+				}
+		
 }

@@ -1880,6 +1880,27 @@ public class PersistenciaBancAndes {
 				 criterio2p, signo2, filtro2p,ordenamiento,tipoOrden);
 	}
 
+	//***************************************************RFC6************************************************************
+		public List<Object[]> consultarOperacionesGerenteGeneral(String criterio1p, String signo1, String filtro1p,
+				String criterio2p, String signo2, String filtro2p, String ordenamiento, String tipoOrden) {
+			return sqlOperacionBancaria.consultarOperacionesGerenteGeneral(pmf.getPersistenceManager(), criterio1p, signo1,filtro1p,
+					 criterio2p, signo2, filtro2p,ordenamiento,tipoOrden);
+			
+		}
+
+
+		public List<Object[]> consultarOperacionesGerenteOficina(String idOficina, String criterio1p, String signo1,
+				String filtro1p, String criterio2p, String signo2, String filtro2p, String ordenamiento, String tipoOrden) {
+			return sqlOperacionBancaria.consultarOperacionesGerenteOficina(pmf.getPersistenceManager(), idOficina, criterio1p, signo1,filtro1p,
+					 criterio2p, signo2, filtro2p,ordenamiento,tipoOrden);
+		}
+
+
+		public List<Object[]> consultarOperacionesCliente(String loginCliente, String criterio1p, String signo1,
+				String filtro1p, String criterio2p, String signo2, String filtro2p, String ordenamiento, String tipoOrden) {
+			return sqlOperacionBancaria.consultarOperacionesCliente(pmf.getPersistenceManager(), loginCliente,criterio1p, signo1,filtro1p,
+					 criterio2p, signo2, filtro2p,ordenamiento,tipoOrden);
+		}
 
 
 

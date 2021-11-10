@@ -222,4 +222,82 @@ public class SQLOperacionBancaria {
 		return q.executeList();
 	}
 
+	//----------------------------------RFC6--------------------------------------------------
+	/**
+	 * @param pm
+	 * @param criterio1
+	 * @param signo1
+	 * @param filtro1
+	 * @param criterio2
+	 * @param signo2
+	 * @param filtro2
+	 * @param ordenamiento
+	 * @param tipoOrden
+	 * @return una lista de objetos con las operaciones de bancAndes
+	 */
+	public List<Object[]> consultarOperacionesGerenteGeneral(PersistenceManager pm, String criterio1,
+			String signo1, String filtro1, String criterio2, String signo2, String filtro2, String ordenamiento,
+			String tipoOrden) {
+		String sql = "SELECT opb.*, pao.oficina FROM ";
+		sql+= pba.darTablaOperacionesBancarias () + " opb ";
+		sql+= "JOIN "+pba.darTablaPuestosAtencionOficina() +" pao ";
+		sql+= "ON pao.id = opb.puestoAtencion WHERE " + criterio1 + " " + signo1 + " ? ";
+		sql+= "and " + criterio2 + " " + signo2 + " ? order by "+ ordenamiento + " " + tipoOrden;
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(filtro1, filtro2);
+		return q.executeList();
+	}
+
+	/**
+	 * @param pm
+	 * @param idOficina
+	 * @param criterio1
+	 * @param signo1
+	 * @param filtro1
+	 * @param criterio2
+	 * @param signo2
+	 * @param filtro2
+	 * @param ordenamiento
+	 * @param tipoOrden
+	 * @return una lista de objetos con las operaciones de la oficina del gerente de oficina que consulta
+	 */
+	public List<Object[]> consultarOperacionesGerenteOficina(PersistenceManager pm, String idOficina,
+			String criterio1, String signo1, String filtro1, String criterio2, String signo2, String filtro2,
+			String ordenamiento, String tipoOrden) {
+		String sql = "SELECT opb.*, pao.oficina FROM ";
+		sql+= pba.darTablaOperacionesBancarias () + " opb ";
+		sql+= "JOIN "+pba.darTablaPuestosAtencionOficina() +" pao ";
+		sql+= "ON pao.id = opb.puestoAtencion WHERE oficina = ? and " + criterio1 + " " + signo1 + " ? ";
+		sql+= "and " + criterio2 + " " + signo2 + " ? order by "+ ordenamiento + " " + tipoOrden;
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(idOficina, filtro1, filtro2);
+		return q.executeList();
+	}
+
+	/**
+	 * @param pm
+	 * @param loginCliente
+	 * @param criterio1
+	 * @param signo1
+	 * @param filtro1
+	 * @param criterio2
+	 * @param signo2
+	 * @param filtro2
+	 * @param ordenamiento
+	 * @param tipoOrden
+	 * @return una lista de objetos con las operaciones del cliente que realiza la consulta
+	 */
+	public List<Object[]> consultarOperacionesCliente(PersistenceManager pm, String loginCliente,
+			String criterio1, String signo1, String filtro1, String criterio2, String signo2, String filtro2,
+			String ordenamiento, String tipoOrden) {
+		String sql = "SELECT opb.*, pao.oficina FROM ";
+		sql+= pba.darTablaOperacionesBancarias () + " opb ";
+		sql+= "JOIN "+pba.darTablaPuestosAtencionOficina() +" pao ";
+		sql+= "ON pao.id = opb.puestoAtencion WHERE cliente = ? and " + criterio1 + " " + signo1 + " ? ";
+		sql+= "and " + criterio2 + " " + signo2 + " ? order by "+ ordenamiento + " " + tipoOrden;
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(loginCliente, filtro1, filtro2);
+		return q.executeList();
+	}
+
 }

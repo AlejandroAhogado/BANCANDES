@@ -3194,9 +3194,8 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 	 *                             REFC5
 	 *****************************************************************/
 	
-// PENDIENTE POR TERMINAR (???)
 	/**
-	 * Consultar las cuentas en bancAndes
+	 * Consultar los prestamos en bancAndes
 	 */
 	public void consultarPrestamos( )
 	{
@@ -3655,22 +3654,425 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 	
 	
 	
+	/* ****************************************************************
+	 *                             REFC6
+	 *****************************************************************/
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/**
+	 * Consultar las operaciones en bancAndes
+	 */
+	public void consultarOperaciones( )
+	{
+		if (tipoUsuario==CAJERO) {
+			mensajeErrorPermisos();
+		}
+		else {
+			try {
+				String resultado = "Resultado de la consulta: ";
+				if(this.tipoUsuario==GERENTEDEOFICINA) {
+
+					JComboBox<String> cbOpcionesCriterio = new JComboBox<String>();
+					cbOpcionesCriterio.addItem("NINGUNO");
+					cbOpcionesCriterio.addItem("TIPOOPERACION");
+					cbOpcionesCriterio.addItem("PRODUCTO");
+					cbOpcionesCriterio.addItem("VALOR MAYOR A");//NL1
+					cbOpcionesCriterio.addItem("FECHA");
+					cbOpcionesCriterio.addItem("OFICINA");
+					cbOpcionesCriterio.addItem("CLIENTE");
+
+					JComboBox<String> cbOpcionesCriterio2 = new JComboBox<String>();
+					cbOpcionesCriterio2.addItem("NINGUNO");
+					cbOpcionesCriterio2.addItem("TIPOOPERACION");
+					cbOpcionesCriterio2.addItem("PRODUCTO");
+					cbOpcionesCriterio2.addItem("VALOR MENOR A");//NL2
+					cbOpcionesCriterio2.addItem("FECHA");
+					cbOpcionesCriterio2.addItem("OFICINA");
+					cbOpcionesCriterio2.addItem("CLIENTE");
+
+					JComboBox<String> cbOpcionesOrdenamiento = new JComboBox<String>();
+					cbOpcionesOrdenamiento.addItem("ID");//NL3
+					cbOpcionesOrdenamiento.addItem("VALOR");
+					cbOpcionesOrdenamiento.addItem("TIPOOPERACION");
+					cbOpcionesOrdenamiento.addItem("OFICINA");
+					cbOpcionesOrdenamiento.addItem("CLIENTE");
+					cbOpcionesOrdenamiento.addItem("FECHA");
+
+
+					JComboBox<String> cbOpcionesTipoOrdenamiento = new JComboBox<String>();
+					cbOpcionesTipoOrdenamiento.addItem("ASC");
+					cbOpcionesTipoOrdenamiento.addItem("DESC");
+
+					JTextField filtro1 = new JTextField();
+					JTextField filtro2 = new JTextField();
+
+					Object[] message = {
+							"Primer Criterio:", cbOpcionesCriterio,
+							"Primer Filtro:", filtro1,
+							"Segundo Criterio:", cbOpcionesCriterio2,
+							"Segundo Filtro:", filtro2,
+							"Ordenamiento:", cbOpcionesOrdenamiento,
+							"Tipo Ordenamiento:", cbOpcionesTipoOrdenamiento
+
+					};
+
+					int option = JOptionPane.showConfirmDialog(null, message, "Consulta de operaciones", JOptionPane.OK_CANCEL_OPTION);
+
+					if (option == JOptionPane.OK_OPTION) {
+						List<Object []> lvo = null;
+
+						VOOficina voof = bancAndes.darOficinaPorGerenteDeOficina(loginUsuarioSistema);
+						
+						String signo1 = cbOpcionesCriterio.getSelectedItem().equals("VALOR MAYOR A")
+								? ">" : "=";
+						String signo2 = cbOpcionesCriterio2.getSelectedItem().equals("VALOR MENOR A")
+								? "<" : "=";
+				
+											
+						String criterio1p = (String) cbOpcionesCriterio.getSelectedItem();
+						String criterio2p = (String) cbOpcionesCriterio2.getSelectedItem();
+						
+						String filtro1p = (String) filtro1.getText();
+						String filtro2p = (String) filtro2.getText();
+						
+						//CAMBIO DE NOMBRES NL A LOS DE LAS TABLAS
+						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("VALOR MAYOR A") ? "VALOR" : criterio1p;
+						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("VALOR MENOR A") ? "VALOR" : criterio2p;
+						
+						//Desambiguar id de operaciones bancarias (no de puestos de atencion)
+						String ordenamiento = cbOpcionesOrdenamiento.getSelectedItem().equals("ID") ? "OPB.ID" : 
+							(String) cbOpcionesOrdenamiento.getSelectedItem();
+						
+						//si no hay primer criterio de filtro
+						if (cbOpcionesCriterio.getSelectedItem().equals("NINGUNO")) {
+							criterio1p = "opb.id";
+							signo1= ">";
+							filtro1p = "0";
+						}
+
+						//si no hay segundo criterio de filtro
+						if (cbOpcionesCriterio2.getSelectedItem().equals("NINGUNO")) {
+							criterio2p = "opb.id";
+							signo2= ">";
+							filtro2p = "0";
+						}
+
+						
+						try {
+							lvo = bancAndes.consultarOperacionesGerenteOficina(
+									String.valueOf(voof.getId()), 
+									criterio1p,
+									signo1, 
+									filtro1p,
+									criterio2p,
+									signo2,
+									filtro2p,
+									ordenamiento,
+									(String) cbOpcionesTipoOrdenamiento.getSelectedItem()
+									);
+						} catch (Exception e) {
+							e.printStackTrace();
+							throw new Exception ("Error en la consulta");
+						}
+						
+						//Impresion del resultado
+						int i=0;
+						for (Object [] opb : lvo) {
+						
+							i++;
+							resultado += "\n Item "+i+": ";
+							resultado+= "ID operacion: "+ opb[0];
+							resultado+= ", Valor: "+ opb[1];
+							resultado+= ", Fecha: "+ opb[2];
+							resultado+= ", Cliente: "+ opb[3];
+							resultado+= ", Producto: "+ opb[4];
+							resultado+= ", Tipo de operacion:"+ opb[5];
+							resultado+= ", Puesto de atencion:  "+ opb[6];
+							resultado+= ", Empleado:  "+ opb[7];
+							resultado+= ", Oficina: "+ opb[8];
+						}
+						panelDatos.actualizarInterfaz(resultado);
+
+					} 	
+
+					if (option == JOptionPane.CANCEL_OPTION)
+					{			        	    
+						panelDatos.actualizarInterfaz("Consulta cancelada");			        	    			
+					}
+
+				}
+
+
+
+				else if(this.tipoUsuario==CLIENTE) {
+
+					JComboBox<String> cbOpcionesCriterio = new JComboBox<String>();
+					cbOpcionesCriterio.addItem("NINGUNO");
+					cbOpcionesCriterio.addItem("TIPOOPERACION");
+					cbOpcionesCriterio.addItem("PRODUCTO");
+					cbOpcionesCriterio.addItem("VALOR MAYOR A");//NL1
+					cbOpcionesCriterio.addItem("FECHA");
+					cbOpcionesCriterio.addItem("OFICINA");
+					cbOpcionesCriterio.addItem("CLIENTE");
+
+					JComboBox<String> cbOpcionesCriterio2 = new JComboBox<String>();
+					cbOpcionesCriterio2.addItem("NINGUNO");
+					cbOpcionesCriterio2.addItem("TIPOOPERACION");
+					cbOpcionesCriterio2.addItem("PRODUCTO");
+					cbOpcionesCriterio2.addItem("VALOR MENOR A");//NL2
+					cbOpcionesCriterio2.addItem("FECHA");
+					cbOpcionesCriterio2.addItem("OFICINA");
+					cbOpcionesCriterio2.addItem("CLIENTE");
+
+					JComboBox<String> cbOpcionesOrdenamiento = new JComboBox<String>();
+					cbOpcionesOrdenamiento.addItem("ID");//NL3
+					cbOpcionesOrdenamiento.addItem("VALOR");
+					cbOpcionesOrdenamiento.addItem("TIPOOPERACION");
+					cbOpcionesOrdenamiento.addItem("OFICINA");
+					cbOpcionesOrdenamiento.addItem("CLIENTE");
+					cbOpcionesOrdenamiento.addItem("FECHA");
+
+
+					JComboBox<String> cbOpcionesTipoOrdenamiento = new JComboBox<String>();
+					cbOpcionesTipoOrdenamiento.addItem("ASC");
+					cbOpcionesTipoOrdenamiento.addItem("DESC");
+
+					JTextField filtro1 = new JTextField();
+					JTextField filtro2 = new JTextField();
+
+					Object[] message = {
+							"Primer Criterio:", cbOpcionesCriterio,
+							"Primer Filtro:", filtro1,
+							"Segundo Criterio:", cbOpcionesCriterio2,
+							"Segundo Filtro:", filtro2,
+							"Ordenamiento:", cbOpcionesOrdenamiento,
+							"Tipo Ordenamiento:", cbOpcionesTipoOrdenamiento
+
+					};
+
+					int option = JOptionPane.showConfirmDialog(null, message, "Consulta de operaciones", JOptionPane.OK_CANCEL_OPTION);
+
+					if (option == JOptionPane.OK_OPTION) {
+						List<Object []> lvo = null;
+
+									
+						String signo1 = cbOpcionesCriterio.getSelectedItem().equals("VALOR MAYOR A")
+								? ">" : "=";
+						String signo2 = cbOpcionesCriterio2.getSelectedItem().equals("VALOR MENOR A")
+								? "<" : "=";
+				
+											
+						String criterio1p = (String) cbOpcionesCriterio.getSelectedItem();
+						String criterio2p = (String) cbOpcionesCriterio2.getSelectedItem();
+						
+						String filtro1p = (String) filtro1.getText();
+						String filtro2p = (String) filtro2.getText();
+						
+						//CAMBIO DE NOMBRES NL A LOS DE LAS TABLAS
+						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("VALOR MAYOR A") ? "VALOR" : criterio1p;
+						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("VALOR MENOR A") ? "VALOR" : criterio2p;
+						//Desambiguar id de operaciones bancarias (no de puestos de atencion)
+						String ordenamiento = cbOpcionesOrdenamiento.getSelectedItem().equals("ID") ? "OPB.ID" : 
+							(String) cbOpcionesOrdenamiento.getSelectedItem();
+
+						//si no hay primer criterio de filtro
+						if (cbOpcionesCriterio.getSelectedItem().equals("NINGUNO")) {
+							criterio1p = "id";
+							signo1= ">";
+							filtro1p = "0";
+						}
+
+						//si no hay segundo criterio de filtro
+						if (cbOpcionesCriterio2.getSelectedItem().equals("NINGUNO")) {
+							criterio2p = "id";
+							signo2= ">";
+							filtro2p = "0";
+						}
+
+						
+						try {
+							lvo = bancAndes.consultarOperacionesCliente(
+									this.loginUsuarioSistema ,
+									criterio1p,
+									signo1, 
+									filtro1p,
+									criterio2p,
+									signo2,
+									filtro2p,
+									ordenamiento,
+									(String) cbOpcionesTipoOrdenamiento.getSelectedItem()
+									);
+						} catch (Exception e) {
+							throw new Exception ("Error en la consulta");
+						}
+						
+						//Impresion del resultado
+						int i=0;
+						for (Object [] opb : lvo) {
+						
+							i++;
+							resultado += "\n Item "+i+": ";
+							resultado+= "ID operacion: "+ opb[0];
+							resultado+= ", Valor: "+ opb[1];
+							resultado+= ", Fecha: "+ opb[2];
+							resultado+= ", Cliente: "+ opb[3];
+							resultado+= ", Producto: "+ opb[4];
+							resultado+= ", Tipo de operacion:"+ opb[5];
+							resultado+= ", Puesto de atencion:  "+ opb[6];
+							resultado+= ", Empleado:  "+ opb[7];
+							resultado+= ", Oficina: "+ opb[8];
+						}
+						panelDatos.actualizarInterfaz(resultado);
+
+					} 	
+
+					if (option == JOptionPane.CANCEL_OPTION)
+					{			        	    
+						panelDatos.actualizarInterfaz("Consulta cancelada");			        	    			
+					}
+				}
+
+
+
+
+
+
+
+				else if(this.tipoUsuario==GERENTEGENERAL) {
+
+
+					JComboBox<String> cbOpcionesCriterio = new JComboBox<String>();
+					cbOpcionesCriterio.addItem("NINGUNO");
+					cbOpcionesCriterio.addItem("TIPOOPERACION");
+					cbOpcionesCriterio.addItem("PRODUCTO");
+					cbOpcionesCriterio.addItem("VALOR MAYOR A");//NL1
+					cbOpcionesCriterio.addItem("FECHA");
+					cbOpcionesCriterio.addItem("OFICINA");
+					cbOpcionesCriterio.addItem("CLIENTE");
+
+					JComboBox<String> cbOpcionesCriterio2 = new JComboBox<String>();
+					cbOpcionesCriterio2.addItem("NINGUNO");
+					cbOpcionesCriterio2.addItem("TIPOOPERACION");
+					cbOpcionesCriterio2.addItem("PRODUCTO");
+					cbOpcionesCriterio2.addItem("VALOR MENOR A");//NL2
+					cbOpcionesCriterio2.addItem("FECHA");
+					cbOpcionesCriterio2.addItem("OFICINA");
+					cbOpcionesCriterio2.addItem("CLIENTE");
+
+					JComboBox<String> cbOpcionesOrdenamiento = new JComboBox<String>();
+					cbOpcionesOrdenamiento.addItem("ID");//NL3
+					cbOpcionesOrdenamiento.addItem("VALOR");
+					cbOpcionesOrdenamiento.addItem("TIPOOPERACION");
+					cbOpcionesOrdenamiento.addItem("OFICINA");
+					cbOpcionesOrdenamiento.addItem("CLIENTE");
+					cbOpcionesOrdenamiento.addItem("FECHA");
+
+
+					JComboBox<String> cbOpcionesTipoOrdenamiento = new JComboBox<String>();
+					cbOpcionesTipoOrdenamiento.addItem("ASC");
+					cbOpcionesTipoOrdenamiento.addItem("DESC");
+
+					JTextField filtro1 = new JTextField();
+					JTextField filtro2 = new JTextField();
+
+					Object[] message = {
+							"Primer Criterio:", cbOpcionesCriterio,
+							"Primer Filtro:", filtro1,
+							"Segundo Criterio:", cbOpcionesCriterio2,
+							"Segundo Filtro:", filtro2,
+							"Ordenamiento:", cbOpcionesOrdenamiento,
+							"Tipo Ordenamiento:", cbOpcionesTipoOrdenamiento
+
+					};
+
+					int option = JOptionPane.showConfirmDialog(null, message, "Consulta de operaciones", JOptionPane.OK_CANCEL_OPTION);
+
+					if (option == JOptionPane.OK_OPTION) {
+						List<Object []> lvo = null;
+
+									
+						String signo1 = cbOpcionesCriterio.getSelectedItem().equals("VALOR MAYOR A")
+								? ">" : "=";
+						String signo2 = cbOpcionesCriterio2.getSelectedItem().equals("VALOR MENOR A")
+								? "<" : "=";
+				
+											
+						String criterio1p = (String) cbOpcionesCriterio.getSelectedItem();
+						String criterio2p = (String) cbOpcionesCriterio2.getSelectedItem();
+						
+						String filtro1p = (String) filtro1.getText();
+						String filtro2p = (String) filtro2.getText();
+						
+						//CAMBIO DE NOMBRES NL A LOS DE LAS TABLAS
+						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("VALOR MAYOR A") ? "VALOR" : criterio1p;
+						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("VALOR MENOR A") ? "VALOR" : criterio2p;
+						//Desambiguar id de operaciones bancarias (no de puestos de atencion)
+						String ordenamiento = cbOpcionesOrdenamiento.getSelectedItem().equals("ID") ? "OPB.ID" : 
+							(String) cbOpcionesOrdenamiento.getSelectedItem();
+
+						//si no hay primer criterio de filtro
+						if (cbOpcionesCriterio.getSelectedItem().equals("NINGUNO")) {
+							criterio1p = "id";
+							signo1= ">";
+							filtro1p = "0";
+						}
+
+						//si no hay segundo criterio de filtro
+						if (cbOpcionesCriterio2.getSelectedItem().equals("NINGUNO")) {
+							criterio2p = "id";
+							signo2= ">";
+							filtro2p = "0";
+						}
+
+						
+						try {
+							lvo = bancAndes.consultarOperacionesGerenteGeneral(
+									criterio1p,
+									signo1, 
+									filtro1p,
+									criterio2p,
+									signo2,
+									filtro2p,
+									ordenamiento,
+									(String) cbOpcionesTipoOrdenamiento.getSelectedItem()
+									);
+						} catch (Exception e) {
+							throw new Exception ("Error en la consulta");
+						}
+						
+						//Impresion del resultado
+						int i=0;
+						for (Object [] opb : lvo) {
+						
+							i++;
+							resultado += "\n Item "+i+": ";
+							resultado+= "ID operacion: "+ opb[0];
+							resultado+= ", Valor: "+ opb[1];
+							resultado+= ", Fecha: "+ opb[2];
+							resultado+= ", Cliente: "+ opb[3];
+							resultado+= ", Producto: "+ opb[4];
+							resultado+= ", Tipo de operacion:"+ opb[5];
+							resultado+= ", Puesto de atencion:  "+ opb[6];
+							resultado+= ", Empleado:  "+ opb[7];
+							resultado+= ", Oficina: "+ opb[8];
+						}
+						panelDatos.actualizarInterfaz(resultado);
+
+					} 	
+
+					if (option == JOptionPane.CANCEL_OPTION)
+					{			        	    
+						panelDatos.actualizarInterfaz("Consulta cancelada");			        	    			
+					}
+				}
+
+			}
+			catch (Exception e) 
+			{
+				                                      e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+			}}
+	}
 	
 	/**
 	 * Genera una cadena de caracteres con la descripción de la excepcion e, haciendo énfasis en las excepcionsde JDO
