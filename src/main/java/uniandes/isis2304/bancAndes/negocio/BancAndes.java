@@ -1109,6 +1109,70 @@ public class BancAndes {
 			List<Object []> usuarios= pba.obtenerUsuarioMasActivoTipoOpGOf(tipoUsuario, tipoOperacion, idOficina);
 			return usuarios;
 			}
+		
+		//-----------------------------RFC5
+		
+		/**
+		 * Implementación del rfc5 desde una cuenta de gerente general: consultar todos los prestamos en bancandes
+		 * @param criterio1p
+		 * @param signo1
+		 * @param filtro1p
+		 * @param criterio2p
+		 * @param signo2
+		 * @param filtro2p
+		 * @param ordenamiento
+		 * @param tipoOrden
+		 * @return todos los prestamos en bancandes segun filtros y criterio de ordenamiento
+		 */
+		public List<Object[]> consultarPrestamosGerenteGeneral(String criterio1p, String signo1, String filtro1p,
+				String criterio2p, String signo2, String filtro2p, String ordenamiento, String tipoOrden) {
+			log.info ("Consultando todos los prestamos");
+			List<Object []> prestamos= pba.consultarPrestamosGerenteGeneral( criterio1p, signo1,filtro1p,
+					 criterio2p, signo2, filtro2p,ordenamiento,tipoOrden);
+			log.info ("Se encontraron todos los prestamos");
+			return prestamos;
+		}
 
+		/**
+		 * Implementación del rfc5 desde una cuenta de gerente de oficina: consultar todos los prestamos en la oficina del gerente de oficina
+		 * @param criterio1p
+		 * @param signo1
+		 * @param filtro1p
+		 * @param criterio2p
+		 * @param signo2
+		 * @param filtro2p
+		 * @param ordenamiento
+		 * @param tipoOrden
+		 * @return todos los prestamos en bancandes segun filtros y criterio de ordenamiento
+		 */
+		public List<Object[]> consultarPrestamosGerenteOficina(String idOficina, String criterio1p, String signo1, String filtro1p,
+				String criterio2p, String signo2, String filtro2p, String ordenamiento, String tipoOrden) {
+			log.info ("Consultando todos los prestamos de la oficina: "+idOficina);
+			List<Object []> prestamos= pba.consultarPrestamosGerenteOficina(idOficina, criterio1p, signo1,filtro1p,
+					 criterio2p, signo2, filtro2p,ordenamiento,tipoOrden);
+			log.info ("Se encontraron todos los prestamos");
+			return prestamos;
+		}
+		
+		/**
+		 * Implementación del rfc5 desde una cuenta de un cliente: consultar todos los prestamos en bancandes de ese cliente
+		 * @param criterio1p
+		 * @param signo1
+		 * @param filtro1p
+		 * @param criterio2p
+		 * @param signo2
+		 * @param filtro2p
+		 * @param ordenamiento
+		 * @param tipoOrden
+		 * @return todos los prestamos en bancandes segun filtros y criterio de ordenamiento
+		 */
+		public List<Object[]> consultarPrestamosCliente(String loginCliente, String criterio1p, String signo1, String filtro1p,
+				String criterio2p, String signo2, String filtro2p, String ordenamiento, String tipoOrden) {
+			log.info ("Consultando todos los prestamos del cliente: "+loginCliente);
+			List<Object []> prestamos= pba.consultarPrestamosCliente(loginCliente,criterio1p, signo1,filtro1p,
+					 criterio2p, signo2, filtro2p,ordenamiento,tipoOrden);
+			log.info ("Se encontraron todos los prestamos del cliente");
+			return prestamos;
+		}
 		
 }

@@ -3,6 +3,7 @@ package uniandes.isis2304.bancAndes.persistencia;
 
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -73,6 +74,84 @@ public class SQLPrestamo {
 		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaPrestamos () + " SET saldoPendiente = saldoPendiente - ? WHERE id = ?");
 		q.setParameters(montoPago, idPrestamo);
 		return  (long) q.executeUnique();
+	}
+
+	//***********************************MÉTODOS PARA EL RFC5*******************************************************
+	/**
+	 * @param pm
+	 * @param criterio1
+	 * @param signo1
+	 * @param filtro1
+	 * @param criterio2
+	 * @param signo2
+	 * @param filtro2
+	 * @param ordenamiento
+	 * @param tipoOrden
+	 * @return una lista de objetos con los prestamos+cliente de todo bancandes
+	 */
+	public List<Object[]> consultarPrestamosGerenteGeneral(PersistenceManager pm, String criterio1,
+			String signo1, String filtro1, String criterio2, String signo2, String filtro2, String ordenamiento,
+			String tipoOrden) {
+		String sql = "SELECT cp.cliente, pr.* FROM ";
+		sql+= pba.darTablaClientesProductos () + " cp ";
+		sql+= "JOIN "+pba.darTablaPrestamos() +" pr ";
+		sql+= "ON cp.producto = pr.id WHERE " + criterio1 + " " + signo1 + " ? ";
+		sql+= "and " + criterio2 + " " + signo2 + " ? order by "+ ordenamiento + " " + tipoOrden;
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(filtro1, filtro2);
+		return q.executeList();
+	}
+
+	/**
+	 * @param pm
+	 * @param idOficina
+	 * @param criterio1
+	 * @param signo1
+	 * @param filtro1
+	 * @param criterio2
+	 * @param signo2
+	 * @param filtro2
+	 * @param ordenamiento
+	 * @param tipoOrden
+	 * @return una lista de objetos con los prestamos+cliente de la oficina que realiza la consulta
+	 */
+	public List<Object[]> consultarPrestamosGerenteOficina(PersistenceManager pm, String idOficina,
+			String criterio1, String signo1, String filtro1, String criterio2, String signo2, String filtro2,
+			String ordenamiento, String tipoOrden) {
+		String sql = "SELECT cp.cliente, pr.* FROM ";
+		sql+= pba.darTablaClientesProductos () + " cp ";
+		sql+= "JOIN "+pba.darTablaPrestamos() +" pr ";
+		sql+= "ON cp.producto = pr.id WHERE oficina = ? and " + criterio1 + " " + signo1 + " ? ";
+		sql+= "and " + criterio2 + " " + signo2 + " ? order by "+ ordenamiento + " " + tipoOrden;
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(idOficina, filtro1, filtro2);
+		return q.executeList();
+	}
+
+	/**
+	 * @param pm
+	 * @param loginCliente
+	 * @param criterio1
+	 * @param signo1
+	 * @param filtro1
+	 * @param criterio2
+	 * @param signo2
+	 * @param filtro2
+	 * @param ordenamiento
+	 * @param tipoOrden
+	 * @return una lista de objetos con los prestamos+cliente del cliente que realiza la consulta
+	 */
+	public List<Object[]> consultarPrestamosCliente(PersistenceManager pm, String loginCliente,
+			String criterio1, String signo1, String filtro1, String criterio2, String signo2, String filtro2,
+			String ordenamiento, String tipoOrden) {
+		String sql = "SELECT cp.cliente, pr.* FROM ";
+		sql+= pba.darTablaClientesProductos () + " cp ";
+		sql+= "JOIN "+pba.darTablaPrestamos() +" pr ";
+		sql+= "ON cp.producto = pr.id WHERE cliente = ? and " + criterio1 + " " + signo1 + " ? ";
+		sql+= "and " + criterio2 + " " + signo2 + " ? order by "+ ordenamiento + " " + tipoOrden;
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(loginCliente, filtro1, filtro2);
+		return q.executeList();
 	}
 	
 	

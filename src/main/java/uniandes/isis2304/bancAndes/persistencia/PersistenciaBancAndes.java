@@ -1858,6 +1858,28 @@ public class PersistenciaBancAndes {
 
 	}
 
+	//***************************************************RFC5************************************************************
+	public List<Object[]> consultarPrestamosGerenteGeneral(String criterio1p, String signo1, String filtro1p,
+			String criterio2p, String signo2, String filtro2p, String ordenamiento, String tipoOrden) {
+		return sqlPrestamo.consultarPrestamosGerenteGeneral(pmf.getPersistenceManager(), criterio1p, signo1,filtro1p,
+				 criterio2p, signo2, filtro2p,ordenamiento,tipoOrden);
+		
+	}
+
+
+	public List<Object[]> consultarPrestamosGerenteOficina(String idOficina, String criterio1p, String signo1,
+			String filtro1p, String criterio2p, String signo2, String filtro2p, String ordenamiento, String tipoOrden) {
+		return sqlPrestamo.consultarPrestamosGerenteOficina(pmf.getPersistenceManager(), idOficina, criterio1p, signo1,filtro1p,
+				 criterio2p, signo2, filtro2p,ordenamiento,tipoOrden);
+	}
+
+
+	public List<Object[]> consultarPrestamosCliente(String loginCliente, String criterio1p, String signo1,
+			String filtro1p, String criterio2p, String signo2, String filtro2p, String ordenamiento, String tipoOrden) {
+		return sqlPrestamo.consultarPrestamosCliente(pmf.getPersistenceManager(), loginCliente,criterio1p, signo1,filtro1p,
+				 criterio2p, signo2, filtro2p,ordenamiento,tipoOrden);
+	}
+
 
 
 

@@ -2279,7 +2279,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 	}
 
 	/* ****************************************************************
-	 *                             REF11
+	 *                             REF12
 	 *****************************************************************/
 	/**
 	 * Registrar operacion sobre prestamo v2 (incluye hacer pago desde una cuenta)
@@ -2519,7 +2519,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						List<Object []> lvo = null;
 
 						VOOficina voof = bancAndes.darOficinaPorGerenteDeOficina(loginUsuarioSistema);
-
+					
 						String signo1 = cbOpcionesCriterio.getSelectedItem().equals("SALDO MAYOR A") ? ">" : "=";
 						String signo2 = cbOpcionesCriterio2.getSelectedItem().equals("SALDO MENOR A") ? "<" : "=";
 
@@ -3190,23 +3190,11 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	/* ****************************************************************
 	 *                             REFC5
 	 *****************************************************************/
 	
-// PENDIENTE POR TERMINAR
+// PENDIENTE POR TERMINAR (???)
 	/**
 	 * Consultar las cuentas en bancAndes
 	 */
@@ -3224,31 +3212,28 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					JComboBox<String> cbOpcionesCriterio = new JComboBox<String>();
 					cbOpcionesCriterio.addItem("NINGUNO");
 					cbOpcionesCriterio.addItem("CERRADO");
-					cbOpcionesCriterio.addItem("SALDO MAYOR A");
+					cbOpcionesCriterio.addItem("SALDO PENDIENTE MAYOR A");//NL1
+					cbOpcionesCriterio.addItem("CUOTA MINIMA MAYOR A");//NL2
+					cbOpcionesCriterio.addItem("MONTO MAYOR A");//NL3
 					cbOpcionesCriterio.addItem("FECHACREACION");
 					cbOpcionesCriterio.addItem("CLIENTE");
 
 					JComboBox<String> cbOpcionesCriterio2 = new JComboBox<String>();
 					cbOpcionesCriterio2.addItem("NINGUNO");
 					cbOpcionesCriterio2.addItem("CERRADO");
-					cbOpcionesCriterio2.addItem("SALDO MENOR A");
+					cbOpcionesCriterio2.addItem("SALDO PENDIENTE MENOR A");//NL4
+					cbOpcionesCriterio2.addItem("CUOTA MINIMA MENOR A");//NL5
+					cbOpcionesCriterio2.addItem("MONTO MENOR A");//NL6
 					cbOpcionesCriterio2.addItem("FECHACREACION");
 					cbOpcionesCriterio2.addItem("CLIENTE");
 
-					JComboBox<String> cbOpcionesAgrupamiento = new JComboBox<String>();
-					cbOpcionesAgrupamiento.addItem("NINGUNO");
-					cbOpcionesAgrupamiento.addItem("CERRADO");
-					cbOpcionesAgrupamiento.addItem("FECHACREACION");
-					cbOpcionesAgrupamiento.addItem("CLIENTE");
-
 					JComboBox<String> cbOpcionesOrdenamiento = new JComboBox<String>();
-					cbOpcionesOrdenamiento.addItem("TIPO");
-					cbOpcionesOrdenamiento.addItem("CERRADO");
-					cbOpcionesOrdenamiento.addItem("FECHACREACION");
-					cbOpcionesOrdenamiento.addItem("TASARENDIMIENTO");
+					cbOpcionesOrdenamiento.addItem("SALDOPENDIENTE");
+					cbOpcionesOrdenamiento.addItem("MONTO");
+					cbOpcionesOrdenamiento.addItem("INTERES");
+					cbOpcionesOrdenamiento.addItem("NUMEROCUOTAS");
 					cbOpcionesOrdenamiento.addItem("ID");
-					cbOpcionesOrdenamiento.addItem("NUMEROCUENTA");
-					cbOpcionesOrdenamiento.addItem("ESTADO");
+					cbOpcionesOrdenamiento.addItem("VALOR CUOTA MINIMA");//NL7
 					cbOpcionesOrdenamiento.addItem("CLIENTE");
 
 
@@ -3260,7 +3245,6 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					JTextField filtro2 = new JTextField();
 
 					Object[] message = {
-							"Agrupamiento: ", cbOpcionesAgrupamiento,
 							"Primer Criterio:", cbOpcionesCriterio,
 							"Primer Filtro:", filtro1,
 							"Segundo Criterio:", cbOpcionesCriterio2,
@@ -3270,65 +3254,93 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 					};
 
-					int option = JOptionPane.showConfirmDialog(null, message, "Consulta de cuentas", JOptionPane.OK_CANCEL_OPTION);
+					int option = JOptionPane.showConfirmDialog(null, message, "Consulta de prestamos", JOptionPane.OK_CANCEL_OPTION);
 
 					if (option == JOptionPane.OK_OPTION) {
 						List<Object []> lvo = null;
 
 						VOOficina voof = bancAndes.darOficinaPorGerenteDeOficina(loginUsuarioSistema);
+															
+						String signo1 = cbOpcionesCriterio.getSelectedItem().equals("SALDO PENDIENTE MAYOR A") 
+								|| cbOpcionesCriterio.getSelectedItem().equals("CUOTA MINIMA MAYOR A") 
+								|| cbOpcionesCriterio.getSelectedItem().equals("MONTO MAYOR A") 
+								? ">" : "=";
+						String signo2 = cbOpcionesCriterio2.getSelectedItem().equals("SALDO PENDIENTE MENOR A") 
+								|| cbOpcionesCriterio.getSelectedItem().equals("CUOTA MINIMA MENOR A") 
+								|| cbOpcionesCriterio.getSelectedItem().equals("MONTO MENOR A") 
+								? "<" : "=";
+				
+											
+						String criterio1p = (String) cbOpcionesCriterio.getSelectedItem();
+						String criterio2p = (String) cbOpcionesCriterio2.getSelectedItem();
+						
+						String filtro1p = (String) filtro1.getText();
+						String filtro2p = (String) filtro2.getText();
+						
+						//CAMBIO DE NOMBRES NL A LOS DE LAS TABLAS
+						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("SALDO PENDIENTE MAYOR A") ? "SALDOPENDIENTE" : criterio1p;
+						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("SALDO PENDIENTE MENOR A") ? "SALDOPENDIENTE" : criterio2p;
+						
+						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("CUOTA MINIMA MAYOR A") ? "VALORCUOTAMINIMA" : criterio1p;
+						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("CUOTA MINIMA MENOR A") ? "VALORCUOTAMINIMA" : criterio2p;
+						
+						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("MONTO MAYOR A") ? "MONTO" : criterio1p;
+						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("MONTO MENOR A") ? "MONTO" : criterio2p;
+						
+						String ordenamiento = cbOpcionesOrdenamiento.getSelectedItem().equals("VALOR CUOTA MINIMA") ? "VALORCUOTAMINIMA" : 
+							(String) cbOpcionesOrdenamiento.getSelectedItem();
+						
 
-						String signo1 = cbOpcionesCriterio.getSelectedItem().equals("SALDO MAYOR A") ? ">" : "=";
-						String signo2 = cbOpcionesCriterio2.getSelectedItem().equals("SALDO MENOR A") ? "<" : "=";
-
-						String criterio1p = cbOpcionesCriterio.getSelectedItem().equals("NINGUNO") ? "oficina" : (String) cbOpcionesCriterio.getSelectedItem();
-						String criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("NINGUNO") ? "oficina" : (String) cbOpcionesCriterio2.getSelectedItem();
-
-						String filtro1p = cbOpcionesCriterio.getSelectedItem().equals("NINGUNO") ?  String.valueOf(voof.getId()) : (String) filtro1.getText();
-						String filtro2p = cbOpcionesCriterio2.getSelectedItem().equals("NINGUNO") ? String.valueOf(voof.getId()) : (String) filtro2.getText();
-
-
-
-						if (cbOpcionesAgrupamiento.getSelectedItem().equals("NINGUNO")) {
-
-							try {
-								lvo = bancAndes.consultarCuentasGerenteOficina(
-										String.valueOf(voof.getId()), 
-										criterio1p,
-										signo1, 
-										filtro1p,
-										criterio2p,
-										signo2,
-										filtro2p,
-										(String) cbOpcionesOrdenamiento.getSelectedItem(),
-										(String) cbOpcionesTipoOrdenamiento.getSelectedItem()
-										);
-							} catch (Exception e) {
-								throw new Exception ("Error en la consulta sin filtro");
-							}
+						//si no hay primer criterio de filtro
+						if (cbOpcionesCriterio.getSelectedItem().equals("NINGUNO")) {
+							criterio1p = "id";
+							signo1= ">";
+							filtro1p = "0";
 						}
 
-						if (!cbOpcionesAgrupamiento.getSelectedItem().equals("NINGUNO")) {
-
-							try {
-								lvo = bancAndes.consultarCuentasGerenteOficinaAgrupamiento(
-										(String)cbOpcionesAgrupamiento.getSelectedItem(),
-										String.valueOf(voof.getId()),
-										criterio1p,
-										signo1, 
-										filtro1p,
-										criterio2p,
-										signo2,
-										filtro2p,
-										(String)cbOpcionesOrdenamiento.getSelectedItem(),
-										(String)cbOpcionesTipoOrdenamiento.getSelectedItem()
-										);
-
-							} catch (Exception e) {
-								throw new Exception ("Error en la consulta");
-							}
-
-
+						//si no hay segundo criterio de filtro
+						if (cbOpcionesCriterio2.getSelectedItem().equals("NINGUNO")) {
+							criterio2p = "id";
+							signo2= ">";
+							filtro2p = "0";
 						}
+
+						
+						try {
+							lvo = bancAndes.consultarPrestamosGerenteOficina(
+									String.valueOf(voof.getId()), 
+									criterio1p,
+									signo1, 
+									filtro1p,
+									criterio2p,
+									signo2,
+									filtro2p,
+									ordenamiento,
+									(String) cbOpcionesTipoOrdenamiento.getSelectedItem()
+									);
+						} catch (Exception e) {
+							throw new Exception ("Error en la consulta");
+						}
+						
+						//Impresion del resultado
+						int i=0;
+						for (Object [] opb : lvo) {
+						
+							i++;
+							resultado += "\n Item "+i+": ";
+							resultado+= "Cliente: "+ opb[0];
+							resultado+= ", ID prestamo: "+ opb[1];
+							resultado+= ", Monto: "+ opb[2];
+							resultado+= ", Saldo pendiente: "+ opb[3];
+							resultado+= ", Interes: "+ opb[4];
+							resultado+= ", Numero de cuotas:"+ opb[5];
+							resultado+= ", Dia de pago:  "+ opb[6];
+							resultado+= ", Valor cuota minima:  "+ opb[7];
+							resultado+= ", Fecha del prestamo: "+ opb[8];
+							resultado+= ", Cerrado: "+ opb[9];
+							resultado+= ", Oficina: "+ opb[10];
+						}
+						panelDatos.actualizarInterfaz(resultado);
 
 					} 	
 
@@ -3346,28 +3358,26 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					JComboBox<String> cbOpcionesCriterio = new JComboBox<String>();
 					cbOpcionesCriterio.addItem("NINGUNO");
 					cbOpcionesCriterio.addItem("CERRADO");
-					cbOpcionesCriterio.addItem("SALDO MAYOR A");
+					cbOpcionesCriterio.addItem("SALDO PENDIENTE MAYOR A");//NL1
+					cbOpcionesCriterio.addItem("CUOTA MINIMA MAYOR A");//NL2
+					cbOpcionesCriterio.addItem("MONTO MAYOR A");//NL3
 					cbOpcionesCriterio.addItem("FECHACREACION");
 
 					JComboBox<String> cbOpcionesCriterio2 = new JComboBox<String>();
 					cbOpcionesCriterio2.addItem("NINGUNO");
 					cbOpcionesCriterio2.addItem("CERRADO");
-					cbOpcionesCriterio2.addItem("SALDO MENOR A");
+					cbOpcionesCriterio2.addItem("SALDO PENDIENTE MENOR A");//NL4
+					cbOpcionesCriterio2.addItem("CUOTA MINIMA MENOR A");//NL5
+					cbOpcionesCriterio2.addItem("MONTO MENOR A");//NL6
 					cbOpcionesCriterio2.addItem("FECHACREACION");
 
-					JComboBox<String> cbOpcionesAgrupamiento = new JComboBox<String>();
-					cbOpcionesAgrupamiento.addItem("NINGUNO");
-					cbOpcionesAgrupamiento.addItem("CERRADO");
-					cbOpcionesAgrupamiento.addItem("FECHACREACION");
-
 					JComboBox<String> cbOpcionesOrdenamiento = new JComboBox<String>();
-					cbOpcionesOrdenamiento.addItem("TIPO");
-					cbOpcionesOrdenamiento.addItem("SALDO");
-					cbOpcionesOrdenamiento.addItem("FECHACREACION");
-					cbOpcionesOrdenamiento.addItem("TASARENDIMIENTO");
+					cbOpcionesOrdenamiento.addItem("SALDOPENDIENTE");
+					cbOpcionesOrdenamiento.addItem("MONTO");
+					cbOpcionesOrdenamiento.addItem("INTERES");
+					cbOpcionesOrdenamiento.addItem("NUMEROCUOTAS");
 					cbOpcionesOrdenamiento.addItem("ID");
-					cbOpcionesOrdenamiento.addItem("NUMEROCUENTA");
-					cbOpcionesOrdenamiento.addItem("ESTADO");
+					cbOpcionesOrdenamiento.addItem("VALOR CUOTA MINIMA");//NL7
 
 
 					JComboBox<String> cbOpcionesTipoOrdenamiento = new JComboBox<String>();
@@ -3378,7 +3388,6 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					JTextField filtro2 = new JTextField();
 
 					Object[] message = {
-							"Agrupamiento: ", cbOpcionesAgrupamiento,
 							"Primer Criterio:", cbOpcionesCriterio,
 							"Primer Filtro:", filtro1,
 							"Segundo Criterio:", cbOpcionesCriterio2,
@@ -3388,89 +3397,92 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 					};
 
-					int option = JOptionPane.showConfirmDialog(null, message, "Consulta de cuentas", JOptionPane.OK_CANCEL_OPTION);
+					int option = JOptionPane.showConfirmDialog(null, message, "Consulta de prestamos", JOptionPane.OK_CANCEL_OPTION);
 
 					if (option == JOptionPane.OK_OPTION) {
 						List<Object []> lvo = null;
 
-
-						String signo1 = cbOpcionesCriterio.getSelectedItem().equals("SALDO MAYOR A") ? ">" : "=";
-						String signo2 = cbOpcionesCriterio2.getSelectedItem().equals("SALDO MENOR A") ? "<" : "=";
+									
+						String signo1 = cbOpcionesCriterio.getSelectedItem().equals("SALDO PENDIENTE MAYOR A") 
+								|| cbOpcionesCriterio.getSelectedItem().equals("CUOTA MINIMA MAYOR A") 
+								|| cbOpcionesCriterio.getSelectedItem().equals("MONTO MAYOR A") 
+								? ">" : "=";
+						String signo2 = cbOpcionesCriterio2.getSelectedItem().equals("SALDO PENDIENTE MENOR A") 
+								|| cbOpcionesCriterio.getSelectedItem().equals("CUOTA MINIMA MENOR A") 
+								|| cbOpcionesCriterio.getSelectedItem().equals("MONTO MENOR A") 
+								? "<" : "=";
 				
-						String criterio1p = cbOpcionesCriterio.getSelectedItem().equals("NINGUNO") ? "cliente" : (String) cbOpcionesCriterio.getSelectedItem();
-						String criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("NINGUNO") ? "cliente" : (String) cbOpcionesCriterio2.getSelectedItem();
-
-						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("SALDO MAYOR A") ? "SALDO" : criterio1p;
-						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("SALDO MENOR A") ? "SALDO" : criterio2p;
+											
+						String criterio1p = (String) cbOpcionesCriterio.getSelectedItem();
+						String criterio2p = (String) cbOpcionesCriterio2.getSelectedItem();
 						
-						String filtro1p = cbOpcionesCriterio.getSelectedItem().equals("NINGUNO") ?  this.loginUsuarioSistema : (String) filtro1.getText();
-						String filtro2p = cbOpcionesCriterio2.getSelectedItem().equals("NINGUNO") ? this.loginUsuarioSistema  : (String) filtro2.getText();
-
-
-
-						if (cbOpcionesAgrupamiento.getSelectedItem().equals("NINGUNO")) {
-
-							try {
-							
-								lvo = bancAndes.consultarCuentasCliente(
-										this.loginUsuarioSistema , 
-										criterio1p,
-										signo1, 
-										filtro1p,
-										criterio2p,
-										signo2,
-										filtro2p,
-										(String) cbOpcionesOrdenamiento.getSelectedItem(),
-										(String) cbOpcionesTipoOrdenamiento.getSelectedItem()
-										);
-								
-							} catch (Exception e) {
-								e.printStackTrace();
-								throw new Exception ("Error en la consulta sin filtro del cliente");
-							}
+						String filtro1p = (String) filtro1.getText();
+						String filtro2p = (String) filtro2.getText();
 						
-							int i=0;
-							for (Object [] opb : lvo) {
-							
-								i++;
-								resultado += "\n Item "+i+": ";
-								resultado+= "Cliente: "+ opb[0];
-								resultado+= ", ID cuenta: "+ opb[1];
-								resultado+= ", Numero Cuenta: "+ opb[2];
-								resultado+= ", Estado: "+ opb[3];
-								resultado+= ", Tipo: "+ opb[4];
-								resultado+= ", Saldo:"+ opb[5];
-								resultado+= ", Fecha Creacion:  "+ opb[6];
-								resultado+= ", Fecha Vencimiento:  "+ opb[7];
-								resultado+= ", Tasa rendimiento: "+ opb[8];
-								resultado+= ", Oficina: "+ opb[9];
-								resultado+= ", Corporativo: "+ opb[10];
-							}
-							panelDatos.actualizarInterfaz(resultado);
+						//CAMBIO DE NOMBRES NL A LOS DE LAS TABLAS
+						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("SALDO PENDIENTE MAYOR A") ? "SALDOPENDIENTE" : criterio1p;
+						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("SALDO PENDIENTE MENOR A") ? "SALDOPENDIENTE" : criterio2p;
+						
+						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("CUOTA MINIMA MAYOR A") ? "VALORCUOTAMINIMA" : criterio1p;
+						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("CUOTA MINIMA MENOR A") ? "VALORCUOTAMINIMA" : criterio2p;
+						
+						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("MONTO MAYOR A") ? "MONTO" : criterio1p;
+						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("MONTO MENOR A") ? "MONTO" : criterio2p;
+						
+						String ordenamiento = cbOpcionesOrdenamiento.getSelectedItem().equals("VALOR CUOTA MINIMA") ? "VALORCUOTAMINIMA" : 
+							(String) cbOpcionesOrdenamiento.getSelectedItem();
+						
+
+						//si no hay primer criterio de filtro
+						if (cbOpcionesCriterio.getSelectedItem().equals("NINGUNO")) {
+							criterio1p = "id";
+							signo1= ">";
+							filtro1p = "0";
 						}
 
-						if (!cbOpcionesAgrupamiento.getSelectedItem().equals("NINGUNO")) {
-
-							try {
-								lvo = bancAndes.consultarCuentasClienteAgrupamiento(
-										(String)cbOpcionesAgrupamiento.getSelectedItem(),
-										this.loginUsuarioSistema ,
-										criterio1p,
-										signo1, 
-										filtro1p,
-										criterio2p,
-										signo2,
-										filtro2p,
-										(String)cbOpcionesOrdenamiento.getSelectedItem(),
-										(String)cbOpcionesTipoOrdenamiento.getSelectedItem()
-										);
-
-							} catch (Exception e) {
-								throw new Exception ("Error en la consulta");
-							}
-
-
+						//si no hay segundo criterio de filtro
+						if (cbOpcionesCriterio2.getSelectedItem().equals("NINGUNO")) {
+							criterio2p = "id";
+							signo2= ">";
+							filtro2p = "0";
 						}
+
+						
+						try {
+							lvo = bancAndes.consultarPrestamosCliente(
+									this.loginUsuarioSistema , 
+									criterio1p,
+									signo1, 
+									filtro1p,
+									criterio2p,
+									signo2,
+									filtro2p,
+									ordenamiento,
+									(String) cbOpcionesTipoOrdenamiento.getSelectedItem()
+									);
+						} catch (Exception e) {
+							throw new Exception ("Error en la consulta");
+						}
+						
+						//Impresion del resultado
+						int i=0;
+						for (Object [] opb : lvo) {
+						
+							i++;
+							resultado += "\n Item "+i+": ";
+							resultado+= "Cliente: "+ opb[0];
+							resultado+= ", ID prestamo: "+ opb[1];
+							resultado+= ", Monto: "+ opb[2];
+							resultado+= ", Saldo pendiente: "+ opb[3];
+							resultado+= ", Interes: "+ opb[4];
+							resultado+= ", Numero de cuotas:"+ opb[5];
+							resultado+= ", Dia de pago:  "+ opb[6];
+							resultado+= ", Valor cuota minima:  "+ opb[7];
+							resultado+= ", Fecha del prestamo: "+ opb[8];
+							resultado+= ", Cerrado: "+ opb[9];
+							resultado+= ", Oficina: "+ opb[10];
+						}
+						panelDatos.actualizarInterfaz(resultado);
 
 					} 	
 
@@ -3492,9 +3504,9 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					JComboBox<String> cbOpcionesCriterio = new JComboBox<String>();
 					cbOpcionesCriterio.addItem("NINGUNO");
 					cbOpcionesCriterio.addItem("CERRADO");
-					cbOpcionesCriterio.addItem("SALDO PENDIENTE MAYOR A");
-					cbOpcionesCriterio.addItem("CUOTA MINIMA MAYOR A");
-					cbOpcionesCriterio.addItem("MONTO MAYOR A");
+					cbOpcionesCriterio.addItem("SALDO PENDIENTE MAYOR A");//NL1
+					cbOpcionesCriterio.addItem("CUOTA MINIMA MAYOR A");//NL2
+					cbOpcionesCriterio.addItem("MONTO MAYOR A");//NL3
 					cbOpcionesCriterio.addItem("FECHACREACION");
 					cbOpcionesCriterio.addItem("OFICINA");
 					cbOpcionesCriterio.addItem("CLIENTE");
@@ -3502,26 +3514,21 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					JComboBox<String> cbOpcionesCriterio2 = new JComboBox<String>();
 					cbOpcionesCriterio2.addItem("NINGUNO");
 					cbOpcionesCriterio2.addItem("CERRADO");
-					cbOpcionesCriterio2.addItem("SALDO MENOR A");
+					cbOpcionesCriterio2.addItem("SALDO PENDIENTE MENOR A");//NL4
+					cbOpcionesCriterio2.addItem("CUOTA MINIMA MENOR A");//NL5
+					cbOpcionesCriterio2.addItem("MONTO MENOR A");//NL6
 					cbOpcionesCriterio2.addItem("FECHACREACION");
-					cbOpcionesCriterio.addItem("OFICINA");
-					cbOpcionesCriterio.addItem("CLIENTE");
-
-					JComboBox<String> cbOpcionesAgrupamiento = new JComboBox<String>();
-					cbOpcionesAgrupamiento.addItem("NINGUNO");
-					cbOpcionesAgrupamiento.addItem("CERRADO");
-					cbOpcionesAgrupamiento.addItem("FECHACREACION");
-					cbOpcionesCriterio.addItem("OFICINA");
-					cbOpcionesAgrupamiento.addItem("CLIENTE");
+					cbOpcionesCriterio2.addItem("OFICINA");
+					cbOpcionesCriterio2.addItem("CLIENTE");
 
 					JComboBox<String> cbOpcionesOrdenamiento = new JComboBox<String>();
-					cbOpcionesOrdenamiento.addItem("CERRADO");
-					cbOpcionesOrdenamiento.addItem("SALDO");
-					cbOpcionesOrdenamiento.addItem("FECHACREACION");
-					cbOpcionesOrdenamiento.addItem("TASARENDIMIENTO");
+					cbOpcionesOrdenamiento.addItem("SALDOPENDIENTE");
+					cbOpcionesOrdenamiento.addItem("MONTO");
+					cbOpcionesOrdenamiento.addItem("INTERES");
+					cbOpcionesOrdenamiento.addItem("NUMEROCUOTAS");
 					cbOpcionesOrdenamiento.addItem("ID");
-					cbOpcionesOrdenamiento.addItem("NUMEROCUENTA");
-					cbOpcionesOrdenamiento.addItem("ESTADO");
+					cbOpcionesOrdenamiento.addItem("VALOR CUOTA MINIMA");//NL7
+					cbOpcionesOrdenamiento.addItem("OFICINA");
 					cbOpcionesOrdenamiento.addItem("CLIENTE");
 
 
@@ -3533,7 +3540,6 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					JTextField filtro2 = new JTextField();
 
 					Object[] message = {
-							"Agrupamiento: ", cbOpcionesAgrupamiento,
 							"Primer Criterio:", cbOpcionesCriterio,
 							"Primer Filtro:", filtro1,
 							"Segundo Criterio:", cbOpcionesCriterio2,
@@ -3543,28 +3549,47 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 					};
 
-					int option = JOptionPane.showConfirmDialog(null, message, "Consulta de cuentas", JOptionPane.OK_CANCEL_OPTION);
+					int option = JOptionPane.showConfirmDialog(null, message, "Consulta de prestamos", JOptionPane.OK_CANCEL_OPTION);
 
 					if (option == JOptionPane.OK_OPTION) {
 						List<Object []> lvo = null;
 
-						String signo1 = cbOpcionesCriterio.getSelectedItem().equals("SALDO MAYOR A") ? ">" : "=";
-						String signo2 = cbOpcionesCriterio2.getSelectedItem().equals("SALDO MENOR A") ? "<" : "=";
-
-						String criterio1p;
-						String criterio2p; 
-						String filtro1p;
-						String filtro2p;
+									
+						String signo1 = cbOpcionesCriterio.getSelectedItem().equals("SALDO PENDIENTE MAYOR A") 
+								|| cbOpcionesCriterio.getSelectedItem().equals("CUOTA MINIMA MAYOR A") 
+								|| cbOpcionesCriterio.getSelectedItem().equals("MONTO MAYOR A") 
+								? ">" : "=";
+						String signo2 = cbOpcionesCriterio2.getSelectedItem().equals("SALDO PENDIENTE MENOR A") 
+								|| cbOpcionesCriterio.getSelectedItem().equals("CUOTA MINIMA MENOR A") 
+								|| cbOpcionesCriterio.getSelectedItem().equals("MONTO MENOR A") 
+								? "<" : "=";
+				
+											
+						String criterio1p = (String) cbOpcionesCriterio.getSelectedItem();
+						String criterio2p = (String) cbOpcionesCriterio2.getSelectedItem();
+						
+						String filtro1p = (String) filtro1.getText();
+						String filtro2p = (String) filtro2.getText();
+						
+						//CAMBIO DE NOMBRES NL A LOS DE LAS TABLAS
+						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("SALDO PENDIENTE MAYOR A") ? "SALDOPENDIENTE" : criterio1p;
+						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("SALDO PENDIENTE MENOR A") ? "SALDOPENDIENTE" : criterio2p;
+						
+						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("CUOTA MINIMA MAYOR A") ? "VALORCUOTAMINIMA" : criterio1p;
+						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("CUOTA MINIMA MENOR A") ? "VALORCUOTAMINIMA" : criterio2p;
+						
+						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("MONTO MAYOR A") ? "MONTO" : criterio1p;
+						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("MONTO MENOR A") ? "MONTO" : criterio2p;
+						
+						String ordenamiento = cbOpcionesOrdenamiento.getSelectedItem().equals("VALOR CUOTA MINIMA") ? "VALORCUOTAMINIMA" : 
+							(String) cbOpcionesOrdenamiento.getSelectedItem();
+						
 
 						//si no hay primer criterio de filtro
 						if (cbOpcionesCriterio.getSelectedItem().equals("NINGUNO")) {
 							criterio1p = "id";
 							signo1= ">";
 							filtro1p = "0";
-						}
-						else {
-							criterio1p= (String) cbOpcionesCriterio.getSelectedItem();
-							filtro1p=(String) filtro1.getText();
 						}
 
 						//si no hay segundo criterio de filtro
@@ -3573,52 +3598,45 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 							signo2= ">";
 							filtro2p = "0";
 						}
-						else {
-							criterio2p= (String) cbOpcionesCriterio2.getSelectedItem();
-							filtro2p=(String) filtro2.getText();
+
+						
+						try {
+							lvo = bancAndes.consultarPrestamosGerenteGeneral(
+									criterio1p,
+									signo1, 
+									filtro1p,
+									criterio2p,
+									signo2,
+									filtro2p,
+									ordenamiento,
+									(String) cbOpcionesTipoOrdenamiento.getSelectedItem()
+									);
+						} catch (Exception e) {
+							throw new Exception ("Error en la consulta");
 						}
-
-						if (cbOpcionesAgrupamiento.getSelectedItem().equals("NINGUNO")) {
-
-							try {
-								lvo = bancAndes.consultarCuentasGerenteGeneral(
-										criterio1p,
-										signo1, 
-										filtro1p,
-										criterio2p,
-										signo2,
-										filtro2p,
-										(String) cbOpcionesOrdenamiento.getSelectedItem(),
-										(String) cbOpcionesTipoOrdenamiento.getSelectedItem()
-										);
-							} catch (Exception e) {
-								throw new Exception ("Error en la consulta");
-							}
+						
+						//Impresion del resultado
+						int i=0;
+						for (Object [] opb : lvo) {
+						
+							i++;
+							resultado += "\n Item "+i+": ";
+							resultado+= "Cliente: "+ opb[0];
+							resultado+= ", ID prestamo: "+ opb[1];
+							resultado+= ", Monto: "+ opb[2];
+							resultado+= ", Saldo pendiente: "+ opb[3];
+							resultado+= ", Interes: "+ opb[4];
+							resultado+= ", Numero de cuotas:"+ opb[5];
+							resultado+= ", Dia de pago:  "+ opb[6];
+							resultado+= ", Valor cuota minima:  "+ opb[7];
+							resultado+= ", Fecha del prestamo: "+ opb[8];
+							resultado+= ", Cerrado: "+ opb[9];
+							resultado+= ", Oficina: "+ opb[10];
 						}
+						panelDatos.actualizarInterfaz(resultado);
 
-						if (!cbOpcionesAgrupamiento.getSelectedItem().equals("NINGUNO")) {
-
-							try {
-								lvo = bancAndes.consultarCuentasGerenteGeneralAgrupamiento(
-										(String)cbOpcionesAgrupamiento.getSelectedItem(),
-										criterio1p,
-										signo1, 
-										filtro1p,
-										criterio2p,
-										signo2,
-										filtro2p,
-										(String)cbOpcionesOrdenamiento.getSelectedItem(),
-										(String)cbOpcionesTipoOrdenamiento.getSelectedItem()
-										);
-
-							} catch (Exception e) {
-								throw new Exception ("Error en la consulta");
-							}
-
-
-						}
 					} 	
-					
+
 					if (option == JOptionPane.CANCEL_OPTION)
 					{			        	    
 						panelDatos.actualizarInterfaz("Consulta cancelada");			        	    			
