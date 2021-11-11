@@ -2483,9 +2483,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 				String resultado = "";
 
 				VOCuenta cuenta=null;
-				VOCuenta destino= null;
 				String idCuenta=null;
-				String idDestino=null;
 
 				JTextField txCuentaO = new JTextField();
 
@@ -2562,75 +2560,100 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 							}
 
 						}
-						//							else {//es un cliente
-						//
-						//								JComboBox<String> cbPuesto = new JComboBox<String>();
-						//								cbPuesto.addItem("DIGITAL");
-						//								cbPuesto.addItem("CAJERO AUTOMATICO");
-						//
-						//								JTextField valor = new JTextField();
-						//								JTextField puestoAtencion = new JTextField();
-						//
-						//								Object[] message = {
-						//										"Valor: ", valor,
-						//										"Tipo de puesto de atencion: ", cbPuesto,
-						//										"Id puesto de atencion:", puestoAtencion
-						//								};
-						//
-						//								int option = JOptionPane.showConfirmDialog(null, message, "Registro de la operacion", JOptionPane.OK_CANCEL_OPTION);
-						//								VOOperacionBancaria ob=null;
-						//								if(cbPuesto.getSelectedItem().equals("DIGITAL")) {
-						//									VOPuestoDigital pd = bancAndes.darPuestoDigitalPorId((long) Integer.parseInt(puestoAtencion.getText()));
-						//									if (pd==null) {
-						//										throw new Exception ("No existe el puesto digital "+puestoAtencion.getText());
-						//									}
-						//								}
-						//								else {
-						//									VOCajeroAutomatico ca = bancAndes.darCajeroAutomaticoPorId((long) Integer.parseInt(puestoAtencion.getText()));
-						//									if (ca==null) {
-						//										throw new Exception ("No existe el cajero automatico "+puestoAtencion.getText());
-						//									}
-						//								}
-						//								if (option == JOptionPane.OK_OPTION) {
-						//
-						//									if ((!cuenta.getTipo().equals("CORRIENTE") &&  cuenta.getSaldo()>=(float) Integer.parseInt(valor.getText())) ||(cuenta.getTipo().equals("CORRIENTE")) ) 
-						//									{
-						//
-						//										try {
-						//											long hoy=System.currentTimeMillis();
-						//											ob =  bancAndes.adicionarOperacionBancaria(
-						//													(float) Integer.parseInt(valor.getText()), 
-						//													new java.sql.Date(hoy),
-						//													this.loginUsuarioSistema, 
-						//													(long) Integer.parseInt(idCuenta), 
-						//													(long) Integer.parseInt(idDestino),
-						//													"TRANSFERIR", 
-						//													(long) Integer.parseInt(puestoAtencion.getText()), 
-						//													null);
-						//
-						//											bancAndes.actualizarSaldoCuenta((long) Integer.parseInt(idCuenta), - (float) Integer.parseInt(valor.getText()));
-						//											bancAndes.actualizarSaldoCuenta((long) Integer.parseInt(idDestino), (float) Integer.parseInt(valor.getText()));
-						//
-						//
-						//										} catch (Exception e) {
-						//											throw new Exception ("No se pudo registrar la operacion sobre la cuenta: " + idCuenta);
-						//										}
-						//									}else {throw new Exception("No se pudo realizar la transferencia desde la cuenta "+ idCuenta+ " porque los fondos son insuficientes.");}
-						//
-						//								}            
-						//
-						//								if (option == JOptionPane.CANCEL_OPTION)
-						//								{          
-						//									panelDatos.actualizarInterfaz("Operacion cancelada");                                                                                 
-						//								}
-						//							}
+						else {//es un cliente
+
+							JComboBox<String> cbPuesto = new JComboBox<String>();
+							cbPuesto.addItem("DIGITAL");
+							cbPuesto.addItem("CAJERO AUTOMATICO");
+
+
+							JTextField puestoAtencion = new JTextField();
+
+							Object[] message2 = {
+									"Id cuenta corporativo : ", txCuentaO,
+									"Tipo de puesto de atencion: ", cbPuesto,
+									"Id puesto de atencion:", puestoAtencion
+							};
+
+							int option2 = JOptionPane.showConfirmDialog(null, message2, "Pagar nomina", JOptionPane.OK_CANCEL_OPTION);
+							idCuenta = txCuentaO.getText();
+
+							cuenta = bancAndes.darCuentaPorId((long) Integer.parseInt(idCuenta));
+
 					
+							if(cbPuesto.getSelectedItem().equals("DIGITAL")) {
+								VOPuestoDigital pd = bancAndes.darPuestoDigitalPorId((long) Integer.parseInt(puestoAtencion.getText()));
+								if (pd==null) {
+									throw new Exception ("No existe el puesto digital "+puestoAtencion.getText());
+								}
+							}
+							else {
+								VOCajeroAutomatico ca = bancAndes.darCajeroAutomaticoPorId((long) Integer.parseInt(puestoAtencion.getText()));
+								if (ca==null) {
+									throw new Exception ("No existe el cajero automatico "+puestoAtencion.getText());
+								}
+							}
+							if (option2 == JOptionPane.OK_OPTION) {
+
+								if (cuenta!=null && cuenta.getEstado().equals(ACTIVA) && cuenta.getCorporativo().equals("TRUE") ) 
+								{
+									VOAsociacion voa = null;
+									try {
+										voa = bancAndes.darAsociacionPorCuenta(cuenta.getId());
+
+									} catch (Exception e) {
+										e.printStackTrace();
+										throw new Exception ("No se encontro ninguna asociacion con la cuenta corporativa "+ cuenta.getId());
+									}
+
+									List<AsociacionCuentasEmpleados> listaCuentas = null;
+									try {
+										listaCuentas = bancAndes.darAsociacionesCuentasPorAsociacion(voa.getId());
+									} catch (Exception e) {
+										throw new Exception ("No se encontro ninguna asociacion cuenta por la asociacion "+ voa.getId());
+									}
+									
+									int i = 0;	
+									try {
+										i =	bancAndes.pagarNomina(
+												listaCuentas,
+												(long) Integer.parseInt(idCuenta),
+												voa.getValor(),
+												loginUsuarioSistema,
+												(long) Integer.parseInt(puestoAtencion.getText()),
+												null);
+
+									} catch (Exception e) {
+										throw new Exception ("No se pudo registrar la operacion sobre la cuenta: " + idCuenta);
+									}
+
+									if (i<listaCuentas.size()) {
+										resultado = "No se pudo pagar la nomina de los cuentas con id";
+										System.out.println(listaCuentas.size());
+										for ( int a=i ; a<listaCuentas.size(); a++) {
+											System.out.println(a);
+											resultado += "\n "+ listaCuentas.get(a).getCuentaEmpleado();
+
+										}
+										panelDatos.actualizarInterfaz(resultado);
+									}
+
+								}else {throw new Exception("No hay una cuenta corporativa activa con el id "+ idCuenta);}
+
+							}            
+
+							if (option2 == JOptionPane.CANCEL_OPTION)
+							{          
+								panelDatos.actualizarInterfaz("Operacion cancelada");                                                                                 
+							}
+						}
 
 
-					resultado += "\n En pagar nomina a empleados\n\n";
-					resultado += "Operacion registrada exitosamente desde cuenta: " + idCuenta;
-					resultado += "\n Operacion terminada";
-					panelDatos.actualizarInterfaz(resultado);
+
+						resultado += "\n En pagar nomina a empleados\n\n";
+						resultado += "Operacion registrada exitosamente desde cuenta: " + idCuenta;
+						resultado += "\n Operacion terminada";
+						panelDatos.actualizarInterfaz(resultado);
 					}
 					else {
 						panelDatos.actualizarInterfaz("No se puede registrar operación sobre el CDT "+idCuenta);
@@ -2643,7 +2666,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 			}
 			catch (Exception e) 
 			{
-				                                      e.printStackTrace();
+				e.printStackTrace();
 				String resultado = generarMensajeError(e);
 				panelDatos.actualizarInterfaz(resultado);
 			}

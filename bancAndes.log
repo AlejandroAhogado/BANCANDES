@@ -371,3 +371,29 @@ ORA-00933: comando SQL no terminado correctamente
 21:35:19,341 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Oficina por login del gerente de oficina: camila3
 21:35:19,380 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Consultando todas las operaciones de la oficina: 18
 21:35:19,420 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontraron todas las operaciones
+15:50:21,977 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+15:50:21,977 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+15:50:22,006 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+15:50:42,224 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cajero por login: rom2716
+15:50:49,147 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 23
+15:50:49,249 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=23, numeroCuenta=575757, estado=ACTIVA, tipo=AHORROS, saldo=5000000.0, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+15:50:49,249 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cajero por login: rom2716
+15:50:53,969 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 23
+15:50:54,068 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=24, valor=4000000.0, frecuencia=QUINCENAL, cuentaCorporativo=23]
+15:50:54,068 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion cuenta por la asociacion con id : 24
+15:50:54,155 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] -  Pagando nomina del cliente corporativo alkosto
+15:50:54,728 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] -  Se pago la nomina del cliente corporativo de 1 empleados.
+16:25:24,554 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+16:25:24,555 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+16:25:24,578 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+16:25:48,739 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cliente por login: luisp8
+16:26:18,383 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 23
+16:26:18,473 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=23, numeroCuenta=575757, estado=ACTIVA, tipo=AHORROS, saldo=5000000.0, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+16:27:17,466 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 23
+16:27:17,544 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=23, numeroCuenta=575757, estado=ACTIVA, tipo=AHORROS, saldo=5000000.0, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+16:27:17,545 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Puesto digital por id: 13
+16:27:17,613 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 23
+16:27:17,679 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=24, valor=4000000.0, frecuencia=QUINCENAL, cuentaCorporativo=23]
+16:27:17,679 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion cuenta por la asociacion con id : 24
+16:27:17,734 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] -  Pagando nomina del cliente corporativo luisp8
+16:27:18,191 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] -  Se pago la nomina del cliente corporativo de 1 empleados.

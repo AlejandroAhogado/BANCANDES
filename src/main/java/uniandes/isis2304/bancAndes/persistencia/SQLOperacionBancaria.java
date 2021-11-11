@@ -331,10 +331,16 @@ public class SQLOperacionBancaria {
 				Query q2;
 				long hoy=System.currentTimeMillis();
 				long idd = pba.nextval();
-				q2 = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaOperacionesBancarias () + "( id, valor, fecha, cliente, productoOrigen, productoDestino,tipoOperacion, puestoAtencion, empleado) values (?,?,?,?,?,?,?,?,?)");
-				q2.setParameters(idd, valor, new java.sql.Date(hoy), cliente, idCuenta,listaCuentas.get(i).getCuentaEmpleado(),"TRANSFERIR", puestoAtencionoficina, loginUsuarioSistema);
-				q2.executeUnique();
+				if (loginUsuarioSistema!=null) {
 
+					q2 = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaOperacionesBancarias () + "( id, valor, fecha, cliente, productoOrigen, productoDestino,tipoOperacion, puestoAtencion, empleado) values (?,?,?,?,?,?,?,?,?)");
+					q2.setParameters(idd, valor, new java.sql.Date(hoy), cliente, idCuenta,listaCuentas.get(i).getCuentaEmpleado(),"TRANSFERIR", puestoAtencionoficina, loginUsuarioSistema);
+					q2.executeUnique();
+				}else {
+					q2 = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaOperacionesBancarias () + "( id, valor, fecha, cliente, productoOrigen, productoDestino,tipoOperacion, puestoAtencion) values (?,?,?,?,?,?,?,?)");
+					q2.setParameters(idd, valor, new java.sql.Date(hoy), cliente, idCuenta,listaCuentas.get(i).getCuentaEmpleado(),"TRANSFERIR", puestoAtencionoficina);
+					q2.executeUnique();
+				}
 				Query q3 = pm.newQuery(SQL, "UPDATE " + pba.darTablaCuentas () + " SET saldo = saldo + ? WHERE id = ?");
 				q3.setParameters(-valor, idCuenta);
 				q3.executeUnique();
@@ -342,7 +348,7 @@ public class SQLOperacionBancaria {
 				Query q4 = pm.newQuery(SQL, "UPDATE " + pba.darTablaCuentas () + " SET saldo = saldo + ? WHERE id = ? ");
 				q4.setParameters(valor, listaCuentas.get(i).getCuentaEmpleado());
 				q4.executeUnique();
-				
+
 				Query q5 = pm.newQuery(SQL, "SAVEPOINT SAVEPOINT"+idd);
 				q5.executeUnique();
 				i++;
@@ -350,7 +356,7 @@ public class SQLOperacionBancaria {
 				continuar = false;
 			}
 		}
-			return i;
+		return i;
 	}
 
 }

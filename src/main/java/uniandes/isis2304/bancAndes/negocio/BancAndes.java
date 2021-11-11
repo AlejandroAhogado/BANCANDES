@@ -1261,6 +1261,7 @@ public class BancAndes {
 
 				public int pagarNomina(List<AsociacionCuentasEmpleados> listaCuentas, long idCuenta, float valor,
 						String cliente, long puestoAtencionoficina, String loginUsuarioSistema) {
+					
 					log.info(" Pagando nomina del cliente corporativo "+  cliente);
 					
 					int cantidadEmpleados  = pba.pagarNomina(listaCuentas,  idCuenta,  valor,
