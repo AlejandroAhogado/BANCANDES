@@ -996,6 +996,10 @@ public class PersistenciaBancAndes {
 	}
 
 
+	/**
+	 * @param idCuenta
+	 * @return
+	 */
 	public long cerrarCuenta(long idCuenta) {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1023,7 +1027,52 @@ public class PersistenciaBancAndes {
 		}
 
 	}
+	
+	
+	
+	
 
+	/**
+	 * @param idCuenta
+	 * @param idCuentaNueva
+	 * @param id
+	 * @return
+	 */
+	public long cerrarCuentaV2(long idCuenta, long idCuentaNueva, long id) {
+
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlCuenta.cerrarCuentaV2 (pm, idCuenta, idCuentaNueva, id);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			//        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	
+	
+
+	/**
+	 * @param idCuenta
+	 * @param estado
+	 * @return
+	 */
 	public long cambiarActividadCuenta(long idCuenta, String estado) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -1962,6 +2011,8 @@ public class PersistenciaBancAndes {
 			return sqlOperacionBancaria.consultarOperacionesCliente(pmf.getPersistenceManager(), loginCliente,criterio1p, signo1,filtro1p,
 					 criterio2p, signo2, filtro2p,ordenamiento,tipoOrden);
 		}
+
+
 
 
 		

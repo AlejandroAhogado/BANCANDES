@@ -2450,22 +2450,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 		}
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
 	/* ****************************************************************
 	 *                             REF13
 	 *****************************************************************/
@@ -2675,25 +2660,115 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 	}
 
+	/* ****************************************************************
+	 *                             REF14
+	 *****************************************************************/
+	/**
+	 * 
+	 */
+		public void cerrarCuentaV2( )
+	{
+		if (tipoUsuario==CLIENTE||tipoUsuario==GERENTEGENERAL||tipoUsuario==CAJERO) {
+			mensajeErrorPermisos();
+		}
+		else {
+			try 
+			{  
+				JTextField idCu = new JTextField();
+				Object[] messageCU = {
+						"id cuenta: ", idCu
+				};
+
+				int optionCU = JOptionPane.showConfirmDialog(null, messageCU, "Datos de la cuenta a cerrar", JOptionPane.OK_CANCEL_OPTION);
+
+				if (optionCU == JOptionPane.OK_OPTION) {
+
+					try {
+						long idCuenta = (long)Integer.parseInt(idCu.getText());
+						VOCuenta cuenta = bancAndes.darCuentaPorId(idCuenta);
+						long idOficina =  cuenta.getOficina();
+
+						if (bancAndes.darOficinaPorId(idOficina).getGerenteLogin().equals(loginUsuarioSistema)) {
+							
+							VOAsociacion voa = bancAndes.darAsociacionPorCuenta(idCuenta); 
+							
+							if (cuenta.getCorporativo().equals("FALSE")||voa==null) {
+								bancAndes.cerrarCuenta(idCuenta);
+
+								String resultado = "En cerrar cuenta\n\n";
+								resultado += "Cuenta cerrada: "+ idCuenta;
+								resultado += "\n Operacion terminada";
+								panelDatos.actualizarInterfaz(resultado);
+							}else {
+								try {
+									
+									String txtIdCuentaNueva = JOptionPane.showInputDialog("Ingrese la nueva cuenta corporativa", "Datos cuenta nueva");
+									long idCuentaNueva = (long) Integer.parseInt(txtIdCuentaNueva);
+									VOCuenta cuentaNueva = bancAndes.darCuentaPorId(idCuentaNueva);
+									if (cuentaNueva==null) {
+										throw new Exception(" No se encontro la cuenta con id "+ idCuentaNueva);
+									}
+									
+									if (cuentaNueva.getCorporativo().equals("TRUE")) {
+										try {
+											bancAndes.cerrarCuentaV2(idCuenta, idCuentaNueva, voa.getId());
+											
+											List<AsociacionCuentasEmpleados> listaCuentas = null;
+											listaCuentas = bancAndes.darAsociacionesCuentasPorAsociacion(voa.getId());
+											
+											if (listaCuentas.size()>0) {
+												String resultado = "En cerrar cuenta\n\n";
+												resultado += "Cuenta cerrada: "+ idCuenta;
+												resultado += "\n Se asociaron "+listaCuentas.size()+ " cuentas";
+												resultado += "\n A la cuenta con id "+idCuentaNueva;
+												panelDatos.actualizarInterfaz(resultado);
+											}
+										} catch (Exception e) {
+											throw new Exception ("No se pudo asociar la cuenta "+idCuentaNueva+ " a la asociacion: "+ voa.getId()+ "/n y tampoco se cerro la cuenta con id: "+idCuenta );
+										}
+										
+									}			
+									
+								}
+								catch(Exception e)
+								{
+									throw new Exception ("No se pudo cerrar la cuenta con id: "+ idCuenta );
+								}
+							
+								
+								
+							}
+							
 
 
+						}else {
+							panelDatos.actualizarInterfaz("La cuenta debe ser cerrada por el gerente de oficina de la oficina donde se abrio");
+						}
+
+					} catch (Exception e) {
+						e.printStackTrace();
+						throw new Exception ("No se pudo cerrar la cuenta con id: " +idCu.getText());
+					}
+				}            
+
+				else if (optionCU == JOptionPane.CANCEL_OPTION)
+				{            
+					panelDatos.actualizarInterfaz("No se cerro ninguna cuenta. Operacion cancelada por el usuario");                                                                                
+				}
 
 
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+			}
+		}
+	}
+	
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
 	/* ****************************************************************
 	 *                             REFC1
 	 *****************************************************************/

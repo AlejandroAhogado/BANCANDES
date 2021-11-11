@@ -556,6 +556,19 @@ public class BancAndes {
 	}
 	
 	/**
+	 * @param idCuenta
+	 * @param idCuentaNueva
+	 * @param id
+	 */
+	public long cerrarCuentaV2(long idCuenta, long idCuentaNueva, long id) {
+		log.info ("Cerrando cuenta: " + idCuenta);
+        long cambios = pba.cerrarCuentaV2 (idCuenta, idCuentaNueva, id);
+        log.info ("Se actualizaron "+cambios+" tuplas");
+        return cambios;
+		
+	}
+	
+	/**
 	 * Cambia el estado de una cuenta dado su id y el estado al que se quiere actualizar
 	 * Adiciona entradas al log de la aplicación
 	 * @param idCuenta
@@ -1269,6 +1282,8 @@ public class BancAndes {
 					log.info(" Se pago la nomina del cliente corporativo de "+  cantidadEmpleados +" empleados.");
 					return cantidadEmpleados;
 				}
+
+			
 
 			
 			

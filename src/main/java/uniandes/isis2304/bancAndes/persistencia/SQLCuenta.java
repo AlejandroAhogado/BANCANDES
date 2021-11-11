@@ -58,12 +58,21 @@ public class SQLCuenta {
 		return (long) q.executeUnique();
 	}
 
+	/**
+	 * @param pm
+	 * @return
+	 */
 	public List<Cuenta> darCuentas(PersistenceManager pm) {
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pba.darTablaCuentas ());
 		q.setResultClass(Cuenta.class);
 		return (List<Cuenta>) q.executeList();
 	}
 
+	/**
+	 * @param pm
+	 * @param id
+	 * @return
+	 */
 	public Cuenta darCuentaPorId(PersistenceManager pm, long id) {
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pba.darTablaCuentas () + " WHERE id = ?");
 		q.setResultClass(Cuenta.class);
@@ -71,6 +80,11 @@ public class SQLCuenta {
 		return (Cuenta) q.executeUnique();
 	}
 	
+	/**
+	 * @param pm
+	 * @param numero
+	 * @return
+	 */
 	public Cuenta darCuentaPorNumero(PersistenceManager pm, int numero) {
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pba.darTablaCuentas () + " WHERE numeroCuenta = ?");
 		q.setParameters(numero);
@@ -78,6 +92,11 @@ public class SQLCuenta {
 		return (Cuenta) q.executeUnique();
 	}
 
+	/**
+	 * @param pm
+	 * @param idCuenta
+	 * @return
+	 */
 	public long cerrarCuenta(PersistenceManager pm, long idCuenta) {
 		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaCuentas () + " SET estado = CERRADA, saldo = 0 WHERE id = ?");
 		q.setParameters(idCuenta);
@@ -85,12 +104,44 @@ public class SQLCuenta {
 		return (long) q.execute();
 	}
 
+	
+	/**
+	 * @param pm
+	 * @param idCuenta
+	 * @param idCuentaNueva
+	 * @param id
+	 * @return
+	 */
+	public long cerrarCuentaV2(PersistenceManager pm, long idCuenta, long idCuentaNueva, long id) {
+		
+		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaAsociaciones() + " SET cuentaCorporativo = ? WHERE id = ?");
+		q.setParameters( idCuentaNueva, id);
+		q.execute();
+		
+		Query q2 = pm.newQuery(SQL, "UPDATE " + pba.darTablaCuentas () + " SET estado = CERRADA, saldo = 0 WHERE id = ?");
+		q2.setParameters(idCuenta);
+		return (long) q2.execute();
+	}
+	
+	
+	/**
+	 * @param pm
+	 * @param idCuenta
+	 * @param cambioSaldo
+	 * @return
+	 */
 	public long actualizarSaldoCuenta(PersistenceManager pm, long idCuenta, float cambioSaldo) {
 		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaCuentas () + " SET saldo = saldo + ? WHERE id = ?");
 		q.setParameters(cambioSaldo, idCuenta);
 		return (long) q.executeUnique();
 	}
 
+	/**
+	 * @param pm
+	 * @param idCuenta
+	 * @param estado
+	 * @return
+	 */
 	public long cambiarActividadCuenta(PersistenceManager pm, long idCuenta, String estado) {
 		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaCuentas () + " SET estado = ? WHERE id = ?");
 		q.setParameters(estado, idCuenta);
@@ -161,6 +212,8 @@ public class SQLCuenta {
 		q.setParameters(agrupamiento,criterio,signo1, filtro,criterio2,signo2, filtro2, agrupamiento,ordenamiento,tipoOrdenamiento);
 		return q.executeList();
 	}
+
+	
 
 	
 

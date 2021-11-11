@@ -397,3 +397,70 @@ ORA-00933: comando SQL no terminado correctamente
 16:27:17,679 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion cuenta por la asociacion con id : 24
 16:27:17,734 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] -  Pagando nomina del cliente corporativo luisp8
 16:27:18,191 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] -  Se pago la nomina del cliente corporativo de 1 empleados.
+17:26:51,867 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+17:26:51,868 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+17:26:51,894 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+17:27:10,041 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+17:27:24,598 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+17:27:24,598 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+17:27:24,623 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+17:27:30,403 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cajero por login: null
+17:27:33,800 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cliente por login: null
+17:27:48,755 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+17:27:59,799 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 23
+17:27:59,904 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=23, numeroCuenta=575757, estado=ACTIVA, tipo=AHORROS, saldo=5000000.0, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:27:59,905 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Oficina por id: 18
+17:27:59,985 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la oficina: Oficina [id=18, nombre=OFICINA USAQUEN, direccion=Cll 183 #23-4, puestosPosibles=10, gerenteLogin=camila3]
+17:27:59,985 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 23
+17:28:00,064 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=24, valor=4000000.0, frecuencia=QUINCENAL, cuentaCorporativo=23]
+17:28:03,113 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 25
+17:28:03,183 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=25, numeroCuenta=878787, estado=ACTIVA, tipo=AHORROS, saldo=9.0E7, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:28:03,184 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Cerrando cuenta: 23
+17:28:03,494 (AWT-EventQueue-0) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : SQL query "UPDATE CUENTAS SET estado = CERRADA, saldo = 0 WHERE id = ?" necesita 1 parametros pero no hay ninguno
+
+17:28:03,559 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron -1 tuplas
+17:28:03,559 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion cuenta por la asociacion con id : 24
+17:28:35,254 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 25
+17:28:35,336 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=25, numeroCuenta=878787, estado=ACTIVA, tipo=AHORROS, saldo=9.0E7, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:28:35,337 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Oficina por id: 18
+17:28:35,393 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la oficina: Oficina [id=18, nombre=OFICINA USAQUEN, direccion=Cll 183 #23-4, puestosPosibles=10, gerenteLogin=camila3]
+17:28:35,394 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 25
+17:28:35,457 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: null
+17:28:35,457 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Cerrando cuenta: 25
+17:28:35,458 (AWT-EventQueue-0) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : SQL query "UPDATE CUENTAS SET estado = CERRADA, saldo = 0 WHERE id = ?" necesita 1 parametros pero no hay ninguno
+
+17:28:35,459 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron -1 tuplas
+17:30:30,856 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+17:30:30,857 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+17:30:30,877 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+17:30:44,232 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+17:30:51,084 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 23
+17:30:51,196 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=23, numeroCuenta=575757, estado=ACTIVA, tipo=AHORROS, saldo=5000000.0, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:30:51,197 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Oficina por id: 18
+17:30:51,257 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la oficina: Oficina [id=18, nombre=OFICINA USAQUEN, direccion=Cll 183 #23-4, puestosPosibles=10, gerenteLogin=camila3]
+17:30:51,257 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 23
+17:30:51,325 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=24, valor=4000000.0, frecuencia=QUINCENAL, cuentaCorporativo=23]
+17:30:53,961 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 25
+17:30:54,044 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=25, numeroCuenta=878787, estado=ACTIVA, tipo=AHORROS, saldo=9.0E7, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:30:54,045 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Cerrando cuenta: 23
+17:30:54,369 (AWT-EventQueue-0) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : SQL query "UPDATE CUENTAS SET estado = CERRADA, saldo = 0 WHERE id = ?" necesita 1 parametros pero no hay ninguno
+
+17:30:54,425 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron -1 tuplas
+17:30:54,425 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion cuenta por la asociacion con id : 24
+17:33:26,835 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+17:33:26,836 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuración indicada en el archivo de configuración
+17:33:26,862 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+17:33:37,959 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+17:33:48,864 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 23
+17:33:48,958 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=23, numeroCuenta=575757, estado=ACTIVA, tipo=AHORROS, saldo=5000000.0, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:33:48,958 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Oficina por id: 18
+17:33:49,040 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la oficina: Oficina [id=18, nombre=OFICINA USAQUEN, direccion=Cll 183 #23-4, puestosPosibles=10, gerenteLogin=camila3]
+17:33:49,040 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 23
+17:33:49,117 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=24, valor=4000000.0, frecuencia=QUINCENAL, cuentaCorporativo=23]
+17:34:18,821 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 25
+17:34:18,894 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=25, numeroCuenta=878787, estado=ACTIVA, tipo=AHORROS, saldo=9.0E7, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:34:18,895 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Cerrando cuenta: 23
+17:34:18,917 (AWT-EventQueue-0) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : SQL query "UPDATE ASOCIACIONES SET cuentaCorporativo = ? WHERE id = ?" necesita 2 parametros pero no hay ninguno
+
+17:34:18,922 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron -1 tuplas
+17:34:18,922 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion cuenta por la asociacion con id : 24
