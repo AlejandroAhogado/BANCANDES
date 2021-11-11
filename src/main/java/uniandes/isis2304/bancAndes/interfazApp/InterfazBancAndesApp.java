@@ -4106,11 +4106,12 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 							resultado+= ", Valor: "+ opb[1];
 							resultado+= ", Fecha: "+ opb[2];
 							resultado+= ", Cliente: "+ opb[3];
-							resultado+= ", Producto: "+ opb[4];
-							resultado+= ", Tipo de operacion:"+ opb[5];
-							resultado+= ", Puesto de atencion:  "+ opb[6];
-							resultado+= ", Empleado:  "+ opb[7];
-							resultado+= ", Oficina: "+ opb[8];
+							resultado+= ", Producto origen: "+ opb[4];
+							resultado+= ", Producto destino:"+ opb[5];
+							resultado+= ", Tipo de operacion:"+ opb[6];
+							resultado+= ", Puesto de atencion:  "+ opb[7];
+							resultado+= ", Empleado:  "+ opb[8];
+							resultado+= ", Oficina: "+ opb[9];
 						}
 						panelDatos.actualizarInterfaz(resultado);
 
@@ -4237,11 +4238,12 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 							resultado+= ", Valor: "+ opb[1];
 							resultado+= ", Fecha: "+ opb[2];
 							resultado+= ", Cliente: "+ opb[3];
-							resultado+= ", Producto: "+ opb[4];
-							resultado+= ", Tipo de operacion:"+ opb[5];
-							resultado+= ", Puesto de atencion:  "+ opb[6];
-							resultado+= ", Empleado:  "+ opb[7];
-							resultado+= ", Oficina: "+ opb[8];
+							resultado+= ", Producto origen: "+ opb[4];
+							resultado+= ", Producto destino:"+ opb[5];
+							resultado+= ", Tipo de operacion:"+ opb[6];
+							resultado+= ", Puesto de atencion:  "+ opb[7];
+							resultado+= ", Empleado:  "+ opb[8];
+							resultado+= ", Oficina: "+ opb[9];
 						}
 						panelDatos.actualizarInterfaz(resultado);
 
