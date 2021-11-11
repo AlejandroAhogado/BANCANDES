@@ -1,7 +1,12 @@
 package uniandes.isis2304.bancAndes.persistencia;
 
+import java.util.List;
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+
+import uniandes.isis2304.bancAndes.negocio.AsociacionCuentasEmpleados;
+import uniandes.isis2304.bancAndes.negocio.ClienteProducto;
 
 public class SQLAsociacionCuentasEmpleados {
 	
@@ -40,6 +45,15 @@ public class SQLAsociacionCuentasEmpleados {
 		Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaAsociacionCuentasEmpleados () + "(asociacion, cuentaEmpleado) values (?, ?)");
         q.setParameters(asociacion, cuentaEmpleado);
         return (long) q.executeUnique();
+	}
+
+
+	public List<AsociacionCuentasEmpleados> darAsociacionesCuentasPorAsociacion(PersistenceManager pm,
+			long id) {
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pba.darTablaAsociacionCuentasEmpleados() + " WHERE asociacion = ?");
+		q.setParameters(id);
+		q.setResultClass(AsociacionCuentasEmpleados.class);
+		return (List<AsociacionCuentasEmpleados>) q.executeList();
 	}
 
 }

@@ -34,6 +34,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
+import uniandes.isis2304.bancAndes.negocio.AsociacionCuentasEmpleados;
 import uniandes.isis2304.bancAndes.negocio.BancAndes;
 import uniandes.isis2304.bancAndes.negocio.ClienteProducto;
 import uniandes.isis2304.bancAndes.negocio.VOAsociacion;
@@ -54,6 +55,7 @@ import uniandes.isis2304.bancAndes.negocio.VOPuestoDeAtencion;
 import uniandes.isis2304.bancAndes.negocio.VOPuestoDigital;
 import uniandes.isis2304.bancAndes.negocio.VOUsuario;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class InterfazBancAndesApp extends JFrame implements ActionListener {
@@ -1018,8 +1020,8 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 						java.sql.Date fvp =fechaVencimiento.getText().isEmpty()? null: new java.sql.Date(fv.getTime());
 
-						
-						
+
+
 						ct =  bancAndes.adicionarCuenta(
 								id, 
 								Integer.parseInt(numCuenta.getText()),
@@ -1033,10 +1035,10 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 								(String)cbCorporativo.getSelectedItem()
 
 								);
-						
-						
+
+
 						if (ct==null) {
-							
+
 							throw new Exception ("La cuenta no se pudo agregar");
 						}
 						String resultado = "En agregar Cuenta\n\n";
@@ -1604,38 +1606,38 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					int option = JOptionPane.showConfirmDialog(null, message, "Registro de la operacion", JOptionPane.OK_CANCEL_OPTION);
 					VOOperacionBancaria ob=null;
 					if (option == JOptionPane.OK_OPTION) {
-						
-							if ((float) Integer.parseInt(valor.getText())>=prestamo.getValorCuotaMinima()) {
-								String tipoOperacion = (float) Integer.parseInt(valor.getText())>prestamo.getValorCuotaMinima()? "PAGAR_CUOTA_EXTRAORDINARIA":"PAGAR_CUOTA";
-								try {
-									long hoy=System.currentTimeMillis();
-									ob =  bancAndes.adicionarOperacionBancaria(
-											(float) Integer.parseInt(valor.getText()), 
-											new java.sql.Date(hoy),
-											cliente.getText(), 
-											(long) Integer.parseInt(idPrestamo), 
-											0,
-											tipoOperacion, 
-											cajero.getPuestoAtencionoficina(), 
-											loginUsuarioSistema);
 
-									bancAndes.realizarPago((long) Integer.parseInt(idPrestamo), (float) Integer.parseInt(valor.getText()));
-									
-									String mensaje = "En registrar operacion sobre prestamo \n\n";
-									mensaje += "Se registro exitosamente una operacion sobre el prestamo: " + idPrestamo;
-									mensaje += "\n Operacion terminada";
+						if ((float) Integer.parseInt(valor.getText())>=prestamo.getValorCuotaMinima()) {
+							String tipoOperacion = (float) Integer.parseInt(valor.getText())>prestamo.getValorCuotaMinima()? "PAGAR_CUOTA_EXTRAORDINARIA":"PAGAR_CUOTA";
+							try {
+								long hoy=System.currentTimeMillis();
+								ob =  bancAndes.adicionarOperacionBancaria(
+										(float) Integer.parseInt(valor.getText()), 
+										new java.sql.Date(hoy),
+										cliente.getText(), 
+										(long) Integer.parseInt(idPrestamo), 
+										0,
+										tipoOperacion, 
+										cajero.getPuestoAtencionoficina(), 
+										loginUsuarioSistema);
 
-									panelDatos.actualizarInterfaz(mensaje);
-									
-									
-								} catch (Exception e) {
-									throw new Exception ("No se pudo registrar la operacion sobre el prestamo: " + idPrestamo);
-								}
+								bancAndes.realizarPago((long) Integer.parseInt(idPrestamo), (float) Integer.parseInt(valor.getText()));
+
+								String mensaje = "En registrar operacion sobre prestamo \n\n";
+								mensaje += "Se registro exitosamente una operacion sobre el prestamo: " + idPrestamo;
+								mensaje += "\n Operacion terminada";
+
+								panelDatos.actualizarInterfaz(mensaje);
+
+
+							} catch (Exception e) {
+								throw new Exception ("No se pudo registrar la operacion sobre el prestamo: " + idPrestamo);
 							}
-							else {
-								throw new Exception ("No se pudo registrar el pago sobre el prestamo: " + idPrestamo+" porque no se alcanzo la cuota minima");
-							}
-						
+						}
+						else {
+							throw new Exception ("No se pudo registrar el pago sobre el prestamo: " + idPrestamo+" porque no se alcanzo la cuota minima");
+						}
+
 					}            
 
 					if (option == JOptionPane.CANCEL_OPTION)
@@ -1656,7 +1658,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 			} 
 			catch (Exception e) 
 			{
-				 e.printStackTrace();
+				e.printStackTrace();
 				String resultado = generarMensajeError(e);
 				panelDatos.actualizarInterfaz(resultado);
 			}
@@ -1754,7 +1756,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 				JTextField cuentaCorporativo = new JTextField();
 				JTextField cuentaEmpleado = new JTextField();
 				JTextField nombreEmpleado = new JTextField();
-				
+
 
 				JComboBox<String> cbAsociacionCorp= new JComboBox<String>();
 				cbAsociacionCorp.addItem("QUINCENAL");
@@ -1777,30 +1779,30 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 								Float.parseFloat(valor.getText()),
 								(String) cbAsociacionCorp.getSelectedItem(),
 								Integer.parseInt(cuentaCorporativo.getText()));								
-						
+
 						int i=1;
-						
+
 						try {//asociar la cuenta a uno o mas empleados
 							boolean asociando = true;
 
 
 							while (asociando) {
-									nombreEmpleado = new JTextField();
-									cuentaEmpleado = new JTextField();
+								nombreEmpleado = new JTextField();
+								cuentaEmpleado = new JTextField();
 								Object[] messageEmpleado = {
 										"Nombre del empleado", nombreEmpleado,
 										"Cuenta Empleado:", cuentaEmpleado
 								};
-								
-								
+
+
 								JOptionPane.showConfirmDialog(null, messageEmpleado, "Nombre del empleado "+i+" a asociar", JOptionPane.OK_CANCEL_OPTION);
-							
-								
+
+
 								if (!cuentaEmpleado.getText().isEmpty()) {
-									
-									
+
+
 									VOCuenta cuenta= bancAndes.darCuentaPorNumero(Integer.parseInt(cuentaEmpleado.getText()));
-								
+
 									VOAsociacionCuentasEmpleados asoEmp = null;
 
 									if (cuenta!=null) {
@@ -1891,7 +1893,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 				VOCuenta destino= null;
 				String idCuenta=null;
 				String idDestino=null;
-				
+
 				if(tipoOperacion==2) {//Transferencia
 					JTextField txCuentaO = new JTextField();
 					JTextField txCuentaD = new JTextField();
@@ -1904,16 +1906,16 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					int option = JOptionPane.showConfirmDialog(null, message, "Registro de la operacion", JOptionPane.OK_CANCEL_OPTION);
 					idCuenta= txCuentaO.getText();
 					idDestino= txCuentaD.getText();
-					
+
 					cuenta= bancAndes.darCuentaPorId((long) Integer.parseInt(idCuenta));
 					destino= bancAndes.darCuentaPorId((long) Integer.parseInt(idDestino));
-					
+
 				}
 				else {
 					idCuenta = JOptionPane.showInputDialog (this, "Id de la cuenta", "Indicar cuenta", JOptionPane.QUESTION_MESSAGE);
 					cuenta= bancAndes.darCuentaPorId((long) Integer.parseInt(idCuenta));
 				}
-				
+
 				if (cuenta!=null && cuenta.getEstado().equals(ACTIVA)) {
 					if (!cuenta.getTipo().equals("CDT")) {
 						switch(tipoOperacion)
@@ -2212,7 +2214,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 										if ((!cuenta.getTipo().equals("CORRIENTE") &&  cuenta.getSaldo()>=(float) Integer.parseInt(valor.getText())) ||(cuenta.getTipo().equals("CORRIENTE")) ) 
 										{
-										
+
 											try {
 												long hoy=System.currentTimeMillis();
 												ob =  bancAndes.adicionarOperacionBancaria(
@@ -2256,7 +2258,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 							resultado += "\n Operacion terminada";
 							panelDatos.actualizarInterfaz(resultado);
 						}
-						
+
 					}
 					else {
 						panelDatos.actualizarInterfaz("No se puede registrar operación sobre el CDT "+idCuenta);
@@ -2293,7 +2295,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 			{            
 				String idPrestamo = JOptionPane.showInputDialog (this, "Id del prestamo", "Indicar prestamo", JOptionPane.QUESTION_MESSAGE);
 				VOPrestamo prestamo = bancAndes.darPrestamoPorId((long) Integer.parseInt(idPrestamo));
-				
+
 				String[] ynopt = {"Sí", "No"};
 				int x= JOptionPane.showOptionDialog(this, "¿Desea hacer el pago electronico?", "Forma de pago", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, ynopt, null);
 
@@ -2312,40 +2314,40 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					int option = JOptionPane.showConfirmDialog(null, message, "Registro de la operacion", JOptionPane.OK_CANCEL_OPTION);
 					VOOperacionBancaria ob=null;
 					if (option == JOptionPane.OK_OPTION) {
-						
-						
-							if ((float) Integer.parseInt(valor.getText())>=prestamo.getValorCuotaMinima()) {
-								String tipoOperacion = (float) Integer.parseInt(valor.getText())>prestamo.getValorCuotaMinima()? "PAGAR_CUOTA_EXTRAORDINARIA":"PAGAR_CUOTA";
-								try {
-									long hoy=System.currentTimeMillis();
-									ob =  bancAndes.adicionarOperacionBancaria(
-											(float) Integer.parseInt(valor.getText()), 
-											new java.sql.Date(hoy),
-											cliente.getText(), 
-											(long) Integer.parseInt(idPrestamo), 
-											0,
-											tipoOperacion, 
-											cajero.getPuestoAtencionoficina(), 
-											loginUsuarioSistema);
 
-									bancAndes.realizarPago((long) Integer.parseInt(idPrestamo), (float) Integer.parseInt(valor.getText()));
-									
-									String mensaje = "En registrar operacion sobre prestamo \n\n";
-									mensaje += "Se registro exitosamente una operacion sobre el prestamo: " + idPrestamo;
-									mensaje += "\n Operacion: " + ob;
-									mensaje += "\n Operacion terminada";
 
-									panelDatos.actualizarInterfaz(mensaje);
-									
-									
-								} catch (Exception e) {
-									throw new Exception ("No se pudo registrar la operacion sobre el prestamo: " + idPrestamo);
-								}
+						if ((float) Integer.parseInt(valor.getText())>=prestamo.getValorCuotaMinima()) {
+							String tipoOperacion = (float) Integer.parseInt(valor.getText())>prestamo.getValorCuotaMinima()? "PAGAR_CUOTA_EXTRAORDINARIA":"PAGAR_CUOTA";
+							try {
+								long hoy=System.currentTimeMillis();
+								ob =  bancAndes.adicionarOperacionBancaria(
+										(float) Integer.parseInt(valor.getText()), 
+										new java.sql.Date(hoy),
+										cliente.getText(), 
+										(long) Integer.parseInt(idPrestamo), 
+										0,
+										tipoOperacion, 
+										cajero.getPuestoAtencionoficina(), 
+										loginUsuarioSistema);
+
+								bancAndes.realizarPago((long) Integer.parseInt(idPrestamo), (float) Integer.parseInt(valor.getText()));
+
+								String mensaje = "En registrar operacion sobre prestamo \n\n";
+								mensaje += "Se registro exitosamente una operacion sobre el prestamo: " + idPrestamo;
+								mensaje += "\n Operacion: " + ob;
+								mensaje += "\n Operacion terminada";
+
+								panelDatos.actualizarInterfaz(mensaje);
+
+
+							} catch (Exception e) {
+								throw new Exception ("No se pudo registrar la operacion sobre el prestamo: " + idPrestamo);
 							}
-							else {
-								throw new Exception ("No se pudo registrar el pago sobre el prestamo: " + idPrestamo+" porque no se alcanzo la cuota minima");
-							}
-						
+						}
+						else {
+							throw new Exception ("No se pudo registrar el pago sobre el prestamo: " + idPrestamo+" porque no se alcanzo la cuota minima");
+						}
+
 					}            
 
 					if (option == JOptionPane.CANCEL_OPTION)
@@ -2372,15 +2374,15 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					};
 
 					int option = JOptionPane.showConfirmDialog(null, message, "Registro de la operacion", JOptionPane.OK_CANCEL_OPTION);
-					
+
 					VOCuenta cuenta = null;
 					try {
 						cuenta = bancAndes.darCuentaPorNumero(Integer.parseInt(txCuenta.getText()));
 					} catch (Exception e) {
 						throw new Exception ("No se encontro la cuenta "+txCuenta.getText());
 					}
-					
-					
+
+
 					VOOperacionBancaria ob=null;
 					if (option == JOptionPane.OK_OPTION) {
 						if ((!cuenta.getTipo().equals("CORRIENTE") &&  cuenta.getSaldo()>=(float) Integer.parseInt(valor.getText())) ||(cuenta.getTipo().equals("CORRIENTE")) ) 
@@ -2401,15 +2403,15 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 									bancAndes.actualizarSaldoCuenta(cuenta.getId(), - (float) Integer.parseInt(valor.getText()));
 									bancAndes.realizarPago((long) Integer.parseInt(idPrestamo), (float) Integer.parseInt(valor.getText()));
-									
+
 									String mensaje = "En registrar operacion sobre prestamo \n\n";
 									mensaje += "Se registro exitosamente una operacion sobre el prestamo: " + idPrestamo;
 									mensaje += "\n Operacion: " + ob;
 									mensaje += "\n Operacion terminada";
 
 									panelDatos.actualizarInterfaz(mensaje);
-									
-									
+
+
 								} catch (Exception e) {
 									throw new Exception ("No se pudo registrar la operacion sobre el prestamo: " + idPrestamo);
 								}
@@ -2417,10 +2419,10 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 							else {
 								throw new Exception ("No se pudo registrar el pago sobre el prestamo: " + idPrestamo+" porque no se alcanzo la cuota minima");
 							}
-							
+
 						}else {throw new Exception("No se pudo realizar la transferencia desde la cuenta "+ cuenta.getId()+ " porque los fondos son insuficientes.");}
 
-						
+
 					}            
 
 					if (option == JOptionPane.CANCEL_OPTION)
@@ -2441,12 +2443,234 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 			} 
 			catch (Exception e) 
 			{
-				 e.printStackTrace();
+				e.printStackTrace();
 				String resultado = generarMensajeError(e);
 				panelDatos.actualizarInterfaz(resultado);
 			}
 		}
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/* ****************************************************************
+	 *                             REF13
+	 *****************************************************************/
+	/**
+	 * Pagar nomina
+	 */
+	public void pagarNomina() {
+		if (tipoUsuario==GERENTEGENERAL || 	tipoUsuario==GERENTEDEOFICINA) {
+			mensajeErrorPermisos();
+		}
+		else {
+			try 
+			{            
+
+				String resultado = "";
+
+				VOCuenta cuenta=null;
+				VOCuenta destino= null;
+				String idCuenta=null;
+				String idDestino=null;
+
+				JTextField txCuentaO = new JTextField();
+
+				Object[] message = {
+						"Id cuenta corporativo: ", txCuentaO
+				};
+
+				int option = JOptionPane.showConfirmDialog(null, message, "Pago de nomina", JOptionPane.OK_CANCEL_OPTION);
+				idCuenta= txCuentaO.getText();
+
+				cuenta= bancAndes.darCuentaPorId((long) Integer.parseInt(idCuenta));	
+
+				if (cuenta!=null && cuenta.getEstado().equals(ACTIVA) && cuenta.getCorporativo().equals("TRUE"))
+				{
+					if (!cuenta.getTipo().equals("CDT")) {
+
+						if(tipoUsuario==CAJERO) {//estamos en puesto atencion oficina
+							VOCajero cajero = bancAndes.darCajeroPorLogin(loginUsuarioSistema);
+
+							JTextField cliente = new JTextField();
+
+							Object[] message2 = {
+									"Login cliente:", cliente
+							};
+
+							int option2 = JOptionPane.showConfirmDialog(null, message2, "Pago de nomina", JOptionPane.OK_CANCEL_OPTION);
+							VOOperacionBancaria ob=null;
+							if (option2 == JOptionPane.OK_OPTION) {
+
+								VOAsociacion voa = null;
+								try {
+									voa = bancAndes.darAsociacionPorCuenta(cuenta.getId());
+
+								} catch (Exception e) {
+									e.printStackTrace();
+									throw new Exception ("No se encontro ninguna asociacion con la cuenta corporativa "+ cuenta.getId());
+								}
+
+								List<AsociacionCuentasEmpleados> listaCuentas = null;
+								try {
+									listaCuentas = bancAndes.darAsociacionesCuentasPorAsociacion(voa.getId());
+								} catch (Exception e) {
+									throw new Exception ("No se encontro ninguna asociacion cuenta por la asociacion "+ voa.getId());
+								}
+								int i = 0;	
+								try {
+									i =	bancAndes.pagarNomina(
+											listaCuentas,
+											(long) Integer.parseInt(idCuenta),
+											voa.getValor(),cliente.getText(),
+											cajero.getPuestoAtencionoficina(),
+											loginUsuarioSistema );
+
+								} catch (Exception e) {
+									throw new Exception ("No se pudo registrar la operacion sobre la cuenta: " + idCuenta);
+								}
+
+								if (i<listaCuentas.size()) {
+									resultado = "No se pudo pagar la nomina de los cuentas con id";
+									System.out.println(listaCuentas.size());
+									for ( int a=i ; a<listaCuentas.size(); a++) {
+										System.out.println(a);
+										resultado += "\n "+ listaCuentas.get(a).getCuentaEmpleado();
+
+									}
+									panelDatos.actualizarInterfaz(resultado);
+								}
+
+							}            
+
+							if (option == JOptionPane.CANCEL_OPTION)
+							{          
+								panelDatos.actualizarInterfaz("Operacion cancelada");                                                                                 
+							}
+
+						}
+						//							else {//es un cliente
+						//
+						//								JComboBox<String> cbPuesto = new JComboBox<String>();
+						//								cbPuesto.addItem("DIGITAL");
+						//								cbPuesto.addItem("CAJERO AUTOMATICO");
+						//
+						//								JTextField valor = new JTextField();
+						//								JTextField puestoAtencion = new JTextField();
+						//
+						//								Object[] message = {
+						//										"Valor: ", valor,
+						//										"Tipo de puesto de atencion: ", cbPuesto,
+						//										"Id puesto de atencion:", puestoAtencion
+						//								};
+						//
+						//								int option = JOptionPane.showConfirmDialog(null, message, "Registro de la operacion", JOptionPane.OK_CANCEL_OPTION);
+						//								VOOperacionBancaria ob=null;
+						//								if(cbPuesto.getSelectedItem().equals("DIGITAL")) {
+						//									VOPuestoDigital pd = bancAndes.darPuestoDigitalPorId((long) Integer.parseInt(puestoAtencion.getText()));
+						//									if (pd==null) {
+						//										throw new Exception ("No existe el puesto digital "+puestoAtencion.getText());
+						//									}
+						//								}
+						//								else {
+						//									VOCajeroAutomatico ca = bancAndes.darCajeroAutomaticoPorId((long) Integer.parseInt(puestoAtencion.getText()));
+						//									if (ca==null) {
+						//										throw new Exception ("No existe el cajero automatico "+puestoAtencion.getText());
+						//									}
+						//								}
+						//								if (option == JOptionPane.OK_OPTION) {
+						//
+						//									if ((!cuenta.getTipo().equals("CORRIENTE") &&  cuenta.getSaldo()>=(float) Integer.parseInt(valor.getText())) ||(cuenta.getTipo().equals("CORRIENTE")) ) 
+						//									{
+						//
+						//										try {
+						//											long hoy=System.currentTimeMillis();
+						//											ob =  bancAndes.adicionarOperacionBancaria(
+						//													(float) Integer.parseInt(valor.getText()), 
+						//													new java.sql.Date(hoy),
+						//													this.loginUsuarioSistema, 
+						//													(long) Integer.parseInt(idCuenta), 
+						//													(long) Integer.parseInt(idDestino),
+						//													"TRANSFERIR", 
+						//													(long) Integer.parseInt(puestoAtencion.getText()), 
+						//													null);
+						//
+						//											bancAndes.actualizarSaldoCuenta((long) Integer.parseInt(idCuenta), - (float) Integer.parseInt(valor.getText()));
+						//											bancAndes.actualizarSaldoCuenta((long) Integer.parseInt(idDestino), (float) Integer.parseInt(valor.getText()));
+						//
+						//
+						//										} catch (Exception e) {
+						//											throw new Exception ("No se pudo registrar la operacion sobre la cuenta: " + idCuenta);
+						//										}
+						//									}else {throw new Exception("No se pudo realizar la transferencia desde la cuenta "+ idCuenta+ " porque los fondos son insuficientes.");}
+						//
+						//								}            
+						//
+						//								if (option == JOptionPane.CANCEL_OPTION)
+						//								{          
+						//									panelDatos.actualizarInterfaz("Operacion cancelada");                                                                                 
+						//								}
+						//							}
+					
+
+
+					resultado += "\n En pagar nomina a empleados\n\n";
+					resultado += "Operacion registrada exitosamente desde cuenta: " + idCuenta;
+					resultado += "\n Operacion terminada";
+					panelDatos.actualizarInterfaz(resultado);
+					}
+					else {
+						panelDatos.actualizarInterfaz("No se puede registrar operación sobre el CDT "+idCuenta);
+					}
+				}		
+
+				else {
+					panelDatos.actualizarInterfaz("La cuenta "+idCuenta+" no está activa");
+				}
+			}
+			catch (Exception e) 
+			{
+				                                      e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+			}
+
+		}
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	/* ****************************************************************
 	 *                             REFC1
 	 *****************************************************************/
@@ -2455,7 +2679,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 	 */
 	public void consultarCuentas( )
 	{
-		
+
 		if (tipoUsuario==CAJERO) {
 			mensajeErrorPermisos();
 		}
@@ -2519,7 +2743,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						List<Object []> lvo = null;
 
 						VOOficina voof = bancAndes.darOficinaPorGerenteDeOficina(loginUsuarioSistema);
-					
+
 						String signo1 = cbOpcionesCriterio.getSelectedItem().equals("SALDO MAYOR A") ? ">" : "=";
 						String signo2 = cbOpcionesCriterio2.getSelectedItem().equals("SALDO MENOR A") ? "<" : "=";
 
@@ -2639,13 +2863,13 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 						String signo1 = cbOpcionesCriterio.getSelectedItem().equals("SALDO MAYOR A") ? ">" : "=";
 						String signo2 = cbOpcionesCriterio2.getSelectedItem().equals("SALDO MENOR A") ? "<" : "=";
-				
+
 						String criterio1p = cbOpcionesCriterio.getSelectedItem().equals("NINGUNO") ? "cliente" : (String) cbOpcionesCriterio.getSelectedItem();
 						String criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("NINGUNO") ? "cliente" : (String) cbOpcionesCriterio2.getSelectedItem();
 
 						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("SALDO MAYOR A") ? "SALDO" : criterio1p;
 						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("SALDO MENOR A") ? "SALDO" : criterio2p;
-						
+
 						String filtro1p = cbOpcionesCriterio.getSelectedItem().equals("NINGUNO") ?  this.loginUsuarioSistema : (String) filtro1.getText();
 						String filtro2p = cbOpcionesCriterio2.getSelectedItem().equals("NINGUNO") ? this.loginUsuarioSistema  : (String) filtro2.getText();
 
@@ -2654,7 +2878,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						if (cbOpcionesAgrupamiento.getSelectedItem().equals("NINGUNO")) {
 
 							try {
-							
+
 								lvo = bancAndes.consultarCuentasCliente(
 										this.loginUsuarioSistema , 
 										criterio1p,
@@ -2666,15 +2890,15 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 										(String) cbOpcionesOrdenamiento.getSelectedItem(),
 										(String) cbOpcionesTipoOrdenamiento.getSelectedItem()
 										);
-								
+
 							} catch (Exception e) {
 								e.printStackTrace();
 								throw new Exception ("Error en la consulta sin filtro del cliente");
 							}
-						
+
 							int i=0;
 							for (Object [] opb : lvo) {
-							
+
 								i++;
 								resultado += "\n Item "+i+": ";
 								resultado+= "Cliente: "+ opb[0];
@@ -2859,7 +3083,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 						}
 					} 	
-					
+
 					if (option == JOptionPane.CANCEL_OPTION)
 					{			        	    
 						panelDatos.actualizarInterfaz("Consulta cancelada");			        	    			
@@ -3185,21 +3409,21 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 			}
 		}
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 	/* ****************************************************************
 	 *                             REFC5
 	 *****************************************************************/
-	
+
 	/**
 	 * Consultar los prestamos en bancAndes
 	 */
 	public void consultarPrestamos( )
 	{
-		
+
 		if (tipoUsuario==CAJERO) {
 			mensajeErrorPermisos();
 		}
@@ -3259,7 +3483,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						List<Object []> lvo = null;
 
 						VOOficina voof = bancAndes.darOficinaPorGerenteDeOficina(loginUsuarioSistema);
-															
+
 						String signo1 = cbOpcionesCriterio.getSelectedItem().equals("SALDO PENDIENTE MAYOR A") 
 								|| cbOpcionesCriterio.getSelectedItem().equals("CUOTA MINIMA MAYOR A") 
 								|| cbOpcionesCriterio.getSelectedItem().equals("MONTO MAYOR A") 
@@ -3268,27 +3492,27 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 								|| cbOpcionesCriterio.getSelectedItem().equals("CUOTA MINIMA MENOR A") 
 								|| cbOpcionesCriterio.getSelectedItem().equals("MONTO MENOR A") 
 								? "<" : "=";
-				
-											
+
+
 						String criterio1p = (String) cbOpcionesCriterio.getSelectedItem();
 						String criterio2p = (String) cbOpcionesCriterio2.getSelectedItem();
-						
+
 						String filtro1p = (String) filtro1.getText();
 						String filtro2p = (String) filtro2.getText();
-						
+
 						//CAMBIO DE NOMBRES NL A LOS DE LAS TABLAS
 						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("SALDO PENDIENTE MAYOR A") ? "SALDOPENDIENTE" : criterio1p;
 						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("SALDO PENDIENTE MENOR A") ? "SALDOPENDIENTE" : criterio2p;
-						
+
 						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("CUOTA MINIMA MAYOR A") ? "VALORCUOTAMINIMA" : criterio1p;
 						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("CUOTA MINIMA MENOR A") ? "VALORCUOTAMINIMA" : criterio2p;
-						
+
 						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("MONTO MAYOR A") ? "MONTO" : criterio1p;
 						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("MONTO MENOR A") ? "MONTO" : criterio2p;
-						
+
 						String ordenamiento = cbOpcionesOrdenamiento.getSelectedItem().equals("VALOR CUOTA MINIMA") ? "VALORCUOTAMINIMA" : 
 							(String) cbOpcionesOrdenamiento.getSelectedItem();
-						
+
 
 						//si no hay primer criterio de filtro
 						if (cbOpcionesCriterio.getSelectedItem().equals("NINGUNO")) {
@@ -3304,7 +3528,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 							filtro2p = "0";
 						}
 
-						
+
 						try {
 							lvo = bancAndes.consultarPrestamosGerenteOficina(
 									String.valueOf(voof.getId()), 
@@ -3320,11 +3544,11 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						} catch (Exception e) {
 							throw new Exception ("Error en la consulta");
 						}
-						
+
 						//Impresion del resultado
 						int i=0;
 						for (Object [] opb : lvo) {
-						
+
 							i++;
 							resultado += "\n Item "+i+": ";
 							resultado+= "Cliente: "+ opb[0];
@@ -3401,7 +3625,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					if (option == JOptionPane.OK_OPTION) {
 						List<Object []> lvo = null;
 
-									
+
 						String signo1 = cbOpcionesCriterio.getSelectedItem().equals("SALDO PENDIENTE MAYOR A") 
 								|| cbOpcionesCriterio.getSelectedItem().equals("CUOTA MINIMA MAYOR A") 
 								|| cbOpcionesCriterio.getSelectedItem().equals("MONTO MAYOR A") 
@@ -3410,27 +3634,27 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 								|| cbOpcionesCriterio.getSelectedItem().equals("CUOTA MINIMA MENOR A") 
 								|| cbOpcionesCriterio.getSelectedItem().equals("MONTO MENOR A") 
 								? "<" : "=";
-				
-											
+
+
 						String criterio1p = (String) cbOpcionesCriterio.getSelectedItem();
 						String criterio2p = (String) cbOpcionesCriterio2.getSelectedItem();
-						
+
 						String filtro1p = (String) filtro1.getText();
 						String filtro2p = (String) filtro2.getText();
-						
+
 						//CAMBIO DE NOMBRES NL A LOS DE LAS TABLAS
 						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("SALDO PENDIENTE MAYOR A") ? "SALDOPENDIENTE" : criterio1p;
 						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("SALDO PENDIENTE MENOR A") ? "SALDOPENDIENTE" : criterio2p;
-						
+
 						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("CUOTA MINIMA MAYOR A") ? "VALORCUOTAMINIMA" : criterio1p;
 						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("CUOTA MINIMA MENOR A") ? "VALORCUOTAMINIMA" : criterio2p;
-						
+
 						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("MONTO MAYOR A") ? "MONTO" : criterio1p;
 						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("MONTO MENOR A") ? "MONTO" : criterio2p;
-						
+
 						String ordenamiento = cbOpcionesOrdenamiento.getSelectedItem().equals("VALOR CUOTA MINIMA") ? "VALORCUOTAMINIMA" : 
 							(String) cbOpcionesOrdenamiento.getSelectedItem();
-						
+
 
 						//si no hay primer criterio de filtro
 						if (cbOpcionesCriterio.getSelectedItem().equals("NINGUNO")) {
@@ -3446,7 +3670,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 							filtro2p = "0";
 						}
 
-						
+
 						try {
 							lvo = bancAndes.consultarPrestamosCliente(
 									this.loginUsuarioSistema , 
@@ -3462,11 +3686,11 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						} catch (Exception e) {
 							throw new Exception ("Error en la consulta");
 						}
-						
+
 						//Impresion del resultado
 						int i=0;
 						for (Object [] opb : lvo) {
-						
+
 							i++;
 							resultado += "\n Item "+i+": ";
 							resultado+= "Cliente: "+ opb[0];
@@ -3553,7 +3777,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					if (option == JOptionPane.OK_OPTION) {
 						List<Object []> lvo = null;
 
-									
+
 						String signo1 = cbOpcionesCriterio.getSelectedItem().equals("SALDO PENDIENTE MAYOR A") 
 								|| cbOpcionesCriterio.getSelectedItem().equals("CUOTA MINIMA MAYOR A") 
 								|| cbOpcionesCriterio.getSelectedItem().equals("MONTO MAYOR A") 
@@ -3562,27 +3786,27 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 								|| cbOpcionesCriterio.getSelectedItem().equals("CUOTA MINIMA MENOR A") 
 								|| cbOpcionesCriterio.getSelectedItem().equals("MONTO MENOR A") 
 								? "<" : "=";
-				
-											
+
+
 						String criterio1p = (String) cbOpcionesCriterio.getSelectedItem();
 						String criterio2p = (String) cbOpcionesCriterio2.getSelectedItem();
-						
+
 						String filtro1p = (String) filtro1.getText();
 						String filtro2p = (String) filtro2.getText();
-						
+
 						//CAMBIO DE NOMBRES NL A LOS DE LAS TABLAS
 						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("SALDO PENDIENTE MAYOR A") ? "SALDOPENDIENTE" : criterio1p;
 						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("SALDO PENDIENTE MENOR A") ? "SALDOPENDIENTE" : criterio2p;
-						
+
 						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("CUOTA MINIMA MAYOR A") ? "VALORCUOTAMINIMA" : criterio1p;
 						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("CUOTA MINIMA MENOR A") ? "VALORCUOTAMINIMA" : criterio2p;
-						
+
 						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("MONTO MAYOR A") ? "MONTO" : criterio1p;
 						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("MONTO MENOR A") ? "MONTO" : criterio2p;
-						
+
 						String ordenamiento = cbOpcionesOrdenamiento.getSelectedItem().equals("VALOR CUOTA MINIMA") ? "VALORCUOTAMINIMA" : 
 							(String) cbOpcionesOrdenamiento.getSelectedItem();
-						
+
 
 						//si no hay primer criterio de filtro
 						if (cbOpcionesCriterio.getSelectedItem().equals("NINGUNO")) {
@@ -3598,7 +3822,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 							filtro2p = "0";
 						}
 
-						
+
 						try {
 							lvo = bancAndes.consultarPrestamosGerenteGeneral(
 									criterio1p,
@@ -3613,11 +3837,11 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						} catch (Exception e) {
 							throw new Exception ("Error en la consulta");
 						}
-						
+
 						//Impresion del resultado
 						int i=0;
 						for (Object [] opb : lvo) {
-						
+
 							i++;
 							resultado += "\n Item "+i+": ";
 							resultado+= "Cliente: "+ opb[0];
@@ -3651,13 +3875,13 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 			}}
 
 	}
-	
-	
-	
+
+
+
 	/* ****************************************************************
 	 *                             REFC6
 	 *****************************************************************/
-	
+
 	/**
 	 * Consultar las operaciones en bancAndes
 	 */
@@ -3721,27 +3945,27 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						List<Object []> lvo = null;
 
 						VOOficina voof = bancAndes.darOficinaPorGerenteDeOficina(loginUsuarioSistema);
-						
+
 						String signo1 = cbOpcionesCriterio.getSelectedItem().equals("VALOR MAYOR A")
 								? ">" : "=";
 						String signo2 = cbOpcionesCriterio2.getSelectedItem().equals("VALOR MENOR A")
 								? "<" : "=";
-				
-											
+
+
 						String criterio1p = (String) cbOpcionesCriterio.getSelectedItem();
 						String criterio2p = (String) cbOpcionesCriterio2.getSelectedItem();
-						
+
 						String filtro1p = (String) filtro1.getText();
 						String filtro2p = (String) filtro2.getText();
-						
+
 						//CAMBIO DE NOMBRES NL A LOS DE LAS TABLAS
 						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("VALOR MAYOR A") ? "VALOR" : criterio1p;
 						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("VALOR MENOR A") ? "VALOR" : criterio2p;
-						
+
 						//Desambiguar id de operaciones bancarias (no de puestos de atencion)
 						String ordenamiento = cbOpcionesOrdenamiento.getSelectedItem().equals("ID") ? "OPB.ID" : 
 							(String) cbOpcionesOrdenamiento.getSelectedItem();
-						
+
 						//si no hay primer criterio de filtro
 						if (cbOpcionesCriterio.getSelectedItem().equals("NINGUNO")) {
 							criterio1p = "opb.id";
@@ -3756,7 +3980,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 							filtro2p = "0";
 						}
 
-						
+
 						try {
 							lvo = bancAndes.consultarOperacionesGerenteOficina(
 									String.valueOf(voof.getId()), 
@@ -3773,11 +3997,11 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 							e.printStackTrace();
 							throw new Exception ("Error en la consulta");
 						}
-						
+
 						//Impresion del resultado
 						int i=0;
 						for (Object [] opb : lvo) {
-						
+
 							i++;
 							resultado += "\n Item "+i+": ";
 							resultado+= "ID operacion: "+ opb[0];
@@ -3854,19 +4078,19 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					if (option == JOptionPane.OK_OPTION) {
 						List<Object []> lvo = null;
 
-									
+
 						String signo1 = cbOpcionesCriterio.getSelectedItem().equals("VALOR MAYOR A")
 								? ">" : "=";
 						String signo2 = cbOpcionesCriterio2.getSelectedItem().equals("VALOR MENOR A")
 								? "<" : "=";
-				
-											
+
+
 						String criterio1p = (String) cbOpcionesCriterio.getSelectedItem();
 						String criterio2p = (String) cbOpcionesCriterio2.getSelectedItem();
-						
+
 						String filtro1p = (String) filtro1.getText();
 						String filtro2p = (String) filtro2.getText();
-						
+
 						//CAMBIO DE NOMBRES NL A LOS DE LAS TABLAS
 						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("VALOR MAYOR A") ? "VALOR" : criterio1p;
 						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("VALOR MENOR A") ? "VALOR" : criterio2p;
@@ -3888,7 +4112,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 							filtro2p = "0";
 						}
 
-						
+
 						try {
 							lvo = bancAndes.consultarOperacionesCliente(
 									this.loginUsuarioSistema ,
@@ -3904,11 +4128,11 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						} catch (Exception e) {
 							throw new Exception ("Error en la consulta");
 						}
-						
+
 						//Impresion del resultado
 						int i=0;
 						for (Object [] opb : lvo) {
-						
+
 							i++;
 							resultado += "\n Item "+i+": ";
 							resultado+= "ID operacion: "+ opb[0];
@@ -3989,19 +4213,19 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					if (option == JOptionPane.OK_OPTION) {
 						List<Object []> lvo = null;
 
-									
+
 						String signo1 = cbOpcionesCriterio.getSelectedItem().equals("VALOR MAYOR A")
 								? ">" : "=";
 						String signo2 = cbOpcionesCriterio2.getSelectedItem().equals("VALOR MENOR A")
 								? "<" : "=";
-				
-											
+
+
 						String criterio1p = (String) cbOpcionesCriterio.getSelectedItem();
 						String criterio2p = (String) cbOpcionesCriterio2.getSelectedItem();
-						
+
 						String filtro1p = (String) filtro1.getText();
 						String filtro2p = (String) filtro2.getText();
-						
+
 						//CAMBIO DE NOMBRES NL A LOS DE LAS TABLAS
 						criterio1p = cbOpcionesCriterio.getSelectedItem().equals("VALOR MAYOR A") ? "VALOR" : criterio1p;
 						criterio2p = cbOpcionesCriterio2.getSelectedItem().equals("VALOR MENOR A") ? "VALOR" : criterio2p;
@@ -4023,7 +4247,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 							filtro2p = "0";
 						}
 
-						
+
 						try {
 							lvo = bancAndes.consultarOperacionesGerenteGeneral(
 									criterio1p,
@@ -4038,11 +4262,11 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						} catch (Exception e) {
 							throw new Exception ("Error en la consulta");
 						}
-						
+
 						//Impresion del resultado
 						int i=0;
 						for (Object [] opb : lvo) {
-						
+
 							i++;
 							resultado += "\n Item "+i+": ";
 							resultado+= "ID operacion: "+ opb[0];
@@ -4068,12 +4292,12 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 			}
 			catch (Exception e) 
 			{
-				                                      e.printStackTrace();
+				e.printStackTrace();
 				String resultado = generarMensajeError(e);
 				panelDatos.actualizarInterfaz(resultado);
 			}}
 	}
-	
+
 	/**
 	 * Genera una cadena de caracteres con la descripciÃ³n de la excepcion e, haciendo Ã©nfasis en las excepcionsde JDO
 	 * @param e - La excepciÃ³n recibida

@@ -994,6 +994,17 @@ public class BancAndes {
 		}
 		
 		
+		/**
+		 * @param id
+		 * @return
+		 */
+		public VOAsociacion darAsociacionPorCuenta(long id) {
+			log.info ("Buscando Asociacion con cuenta por id: " + id);
+			Asociacion asociacion= pba.darAsociacionPorCuenta (id);
+			log.info ("Se encontro la asociacion: "+ asociacion);
+			return asociacion;
+		}
+		
 		/* ****************************************************************
 		 * 			Métodos para manejar AsociacionCuentasEmpleados
 		 *****************************************************************/
@@ -1006,6 +1017,13 @@ public class BancAndes {
 	        return asociacionCuentaEmpleado;
 		}
 		
+		
+		public List<AsociacionCuentasEmpleados> darAsociacionesCuentasPorAsociacion(long id) {
+		    log.info ("Buscando Asociacion cuenta por la asociacion con id : " + id);
+            List<AsociacionCuentasEmpleados> lace= pba.darAsociacionesCuentasPorAsociacion (id);
+            return lace;
+		}
+
 		
 		
 		//***************************************METEODOS PARA REQUERIMIENTOS DE CONSULTA
@@ -1240,5 +1258,18 @@ public class BancAndes {
 					log.info ("Se encontraron todas las operaciones del cliente");
 					return prestamos;
 				}
+
+				public int pagarNomina(List<AsociacionCuentasEmpleados> listaCuentas, long idCuenta, float valor,
+						String cliente, long puestoAtencionoficina, String loginUsuarioSistema) {
+					log.info(" Pagando nomina del cliente corporativo "+  cliente);
+					
+					int cantidadEmpleados  = pba.pagarNomina(listaCuentas,  idCuenta,  valor,
+							 cliente,  puestoAtencionoficina,  loginUsuarioSistema);
+					log.info(" Se pago la nomina del cliente corporativo de "+  cantidadEmpleados +" empleados.");
+					return cantidadEmpleados;
+				}
+
+			
+			
 		
 }

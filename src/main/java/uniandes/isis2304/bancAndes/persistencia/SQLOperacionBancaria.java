@@ -6,6 +6,9 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.isis2304.bancAndes.negocio.AsociacionCuentasEmpleados;
+import uniandes.isis2304.bancAndes.negocio.Cuenta;
+
 public class SQLOperacionBancaria {
 
 	/* ****************************************************************
@@ -43,17 +46,17 @@ public class SQLOperacionBancaria {
 		Query q;
 		if(productoDestino!=0) {
 			q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaOperacionesBancarias () + "( id, valor, fecha, cliente, productoOrigen, productoDestino,tipoOperacion, puestoAtencion, empleado) values (?,?,?,?,?,?,?,?,?)");
-	        q.setParameters(id, valor, fecha, cliente, productoOrigen,productoDestino,tipoOperacion, puestoAtencion, empleado);
+			q.setParameters(id, valor, fecha, cliente, productoOrigen,productoDestino,tipoOperacion, puestoAtencion, empleado);
 		}
 		else {
 			q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaOperacionesBancarias () + "( id, valor, fecha, cliente, productoOrigen, tipoOperacion, puestoAtencion, empleado) values (?,?,?,?,?,?,?,?)");
-	        q.setParameters(id, valor, fecha, cliente, productoOrigen,tipoOperacion, puestoAtencion, empleado);
+			q.setParameters(id, valor, fecha, cliente, productoOrigen,tipoOperacion, puestoAtencion, empleado);
 		}
 		return (long) q.executeUnique();
 	}
-	
+
 	//************************************************SENTENCIAS PARA REQUERIMIENTOS DE CONSULTA
-	
+
 	//----------------------------------RFC3--------------------------------------------------
 	/**
 	 * Consulta las operaciones más movidas en todas las oficinas
@@ -73,7 +76,7 @@ public class SQLOperacionBancaria {
 		q.setParameters(fechaInicio, fechaFin);
 		return q.executeList();
 	}
-	
+
 	/**
 	 * Consulta las operaciones más movidas en la oficina de 
 	 * @param pm
@@ -94,7 +97,7 @@ public class SQLOperacionBancaria {
 		q.setParameters(fechaInicio, fechaFin, idOficina);
 		return q.executeList();
 	}
-	
+
 	//----------------------------------RFC4--------------------------------------------------
 	/**
 	 * Consulta el usuario (o usuarios) mas activos del sistema
@@ -123,12 +126,12 @@ public class SQLOperacionBancaria {
 		sql+= "where valor> ? And pao.oficina= ? ";
 		sql+= "Group By ? ";
 		sql+= ") )";
-		
+
 		Query q = pm.newQuery(SQL, sql);
 		q.setParameters(tipoUsuario, valor, idOficina, tipoUsuario, tipoUsuario, valor, idOficina, tipoUsuario);
 		return q.executeList();
 	}
-	
+
 
 	/**
 	 * Consulta el usuario (o usuarios) mas activos del sistema como gerente de oficina usando el filtro de tipo de operacion
@@ -157,12 +160,12 @@ public class SQLOperacionBancaria {
 		sql+= "where tipoOperacion = ? And pao.oficina= ? ";
 		sql+= "Group By ? ";
 		sql+= ") )";
-		
+
 		Query q = pm.newQuery(SQL, sql);
 		q.setParameters(tipoUsuario, tipoOperacion, idOficina, tipoUsuario, tipoUsuario, tipoOperacion, idOficina, tipoUsuario);
 		return q.executeList();
 	}
-	
+
 	/**
 	 * Consulta el usuario (o usuarios) mas activos del sistema como un gerente general usando el filtro de valor
 	 *
@@ -186,12 +189,12 @@ public class SQLOperacionBancaria {
 		sql+= "where valor> ? ";
 		sql+= "Group By ? ";
 		sql+= ") )";
-		
+
 		Query q = pm.newQuery(SQL, sql);
 		q.setParameters(tipoUsuario, valor, tipoUsuario, tipoUsuario, valor, tipoUsuario);
 		return q.executeList();
 	}
-	
+
 
 	/**
 	 * Consulta el usuario (o usuarios) mas activos del sistema como un gerente general usando el filtro de tipo de operacion
@@ -216,7 +219,7 @@ public class SQLOperacionBancaria {
 		sql+= "where tipoOperacion = ? ";
 		sql+= "Group By ? ";
 		sql+= ") )";
-		
+
 		Query q = pm.newQuery(SQL, sql);
 		q.setParameters(tipoUsuario, tipoOperacion, tipoUsuario, tipoUsuario, tipoOperacion, tipoUsuario);
 		return q.executeList();
@@ -298,6 +301,56 @@ public class SQLOperacionBancaria {
 		Query q = pm.newQuery(SQL, sql);
 		q.setParameters(loginCliente, filtro1, filtro2);
 		return q.executeList();
+	}
+
+	/**
+	 * @param pm
+	 * @param listaCuentas
+	 * @param idCuenta
+	 * @param valor
+	 * @param cliente
+	 * @param puestoAtencionoficina
+	 * @param loginUsuarioSistema
+	 * @return
+	 */
+	public int pagarNomina(PersistenceManager pm, List<AsociacionCuentasEmpleados> listaCuentas, long idCuenta,
+			float valor, String cliente, long puestoAtencionoficina, String loginUsuarioSistema) {
+
+
+		int i = 0;
+		boolean continuar = true;
+		while ( i<listaCuentas.size() && continuar) {
+
+			Query q = pm.newQuery(SQL, "SELECT * FROM " + pba.darTablaCuentas () + " WHERE id = ?");
+			q.setResultClass(Cuenta.class);
+			q.setParameters(idCuenta);
+			Cuenta cuenta = (Cuenta) q.executeUnique();
+
+			if (cuenta.getSaldo()>=valor) {
+
+				Query q2;
+				long hoy=System.currentTimeMillis();
+				long idd = pba.nextval();
+				q2 = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaOperacionesBancarias () + "( id, valor, fecha, cliente, productoOrigen, productoDestino,tipoOperacion, puestoAtencion, empleado) values (?,?,?,?,?,?,?,?,?)");
+				q2.setParameters(idd, valor, new java.sql.Date(hoy), cliente, idCuenta,listaCuentas.get(i).getCuentaEmpleado(),"TRANSFERIR", puestoAtencionoficina, loginUsuarioSistema);
+				q2.executeUnique();
+
+				Query q3 = pm.newQuery(SQL, "UPDATE " + pba.darTablaCuentas () + " SET saldo = saldo + ? WHERE id = ?");
+				q3.setParameters(-valor, idCuenta);
+				q3.executeUnique();
+
+				Query q4 = pm.newQuery(SQL, "UPDATE " + pba.darTablaCuentas () + " SET saldo = saldo + ? WHERE id = ? ");
+				q4.setParameters(valor, listaCuentas.get(i).getCuentaEmpleado());
+				q4.executeUnique();
+				
+				Query q5 = pm.newQuery(SQL, "SAVEPOINT SAVEPOINT"+idd);
+				q5.executeUnique();
+				i++;
+			}else {
+				continuar = false;
+			}
+		}
+			return i;
 	}
 
 }

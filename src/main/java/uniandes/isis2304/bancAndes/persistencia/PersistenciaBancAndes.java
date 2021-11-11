@@ -513,7 +513,7 @@ public class PersistenciaBancAndes {
 	 * Adiciona entradas al log de la aplicación
 	 * @return El siguiente número del secuenciador de BancAndes
 	 */
-	private long nextval ()
+	public long nextval ()
 	{
 		long resp = sqlUtil.nextval (pmf.getPersistenceManager());
 		log.trace ("Generando secuencia: " + resp);
@@ -897,6 +897,48 @@ public class PersistenciaBancAndes {
 		}
 	}
 
+	
+	
+	/**
+	 * @param listaCuentas
+	 * @param idCuenta
+	 * @param valor
+	 * @param cliente
+	 * @param puestoAtencionoficina
+	 * @param loginUsuarioSistema
+	 * @return
+	 */
+	public int pagarNomina(List<AsociacionCuentasEmpleados> listaCuentas, long idCuenta, float valor,
+			String cliente, long puestoAtencionoficina, String loginUsuarioSistema)
+	
+	{
+	PersistenceManager pm = pmf.getPersistenceManager();
+	Transaction tx=pm.currentTransaction();
+	try
+	{	
+		
+		tx.begin();
+		int cantidadPagados = sqlOperacionBancaria.pagarNomina(pm, listaCuentas, idCuenta, valor,
+				 cliente, puestoAtencionoficina, loginUsuarioSistema);
+		tx.commit();
+		return cantidadPagados;
+	}
+	catch (Exception e)
+	{
+		e.printStackTrace();
+		log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+		return -1;
+	}
+	finally
+	{
+		if (tx.isActive())
+		{
+			tx.rollback();
+		}
+		pm.close();
+	}
+	}
+	
 
 	/* ****************************************************************
 	 * 			Métodos para manejar CUENTA
@@ -1717,6 +1759,22 @@ public class PersistenciaBancAndes {
 	}
 
 
+	
+	/**
+	 * @param id
+	 * @return
+	 */
+	public Asociacion darAsociacionPorCuenta(long id) {
+		Asociacion asociacion=null;
+		try {
+			asociacion = sqlAsociacion.darAsociacionPorCuenta (pmf.getPersistenceManager(), id);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return asociacion;
+	}
+
 
 
 
@@ -1738,7 +1796,7 @@ public class PersistenciaBancAndes {
 			tx.begin();
 			long tuplasInsertadas = sqlAsociacionCuentasEmpleados.adicionarAsociacionCuentasEmpleados(pm,asociacion, cuentaEmpleado);
 			tx.commit();
-
+			
 			log.trace ("Insercion de la asociacion id:" + asociacion + " cuenta empleado : " + cuentaEmpleado + ": "+ tuplasInsertadas + " tuplas insertadas");
 
 			return new AsociacionCuentasEmpleados (asociacion, cuentaEmpleado);
@@ -1761,6 +1819,9 @@ public class PersistenciaBancAndes {
 
 
 
+	public List<AsociacionCuentasEmpleados> darAsociacionesCuentasPorAsociacion(long id) {
+		return sqlAsociacionCuentasEmpleados.darAsociacionesCuentasPorAsociacion (pmf.getPersistenceManager(), id);
+		}
 
 
 
@@ -1902,6 +1963,13 @@ public class PersistenciaBancAndes {
 					 criterio2p, signo2, filtro2p,ordenamiento,tipoOrden);
 		}
 
+
+		
+
+
+
+
+	
 
 
 

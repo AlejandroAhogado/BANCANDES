@@ -5,6 +5,9 @@ import java.sql.Date;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.isis2304.bancAndes.negocio.Asociacion;
+import uniandes.isis2304.bancAndes.negocio.Cuenta;
+
 public class SQLAsociacion {
 
 	/* ****************************************************************
@@ -74,6 +77,14 @@ public class SQLAsociacion {
 		Query q = pm.newQuery(SQL, "DELETE FROM " + pba.darTablaAsociaciones () + " WHERE id = ?");
         q.setParameters(id);
         return (long) q.executeUnique();
+	}
+
+	public Asociacion darAsociacionPorCuenta(PersistenceManager pm, long id) {
+			Query q = pm.newQuery(SQL, "SELECT * FROM " + pba.darTablaAsociaciones() + " WHERE cuentaCorporativo = ?");
+			q.setParameters(id);
+			q.setResultClass(Asociacion.class);
+			return (Asociacion) q.executeUnique();
+			
 	}
 
 }
