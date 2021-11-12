@@ -1051,7 +1051,7 @@ public class PersistenciaBancAndes {
 		}
 		catch (Exception e)
 		{
-			//        	e.printStackTrace();
+			        	e.printStackTrace();
 			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 			return -1;
 		}

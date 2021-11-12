@@ -55,16 +55,15 @@ public class SQLPrestamo {
 	public Prestamo darPrestamoPorId(PersistenceManager pm, long id) {
 	
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pba.darTablaPrestamos () + " WHERE id = ?");
-		q.setResultClass(Prestamo.class);
 		q.setParameters(id);
+		q.setResultClass(Prestamo.class);
 		return (Prestamo) q.executeUnique();
 		
 	}
 
 	public long cerrarPrestamo(PersistenceManager pm, long idPrestamo) {
 	
-		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaPrestamos () + " SET cerrado = 'TRUE'  WHERE id = ?");
-		q.setParameters(idPrestamo);
+		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaPrestamos () + " SET cerrado = 'TRUE'  WHERE id = "+idPrestamo);
 		return  (long) q.executeUnique();
 		
 	}

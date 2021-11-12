@@ -114,12 +114,11 @@ public class SQLCuenta {
 	 */
 	public long cerrarCuentaV2(PersistenceManager pm, long idCuenta, long idCuentaNueva, long id) {
 		
-		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaAsociaciones() + " SET cuentaCorporativo = ? WHERE id = ?");
+		Query q = pm.newQuery(SQL, "UPDATE " + pba.darTablaAsociaciones() + " SET cuentaCorporativo = "+idCuentaNueva+" WHERE id = "+id);
 		q.setParameters( idCuentaNueva, id);
 		q.execute();
-		
-		Query q2 = pm.newQuery(SQL, "UPDATE " + pba.darTablaCuentas () + " SET estado = CERRADA, saldo = 0 WHERE id = ?");
-		q2.setParameters(idCuenta);
+
+		Query q2 = pm.newQuery(SQL, "UPDATE " + pba.darTablaCuentas () + " SET estado = 'CERRADA', saldo = 0 WHERE id = "+idCuenta);
 		return (long) q2.execute();
 	}
 	

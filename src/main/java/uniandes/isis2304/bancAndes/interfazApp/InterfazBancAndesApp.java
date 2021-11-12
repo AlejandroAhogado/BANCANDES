@@ -1689,8 +1689,12 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 					try {
 						long idPrestamo = (long)Integer.parseInt(idPr.getText());
+				System.out.println("antes de buscar prestamo");
 						VOPrestamo prestamo = bancAndes.darPrestamoPorId(idPrestamo);
-
+				System.out.println("prestamo despues");
+						if (prestamo==null) {
+							System.out.println("prestamo null");
+						}
 						if (prestamo.getSaldoPendiente()==0) {
 							bancAndes.cerrarPrestamo(idPrestamo);
 
@@ -1705,6 +1709,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						}
 
 					} catch (Exception e) {
+						e.printStackTrace();
 						throw new Exception ("No se pudo cerrar el prestamo con id" );
 					}
 
