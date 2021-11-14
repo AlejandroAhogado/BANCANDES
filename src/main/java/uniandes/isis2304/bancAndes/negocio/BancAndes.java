@@ -366,6 +366,17 @@ public class BancAndes {
         log.info ("Adicionando Operacion Bancaria: " + operacionBancaria);
         return operacionBancaria;
 	}
+	
+	
+	
+	public long eliminarOperacionBancaria ( long id)
+	{
+        log.info ("Eliminando Operacion Bancaria ");
+        long operacionBancaria = pba.eliminarOperacionBancaria ( id);		
+        log.info ("Eliminando Operacion Bancaria: " + operacionBancaria);
+        return operacionBancaria;
+	}
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar los PRODUCTOS
 	 *****************************************************************/
@@ -534,7 +545,7 @@ public class BancAndes {
 	 */
 	public Cuenta darCuentaPorNumero (int numero)
 	{
-		System.out.println("llego a dar x num");
+		
 		log.info ("Buscando Cuenta por numero de cuenta: " + numero);
 		Cuenta cuenta= pba.darCuentaPorNumero (numero);
 		log.info ("Se encontro la cuenta: "+cuenta);
@@ -617,11 +628,11 @@ public class BancAndes {
 	 * @return El objeto Prestamo adicionado. null si ocurre alguna Excepción
 	 */
 	public Prestamo adicionarPrestamo ( long id, float monto, float saldoPendiente, float interes, int numeroCuotas, int diaPago,
-			float valorCuotaMinima, Date fechaPrestamo, String cerrado)
+			float valorCuotaMinima, Date fechaPrestamo, String cerrado, long oficina)
 	{
         log.info ("Adicionando Prestamo: " +id);
         Prestamo prestamo = pba.adicionarPrestamo (id, monto, saldoPendiente, interes, numeroCuotas, diaPago,
-    			valorCuotaMinima, fechaPrestamo, cerrado);		
+    			valorCuotaMinima, fechaPrestamo, cerrado, oficina);		
         log.info ("Adicionando Prestamo: " + prestamo);
         return prestamo;
 	}
@@ -1283,9 +1294,6 @@ public class BancAndes {
 					return cantidadEmpleados;
 				}
 
-			
 
-			
-			
 		
 }

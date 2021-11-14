@@ -21,9 +21,11 @@ public class Prestamo implements VOPrestamo{
 	private Date fechaPrestamo;
 	
 	private String cerrado;
+	
+	private long oficina;
 
 	public Prestamo(long id, float monto, float saldoPendiente, float interes, int numeroCuotas, int diaPago,
-			float valorCuotaMinima, Date fechaPrestamo, String cerrado) {
+			float valorCuotaMinima, Date fechaPrestamo, String cerrado, long oficina) {
 		this.id = id;
 		this.monto = monto;
 		this.saldoPendiente = saldoPendiente;
@@ -33,6 +35,7 @@ public class Prestamo implements VOPrestamo{
 		this.valorCuotaMinima = valorCuotaMinima;
 		this.fechaPrestamo = fechaPrestamo;
 		this.cerrado = cerrado;
+		this.oficina = oficina;
 	}
 	
 	public Prestamo()
@@ -47,9 +50,17 @@ public class Prestamo implements VOPrestamo{
 		long hoy=System.currentTimeMillis();  
 		this.fechaPrestamo=new java.sql.Date(hoy); 
 		this.cerrado = "FALSE";
-		
+		this.oficina = 0;
 	}
 
+
+	public long getOficina() {
+		return oficina;
+	}
+
+	public void setOficina(long oficina) {
+		this.oficina = oficina;
+	}
 
 	public long getId() {
 		return id;
