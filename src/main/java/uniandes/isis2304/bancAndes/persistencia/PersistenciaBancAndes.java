@@ -869,7 +869,7 @@ public class PersistenciaBancAndes {
 		Transaction tx=pm.currentTransaction();
 		try
 		{
-
+			
 			tx.begin();
 			long id = nextval ();
 			long tuplasInsertadas = sqlOperacionBancaria.adicionarOperacionBancaria(pm, id, valor, fecha, cliente, productoOrigen,productoDestino,
@@ -895,6 +895,34 @@ public class PersistenciaBancAndes {
 			}
 			pm.close();
 		}
+	}
+
+	
+	public long eliminarOperacionBancaria(long id) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long visitasEliminadas = sqlOperacionBancaria.eliminarOperacionBancaria (pm, id);
+            tx.commit();
+
+            return visitasEliminadas;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
 	}
 
 	
@@ -1136,7 +1164,7 @@ public class PersistenciaBancAndes {
 	 *****************************************************************/
 
 	public Prestamo adicionarPrestamo(long id, float monto, float saldoPendiente, float interes, int numeroCuotas,
-			int diaPago, float valorCuotaMinima, Date fechaPrestamo, String cerrado) {
+			int diaPago, float valorCuotaMinima, Date fechaPrestamo, String cerrado, long oficina) {
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -1145,13 +1173,13 @@ public class PersistenciaBancAndes {
 
 			tx.begin();
 			long tuplasInsertadas = sqlPrestamo.adicionarPrestamo(pm, id, monto, saldoPendiente, interes, numeroCuotas,
-					diaPago, valorCuotaMinima, fechaPrestamo, cerrado);
+					diaPago, valorCuotaMinima, fechaPrestamo, cerrado, oficina);
 			tx.commit();
 
 			log.trace ("Inserción de prestamo: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
 
 			return new Prestamo ( id, monto, saldoPendiente, interes, numeroCuotas,
-					diaPago, valorCuotaMinima, fechaPrestamo, cerrado);
+					diaPago, valorCuotaMinima, fechaPrestamo, cerrado, oficina);
 		}
 		catch (Exception e)
 		{
@@ -2013,17 +2041,8 @@ public class PersistenciaBancAndes {
 		}
 
 
-
-
-		
-
-
-
-
 	
 
-
-
-
+		
 
 }

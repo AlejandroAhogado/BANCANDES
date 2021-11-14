@@ -1485,8 +1485,10 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 				int option = JOptionPane.showConfirmDialog(null, message, "Informacion prestamo", JOptionPane.OK_CANCEL_OPTION);
 				VOPrestamo pt=null;
 				if (option == JOptionPane.OK_OPTION) {
+					
 					try {
 						long hoy=System.currentTimeMillis();  
+						long idOficina = bancAndes.darOficinaPorGerenteDeOficina(loginUsuarioSistema).getId();
 
 						pt =  bancAndes.adicionarPrestamo(
 								id, 
@@ -1497,7 +1499,8 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 								Integer.parseInt(diaPago.getText()),
 								(float)Integer.parseInt(valorCuotaMinima.getText()),
 								new java.sql.Date(hoy),
-								"FALSE"
+								"FALSE",
+								idOficina
 								);
 
 						String resultado = "En agregar Prestamo\n\n";
@@ -2383,10 +2386,14 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					VOCuenta cuenta = null;
 					try {
 						cuenta = bancAndes.darCuentaPorNumero(Integer.parseInt(txCuenta.getText()));
+						
 					} catch (Exception e) {
 						throw new Exception ("No se encontro la cuenta "+txCuenta.getText());
 					}
-
+					
+					if (cuenta==null) {
+						throw new Exception ("No se encontro la cuenta "+txCuenta.getText());
+					}
 
 					VOOperacionBancaria ob=null;
 					if (option == JOptionPane.OK_OPTION) {

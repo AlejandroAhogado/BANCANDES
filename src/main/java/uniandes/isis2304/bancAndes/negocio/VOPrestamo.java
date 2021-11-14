@@ -23,6 +23,7 @@ public interface VOPrestamo {
 	public String getCerrado(); 
 
 	public String toString();
-
+	
+	public long getOficina(); 
 	
 }

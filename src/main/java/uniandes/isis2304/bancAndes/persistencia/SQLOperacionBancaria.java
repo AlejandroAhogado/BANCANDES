@@ -55,6 +55,16 @@ public class SQLOperacionBancaria {
 		return (long) q.executeUnique();
 	}
 
+	
+
+	public long eliminarOperacionBancaria(PersistenceManager pm, long id) {
+		  Query q = pm.newQuery(SQL, "DELETE FROM " + pba.darTablaOperacionesBancarias() + " WHERE id = ?");
+	      q.setParameters(id);
+	      return (long) q.executeUnique();
+	}
+
+	
+	
 	//************************************************SENTENCIAS PARA REQUERIMIENTOS DE CONSULTA
 
 	//----------------------------------RFC3--------------------------------------------------

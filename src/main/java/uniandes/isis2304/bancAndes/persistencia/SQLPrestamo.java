@@ -43,11 +43,11 @@ public class SQLPrestamo {
 	}
 
 	public long adicionarPrestamo(PersistenceManager pm, long id, float monto, float saldoPendiente, float interes, int numeroCuotas,
-			int diaPago, float valorCuotaMinima, Date fechaPrestamo, String cerrado) {
+			int diaPago, float valorCuotaMinima, Date fechaPrestamo, String cerrado, long oficina) {
 		
-		   Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaPrestamos () + "(id, monto, saldoPendiente, interes, numeroCuotas, diaPago, valorCuotaMinima, fechaPrestamo, cerrado) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		   Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaPrestamos () + "(id, monto, saldoPendiente, interes, numeroCuotas, diaPago, valorCuotaMinima, fechaPrestamo, cerrado, oficina) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 	        q.setParameters(id, monto, saldoPendiente, interes, numeroCuotas,
-       			 diaPago, valorCuotaMinima, fechaPrestamo, cerrado);
+       			 diaPago, valorCuotaMinima, fechaPrestamo, cerrado, oficina);
 	        return (long) q.executeUnique();
 		
 	}
