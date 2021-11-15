@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"uniandes.isis2304.bancAndes.interfazApp"},{"l":"uniandes.isis2304.bancAndes.negocio"},{"l":"uniandes.isis2304.bancAndes.persistencia"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"uniandes.isis2304.bancAndes.interfazApp"},{"l":"uniandes.isis2304.bancAndes.negocio"},{"l":"uniandes.isis2304.bancAndes.persistencia"},{"l":"uniandes.isis2304.bancAndes.test"}]

@@ -2830,3 +2830,332 @@ READ_COMMITTED y SERIALIZABLE son los ˙nicos niveles de transacciÛn v·lidos
 17:31:08,665 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 26
 17:31:08,697 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=35, valor=40000.0, frecuencia=MENSUAL, cuentaCorporativo=26]
 17:31:08,697 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion cuenta por la asociacion con id : 35
+17:38:08,903 (main) INFO  [uniandes.isis2304.bancAndes.test.CuentaTest] - Probando las operaciones CRD sobre Cuenta
+17:38:08,962 (main) INFO  [uniandes.isis2304.bancAndes.test.CuentaTest] - Se encontrÛ un archivo de configuraciÛn de tablas v·lido
+17:38:10,709 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Cerrando cuenta: 23
+17:38:10,989 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:38:10,990 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 23
+17:38:11,064 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=23, numeroCuenta=575757, estado=CERRADA, tipo=AHORROS, saldo=0.0, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:38:11,065 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 25
+17:38:11,101 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=24, valor=4000000.0, frecuencia=QUINCENAL, cuentaCorporativo=25]
+17:38:11,103 (main) INFO  [uniandes.isis2304.bancAndes.test.OperacionBancariaTest] - Probando las operaciones sobre OperacionBancaria
+17:38:11,103 (main) INFO  [uniandes.isis2304.bancAndes.test.OperacionBancariaTest] - Se encontrÛ un archivo de configuraciÛn de tablas v·lido
+17:38:11,103 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Prestamo por id: 1
+17:38:11,144 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro el prestamo: Prestamo [id=1, monto=5.0E7, saldoPendiente=2.19E7, interes=3.0, numeroCuotas=15, diaPago=20, valorCuotaMinima=1000000.0, fechaPrestamo=null, cerrado=FALSE]
+17:38:11,144 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 23
+17:38:11,181 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=23, numeroCuenta=575757, estado=CERRADA, tipo=AHORROS, saldo=0.0, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:38:11,181 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Operacion Bancaria 
+17:38:11,262 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Operacion Bancaria: OperacionBancaria [id=36, valor=1100000.0, fecha=2021-11-15, cliente=alkosto, productoOrigen=23, productoDestino=1, tipoOperacion=PAGAR_CUOTA_EXTRAORDINARIA, puestoAtencion=7, empleado=rom2716]
+17:38:11,262 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Prestamo por id: 1
+17:38:11,297 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro el prestamo: Prestamo [id=1, monto=5.0E7, saldoPendiente=2.19E7, interes=3.0, numeroCuotas=15, diaPago=20, valorCuotaMinima=1000000.0, fechaPrestamo=null, cerrado=FALSE]
+17:38:11,297 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Realizando Pago: 1
+17:38:11,355 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:38:11,355 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 23
+17:38:11,391 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:38:11,391 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Prestamo por id: 1
+17:38:11,430 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro el prestamo: Prestamo [id=1, monto=5.0E7, saldoPendiente=2.08E7, interes=3.0, numeroCuotas=15, diaPago=20, valorCuotaMinima=1000000.0, fechaPrestamo=null, cerrado=FALSE]
+17:38:11,430 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 23
+17:38:11,466 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=23, numeroCuenta=575757, estado=CERRADA, tipo=AHORROS, saldo=-1100000.0, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:38:11,466 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Operacion Bancaria 
+17:38:11,504 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Operacion Bancaria: 1
+17:38:11,504 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 23
+17:38:11,537 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:38:11,537 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Prestamo por id: 1
+17:38:11,573 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro el prestamo: Prestamo [id=1, monto=5.0E7, saldoPendiente=2.08E7, interes=3.0, numeroCuotas=15, diaPago=20, valorCuotaMinima=1000000.0, fechaPrestamo=null, cerrado=FALSE]
+17:38:11,574 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Realizando Pago: 1
+17:38:11,601 (main) INFO  [uniandes.isis2304.bancAndes.test.OperacionBancariaTest] - Probando las operaciones sobre OperacionBancaria
+17:38:11,601 (main) INFO  [uniandes.isis2304.bancAndes.test.OperacionBancariaTest] - Se encontrÛ un archivo de configuraciÛn de tablas v·lido
+17:38:11,885 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 23
+17:38:11,920 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=23, numeroCuenta=575757, estado=CERRADA, tipo=AHORROS, saldo=0.0, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:38:11,920 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 4
+17:38:11,955 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=4, numeroCuenta=12345, estado=ACTIVA, tipo=AHORROS, saldo=1.7E8, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=FALSE]
+17:38:11,955 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Operacion Bancaria 
+17:38:12,171 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Operacion Bancaria: OperacionBancaria [id=37, valor=5000.0, fecha=2021-11-15, cliente=alkosto, productoOrigen=23, productoDestino=4, tipoOperacion=TRANSFERIR, puestoAtencion=12, empleado=null]
+17:38:12,171 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 23
+17:38:12,216 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:38:12,216 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 4
+17:38:12,252 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:38:12,252 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 23
+17:38:12,289 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=23, numeroCuenta=575757, estado=CERRADA, tipo=AHORROS, saldo=-5000.0, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:38:12,290 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 4
+17:38:12,323 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=4, numeroCuenta=12345, estado=ACTIVA, tipo=AHORROS, saldo=1.70004992E8, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=FALSE]
+17:38:12,323 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Operacion Bancaria 
+17:38:12,356 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Operacion Bancaria: 1
+17:38:12,356 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 23
+17:38:12,388 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:38:12,388 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 4
+17:38:12,423 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:38:12,445 (main) INFO  [uniandes.isis2304.bancAndes.test.OperacionBancariaTest] - Probando las operaciones sobre OperacionBancaria
+17:38:12,445 (main) INFO  [uniandes.isis2304.bancAndes.test.OperacionBancariaTest] - Se encontrÛ un archivo de configuraciÛn de tablas v·lido
+17:38:12,726 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion cuenta por la asociacion con id : 24
+17:38:12,763 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 25
+17:38:12,795 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=24, valor=4000000.0, frecuencia=QUINCENAL, cuentaCorporativo=25]
+17:38:12,796 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 3
+17:38:12,836 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=3, numeroCuenta=1223344, estado=ACTIVA, tipo=AHORROS, saldo=1.2E8, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=FALSE]
+17:38:12,836 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 25
+17:38:12,867 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=25, numeroCuenta=878787, estado=ACTIVA, tipo=AHORROS, saldo=9.0E7, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:38:12,867 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] -  Pagando nomina del cliente corporativo alkosto
+17:38:13,253 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] -  Se pago la nomina del cliente corporativo de 2 empleados.
+17:38:13,253 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 3
+17:38:13,288 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=3, numeroCuenta=1223344, estado=ACTIVA, tipo=AHORROS, saldo=1.24E8, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=FALSE]
+17:38:13,288 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 25
+17:38:13,323 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=25, numeroCuenta=878787, estado=ACTIVA, tipo=AHORROS, saldo=8.2E7, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:38:13,323 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 25
+17:38:13,369 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:38:13,369 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 3
+17:38:13,402 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:38:13,402 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 4
+17:38:13,435 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:38:13,459 (main) INFO  [uniandes.isis2304.bancAndes.test.OperacionBancariaTest] - Probando las operaciones sobre Operaciones Bancarias
+17:38:13,459 (main) INFO  [uniandes.isis2304.bancAndes.test.OperacionBancariaTest] - Se encontrÛ un archivo de configuraciÛn de tablas v·lido
+17:38:13,739 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Consultando todas las operaciones
+17:38:13,772 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontraron todas las operaciones
+17:38:13,773 (main) INFO  [uniandes.isis2304.bancAndes.test.CuentaTest] - Probando las operaciones sobre Prestamos
+17:38:13,774 (main) INFO  [uniandes.isis2304.bancAndes.test.CuentaTest] - Se encontrÛ un archivo de configuraciÛn de tablas v·lido
+17:38:13,774 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Consultando todos los prestamos
+17:38:13,805 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontraron todos los prestamos
+17:38:13,806 (main) INFO  [uniandes.isis2304.bancAndes.test.AsociacionTest] - Probando las operaciones CRD sobre Asociacion
+17:38:13,806 (main) INFO  [uniandes.isis2304.bancAndes.test.AsociacionTest] - Se encontrÛ un archivo de configuraciÛn de tablas v·lido
+17:38:13,806 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Asociacion: 
+17:38:14,012 (main) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO ASOCIACIONES(id, valor, frecuencia, cuentaCorporativo) values (?, ?, ?, ?)".
+ORA-00001: restricciÛn ˙nica (ISIS2304A03202120.SYS_C00338079) violada
+
+17:38:14,034 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Asociacion: null
+17:38:14,034 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 26
+17:38:14,068 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=35, valor=40000.0, frecuencia=MENSUAL, cuentaCorporativo=26]
+17:38:14,068 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 26
+17:38:14,104 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=35, valor=40000.0, frecuencia=MENSUAL, cuentaCorporativo=26]
+17:38:14,104 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Asociacion Cuenta Empleados:
+17:38:14,130 (main) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO ASOCIACIONCUENTASEMPLEADOS(asociacion, cuentaEmpleado) values (?, ?)".
+ORA-00001: restricciÛn ˙nica (ISIS2304A03202120.PK_ASOCIACIONCUENTASEMPLEADOSPRIMARY) violada
+
+17:38:14,151 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Asociacion Cuenta Empleados: null
+17:38:14,151 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 26
+17:38:14,183 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=35, valor=40000.0, frecuencia=MENSUAL, cuentaCorporativo=26]
+17:38:14,183 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Asociacion Cuenta Empleados:
+17:38:14,207 (main) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO ASOCIACIONCUENTASEMPLEADOS(asociacion, cuentaEmpleado) values (?, ?)".
+ORA-00001: restricciÛn ˙nica (ISIS2304A03202120.PK_ASOCIACIONCUENTASEMPLEADOSPRIMARY) violada
+
+17:38:14,227 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Asociacion Cuenta Empleados: null
+17:38:14,227 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 26
+17:38:14,256 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=35, valor=40000.0, frecuencia=MENSUAL, cuentaCorporativo=26]
+17:38:14,257 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion cuenta por la asociacion con id : 35
+17:38:24,527 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr√≥ un archivo de configuraci√≥n v√°lido: Interfaz
+17:38:24,528 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuraci√≥n indicada en el archivo de configuraci√≥n
+17:38:24,552 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr√≥ un archivo de configuraci√≥n v√°lido: Tablas BD
+17:38:45,641 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+17:39:02,366 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Asociacion: 
+17:39:02,684 (AWT-EventQueue-0) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO ASOCIACIONES(id, valor, frecuencia, cuentaCorporativo) values (?, ?, ?, ?)".
+ORA-00001: restricciÛn ˙nica (ISIS2304A03202120.SYS_C00338079) violada
+
+17:39:02,707 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Asociacion: null
+17:39:10,949 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por numero de cuenta: 12345
+17:39:11,014 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=4, numeroCuenta=12345, estado=ACTIVA, tipo=AHORROS, saldo=1.7E8, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=FALSE]
+17:40:41,477 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr√≥ un archivo de configuraci√≥n v√°lido: Interfaz
+17:40:41,477 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuraci√≥n indicada en el archivo de configuraci√≥n
+17:40:41,503 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr√≥ un archivo de configuraci√≥n v√°lido: Tablas BD
+17:40:53,210 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+17:41:10,200 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Asociacion: 
+17:41:10,513 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Asociacion: Asociacion [id=27, valor=3000000.0, frecuencia=QUINCENAL, cuentaCorporativo=26]
+17:41:16,967 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por numero de cuenta: 12345
+17:41:17,034 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=4, numeroCuenta=12345, estado=ACTIVA, tipo=AHORROS, saldo=1.7E8, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=FALSE]
+17:41:17,034 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Asociacion Cuenta Empleados:
+17:41:17,078 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Asociacion Cuenta Empleados: AsociacionCuentasEmpleados [asociacion=27, cuentaEmpleado=4]
+17:41:24,630 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr√≥ un archivo de configuraci√≥n v√°lido: Interfaz
+17:41:24,631 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuraci√≥n indicada en el archivo de configuraci√≥n
+17:41:24,656 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr√≥ un archivo de configuraci√≥n v√°lido: Tablas BD
+17:41:47,132 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cajero por login: rom2716
+17:41:58,826 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 3
+17:41:58,892 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=3, numeroCuenta=1223344, estado=ACTIVA, tipo=AHORROS, saldo=1.2E8, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=FALSE]
+17:41:58,892 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 4
+17:41:58,935 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=4, numeroCuenta=12345, estado=ACTIVA, tipo=AHORROS, saldo=1.7E8, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=FALSE]
+17:41:58,935 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cajero por login: rom2716
+17:42:12,006 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Operacion Bancaria 
+17:42:12,316 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Operacion Bancaria: OperacionBancaria [id=28, valor=1000000.0, fecha=2021-11-15, cliente=pedrof3, productoOrigen=3, productoDestino=4, tipoOperacion=TRANSFERIR, puestoAtencion=9, empleado=rom2716]
+17:42:12,317 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 3
+17:42:12,369 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:42:12,369 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 4
+17:42:12,408 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:42:44,870 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Prestamo por id: 1
+17:42:44,917 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro el prestamo: Prestamo [id=1, monto=5.0E7, saldoPendiente=2.3E7, interes=3.0, numeroCuotas=15, diaPago=20, valorCuotaMinima=1000000.0, fechaPrestamo=null, cerrado=FALSE]
+17:42:46,238 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cajero por login: rom2716
+17:42:59,122 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por numero de cuenta: 878787
+17:42:59,171 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=25, numeroCuenta=878787, estado=ACTIVA, tipo=AHORROS, saldo=9.0E7, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:42:59,171 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Operacion Bancaria 
+17:42:59,274 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Operacion Bancaria: OperacionBancaria [id=29, valor=1100000.0, fecha=2021-11-15, cliente=alkosto, productoOrigen=25, productoDestino=1, tipoOperacion=PAGAR_CUOTA_EXTRAORDINARIA, puestoAtencion=9, empleado=rom2716]
+17:42:59,274 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 25
+17:42:59,323 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:42:59,323 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Prestamo por id: 1
+17:42:59,359 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro el prestamo: Prestamo [id=1, monto=5.0E7, saldoPendiente=2.3E7, interes=3.0, numeroCuotas=15, diaPago=20, valorCuotaMinima=1000000.0, fechaPrestamo=null, cerrado=FALSE]
+17:42:59,359 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Realizando Pago: 1
+17:42:59,396 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:43:28,740 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr√≥ un archivo de configuraci√≥n v√°lido: Interfaz
+17:43:28,741 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuraci√≥n indicada en el archivo de configuraci√≥n
+17:43:28,767 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr√≥ un archivo de configuraci√≥n v√°lido: Tablas BD
+17:44:01,592 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cajero por login: nady231
+17:44:13,781 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 23
+17:44:13,841 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=23, numeroCuenta=575757, estado=ACTIVA, tipo=AHORROS, saldo=5000000.0, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:44:13,841 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cajero por login: nady231
+17:44:17,768 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 23
+17:44:17,823 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=24, valor=4000000.0, frecuencia=QUINCENAL, cuentaCorporativo=23]
+17:44:17,823 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion cuenta por la asociacion con id : 24
+17:44:17,867 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] -  Pagando nomina del cliente corporativo alkosto
+17:44:18,213 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] -  Se pago la nomina del cliente corporativo de 1 empleados.
+17:45:20,120 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr√≥ un archivo de configuraci√≥n v√°lido: Interfaz
+17:45:20,120 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuraci√≥n indicada en el archivo de configuraci√≥n
+17:45:20,145 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr√≥ un archivo de configuraci√≥n v√°lido: Tablas BD
+17:45:43,056 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+17:46:20,901 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 23
+17:46:20,956 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=23, numeroCuenta=575757, estado=ACTIVA, tipo=AHORROS, saldo=1000000.0, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:46:20,956 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Oficina por id: 18
+17:46:21,001 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la oficina: Oficina [id=18, nombre=OFICINA USAQUEN, direccion=Cll 183 #23-4, puestosPosibles=10, gerenteLogin=camila3]
+17:46:21,002 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 23
+17:46:21,044 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=24, valor=4000000.0, frecuencia=QUINCENAL, cuentaCorporativo=23]
+17:46:25,341 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 25
+17:46:25,385 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=25, numeroCuenta=878787, estado=ACTIVA, tipo=AHORROS, saldo=8.89E7, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:46:25,386 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Cerrando cuenta: 23
+17:46:25,659 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:46:25,659 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion cuenta por la asociacion con id : 24
+17:46:41,868 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr√≥ un archivo de configuraci√≥n v√°lido: Interfaz
+17:46:41,868 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuraci√≥n indicada en el archivo de configuraci√≥n
+17:46:41,904 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr√≥ un archivo de configuraci√≥n v√°lido: Tablas BD
+17:46:57,867 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente General por login: juanl2
+17:47:22,381 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Consultando todos los prestamos
+17:47:22,445 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontraron todos los prestamos
+17:47:40,736 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Consultando todos los prestamos
+17:47:40,803 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontraron todos los prestamos
+17:47:52,829 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr√≥ un archivo de configuraci√≥n v√°lido: Interfaz
+17:47:52,830 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuraci√≥n indicada en el archivo de configuraci√≥n
+17:47:52,856 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr√≥ un archivo de configuraci√≥n v√°lido: Tablas BD
+17:48:08,419 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+17:48:16,159 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Oficina por login del gerente de oficina: camila3
+17:48:16,215 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Consultando todas las operaciones de la oficina: 18
+17:48:16,274 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontraron todas las operaciones
+17:48:39,713 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Oficina por login del gerente de oficina: camila3
+17:48:39,763 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Consultando todas las operaciones de la oficina: 18
+17:48:39,814 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontraron todas las operaciones
+17:52:55,665 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr√≥ un archivo de configuraci√≥n v√°lido: Interfaz
+17:52:55,666 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuraci√≥n indicada en el archivo de configuraci√≥n
+17:52:55,696 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr√≥ un archivo de configuraci√≥n v√°lido: Tablas BD
+17:53:06,481 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Gerente de Oficina por login: camila3
+17:53:18,621 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 25
+17:53:18,686 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=25, numeroCuenta=878787, estado=ACTIVA, tipo=AHORROS, saldo=8.89E7, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:53:18,686 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Oficina por id: 18
+17:53:18,758 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la oficina: Oficina [id=18, nombre=OFICINA USAQUEN, direccion=Cll 183 #23-4, puestosPosibles=10, gerenteLogin=camila3]
+17:53:18,759 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 25
+17:53:18,813 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=24, valor=4000000.0, frecuencia=QUINCENAL, cuentaCorporativo=25]
+17:53:29,019 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 26
+17:53:29,068 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=26, numeroCuenta=555555, estado=ACTIVA, tipo=AHORROS, saldo=5000000.0, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:53:29,068 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Cerrando cuenta: 25
+17:53:29,363 (AWT-EventQueue-0) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "UPDATE ASOCIACIONES SET cuentaCorporativo = 26 WHERE id = 24".
+ORA-00001: restricciÛn ˙nica (ISIS2304A03202120.SYS_C00338793) violada
+
+17:53:29,399 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron -1 tuplas
+17:53:29,399 (AWT-EventQueue-0) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion cuenta por la asociacion con id : 24
+17:54:21,482 (main) INFO  [uniandes.isis2304.bancAndes.test.CuentaTest] - Probando las operaciones CRD sobre Cuenta
+17:54:21,551 (main) INFO  [uniandes.isis2304.bancAndes.test.CuentaTest] - Se encontrÛ un archivo de configuraciÛn de tablas v·lido
+17:54:23,322 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Cerrando cuenta: 23
+17:54:23,670 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:54:23,670 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 23
+17:54:23,733 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=23, numeroCuenta=575757, estado=CERRADA, tipo=AHORROS, saldo=0.0, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:54:23,733 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 25
+17:54:23,769 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=24, valor=4000000.0, frecuencia=QUINCENAL, cuentaCorporativo=25]
+17:54:23,771 (main) INFO  [uniandes.isis2304.bancAndes.test.OperacionBancariaTest] - Probando las operaciones sobre OperacionBancaria
+17:54:23,772 (main) INFO  [uniandes.isis2304.bancAndes.test.OperacionBancariaTest] - Se encontrÛ un archivo de configuraciÛn de tablas v·lido
+17:54:23,772 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Prestamo por id: 1
+17:54:23,809 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro el prestamo: Prestamo [id=1, monto=5.0E7, saldoPendiente=2.19E7, interes=3.0, numeroCuotas=15, diaPago=20, valorCuotaMinima=1000000.0, fechaPrestamo=null, cerrado=FALSE]
+17:54:23,810 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 23
+17:54:23,849 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=23, numeroCuenta=575757, estado=CERRADA, tipo=AHORROS, saldo=0.0, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:54:23,849 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Operacion Bancaria 
+17:54:23,919 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Operacion Bancaria: OperacionBancaria [id=31, valor=1100000.0, fecha=2021-11-15, cliente=alkosto, productoOrigen=23, productoDestino=1, tipoOperacion=PAGAR_CUOTA_EXTRAORDINARIA, puestoAtencion=7, empleado=rom2716]
+17:54:23,919 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Prestamo por id: 1
+17:54:23,954 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro el prestamo: Prestamo [id=1, monto=5.0E7, saldoPendiente=2.19E7, interes=3.0, numeroCuotas=15, diaPago=20, valorCuotaMinima=1000000.0, fechaPrestamo=null, cerrado=FALSE]
+17:54:23,955 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Realizando Pago: 1
+17:54:24,002 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:54:24,002 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 23
+17:54:24,035 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:54:24,035 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Prestamo por id: 1
+17:54:24,075 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro el prestamo: Prestamo [id=1, monto=5.0E7, saldoPendiente=2.08E7, interes=3.0, numeroCuotas=15, diaPago=20, valorCuotaMinima=1000000.0, fechaPrestamo=null, cerrado=FALSE]
+17:54:24,076 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 23
+17:54:24,114 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=23, numeroCuenta=575757, estado=CERRADA, tipo=AHORROS, saldo=-1100000.0, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:54:24,114 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Operacion Bancaria 
+17:54:24,153 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Operacion Bancaria: 1
+17:54:24,153 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 23
+17:54:24,189 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:54:24,190 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Prestamo por id: 1
+17:54:24,242 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro el prestamo: Prestamo [id=1, monto=5.0E7, saldoPendiente=2.08E7, interes=3.0, numeroCuotas=15, diaPago=20, valorCuotaMinima=1000000.0, fechaPrestamo=null, cerrado=FALSE]
+17:54:24,242 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Realizando Pago: 1
+17:54:24,269 (main) INFO  [uniandes.isis2304.bancAndes.test.OperacionBancariaTest] - Probando las operaciones sobre OperacionBancaria
+17:54:24,270 (main) INFO  [uniandes.isis2304.bancAndes.test.OperacionBancariaTest] - Se encontrÛ un archivo de configuraciÛn de tablas v·lido
+17:54:24,572 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 23
+17:54:24,607 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=23, numeroCuenta=575757, estado=CERRADA, tipo=AHORROS, saldo=0.0, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:54:24,607 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 4
+17:54:24,643 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=4, numeroCuenta=12345, estado=ACTIVA, tipo=AHORROS, saldo=1.71E8, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=FALSE]
+17:54:24,643 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Operacion Bancaria 
+17:54:24,871 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Operacion Bancaria: OperacionBancaria [id=32, valor=5000.0, fecha=2021-11-15, cliente=alkosto, productoOrigen=23, productoDestino=4, tipoOperacion=TRANSFERIR, puestoAtencion=12, empleado=null]
+17:54:24,871 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 23
+17:54:24,916 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:54:24,916 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 4
+17:54:24,949 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:54:24,950 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 23
+17:54:24,986 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=23, numeroCuenta=575757, estado=CERRADA, tipo=AHORROS, saldo=-5000.0, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:54:24,987 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 4
+17:54:25,023 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=4, numeroCuenta=12345, estado=ACTIVA, tipo=AHORROS, saldo=1.71004992E8, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=FALSE]
+17:54:25,023 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Operacion Bancaria 
+17:54:25,065 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Eliminando Operacion Bancaria: 1
+17:54:25,065 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 23
+17:54:25,105 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:54:25,105 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 4
+17:54:25,142 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:54:25,169 (main) INFO  [uniandes.isis2304.bancAndes.test.OperacionBancariaTest] - Probando las operaciones sobre OperacionBancaria
+17:54:25,170 (main) INFO  [uniandes.isis2304.bancAndes.test.OperacionBancariaTest] - Se encontrÛ un archivo de configuraciÛn de tablas v·lido
+17:54:25,465 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion cuenta por la asociacion con id : 24
+17:54:25,504 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 25
+17:54:25,539 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=24, valor=4000000.0, frecuencia=QUINCENAL, cuentaCorporativo=25]
+17:54:25,539 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 3
+17:54:25,596 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=3, numeroCuenta=1223344, estado=ACTIVA, tipo=AHORROS, saldo=1.23E8, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=FALSE]
+17:54:25,596 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 25
+17:54:25,636 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=25, numeroCuenta=878787, estado=ACTIVA, tipo=AHORROS, saldo=8.89E7, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:54:25,636 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] -  Pagando nomina del cliente corporativo alkosto
+17:54:26,029 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] -  Se pago la nomina del cliente corporativo de 2 empleados.
+17:54:26,029 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 3
+17:54:26,066 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=3, numeroCuenta=1223344, estado=ACTIVA, tipo=AHORROS, saldo=1.27E8, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=FALSE]
+17:54:26,066 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Cuenta por id: 25
+17:54:26,110 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la cuenta: Cuenta [id=25, numeroCuenta=878787, estado=ACTIVA, tipo=AHORROS, saldo=8.09E7, fechaCreacion=null, fechaVencimiento=null, tasaRendimiento=5.0, oficina=18, corporativo=TRUE]
+17:54:26,110 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 25
+17:54:26,159 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:54:26,159 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 3
+17:54:26,192 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:54:26,192 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Actualizando saldo de cuenta: 4
+17:54:26,226 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se actualizaron 1 tuplas
+17:54:26,248 (main) INFO  [uniandes.isis2304.bancAndes.test.OperacionBancariaTest] - Probando las operaciones sobre Operaciones Bancarias
+17:54:26,248 (main) INFO  [uniandes.isis2304.bancAndes.test.OperacionBancariaTest] - Se encontrÛ un archivo de configuraciÛn de tablas v·lido
+17:54:26,530 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Consultando todas las operaciones
+17:54:26,571 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontraron todas las operaciones
+17:54:26,572 (main) INFO  [uniandes.isis2304.bancAndes.test.CuentaTest] - Probando las operaciones sobre Prestamos
+17:54:26,573 (main) INFO  [uniandes.isis2304.bancAndes.test.CuentaTest] - Se encontrÛ un archivo de configuraciÛn de tablas v·lido
+17:54:26,573 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Consultando todos los prestamos
+17:54:26,614 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontraron todos los prestamos
+17:54:26,614 (main) INFO  [uniandes.isis2304.bancAndes.test.AsociacionTest] - Probando las operaciones CRD sobre Asociacion
+17:54:26,614 (main) INFO  [uniandes.isis2304.bancAndes.test.AsociacionTest] - Se encontrÛ un archivo de configuraciÛn de tablas v·lido
+17:54:26,614 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Asociacion: 
+17:54:26,820 (main) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO ASOCIACIONES(id, valor, frecuencia, cuentaCorporativo) values (?, ?, ?, ?)".
+ORA-00001: restricciÛn ˙nica (ISIS2304A03202120.SYS_C00338793) violada
+
+17:54:26,841 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Asociacion: null
+17:54:26,841 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 26
+17:54:26,877 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=27, valor=3000000.0, frecuencia=QUINCENAL, cuentaCorporativo=26]
+17:54:26,877 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 26
+17:54:26,910 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=27, valor=3000000.0, frecuencia=QUINCENAL, cuentaCorporativo=26]
+17:54:26,910 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Asociacion Cuenta Empleados:
+17:54:26,946 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Asociacion Cuenta Empleados: AsociacionCuentasEmpleados [asociacion=27, cuentaEmpleado=3]
+17:54:26,946 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 26
+17:54:26,985 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=27, valor=3000000.0, frecuencia=QUINCENAL, cuentaCorporativo=26]
+17:54:26,985 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Asociacion Cuenta Empleados:
+17:54:27,011 (main) ERROR [uniandes.isis2304.bancAndes.persistencia.PersistenciaBancAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO ASOCIACIONCUENTASEMPLEADOS(asociacion, cuentaEmpleado) values (?, ?)".
+ORA-00001: restricciÛn ˙nica (ISIS2304A03202120.PK_ASOCIACIONCUENTASEMPLEADOSPRIMARY) violada
+
+17:54:27,031 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Adicionando Asociacion Cuenta Empleados: null
+17:54:27,031 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 26
+17:54:27,067 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=27, valor=3000000.0, frecuencia=QUINCENAL, cuentaCorporativo=26]
+17:54:27,068 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion cuenta por la asociacion con id : 27

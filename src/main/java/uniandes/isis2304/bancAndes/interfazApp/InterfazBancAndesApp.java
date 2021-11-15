@@ -2742,8 +2742,8 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 								panelDatos.actualizarInterfaz(resultado);
 							}else {
 								try {
-									
-									String txtIdCuentaNueva = JOptionPane.showInputDialog("Ingrese la nueva cuenta corporativa", "Datos cuenta nueva");
+								
+									String txtIdCuentaNueva = JOptionPane.showInputDialog(this,"Ingrese la nueva cuenta corporativa", "Datos cuenta nueva", JOptionPane.QUESTION_MESSAGE);
 									long idCuentaNueva = (long) Integer.parseInt(txtIdCuentaNueva);
 									VOCuenta cuentaNueva = bancAndes.darCuentaPorId(idCuentaNueva);
 									if (cuentaNueva==null) {
