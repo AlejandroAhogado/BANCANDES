@@ -2,29 +2,28 @@ Para iniciar la aplicación correctamente se debe correr primero el archivo llam
 Después de iniciada la aplicación, el usuario tendrá la posibilidad de elegir como que tipo de usuario desear ingresar al sistema. Es importante tener en cuenta que para poder ingresar al sistema las credenciales deben ser correctas y corresponder con el mismo tipo de usuario.
 Estos son algunos ejemplos de  credenciales, sin embargo se debe tener en cuenta que cada tipo de usuario tiene ciertas restricciones sobre las tareas que puede realizar y también las restricciones planteadas en el caso, como por ejemplo el hecho de que una cuenta no puede ser cerrada por un gerente de oficina que no corresponda a la oficina donde se abrió la cuenta. 
 
+
 Gerentes de Oficina:
 Login: camila3	
-Contraseña: 143534rfewdfa
+Contraseña: 123456789
 Gerente General:
 Login: juanl2
-Constraseña:	sfvr223423432
+Constraseña:	123456789
 
 Cajeros:
 Login: rom2716	
-Contraseña: 1234fd34342vsfa
+Contraseña: 123456789
 Login: andres123
-Contraseña: 34gfffr23423432
+Contraseña: 123456789
 Login: nady231
-Contraseña:  gteegrr8732
+Contraseña:  123456789
 
 Clientes:
-Login: COMPRATODO321
-Contraseña: fdsv234223
+Login: alkosto
+Contraseña: 123456789
 Login: luisp8	
-Contraseña: 1234fdvsfa
+Contraseña: 123456789
 Login: pedrof3	
-Contraseña: pedrower23423432
-Login: daniela77	
-Contraseña: fdbedrrr322
+Contraseña: 123456789
 Login: val763	
-Contraseña: 314324vdfewfs
+Contraseña: 123456789
