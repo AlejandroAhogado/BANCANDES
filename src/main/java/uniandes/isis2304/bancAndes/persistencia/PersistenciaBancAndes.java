@@ -869,9 +869,9 @@ public class PersistenciaBancAndes {
 		Transaction tx=pm.currentTransaction();
 		try
 		{
-			
+			tx.setIsolationLevel("serializable");
 			tx.begin();
-			tx.setIsolationLevel("repeteable-read");
+			
 			long id = nextval ();
 			long tuplasInsertadas = sqlOperacionBancaria.adicionarOperacionBancaria(pm, id, valor, fecha, cliente, productoOrigen,productoDestino,
 					tipoOperacion, puestoAtencion, empleado);
@@ -945,9 +945,9 @@ public class PersistenciaBancAndes {
 	Transaction tx=pm.currentTransaction();
 	try
 	{	
-		
-		tx.begin();
 		tx.setIsolationLevel("serializable");
+		tx.begin();
+		
 		int cantidadPagados = sqlOperacionBancaria.pagarNomina(pm, listaCuentas, idCuenta, valor,
 				 cliente, puestoAtencionoficina, loginUsuarioSistema);
 		tx.commit();
@@ -1073,9 +1073,10 @@ public class PersistenciaBancAndes {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
-		{
+		{	
+			tx.setIsolationLevel("serializable");			
 			tx.begin();
-			tx.setIsolationLevel("repeteable-read");
+		
 			long resp = sqlCuenta.cerrarCuentaV2 (pm, idCuenta, idCuentaNueva, id);
 			tx.commit();
 			return resp;
@@ -1741,9 +1742,8 @@ public class PersistenciaBancAndes {
 		Transaction tx=pm.currentTransaction();
 		try
 		{
-			
-			tx.begin();
 			tx.setIsolationLevel("read-committed");
+			tx.begin();
 			long id = nextval();
 			long tuplasInsertadas = sqlAsociacion.adicionarAsociacion(pm, id, valor, frecuencia, cuentaCorporativo);
 			tx.commit();
