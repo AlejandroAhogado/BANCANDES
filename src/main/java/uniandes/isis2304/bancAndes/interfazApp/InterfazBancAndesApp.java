@@ -1960,8 +1960,16 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 													cajero.getPuestoAtencionoficina(), 
 													loginUsuarioSistema);
 
+											//bancAndes.actualizarSaldoCuenta((long) Integer.parseInt(idCuenta), (float) Integer.parseInt(valor.getText()));
+										} catch (Exception e) {
+											
+											throw new Exception ("No se pudo registrar la operacion sobre la cuenta: " + idCuenta);
+										}
+										try {
+
 											bancAndes.actualizarSaldoCuenta((long) Integer.parseInt(idCuenta), (float) Integer.parseInt(valor.getText()));
 										} catch (Exception e) {
+											bancAndes.eliminarOperacionBancaria(ob.getId());
 											throw new Exception ("No se pudo registrar la operacion sobre la cuenta: " + idCuenta);
 										}
 									}            
@@ -2015,9 +2023,16 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 													(long) Integer.parseInt(puestoAtencion.getText()), 
 													null);
 
-											bancAndes.actualizarSaldoCuenta((long) Integer.parseInt(idCuenta), (float) Integer.parseInt(valor.getText()));
+											//bancAndes.actualizarSaldoCuenta((long) Integer.parseInt(idCuenta), (float) Integer.parseInt(valor.getText()));
 
 										} catch (Exception e) {
+											throw new Exception ("No se pudo registrar la operacion sobre la cuenta: " + idCuenta);
+										}
+										try {
+
+											bancAndes.actualizarSaldoCuenta((long) Integer.parseInt(idCuenta), (float) Integer.parseInt(valor.getText()));
+										} catch (Exception e) {
+											bancAndes.eliminarOperacionBancaria(ob.getId());
 											throw new Exception ("No se pudo registrar la operacion sobre la cuenta: " + idCuenta);
 										}
 									}            
@@ -2062,9 +2077,16 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 														cajero.getPuestoAtencionoficina(), 
 														loginUsuarioSistema);
 
-												bancAndes.actualizarSaldoCuenta((long) Integer.parseInt(idCuenta), - (float) Integer.parseInt(valor.getText()));
+												//bancAndes.actualizarSaldoCuenta((long) Integer.parseInt(idCuenta), - (float) Integer.parseInt(valor.getText()));
 
 											} catch (Exception e) {
+												throw new Exception ("No se pudo registrar la operacion sobre la cuenta: " + idCuenta);
+											}
+											try {
+
+												bancAndes.actualizarSaldoCuenta((long) Integer.parseInt(idCuenta), - (float) Integer.parseInt(valor.getText()));
+											} catch (Exception e) {
+												bancAndes.eliminarOperacionBancaria(ob.getId());
 												throw new Exception ("No se pudo registrar la operacion sobre la cuenta: " + idCuenta);
 											}
 										}else {panelDatos.actualizarInterfaz("No se pudo realizar el retiro de la cuenta "+ idCuenta+ " porque se intento realizar un sobregiro.");}
@@ -2122,9 +2144,16 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 														null);
 
 
-												bancAndes.actualizarSaldoCuenta((long) Integer.parseInt(idCuenta), - (float) Integer.parseInt(valor.getText()));
+												//bancAndes.actualizarSaldoCuenta((long) Integer.parseInt(idCuenta), - (float) Integer.parseInt(valor.getText()));
 
 											} catch (Exception e) {
+												throw new Exception ("No se pudo registrar la operacion sobre la cuenta: " + idCuenta);
+											}
+											try {
+
+												bancAndes.actualizarSaldoCuenta((long) Integer.parseInt(idCuenta), - (float) Integer.parseInt(valor.getText()));
+											} catch (Exception e) {
+												bancAndes.eliminarOperacionBancaria(ob.getId());
 												throw new Exception ("No se pudo registrar la operacion sobre la cuenta: " + idCuenta);
 											}
 										}else {panelDatos.actualizarInterfaz("No se pudo realizar el retiro de la cuenta "+ idCuenta+ " porque se intento realizar un sobregiro.");}
@@ -2732,7 +2761,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 												String resultado = "En cerrar cuenta\n\n";
 												resultado += "Cuenta cerrada: "+ idCuenta;
 												resultado += "\n Se asociaron "+listaCuentas.size()+ " cuentas";
-												resultado += "\n A la cuenta con id "+idCuentaNueva;
+												resultado += " a la cuenta con id "+idCuentaNueva;
 												panelDatos.actualizarInterfaz(resultado);
 											}
 										} catch (Exception e) {
@@ -3548,7 +3577,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					cbOpcionesCriterio.addItem("SALDO PENDIENTE MAYOR A");//NL1
 					cbOpcionesCriterio.addItem("CUOTA MINIMA MAYOR A");//NL2
 					cbOpcionesCriterio.addItem("MONTO MAYOR A");//NL3
-					cbOpcionesCriterio.addItem("FECHACREACION");
+					//cbOpcionesCriterio.addItem("FECHACREACION");
 					cbOpcionesCriterio.addItem("CLIENTE");
 
 					JComboBox<String> cbOpcionesCriterio2 = new JComboBox<String>();
@@ -3557,7 +3586,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					cbOpcionesCriterio2.addItem("SALDO PENDIENTE MENOR A");//NL4
 					cbOpcionesCriterio2.addItem("CUOTA MINIMA MENOR A");//NL5
 					cbOpcionesCriterio2.addItem("MONTO MENOR A");//NL6
-					cbOpcionesCriterio2.addItem("FECHACREACION");
+					//cbOpcionesCriterio2.addItem("FECHACREACION");
 					cbOpcionesCriterio2.addItem("CLIENTE");
 
 					JComboBox<String> cbOpcionesOrdenamiento = new JComboBox<String>();
@@ -4010,8 +4039,8 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					cbOpcionesCriterio.addItem("TIPOOPERACION");
 					cbOpcionesCriterio.addItem("PRODUCTO");
 					cbOpcionesCriterio.addItem("VALOR MAYOR A");//NL1
-					cbOpcionesCriterio.addItem("FECHA");
-					cbOpcionesCriterio.addItem("OFICINA");
+					//cbOpcionesCriterio.addItem("FECHA");
+					//cbOpcionesCriterio.addItem("OFICINA");
 					cbOpcionesCriterio.addItem("CLIENTE");
 
 					JComboBox<String> cbOpcionesCriterio2 = new JComboBox<String>();
@@ -4019,15 +4048,15 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					cbOpcionesCriterio2.addItem("TIPOOPERACION");
 					cbOpcionesCriterio2.addItem("PRODUCTO");
 					cbOpcionesCriterio2.addItem("VALOR MENOR A");//NL2
-					cbOpcionesCriterio2.addItem("FECHA");
-					cbOpcionesCriterio2.addItem("OFICINA");
+					//cbOpcionesCriterio2.addItem("FECHA");
+					//cbOpcionesCriterio2.addItem("OFICINA");
 					cbOpcionesCriterio2.addItem("CLIENTE");
 
 					JComboBox<String> cbOpcionesOrdenamiento = new JComboBox<String>();
 					cbOpcionesOrdenamiento.addItem("ID");//NL3
 					cbOpcionesOrdenamiento.addItem("VALOR");
 					cbOpcionesOrdenamiento.addItem("TIPOOPERACION");
-					cbOpcionesOrdenamiento.addItem("OFICINA");
+					//cbOpcionesOrdenamiento.addItem("OFICINA");
 					cbOpcionesOrdenamiento.addItem("CLIENTE");
 					cbOpcionesOrdenamiento.addItem("FECHA");
 
@@ -4145,25 +4174,25 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					cbOpcionesCriterio.addItem("TIPOOPERACION");
 					cbOpcionesCriterio.addItem("PRODUCTO");
 					cbOpcionesCriterio.addItem("VALOR MAYOR A");//NL1
-					cbOpcionesCriterio.addItem("FECHA");
+					//cbOpcionesCriterio.addItem("FECHA");
 					cbOpcionesCriterio.addItem("OFICINA");
-					cbOpcionesCriterio.addItem("CLIENTE");
+					//cbOpcionesCriterio.addItem("CLIENTE");
 
 					JComboBox<String> cbOpcionesCriterio2 = new JComboBox<String>();
 					cbOpcionesCriterio2.addItem("NINGUNO");
 					cbOpcionesCriterio2.addItem("TIPOOPERACION");
 					cbOpcionesCriterio2.addItem("PRODUCTO");
 					cbOpcionesCriterio2.addItem("VALOR MENOR A");//NL2
-					cbOpcionesCriterio2.addItem("FECHA");
+					//cbOpcionesCriterio2.addItem("FECHA");
 					cbOpcionesCriterio2.addItem("OFICINA");
-					cbOpcionesCriterio2.addItem("CLIENTE");
+					//cbOpcionesCriterio2.addItem("CLIENTE");
 
 					JComboBox<String> cbOpcionesOrdenamiento = new JComboBox<String>();
 					cbOpcionesOrdenamiento.addItem("ID");//NL3
 					cbOpcionesOrdenamiento.addItem("VALOR");
 					cbOpcionesOrdenamiento.addItem("TIPOOPERACION");
 					cbOpcionesOrdenamiento.addItem("OFICINA");
-					cbOpcionesOrdenamiento.addItem("CLIENTE");
+					//cbOpcionesOrdenamiento.addItem("CLIENTE");
 					cbOpcionesOrdenamiento.addItem("FECHA");
 
 
@@ -4211,14 +4240,14 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 						//si no hay primer criterio de filtro
 						if (cbOpcionesCriterio.getSelectedItem().equals("NINGUNO")) {
-							criterio1p = "id";
+							criterio1p = "opb.id";
 							signo1= ">";
 							filtro1p = "0";
 						}
 
 						//si no hay segundo criterio de filtro
 						if (cbOpcionesCriterio2.getSelectedItem().equals("NINGUNO")) {
-							criterio2p = "id";
+							criterio2p = "opb.id";
 							signo2= ">";
 							filtro2p = "0";
 						}
@@ -4281,7 +4310,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					cbOpcionesCriterio.addItem("TIPOOPERACION");
 					cbOpcionesCriterio.addItem("PRODUCTO");
 					cbOpcionesCriterio.addItem("VALOR MAYOR A");//NL1
-					cbOpcionesCriterio.addItem("FECHA");
+					//cbOpcionesCriterio.addItem("FECHA");
 					cbOpcionesCriterio.addItem("OFICINA");
 					cbOpcionesCriterio.addItem("CLIENTE");
 
@@ -4290,7 +4319,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 					cbOpcionesCriterio2.addItem("TIPOOPERACION");
 					cbOpcionesCriterio2.addItem("PRODUCTO");
 					cbOpcionesCriterio2.addItem("VALOR MENOR A");//NL2
-					cbOpcionesCriterio2.addItem("FECHA");
+					//cbOpcionesCriterio2.addItem("FECHA");
 					cbOpcionesCriterio2.addItem("OFICINA");
 					cbOpcionesCriterio2.addItem("CLIENTE");
 
@@ -4347,14 +4376,14 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 
 						//si no hay primer criterio de filtro
 						if (cbOpcionesCriterio.getSelectedItem().equals("NINGUNO")) {
-							criterio1p = "id";
+							criterio1p = "opb.id";
 							signo1= ">";
 							filtro1p = "0";
 						}
 
 						//si no hay segundo criterio de filtro
 						if (cbOpcionesCriterio2.getSelectedItem().equals("NINGUNO")) {
-							criterio2p = "id";
+							criterio2p = "opb.id";
 							signo2= ">";
 							filtro2p = "0";
 						}
@@ -4379,17 +4408,18 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						int i=0;
 						for (Object [] opb : lvo) {
 
-							i++;
+							i++;		
 							resultado += "\n Item "+i+": ";
 							resultado+= "ID operacion: "+ opb[0];
 							resultado+= ", Valor: "+ opb[1];
 							resultado+= ", Fecha: "+ opb[2];
 							resultado+= ", Cliente: "+ opb[3];
-							resultado+= ", Producto: "+ opb[4];
-							resultado+= ", Tipo de operacion:"+ opb[5];
-							resultado+= ", Puesto de atencion:  "+ opb[6];
-							resultado+= ", Empleado:  "+ opb[7];
-							resultado+= ", Oficina: "+ opb[8];
+							resultado+= ", Producto origen: "+ opb[4];
+							resultado+= ", Producto destino:"+ opb[5];
+							resultado+= ", Tipo de operacion:"+ opb[6];
+							resultado+= ", Puesto de atencion:  "+ opb[7];
+							resultado+= ", Empleado:  "+ opb[8];
+							resultado+= ", Oficina: "+ opb[9];
 						}
 						panelDatos.actualizarInterfaz(resultado);
 
