@@ -979,7 +979,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 		else {
 			try 
 			{
-				VOProducto p = bancAndes.adicionarProducto();
+				VOProducto p = bancAndes.adicionarProducto("CUENTA");
 				long id = p.getId();
 
 
@@ -1464,7 +1464,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 		else {
 			try 
 			{
-				VOProducto p = bancAndes.adicionarProducto();
+				VOProducto p = bancAndes.adicionarProducto("PRESTAMO");
 				long id = p.getId();
 				System.out.println(id);
 

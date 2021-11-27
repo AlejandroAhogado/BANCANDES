@@ -1502,19 +1502,19 @@ public class PersistenciaBancAndes {
 	/* ****************************************************************
 	 * 			Métodos para manejar PRODUCTO
 	 *****************************************************************/
-	public Producto adicionarProducto() {
+	public Producto adicionarProducto(String tipo) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
 			tx.begin();
 			long id = nextval ();
-			long tuplasInsertadas = sqlProducto.adicionarProducto(pm,id);
+			long tuplasInsertadas = sqlProducto.adicionarProducto(pm,id, tipo);
 			tx.commit();
 
 			log.trace ("Inserción de producto: " + id + ": " + tuplasInsertadas + " tuplas insertadas");
 
-			return new Producto (id);
+			return new Producto (id, tipo);
 		}
 		catch (Exception e)
 		{

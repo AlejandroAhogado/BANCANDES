@@ -385,10 +385,10 @@ public class BancAndes {
 	 * Adiciona entradas al log de la aplicación
 	 * @return El objeto Usuario adicionado. null si ocurre alguna Excepción
 	 */
-	public Producto adicionarProducto ()
+	public Producto adicionarProducto (String tipo)
 	{
         log.info ("Adicionando Producto");
-        Producto producto = pba.adicionarProducto ();		
+        Producto producto = pba.adicionarProducto (tipo);		
         log.info ("Adicionando Producto: " + producto);
         return producto;
 	}

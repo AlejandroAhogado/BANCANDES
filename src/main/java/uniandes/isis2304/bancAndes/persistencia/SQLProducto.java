@@ -39,9 +39,9 @@ public class SQLProducto {
 	 * @param id
 	 * @return
 	 */
-	public long adicionarProducto(PersistenceManager pm, long id) {
-		Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaProductos () + "(id) values (?)");
-        q.setParameters(id);
+	public long adicionarProducto(PersistenceManager pm, long id, String tipo) {
+		Query q = pm.newQuery(SQL, "INSERT INTO " + pba.darTablaProductos () + "(id, tipo) values (?, ?)");
+        q.setParameters(id, tipo);
         return (long) q.executeUnique();
 	}
 

@@ -4,6 +4,8 @@ public interface VOProducto {
 
 
 	public long getId();
+	
+	public String getTipo();
 
 	@Override
 	public String toString(); 

@@ -3159,3 +3159,6 @@ ORA-00001: restricci髇 鷑ica (ISIS2304A03202120.PK_ASOCIACIONCUENTASEMPLEADOSPRI
 17:54:27,031 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion con cuenta por id: 26
 17:54:27,067 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Se encontro la asociacion: Asociacion [id=27, valor=3000000.0, frecuencia=QUINCENAL, cuentaCorporativo=26]
 17:54:27,068 (main) INFO  [uniandes.isis2304.bancAndes.negocio.BancAndes] - Buscando Asociacion cuenta por la asociacion con id : 27
+10:57:10,797 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Interfaz
+10:57:10,808 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se aplica configuraci贸n indicada en el archivo de configuraci贸n
+10:57:10,827 (main) INFO  [uniandes.isis2304.bancAndes.interfazApp.InterfazBancAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Tablas BD
