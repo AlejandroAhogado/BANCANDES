@@ -1294,6 +1294,40 @@ public class BancAndes {
 					return cantidadEmpleados;
 				}
 
+		//--------------------------------------RF7
+				
+				public List<Object[]> consultarOperacionesV2(Date f1p, Date f2p, String criterio1p,
+						String filtro1p) {
+					log.info ("Consultando todas las operaciones (V2)");
+					List<Object[]> operaciones= pba.consultarOperacionesV2( f1p, f2p, criterio1p, filtro1p);
+					log.info ("Se encontraron todas las operaciones");
+					return operaciones;
+				}
 
+
+		//--------------------------------------RF8
+				
+				public List<Object[]> consultarOperacionesV3(Date f1p, Date f2p, String criterio1p,
+						String filtro1p) {
+					log.info ("Consultando todas las operaciones (V3)");
+					List<Object[]> operaciones= pba.consultarOperacionesV3( f1p, f2p, criterio1p, filtro1p);
+					log.info ("Se encontraron todas las operaciones");
+					return operaciones;
+				}
+
+		//--------------------------------------RF9
+				public List<Object[]> consultarConsignaciones(String producto, float filtro1p) {
+					log.info ("Consultando todas las consignaciones");
+					List<Object[]> operaciones= pba.consultarConsignaciones(producto, filtro1p);
+					log.info ("Se encontraron todas las consignaciones");
+					return operaciones;
+				}
+		//--------------------------------------RF10
+				public List<Object[]> consultarPuestosAtencion(long puestoAtencion1, long puestoAtencion2) {
+					log.info ("Consultando clientes y operaciones por puestos de atencion");
+					List<Object[]> resp= pba.consultarPuestosAtencion(puestoAtencion1, puestoAtencion2);
+					log.info ("Se encontraron todos los clientes y operaciones por puestos de atencion");
+					return resp;
+				}
 		
 }

@@ -37,6 +37,7 @@ import com.google.gson.stream.JsonReader;
 import uniandes.isis2304.bancAndes.negocio.AsociacionCuentasEmpleados;
 import uniandes.isis2304.bancAndes.negocio.BancAndes;
 import uniandes.isis2304.bancAndes.negocio.ClienteProducto;
+import uniandes.isis2304.bancAndes.negocio.OperacionBancaria;
 import uniandes.isis2304.bancAndes.negocio.VOAsociacion;
 import uniandes.isis2304.bancAndes.negocio.VOAsociacionCuentasEmpleados;
 import uniandes.isis2304.bancAndes.negocio.VOCajero;
@@ -1014,7 +1015,7 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 				VOCuenta ct=null;
 				if (option == JOptionPane.OK_OPTION) {
 					try {
-						long hoy=System.currentTimeMillis();  
+						long hoy=System.currentTimeMillis(); 
 						SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyyy");
 						java.util.Date fv = fechaVencimiento.getText().isEmpty()? null:format.parse(fechaVencimiento.getText());
 
@@ -4439,7 +4440,383 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 				panelDatos.actualizarInterfaz(resultado);
 			}}
 	}
+	
+	/* ****************************************************************
+	 *                             REFC7
+	 *****************************************************************/
 
+	/**
+	 * Consultar las operaciones en bancAndes version 2
+	 */
+	public void consultarOperacionesV2( )
+	{
+		if (tipoUsuario!=GERENTEGENERAL) {
+			mensajeErrorPermisos();
+		}
+		else {
+			try {
+				String resultado = "Resultado de la consulta: ";
+
+
+				JComboBox<String> cbOpcionesCriterio = new JComboBox<String>();
+				cbOpcionesCriterio.addItem("TIPOOPERACION");
+				cbOpcionesCriterio.addItem("PRODUCTOORIGEN");
+				cbOpcionesCriterio.addItem("VALOR");
+				cbOpcionesCriterio.addItem("OFICINA");
+				cbOpcionesCriterio.addItem("CLIENTE");
+
+
+				JTextField filtro1 = new JTextField();
+				JTextField fecha1 = new JTextField();
+				JTextField fecha2 = new JTextField();
+
+				Object[] message = {
+						"Desde (DD/MM/AA):", fecha1,
+						"Hasta (DD/MM/AA):", fecha2,
+						"Primer Criterio:", cbOpcionesCriterio,
+						"Primer Filtro:", filtro1
+
+				};
+
+				int option = JOptionPane.showConfirmDialog(null, message, "Consulta de operaciones", JOptionPane.OK_CANCEL_OPTION);
+
+				if (option == JOptionPane.OK_OPTION) {
+					List<Object[]> operaciones = null;
+
+
+					String criterio1p = (String) cbOpcionesCriterio.getSelectedItem();
+
+					String filtro1p = (String) filtro1.getText();
+					
+					
+					SimpleDateFormat format = new SimpleDateFormat("DD/MM/YY");
+					java.util.Date f1 = fecha1.getText().isEmpty()? format.parse("01/01/01"):format.parse(fecha1.getText());
+					java.sql.Date f1p =new java.sql.Date(f1.getTime());
+					
+					long hoy =System.currentTimeMillis(); 
+					
+					java.util.Date f2 = fecha2.getText().isEmpty()? null :format.parse(fecha2.getText());
+					java.sql.Date f2p = (f2 == null)? new java.sql.Date(hoy):	new java.sql.Date(f2.getTime());
+					
+					try {
+						operaciones = bancAndes.consultarOperacionesV2(
+								f1p, f2p, criterio1p, filtro1p
+								);
+					} catch (Exception e) {
+						throw new Exception ("Error en la consulta");
+					}
+
+					//Impresion del resultado
+					int i=0;
+					for (Object[] opb : operaciones) {
+						i++;		
+						resultado += "\n Item "+i+": ";
+
+						resultado+= "ID operacion: "+ opb[0];
+						resultado+= ", Valor: "+ opb[1];
+						resultado+= ", Fecha: "+ opb[2];
+						resultado+= ", Cliente: "+ opb[3];
+						resultado+= ", Producto origen: "+ opb[4];
+						resultado+= ", Producto destino:"+ opb[5];
+						resultado+= ", Tipo de operacion:"+ opb[6];
+						resultado+= ", Puesto de atencion:  "+ opb[7];
+						resultado+= ", Empleado:  "+ opb[8];
+					}
+					panelDatos.actualizarInterfaz(resultado);
+
+				} 	
+
+				if (option == JOptionPane.CANCEL_OPTION)
+				{			        	    
+					panelDatos.actualizarInterfaz("Consulta cancelada");			        	    			
+				}
+
+
+			}
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+			}}
+	}
+	
+	/* ****************************************************************
+	 *                             REFC8
+	 *****************************************************************/
+
+	/**
+	 * Consultar las operaciones en bancAndes version 3
+	 */
+	public void consultarOperacionesV3( )
+	{
+		if (tipoUsuario!=GERENTEGENERAL) {
+			mensajeErrorPermisos();
+		}
+		else {
+			try {
+				String resultado = "Resultado de la consulta: ";
+
+
+				JComboBox<String> cbOpcionesCriterio = new JComboBox<String>();
+				cbOpcionesCriterio.addItem("TIPOOPERACION");
+				cbOpcionesCriterio.addItem("PRODUCTOORIGEN");
+				cbOpcionesCriterio.addItem("VALOR");
+				cbOpcionesCriterio.addItem("OFICINA");
+				cbOpcionesCriterio.addItem("CLIENTE");
+
+
+				JTextField filtro1 = new JTextField();
+				JTextField fecha1 = new JTextField();
+				JTextField fecha2 = new JTextField();
+
+				Object[] message = {
+						"Desde (DD/MM/AA):", fecha1,
+						"Hasta (DD/MM/AA):", fecha2,
+						"Primer Criterio:", cbOpcionesCriterio,
+						"Primer Filtro:", filtro1
+
+				};
+
+				int option = JOptionPane.showConfirmDialog(null, message, "Consulta de operaciones", JOptionPane.OK_CANCEL_OPTION);
+
+				if (option == JOptionPane.OK_OPTION) {
+					List<Object[]> operaciones = null;
+
+
+					String criterio1p = (String) cbOpcionesCriterio.getSelectedItem();
+
+					String filtro1p = (String) filtro1.getText();
+					
+					
+					SimpleDateFormat format = new SimpleDateFormat("DD/MM/YY");
+					java.util.Date f1 = fecha1.getText().isEmpty()? format.parse("01/01/01"):format.parse(fecha1.getText());
+					java.sql.Date f1p =new java.sql.Date(f1.getTime());
+					
+					long hoy =System.currentTimeMillis(); 
+					
+					java.util.Date f2 = fecha2.getText().isEmpty()? null :format.parse(fecha2.getText());
+					java.sql.Date f2p = (f2 == null)? new java.sql.Date(hoy):	new java.sql.Date(f2.getTime());
+					
+
+					try {
+						operaciones = bancAndes.consultarOperacionesV3(
+								f1p, f2p, criterio1p, filtro1p
+								);
+					} catch (Exception e) {
+						throw new Exception ("Error en la consulta");
+					}
+
+					//Impresion del resultado
+					int i=0;
+					for (Object[] opb : operaciones) {
+						i++;		
+						resultado += "\n Item "+i+": ";
+						
+						resultado+= "ID operacion: "+ opb[0];
+						resultado+= ", Valor: "+ opb[1];
+						resultado+= ", Fecha: "+ opb[2];
+						resultado+= ", Cliente: "+ opb[3];
+						resultado+= ", Producto origen: "+ opb[4];
+						resultado+= ", Producto destino:"+ opb[5];
+						resultado+= ", Tipo de operacion:"+ opb[6];
+						resultado+= ", Puesto de atencion:  "+ opb[7];
+						resultado+= ", Empleado:  "+ opb[8];
+					}
+					panelDatos.actualizarInterfaz(resultado);
+
+				} 	
+
+				if (option == JOptionPane.CANCEL_OPTION)
+				{			        	    
+					panelDatos.actualizarInterfaz("Consulta cancelada");			        	    			
+				}
+
+
+			}
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+			}}
+	}
+	
+	/* ****************************************************************
+	 *                             REFC9
+	 *****************************************************************/
+
+	/**
+	 * Consultar las consignaciones en bancAndes 
+	 */
+	public void consultarConsignaciones( )
+	{
+		if (tipoUsuario!=GERENTEGENERAL) {
+			mensajeErrorPermisos();
+		}
+		else {
+			try {
+				String resultado = "Resultado de la consulta: ";
+
+
+				JComboBox<String> cbOpcionesProducto = new JComboBox<String>();
+				cbOpcionesProducto.addItem("CDT");
+				cbOpcionesProducto.addItem("CUENTA");
+				cbOpcionesProducto.addItem("PRESTAMO");
+				cbOpcionesProducto.addItem("ACCION");
+				cbOpcionesProducto.addItem("DEPOSTIO_INVERSION");
+
+
+				JTextField filtro1 = new JTextField();
+
+				Object[] message = {
+						"Tipo de producto:", cbOpcionesProducto,
+						"Valor:", filtro1
+
+				};
+
+				int option = JOptionPane.showConfirmDialog(null, message, "Consulta de consignaciones", JOptionPane.OK_CANCEL_OPTION);
+
+				if (option == JOptionPane.OK_OPTION) {
+					List<Object[]> operaciones = null;
+
+
+					String producto = (String) cbOpcionesProducto.getSelectedItem();
+
+					String filtro1p = (String) filtro1.getText();
+					
+					
+					try {
+						operaciones = bancAndes.consultarConsignaciones(
+								producto, (float) Integer.parseInt(filtro1p)
+								);
+					} catch (Exception e) {
+						e.printStackTrace();
+						throw new Exception ("Error en la consulta");
+					}
+
+					//Impresion del resultado
+					int i=0;
+					for (Object[] opb : operaciones) {
+						i++;		
+						resultado += "\n Item "+i+": ";
+						
+						resultado+= "ID operacion: "+ opb[0];
+						resultado+= ", Valor: "+ opb[1];
+						resultado+= ", Fecha: "+ opb[2];
+						resultado+= ", Cliente: "+ opb[3];
+						resultado+= ", Producto origen: "+ opb[4];
+						resultado+= ", Producto destino:"+ opb[5];
+						resultado+= ", Tipo de operacion:"+ opb[6];
+						resultado+= ", Puesto de atencion:  "+ opb[7];
+						resultado+= ", Empleado:  "+ opb[8];
+					}
+					panelDatos.actualizarInterfaz(resultado);
+
+				} 	
+
+				if (option == JOptionPane.CANCEL_OPTION)
+				{			        	    
+					panelDatos.actualizarInterfaz("Consulta cancelada");			        	    			
+				}
+
+
+			}
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+			}}
+	}
+
+	/* ****************************************************************
+	 *                             REFC10
+	 *****************************************************************/
+
+	/**
+	 * Consultar puestos de atencion en bancAndes 
+	 */
+	public void consultarPuntosAtencion( )
+	{
+		if (tipoUsuario!=GERENTEGENERAL) {
+			mensajeErrorPermisos();
+		}
+		else {
+			try {
+				String resultado = "Resultado de la consulta: ";
+
+
+				JTextField puesto1 = new JTextField();
+				JTextField puesto2 = new JTextField();
+
+				Object[] message = {
+						"Puesto de atencion 1:", puesto1,
+						"Puesto de atencion 2:", puesto2
+
+				};
+
+				int option = JOptionPane.showConfirmDialog(null, message, "Consulta de clientes por puestos de atencion", JOptionPane.OK_CANCEL_OPTION);
+
+				if (option == JOptionPane.OK_OPTION) {
+					List<Object []> resp = null;
+
+					String puesto1p = (String) puesto1.getText();
+					String puesto2p = (String) puesto2.getText();
+					
+					
+					try {
+						resp = bancAndes.consultarPuestosAtencion(
+								(long) Integer.parseInt(puesto1p), (long) Integer.parseInt(puesto2p)
+								);
+					} catch (Exception e) {
+						throw new Exception ("Error en la consulta");
+					}
+
+					//Impresion del resultado
+					int i=0;
+					for (Object[] opb : resp) {
+						i++;		
+						resultado += "\n Item "+i+": ";
+						resultado+= "Nombre:"+ opb[5];
+						resultado+= ", Login:  "+ opb[7];
+						resultado+= ", Correo: "+ opb[9];
+						resultado+= ", Tipo Documento : "+ opb[0];
+						resultado+= ", Numero Documento: "+ opb[1];
+						resultado+= ", Departamento: "+ opb[2];
+						resultado+= ", Codigo postal: "+ opb[3];
+						resultado+= ", Nacionalidad: "+ opb[4];
+						resultado+= ", Direccion:"+ opb[6];						
+						resultado+= ", Telefono: "+ opb[10];
+						resultado+= ", Ciudad:"+ opb[11];
+						resultado+= ", Tipo cliente:"+ opb[12];
+						resultado+= ", \n Id operacion:"+ opb[13];
+						resultado+= ", Valor:"+ opb[14];
+						resultado+= ", Fecha:"+ opb[15];
+						resultado+= ", Prod. origen:"+ opb[17];
+						resultado+= ", Prod. destino:"+ opb[18];
+						resultado+= ", Tipo operacion:"+ opb[19];
+						resultado+= ", Puesto atencion:"+ opb[20];
+						resultado+= ", Empleado:"+ opb[21];
+					}
+					panelDatos.actualizarInterfaz(resultado);
+
+				} 	
+
+				if (option == JOptionPane.CANCEL_OPTION)
+				{			        	    
+					panelDatos.actualizarInterfaz("Consulta cancelada");			        	    			
+				}
+
+
+			}
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+			}}
+	}
 	/**
 	 * Genera una cadena de caracteres con la descripción de la excepcion e, haciendo énfasis en las excepcionsde JDO
 	 * @param e - La excepción recibida

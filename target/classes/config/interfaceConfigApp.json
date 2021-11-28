@@ -105,31 +105,28 @@
 					}
 				]
 			},
-		{ "menuTitle": "Mantenimiento",
-		  "options":
-			[
-				{
-					"label": "Mostrar log BancAndes",
-					"event": "mostrarLogBancAndes"
-				},
-				{
-					"label": "Mostrar log datanucleus",
-					"event": "mostrarLogDatanuecleus"
-				},
-				{
-					"label": "Limpiar log de bancAndes",
-					"event": "limpiarLogBancAndes"
-				},
-				{
-					"label": "Limpiar log de datanucleus",
-					"event": "limpiarLogDatanucleus"
-				},
-				{
-					"label": "Limpiar Base de Datos",
-					"event": "limpiarBD"
-				}
-			]
-		},		
+			
+		{ "menuTitle": "Requerimientos de Consulta V.3",
+			  "options":
+				[
+					{
+						"label": "Consultar operaciones V2",
+						"event": "consultarOperacionesV2"
+					},
+					{
+						"label": "Consultar operaciones V3",
+						"event": "consultarOperacionesV3"
+					},
+					{
+						"label": "Consultar consignaciones",
+						"event": "consultarConsignaciones"
+					},
+					{
+						"label": "Consultar puntos de atencion",
+						"event": "consultarPuntosAtencion"
+					}
+				]
+			},
 		{ "menuTitle": "Documentacion",
 		  "options":
 			[

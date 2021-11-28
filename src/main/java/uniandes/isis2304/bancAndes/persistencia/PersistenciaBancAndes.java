@@ -2045,6 +2045,25 @@ public class PersistenciaBancAndes {
 		}
 
 
+		//***************************************************RFC7************************************************************
+		public List<Object[]> consultarOperacionesV2(Date f1p, Date f2p, String criterio1p, String filtro1p) {
+				return sqlOperacionBancaria.consultarOperacionesV2(pmf.getPersistenceManager(), f1p, f2p, criterio1p, filtro1p);
+		}
+
+		//***************************************************RFC8************************************************************
+		public List<Object[]> consultarOperacionesV3(Date f1p, Date f2p, String criterio1p, String filtro1p) {
+			return sqlOperacionBancaria.consultarOperacionesV3(pmf.getPersistenceManager(), f1p, f2p, criterio1p, filtro1p);
+	}
+
+		//***************************************************RFC9************************************************************
+		public List<Object[]> consultarConsignaciones(String producto, float filtro1p) {
+			return sqlOperacionBancaria.consultarConsignaciones(pmf.getPersistenceManager(), producto, filtro1p);
+		}
+
+		//***************************************************RFC10************************************************************
+		public List<Object[]> consultarPuestosAtencion(long puestoAtencion1, long puestoAtencion2) {
+			return sqlOperacionBancaria.consultarPuntosAtencion(pmf.getPersistenceManager(), puestoAtencion1, puestoAtencion2);
+		}
 	
 
 		

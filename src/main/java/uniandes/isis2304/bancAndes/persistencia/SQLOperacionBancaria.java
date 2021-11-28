@@ -7,7 +7,9 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import uniandes.isis2304.bancAndes.negocio.AsociacionCuentasEmpleados;
+import uniandes.isis2304.bancAndes.negocio.Cliente;
 import uniandes.isis2304.bancAndes.negocio.Cuenta;
+import uniandes.isis2304.bancAndes.negocio.OperacionBancaria;
 
 public class SQLOperacionBancaria {
 
@@ -234,6 +236,79 @@ public class SQLOperacionBancaria {
 		q.setParameters(tipoUsuario, tipoOperacion, tipoUsuario, tipoUsuario, tipoOperacion, tipoUsuario);
 		return q.executeList();
 	}
+
+	//----------------------------------RFC7-----------------------------------------------
+	/**
+	 * @param pm
+	 * @param fecha1
+	 * @param fecha2
+	 * @param tipoOperacion
+	 * @return
+	 */
+	public List<Object[]> consultarOperacionesV2(PersistenceManager pm, Date fecha1, Date fecha2, String criterio, String filtro) {
+		String sql = "SELECT opb.* FROM ";
+		sql+= pba.darTablaOperacionesBancarias () + " opb ";
+		sql+= "WHERE fecha > ? ";
+		sql+= "and fecha < ? and "+ criterio +" = ?";
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(fecha1 , fecha2, filtro);
+		return q.executeList();
+	}
+	
+	//----------------------------------RFC8-----------------------------------------------
+		/**
+		 * @param pm
+		 * @param fecha1
+		 * @param fecha2
+		 * @param tipoOperacion
+		 * @return
+		 */
+	public List<Object[]> consultarOperacionesV3(PersistenceManager pm, Date fecha1, Date fecha2, String criterio, String filtro) {
+		String sql = "SELECT opb.* FROM ";
+		sql+= pba.darTablaOperacionesBancarias () + " opb ";
+		sql+= "WHERE fecha > ? ";
+		sql+= "and fecha < ? and "+ criterio +" <> ?";
+		Query q = pm.newQuery(SQL, sql);
+		q.setParameters(fecha1 , fecha2, filtro);
+		return q.executeList();
+	}
+	
+		//----------------------------------RFC9-----------------------------------------------
+			
+		/**
+		 * @param pm
+		 * @param tipoProducto
+		 * @param valor
+		 * @return
+		 */
+		public List<Object[]> consultarConsignaciones(PersistenceManager pm, String tipoProducto, float valor) {
+			String sql = "SELECT opb.* FROM ";
+			sql+= pba.darTablaOperacionesBancarias () + " opb, "+ pba.darTablaClientesProductos() + " cp, "+ pba.darTablaProductos() + " p ";
+			sql+= "WHERE TIPOOPERACION = 'CONSIGNAR' ";
+			sql+= "and opb.cliente = cp.cliente and p.tipo = ? and valor > ?";
+			Query q = pm.newQuery(SQL, sql);
+			q.setParameters(tipoProducto , valor);
+			return q.executeList();
+		}
+
+		//----------------------------------RFC10-----------------------------------------------
+
+		/**
+		 * @param pm
+		 * @param puesto1
+		 * @param puesto2
+		 * @return
+		 */
+		public List<Object[]> consultarPuntosAtencion(PersistenceManager pm, long puesto1,long puesto2) {
+			String sql = "SELECT c.*, opb.* FROM ";
+			sql+= pba.darTablaOperacionesBancarias () + " opb, "+ pba.darTablaClientes() + " c ";
+			sql+= "WHERE (PUESTOATENCION = ? OR PUESTOATENCION = ?) ";
+			sql+= "and opb.cliente = c.login";
+			Query q = pm.newQuery(SQL, sql);
+			q.setParameters(puesto1, puesto2);
+			return q.executeList();
+		}
+
 
 	//----------------------------------RFC6--------------------------------------------------
 	/**
