@@ -2064,6 +2064,11 @@ public class PersistenciaBancAndes {
 		public List<Object[]> consultarPuestosAtencion(long puestoAtencion1, long puestoAtencion2) {
 			return sqlOperacionBancaria.consultarPuntosAtencion(pmf.getPersistenceManager(), puestoAtencion1, puestoAtencion2);
 		}
+
+		//**************************************CONSULTAR TODAS LAS OPERACIONES BANCARIAS**************************************
+		public List<Object[]> darOperacionesBancarias() {
+			return sqlOperacionBancaria.darOperacionesBancarias(pmf.getPersistenceManager());
+		}
 	
 
 		

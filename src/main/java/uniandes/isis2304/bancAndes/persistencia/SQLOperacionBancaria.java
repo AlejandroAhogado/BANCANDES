@@ -444,4 +444,9 @@ public class SQLOperacionBancaria {
 		return i;
 	}
 
+	public List<Object[]> darOperacionesBancarias(PersistenceManager pm) {
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pba.darTablaOperacionesBancarias());
+		return (List<Object[]>) q.executeList();
+	}
+
 }

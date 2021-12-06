@@ -11,8 +11,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.sql.Timestamp;
 import java.sql.Types;
 import java.text.SimpleDateFormat;
+
 
 import javax.jdo.JDODataStoreException;
 import javax.swing.ImageIcon;
@@ -56,6 +58,7 @@ import uniandes.isis2304.bancAndes.negocio.VOPuestoDeAtencion;
 import uniandes.isis2304.bancAndes.negocio.VOPuestoDigital;
 import uniandes.isis2304.bancAndes.negocio.VOUsuario;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -4799,6 +4802,121 @@ public class InterfazBancAndesApp extends JFrame implements ActionListener {
 						resultado+= ", Puesto atencion:"+ opb[20];
 						resultado+= ", Empleado:"+ opb[21];
 					}
+					panelDatos.actualizarInterfaz(resultado);
+
+				} 	
+
+				if (option == JOptionPane.CANCEL_OPTION)
+				{			        	    
+					panelDatos.actualizarInterfaz("Consulta cancelada");			        	    			
+				}
+
+
+			}
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+			}}
+	}
+	
+	
+	
+	
+	/* ****************************************************************
+	 *      ANALISIS DEL PROCESO DE OPTIMIZACIÓN Y MODELO DE EJECUCIÓN DE CONSULTAS
+	 *****************************************************************/
+
+	/**
+	 * Consultar las operaciones en bancAndes version 2 mediante instrucciones de control
+	 */
+	public void consultarOperacionesV22( )
+	{
+		if (tipoUsuario!=GERENTEGENERAL) {
+			mensajeErrorPermisos();
+		}
+		else {
+			try {
+				String resultado = "Resultado de la consulta: ";
+
+
+				JComboBox<String> cbOpcionesCriterio = new JComboBox<String>();
+				cbOpcionesCriterio.addItem("TIPOOPERACION");
+
+
+				JTextField filtro1 = new JTextField();
+				JTextField fecha1 = new JTextField();
+				JTextField fecha2 = new JTextField();
+
+				Object[] message = {
+						"Desde (DD/MM/AA):", fecha1,
+						"Hasta (DD/MM/AA):", fecha2,
+						"Primer Criterio:", cbOpcionesCriterio,
+						"Primer Filtro:", filtro1
+
+				};
+
+				int option = JOptionPane.showConfirmDialog(null, message, "Consulta de operaciones", JOptionPane.OK_CANCEL_OPTION);
+
+				if (option == JOptionPane.OK_OPTION) {
+					List<Object[]> operaciones = null;
+
+
+					String criterio1p = (String) cbOpcionesCriterio.getSelectedItem();
+
+					String filtro1p = (String) filtro1.getText();
+					
+					
+					SimpleDateFormat format = new SimpleDateFormat("DD/MM/YY");
+					java.util.Date f1 = fecha1.getText().isEmpty()? format.parse("01/01/01"):format.parse(fecha1.getText());
+					java.sql.Date f1p =new java.sql.Date(f1.getTime());
+					
+					long hoy =System.currentTimeMillis(); 
+					
+					java.util.Date f2 = fecha2.getText().isEmpty()? null :format.parse(fecha2.getText());
+					java.sql.Date f2p = (f2 == null)? new java.sql.Date(hoy):	new java.sql.Date(f2.getTime());
+					
+					//iniciar toma de tiempo
+					long startTime = System.nanoTime();
+					
+					try {
+						operaciones = bancAndes.darOperacionesBancarias();
+							
+					} catch (Exception e) {
+						throw new Exception ("Error en la consulta");
+					}
+					
+					
+					int i=0;
+					for (Object[] opb : operaciones) {
+						
+						
+						Timestamp fecha= new Timestamp(((Timestamp) opb[2]).getTime());
+						Date date = new Date(fecha.getTime()); 
+						
+						//Filtros de la consulta
+						if (f1p.after(date) && f2p.before(date) && ((String)opb[6]).equals(filtro1p)) {
+							i++;		
+							//Impresion del resultado
+							resultado += "\n Item "+i+": ";
+
+							resultado+= "ID operacion: "+ opb[0];
+							resultado+= ", Valor: "+ opb[1];
+							resultado+= ", Fecha: "+ opb[2];
+							resultado+= ", Cliente: "+ opb[3];
+							resultado+= ", Producto origen: "+ opb[4];
+							resultado+= ", Producto destino:"+ opb[5];
+							resultado+= ", Tipo de operacion:"+ opb[6];
+							resultado+= ", Puesto de atencion:  "+ opb[7];
+							resultado+= ", Empleado:  "+ opb[8];
+						}
+					}
+					//finalizar toma de tiempo
+					long endTime = System.nanoTime();
+					long timeElapsed = endTime - startTime;
+					
+					resultado+= "\n"+(timeElapsed/1000000)+"ms";
 					panelDatos.actualizarInterfaz(resultado);
 
 				} 	

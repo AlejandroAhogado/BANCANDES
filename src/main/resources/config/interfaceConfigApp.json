@@ -124,6 +124,10 @@
 					{
 						"label": "Consultar puntos de atencion",
 						"event": "consultarPuntosAtencion"
+					},
+					{
+						"label": "Consultar operaciones V2.2",
+						"event": "consultarOperacionesV22"
 					}
 				]
 			},

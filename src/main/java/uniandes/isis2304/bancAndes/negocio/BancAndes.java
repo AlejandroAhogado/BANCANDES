@@ -1329,5 +1329,12 @@ public class BancAndes {
 					log.info ("Se encontraron todos los clientes y operaciones por puestos de atencion");
 					return resp;
 				}
+		//--------------------------------------Consultar todas las operaciones del sistema
+				public List<Object[]> darOperacionesBancarias() {
+					log.info ("Consultando todas las operaciones bancarias");
+					List<Object[]> resp= pba.darOperacionesBancarias();
+					log.info ("Se encontraron todas las operaciones bancarias");
+					return resp;
+				}
 		
 }
