@@ -283,9 +283,12 @@ public class SQLOperacionBancaria {
 		 */
 		public List<Object[]> consultarConsignaciones(PersistenceManager pm, String tipoProducto, float valor) {
 			String sql = "SELECT opb.* FROM ";
-			sql+= pba.darTablaOperacionesBancarias () + " opb, "+ pba.darTablaClientesProductos() + " cp, "+ pba.darTablaProductos() + " p ";
-			sql+= "WHERE TIPOOPERACION = 'CONSIGNAR' ";
-			sql+= "and opb.cliente = cp.cliente and p.tipo = ? and valor > ?";
+			sql+= pba.darTablaOperacionesBancarias () + " opb INNER JOIN (SELECT cp.cliente FROM ";
+			sql+= pba.darTablaClientesProductos() + " cp INNER JOIN "+ pba.darTablaProductos() + " p ";
+			sql+= "ON cp.producto = p.id ";
+			sql+= "WHERE p.tipo = ? ) tab ";
+			sql+= "ON opb.cliente = tab.cliente ";
+			sql+= "WHERE tipooperacion = 'CONSIGNAR' and valor > ?";
 			Query q = pm.newQuery(SQL, sql);
 			q.setParameters(tipoProducto , valor);
 			return q.executeList();
